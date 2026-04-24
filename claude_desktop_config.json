@@ -1,0 +1,22 @@
+{
+  "preferences": {
+    "coworkWebSearchEnabled": true,
+    "coworkScheduledTasksEnabled": false,
+    "ccdScheduledTasksEnabled": true,
+    "sidebarMode": "chat"
+  },
+  "mcpServers": {
+    "tektronix": {
+      "command": "C:\\Users\\u610842\\OneDrive - Ralliant\\Documents\\TektronixMCP_v1.2.0\\tektronix_mcp_server.exe",
+      "args": [],
+      "env": {
+        "OPENAI_API_KEY": "REPLACE_WITH_YOUR_OPENAI_KEY",
+        "TEK_VECTOR_STORE_ID": "REPLACE_WITH_YOUR_VECTOR_STORE_ID",
+        "TEK_INSTALL_PATH": "C:\\Users\\u610842\\OneDrive - Ralliant\\Documents\\TektronixMCP_v1.2.0",
+        "TEK_KNOWLEDGE_REPO": "",
+        "TEK_KNOWLEDGE_TOKEN": "",
+        "TEK_EXPERT_MODE": "1"
+      }
+    }
+  }
+}

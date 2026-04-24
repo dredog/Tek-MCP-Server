@@ -1,0 +1,98 @@
+{
+  "plugin_directories": [
+    "C:\\Users\\YourName\\MyTestSuites",
+    "%USERPROFILE%\\Documents\\TekTests"
+  ],
+  "priority_instruments": [
+    "169.254.10.36",
+    "169.254.165.92",
+    "169.254.113.94",
+    "169.254.16.74"
+  ],
+  "acknowledgments": [
+    {
+      "version": "1.1.1",
+      "timestamp": "2026-02-17T07:46:57.084239",
+      "user": "u610842"
+    },
+    {
+      "version": "1.1.1",
+      "timestamp": "2026-02-17T12:12:41.255732",
+      "user": "u610842"
+    },
+    {
+      "version": "1.1.1",
+      "timestamp": "2026-02-17T13:13:51.804780",
+      "user": "u610842"
+    },
+    {
+      "version": "1.1.1",
+      "timestamp": "2026-02-17T13:34:42.986705",
+      "user": "u610842"
+    },
+    {
+      "version": "1.1.1",
+      "timestamp": "2026-02-17T14:02:34.591028",
+      "user": "u610842"
+    },
+    {
+      "version": "1.1.1",
+      "timestamp": "2026-02-17T14:28:59.894827",
+      "user": "u610842"
+    },
+    {
+      "version": "1.1.1",
+      "timestamp": "2026-02-17T17:24:43.019520",
+      "user": "u610842"
+    },
+    {
+      "version": "1.1.1",
+      "timestamp": "2026-02-17T18:25:02.661584",
+      "user": "u610842"
+    },
+    {
+      "version": "1.1.1",
+      "timestamp": "2026-02-17T22:03:32.033028",
+      "user": "u610842"
+    },
+    {
+      "version": "1.1.1",
+      "timestamp": "2026-02-18T11:39:23.642744",
+      "user": "u610842"
+    },
+    {
+      "version": "1.1.1",
+      "timestamp": "2026-02-18T23:39:30.945912",
+      "user": "u610842"
+    },
+    {
+      "version": "1.1.1",
+      "timestamp": "2026-02-19T00:49:16.053023",
+      "user": "u610842"
+    },
+    {
+      "version": "1.1.1",
+      "timestamp": "2026-02-23T11:57:48.665197",
+      "user": "u610842"
+    },
+    {
+      "version": "1.1.1",
+      "timestamp": "2026-03-10T15:40:02.146441",
+      "user": "u610842"
+    }
+  ],
+  "favorites": [],
+  "usage_history": {
+    "Andre's Jitter Test": "2026-02-24T00:57:38.184526",
+    "AWG70002B Pulse Timing Test": "2026-02-17T08:11:16.414400",
+    "Current Shunt Test with SMU as source": "2026-03-10T15:40:22.646606",
+    "AFG Frequency Sweep (1kHz - 25MHz)": "2026-02-17T08:11:16.414400",
+    "Spectrum Scanner (FM Radio default)": "2026-03-10T15:40:22.656632",
+    "Eye Diagram Analysis": "2026-03-10T15:40:22.646606"
+  },
+  "last_selection": [
+    "Current Shunt Test with SMU as source",
+    "Eye Diagram Analysis",
+    "Spectrum Scanner (FM Radio default)"
+  ]
+}

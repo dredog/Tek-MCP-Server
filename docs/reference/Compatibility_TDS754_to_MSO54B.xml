@@ -1,0 +1,793 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- This file contains compatibility definition for commands used by VRTT.  This will be merged with 
+     Compatibility.xml when compatibility for all commands are implemented.-->
+<translations version='0.5'>
+
+<!-- Trying out a one-to-many translation for *OPC to get by the WaitForOPC in ReadWaveformMeasurement driver function for tktds754
+	<keyword name="*OPC" leaf="1" command="1">
+		<translation header="*OPC" />
+		<translation header="*ESR?" />
+	</keyword>
+-->
+	<keyword name='SELect'>	
+	<!-- AAsbury added 4/9/23 to account for the erroneour SEL:REF?? query in tktds7x4-->
+	<!-- AAsbury edited 4/13/23 to make a better translation to DIS:SEL:MATH or DIS:SEL:REF -->
+		<keyword name="REF4" leaf="1" query="1" specialSuffix="1">
+			<translation header=":DISplay:SELect:REF" />
+		</keyword>
+		<keyword name="REF3" leaf="1" query="1" specialSuffix="1">
+			<translation header=":DISplay:SELect:REF" />
+		</keyword>
+		<keyword name="REF2" leaf="1" query="1" specialSuffix="1">
+			<translation header=":DISplay:SELect:REF" />
+		</keyword>
+		<keyword name="REF1" leaf="1" query="1" specialSuffix="1">
+			<translation header=":DISplay:SELect:REF" />
+		</keyword>
+		<keyword name="MATH3" leaf="1" query="1" specialSuffix="1">
+			<translation header=":DISplay:SELect:MATH" />
+		</keyword>
+		<keyword name="MATH2" leaf="1" query="1" specialSuffix="1">
+			<translation header=":DISplay:SELect:MATH" />
+		</keyword>
+		<keyword name="MATH1" leaf="1" query="1" specialSuffix="1">
+			<translation header=":DISplay:SELect:MATH" />
+		</keyword>
+	</keyword>
+	
+	<!--Horizontal command group-->
+	<keyword name="HORizontal" argument='1'>
+		<keyword name="RECOrdlength" leaf="1" command="1" argument="1" query="1">
+			<translation header=":HORizontal:MODE MANUAL" addedArgument="1" reuseArgument="1" countOfArguments="1"/>
+			<translation header=":HORizontal:MODE:MANUAL:CONFIGURE RECORDLENGTH" addedArgument="1" reuseArgument="1" countOfArguments="1"/>
+			<translation header=":HORizontal:MODE:RECOrdlength" delyDuration="100" />
+		</keyword>
+		
+		<!--Andre added 10/17/22: VERIFIED TO WORK for TDS-->
+		<keyword name="TRIGger">
+			<keyword name="POSition" leaf="1" command="1" query="1">
+				<translation header=":HORizontal:POSition" delyDuration="100" />
+			</keyword>
+		</keyword>
+
+		<keyword name="DIGital">
+			<keyword name="MAGnivu">
+				<!--HORizontal:DIGital:MAGnivu:POSition?-->
+				<keyword name="POSition" leaf="1" command="0" query="1">
+					<translation header=":HORizontal:POSition" />
+				</keyword>
+			</keyword>
+			<keyword name="RECOrdlength">
+				<!-- HORizontal:DIGital:RECOrdlength:MAGnivu? -->
+				<keyword name="MAGnivu" leaf="1" command="0" query="1">
+				<translation header=":HORizontal:RECOrdlength" />
+				</keyword>
+			</keyword>
+			<keyword name="SAMPLERate">
+				<!-- HORizontal:DIGital:SAMPLERate:MAGnivu? -->
+				<keyword name="MAGnivu" leaf="1" command="0" query="1">
+					<translation header=":HORizontal:SAMPLERate" />
+				</keyword>
+			</keyword>
+		</keyword>
+
+		<keyword name="FASTframe">
+			<keyword name="MULtipleframes">
+				<!-- HORizontal:FASTframe:MULtipleframes:MODe -->
+				<keyword name="MODe" leaf="1" command="1" query="1" argument="1">
+					<translation header=':HORizontal:FASTframe:MULtipleframes:MODe OVERlay' addedArgument='1' sensitiveArgument='ONLYOVERlay'/>
+				</keyword>
+			</keyword>
+			<keyword name="XZEro">
+				<keyword name="ALL">
+					<!-- HORizontal:FASTframe:XZEro:ALL:CH<x>?-->
+					<keyword name="CH?" leaf="1" command="0" query="1">
+						<translation header=":HORizontal:FASTframe:XZEro:ALL" />
+					</keyword>
+				</keyword>
+				<keyword name="SELECTED">
+					<!-- HORizontal:FASTframe:XZEro:SELECTED:CH<x>?-->
+					<keyword name="CH?" leaf="1" command="0" query="1">
+						<translation header=":HORizontal:FASTframe:XZEro:SELECTED" />
+					</keyword>
+				</keyword>
+			</keyword>
+		</keyword>
+		
+		<!-- AAsbury added 3/7/23  - verified-->
+		<keyword name="MODe" leaf="1" command="1" query="1" argument="1">
+			<translation header=":DISplay:WAVEView1:INTENSITy:WAVEform 75" addedArgument="1" sensitiveArgument="MAIn" reuseArgument="1" countOfArguments="1"/>
+			<translation header=":DISplay:WAVEView1:INTENSITy:WAVEform 100" addedArgument="1" sensitiveArgument="INTENSIFied"/>
+		</keyword>
+		
+		<keyword name="MAIn">
+			<keyword name="SCAle" leaf="1" command="1" argument="1">
+				<translation header=":HORizontal:MODE MANUAL" addedArgument="1" reuseArgument="1" countOfArguments="1" sendInQuery="0"/>
+				<translation header=":HORizontal:MODE:MANUAL:CONFIGURE RECORDLENGTH" addedArgument="1" reuseArgument="1" countOfArguments="1" sendInQuery="0"/>
+				<translation header=":HORizontal:MODE:SCAle" reuseArgument="1" countOfArguments="1" delyDuration="200" sendInQuery="1" />
+				<translation header=":HORizontal:MODE:SAMPLERate 625E6" addedArgument="1" sensitiveArgument="5E-3" reuseArgument="1" countOfArguments="1" sendInQuery="0"/>
+				<translation header=":HORizontal:MODE:SAMPLERate 1.25E9" addedArgument="1" sensitiveArgument="1E-3" reuseArgument="1" countOfArguments="1" sendInQuery="0"/>
+				<translation header=":HORizontal:MODE:SAMPLERate 6.25E9" addedArgument="1" sensitiveArgument="5E-6" reuseArgument="1" countOfArguments="1" sendInQuery="0"/>
+				<translation header=":HORizontal:MODE:SAMPLERate 5E7" addedArgument="1" sensitiveArgument="10E-3" reuseArgument="1" countOfArguments="1" sendInQuery="0"/>
+			</keyword>
+		</keyword>
+		
+		<keyword name="DELay">
+			<keyword name="TIMe" leaf="1" command="1" query="1" argument="1">
+				<translation header=":HOR:DEL:TIM" />
+				<translation header=":HOR:DEL:MOD ON" addedArgument="1" />
+				<translation header=":SEL:CH8 ON" addedArgument="1"/>
+			</keyword>
+		</keyword>
+	</keyword>
+	
+	
+	<!--vertical command group-->
+	
+	<!--Andre added 10/24/22 VERIFIED TO WORK for TDS. Baffled why CH? did not work for this one but CH1 with specialSuffix does work.-->
+	<keyword name='CH1' specialSuffix='1'>	
+	<!-- AAsbury added 3/13/23 to convert CH<x>:PROBE? to CH<x>:PROBEFunc:EXTAtten? for channels 1-4-->
+	<!-- AAsbury edited 4/13/23 to add support for command, not just query. -->
+		<keyword name="PROBE" leaf="1" query="1" command="1">
+			<translation header=":CH1:PROBEFunc:EXTAtten" sendInQuery='1' />
+		</keyword>
+		<keyword name="IMPedance" leaf="1" command="1" query="1" argument="1">
+			<translation header= ":CH1:TERMination 1E6" addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="MEG" sendInQuery="1"/>
+			<translation header= ":CH1:TERMination 50" addedArgument='1' sensitiveArgument="FIFty" sendInQuery="0" />
+		</keyword>
+	<!-- AAsbury added 3/7/23 -->
+		<keyword name="BANdwidth" leaf="1" command="1" query="1" argument="1">
+			<translation header="CH1:BANdwidth 250E6" addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="TWO" sendInQuery="0"/>
+			<translation header="CH1:BANdwidth 20E6" addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="TWEnty" sendInQuery="0"/>
+			<translation header="CH1:BANdwidth FULl" addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="FULl" sendInQuery="0"/>
+			<translation header="CH1:BANdwidth" sendInQuery="1"/>
+			<translation header="SEL:CH1 ON" addedArgument="1" />
+		</keyword>
+		<keyword name="SCAle" leaf="1" command="1" query="1" >
+			<delay duration="100" />
+		</keyword>
+		<keyword name="OFFSet" leaf="1" command="1" query="1">
+			<delay duration="100" />
+		</keyword>
+	</keyword>
+	
+	<!-- AAsbury added 3/7/23 -->
+	<keyword name='CH2' specialSuffix='1'>	
+		<keyword name="PROBE" leaf="1" query="1">
+			<translation header=":CH2:PROBEFunc:EXTAtten"/>
+		</keyword>
+		<keyword name="IMPedance" leaf="1" command="1" query="1" argument="1">
+			<translation header= ":CH2:TERMination 1E6" addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="MEG" />
+			<translation header= ":CH2:TERMination 50" addedArgument='1' sensitiveArgument="FIFty" sendInQuery="0" />
+
+		</keyword>
+		<keyword name="BANdwidth" leaf="1" command="1" query="1" argument="1">
+			<translation header="CH2:BANdwidth 250E6" addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="TWO"/>
+			<translation header="CH2:BANdwidth 20E6" addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="TWEnty"/>
+			<translation header="CH2:BANdwidth FULl" addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="FULl"/>
+			<translation header="CH2:BANdwidth" />
+			<translation header="SEL:CH2 ON" addedArgument="1" />
+		</keyword>
+	</keyword>
+	
+	<!-- AAsbury added 3/7/23 -->
+	<keyword name='CH3' specialSuffix='1'>	
+		<keyword name="PROBE" leaf="1" query="1">
+			<translation header=":CH3:PROBEFunc:EXTAtten"/>
+		</keyword>
+			<keyword name="IMPedance" leaf="1" command="1" query="1" argument="1">
+			<translation header= ":CH3:TERMination 1E6" addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="MEG" />
+			<translation header= ":CH3:TERMination 50" addedArgument='1' sensitiveArgument="FIFty" sendInQuery="0" />
+		</keyword>
+		<keyword name="BANdwidth" leaf="1" command="1" query="1" argument="1">
+			<translation header="CH3:BANdwidth 250E6" addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="TWO"/>
+			<translation header="CH3:BANdwidth 20E6" addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="TWEnty"/>
+			<translation header="CH3:BANdwidth FULl" addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="FULl"/>
+			<translation header="CH3:BANdwidth" />
+			<translation header="SEL:CH3 ON" addedArgument="1" />
+		</keyword>
+	</keyword>
+	
+	<!-- AAsbury added 3/7/23 -->
+	<keyword name='CH4' specialSuffix='1'>	
+		<keyword name="PROBE" leaf="1" query="1">
+			<translation header=":CH4:PROBEFunc:EXTAtten"/>
+		</keyword>
+			<keyword name="IMPedance" leaf="1" command="1" query="1" argument="1">
+			<translation header= ":CH4:TERMination 1E6" addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="MEG" />
+			<translation header= ":CH4:TERMination 50" addedArgument='1' sensitiveArgument="FIFty" sendInQuery="0" />
+		</keyword>
+		<keyword name="BANdwidth" leaf="1" command="1" query="1" argument="1">
+			<translation header="CH4:BANdwidth 250E6" addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="TWO"/>
+			<translation header="CH4:BANdwidth 20E6" addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="TWEnty"/>
+			<translation header="CH4:BANdwidth FULl" addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="FULl"/>
+			<translation header="CH4:BANdwidth" />
+			<translation header="SEL:CH4 ON" addedArgument="1" />
+		</keyword>
+	</keyword>
+	
+
+	
+
+	<!--MEASUREMENT COMMAND GROUP-->
+	<keyword name='MEASU'>
+		<keyword name='MEAS?'>
+			<keyword name='STATE' leaf="1" command="1" argument="1">
+				<translation header=':measurement:delete "meas?"' sensitiveArgument='OFF/0'/>
+			</keyword>
+		</keyword>
+	
+		<!--Andre added on 10/24/22 VERIFIED TO WORK for TDS-->
+		<keyword name="REFLevel">
+			<keyword name="ABSolute">
+				<keyword name="MID" leaf="1" command="1" argument="1">
+					<translation header=":MEASU:CH1:REFL:ABS:FALLMID" reuseArgument='1' countOfArguments='1'/>
+					<translation header=":MEASU:CH1:REFL:ABS:RISEMID" />
+					<translation header=":MEASU:REFL:TYPE PERSOURCE" addedArgument='1' />
+					<translation header= ":*WAI" addedArgument="1" />
+				</keyword>
+				<keyword name="MID2" leaf="1" command="1" specialSuffix='1'>
+					<translation header=":MEASU:CH2:REFL:ABS:FALLMID" reuseArgument='1' countOfArguments='1'/>
+					<translation header=":MEASU:CH2:REFL:ABS:RISEMID" />
+					<translation header=":MEASU:REFL:TYPE PERSOURCE" addedArgument='1' />
+					<translation header= ":*WAI" addedArgument="1" />
+				</keyword>
+				<keyword name="HIGH" leaf="1" command="1" specialSuffix='1'>
+					<translation header=":MEASU:CH1:REFL:ABS:FALLHIGH" reuseArgument='1' countOfArguments='1'/>
+					<translation header=":MEASU:CH1:REFL:ABS:RISEHIGH" reuseArgument='1' countOfArguments='1'/>
+					<translation header=":MEASU:CH2:REFL:ABS:FALLHIGH" reuseArgument='1' countOfArguments='1'/>
+					<translation header=":MEASU:CH2:REFL:ABS:RISEHIGH" />
+					<translation header=":MEASU:REFL:TYPE PERSOURCE" addedArgument='1' />
+					<translation header= ":*WAI" addedArgument="1" />
+				</keyword>
+				<keyword name="LOW" leaf="1" command="1" specialSuffix='1'>
+					<translation header=":MEASU:CH1:REFL:ABS:FALLLOW" reuseArgument='1' countOfArguments='1'/>
+					<translation header=":MEASU:CH1:REFL:ABS:RISELOW" reuseArgument='1' countOfArguments='1'/>
+					<translation header=":MEASU:CH2:REFL:ABS:FALLLOW" reuseArgument='1' countOfArguments='1'/>
+					<translation header=":MEASU:CH2:REFL:ABS:RISELOW" />
+					<translation header=":MEASU:REFL:TYPE PERSOURCE" addedArgument='1' />
+					<translation header= ":*WAI" addedArgument="1" />
+				</keyword>
+			</keyword>
+			<keyword name="METHod" leaf='1' command='1' argument='1'>
+				<translation header=":MEASU:MEAS1:REFL:METH" reuseArgument='1' countOfArguments='1' />
+				<translation header=":MEASU:IMM:REFL:METH" reuseArgument='1' countOfArguments='1' />
+				<translation header=":MEASU:CH1:REFL:METH" reuseArgument='1' countOfArguments='1' />
+				<translation header=":MEASU:CH2:REFL:METH" />
+				<translation header= ":*WAI" addedArgument="1" />
+			</keyword>
+		</keyword>
+		
+		<!-- 10/21/22: AAsbury added these translations to change MEASU:IMMED to MEASU:MEAS1  VERIFIED TO WORK. While the syntax MEASU:IMM:TYP is supported on the MSO4/5/6 platform,
+				the arguments need to be written out completely (i.e. MEASU:IMM:TYP FREQ does not work, :MEASU:IMM:TYP FREQUENCY does work.
+				This also allows us to add other functions in with the set measurement type such as Wait.-->
+		<!-- 4/5/23: AAsbury added delyDuration to the Type commands to allow the scope time to setup the measurement before it then fetches the value. -->
+		<keyword name="IMMediate">
+			<keyword name="TYPe" leaf='1' command='1' query="1" argument='1'>
+				<translation header=":MEASU:IMM:TYPE HIGH" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="HIGH" delyDuration="1000"/>
+				<translation header=":MEASU:IMM:TYPE LOW" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="LOW" delyDuration="1000"/>	
+				<translation header=":MEASU:IMM:TYPE FREQUENCY" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="FREQ" delyDuration="1000"/>
+				<translation header=":MEASU:IMM:TYPE PERIOD" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="PERI" delyDuration="1000"/>
+				<translation header=":MEASU:IMM:TYPE DELAY" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="DEL" delyDuration="1000"/>
+				<translation header=":MEASU:IMM:TYPE PDUTY" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="PDU" delyDuration="1000"/>
+				<translation header=":MEASU:IMM:TYPE RISETIME" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="RIS" delyDuration="1000"/>
+				<translation header=":MEASU:IMM:TYPE FALLTIME" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="FALL" delyDuration="1000"/>
+				<translation header=":MEASU:IMM:TYPE RMS" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="RMS" delyDuration="1000"/>
+				<translation header=":MEASU:IMM:TYPE ACRMS" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="ACRMS" delyDuration="1000"/>
+				<translation header=":MEASU:IMM:TYPE AMPLITUDE" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="AMPL" delyDuration="1000"/>
+				<translation header=":MEASU:IMM:TYPE" sendInQuery='1' delyDuration="400" />
+			</keyword>
+			<keyword name="SOUrce" leaf='1' command='1' query="1" argument='1'>
+				<delay duration="100" />
+			</keyword>
+			<keyword name="SOUrce1" leaf='1' command='1' query="1" argument='1'>
+				<delay duration="100" />
+			</keyword>
+			<keyword name="SOURCE2" leaf='1' command='1' query="1" argument='1'>
+				<delay duration="100" />
+			</keyword>
+			<keyword name="DELay">
+				<keyword name="EDGE1" leaf='1' command='1' specialSuffix='1'>
+					<translation header=":MEASU:IMM:FROMedge" delyDuration="100" />
+				</keyword>
+				<keyword name="EDGE2" leaf='1' command='1' specialSuffix='1'>
+					<translation header=":MEASU:IMM:TOedge" delyDuration="100" />
+				</keyword>		
+			</keyword>
+		</keyword>
+		
+		<!-- Andre added on 12/06/22 to account for MEASU:MEAS1 commands originally seen in Delta's filter test. May not want to implement to the wide audience because some may still want imm measurements rather than measurement badges-->
+		<keyword name="MEAS1" specialSuffix='1'>
+			<keyword name="TYP" leaf='1' command='1' argument='1'>
+				<!--<translation header=':SEL:CH3 ON' addedArgument='1'/> .-->
+				<translation header=":MEASU:MEAS1:TYPE HIGH" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="HIGH" delyDuration="1000" />
+				<translation header=":MEASU:MEAS1:TYPE LOW" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="LOW" delyDuration="1000" />
+				<translation header=":MEASU:MEAS1:TYPE FREQUENCY" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="FREQ" delyDuration="1000"/>
+				<translation header=":MEASU:MEAS1:TYPE PERIOD" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="PERI" delyDuration="1000" />
+				<translation header=":MEASU:MEAS1:TYPE DELAY" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="DEL" delyDuration="1000" />
+				<translation header=":MEASU:MEAS1:TYPE PDUTY" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="PDU" delyDuration="1000" />
+				<translation header=":MEASU:MEAS1:TYPE RISETIME" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="RIS" delyDuration="1000" />
+				<translation header=":MEASU:MEAS1:TYPE FALLTIME" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="FALL" delyDuration="1000" />
+				<translation header=":MEASU:MEAS1:TYPE RMS" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="RMS" delyDuration="1000" />
+				<translation header=":MEASU:MEAS1:TYPE ACRMS" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="ACRMS" delyDuration="1000" />
+				<translation header=":MEASU:MEAS1:TYPE AMPLITUDE" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="AMP" delyDuration="1000"/>
+				<translation header=":MEASU:MEAS1:TYPE" sendInQuery='1' delyDuration="400" />
+			</keyword>
+			<keyword name="SOURCE?" leaf='1' command='1' argument='1'>
+				<translation header=":MEASU:MEAS1:SOURCE?" delyDuration="1" />
+			</keyword>
+			<keyword name="DELay">
+				<keyword name="EDGE1" leaf='1' command='1' specialSuffix='1'>
+					<translation header=":MEASU:MEAS1:FROMedge" />
+				</keyword>
+				<keyword name="EDGE2" leaf='1' command='1' specialSuffix='1'>
+					<translation header=":MEASU:MEAS1:TOedge" />
+				</keyword>		
+			</keyword>
+			<keyword name="VAL" leaf='1' query='1' >
+				<translation header=":MEASU:MEAS1:RESults:CURRENTACq:MEAN" />
+			</keyword>
+		</keyword>
+		<keyword name="MEAS2" specialSuffix='1'>
+			<keyword name="TYP" leaf='1' command='1' argument='1'>
+				<translation header=":MEASU:MEAS2:TYPE HIGH" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="HIGH" delyDuration="1000" />
+				<translation header=":MEASU:MEAS2:TYPE LOW" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="LOW" delyDuration="1000" />
+				<translation header=":MEASU:MEAS2:TYPE FREQUENCY" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="FREQ" delyDuration="1000" />
+				<translation header=":MEASU:MEAS2:TYPE PERIOD" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="PERI" delyDuration="1000" />
+				<translation header=":MEASU:MEAS2:TYPE DELAY" sendInQuery='1' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="DEL" delyDuration="1000" />
+				<translation header=":MEASU:MEAS2:TYPE PDUTY" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="PDU" delyDuration="1000" />
+				<translation header=":MEASU:MEAS2:TYPE RISETIME" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="RIS" delyDuration="1000" />
+				<translation header=":MEASU:MEAS2:TYPE FALLTIME" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="FALL" delyDuration="1000" />
+				<translation header=":MEASU:MEAS2:TYPE RMS" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="RMS" delyDuration="1000" />
+				<translation header=":MEASU:MEAS2:TYPE ACRMS" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="ACRMS" delyDuration="1000" />
+				<translation header=":MEASU:MEAS2:TYPE AMPLITUDE" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="AMP" delyDuration="1000"/>
+				<translation header=":MEASU:MEAS2:TYPE" sendInQuery='1' delyDuration="400" />
+			</keyword>
+			<keyword name="SOURCE?" leaf='1' command='1' argument='1'>
+				<translation header=":MEASU:MEAS2:SOURCE?" />
+				<translation header= ":*WAI" addedArgument="1" />
+			</keyword>
+			<keyword name="DELay">
+				<keyword name="EDGE1" leaf='1' command='1' specialSuffix='1'>
+					<translation header=":MEASU:MEAS2:FROMedge" />
+				</keyword>
+				<keyword name="EDGE2" leaf='1' command='1' specialSuffix='1'>
+					<translation header=":MEASU:MEAS2:TOedge" />
+				</keyword>		
+			</keyword>
+			<keyword name="VAL" leaf='1' query='1' >
+				<translation header=":MEASU:MEAS2:RESults:CURRENTACq:MEAN" />
+			</keyword>
+		</keyword>
+		<keyword name="MEAS3" specialSuffix='1'>
+			<keyword name="TYP" leaf='1' command='1' argument='1'>
+				<translation header=":MEASU:MEAS3:TYPE HIGH" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="HIGH" />
+				<translation header=":MEASU:MEAS3:TYPE LOW" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="LOW" />
+				<translation header=":MEASU:MEAS3:TYPE FREQUENCY" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="FREQ" />
+				<translation header=":MEASU:MEAS3:TYPE PERIOD" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="PERI" />
+				<translation header=":MEASU:MEAS3:TYPE DELAY" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="DEL" />
+				<translation header=":MEASU:MEAS3:TYPE PDUTY" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="PDU" />
+				<translation header=":MEASU:MEAS3:TYPE RISETIME" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="RIS" />
+				<translation header=":MEASU:MEAS3:TYPE FALLTIME" sendInQuery='0' addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="FALL" />
+				<translation header=":MEASU:MEAS3:TYPE" sendInQuery='1' delyDuration="400" />
+			</keyword>
+			<keyword name="SOURCE?" leaf='1' command='1' argument='1'>
+				<translation header=":MEASU:MEAS3:SOURCE?" />
+				<translation header= ":*WAI" addedArgument="1" />
+			</keyword>
+			<keyword name="DELay">
+				<keyword name="EDGE1" leaf='1' command='1' specialSuffix='1'>
+					<translation header=":MEASU:MEAS3:FROMedge" />
+				</keyword>
+				<keyword name="EDGE2" leaf='1' command='1' specialSuffix='1'>
+					<translation header=":MEASU:MEAS3:TOedge" />
+				</keyword>		
+			</keyword>
+			<keyword name="VAL" leaf='1' query='1' >
+				<translation header=":MEASU:MEAS3:RESults:CURRENTACq:MEAN" />
+			</keyword>
+		</keyword>
+		<!-- Andre added on 12/6/22 to address command in Delta's filter test -->
+		<keyword name="METH" leaf='1' command='1' argument='1'>
+			<translation header=":MEASU:MEAS1:REFLEVELS:BASETOP" reuseArgument='1' countOfArguments='1' />
+			<!--<translation header=":MEASU:MEAS2:REFLEVELS:BASETOP" reuseArgument='1' countOfArguments='1' /> -->
+		</keyword>
+		
+		<!-- AAsbury added 3/28/23. TDS754 only had one option for gating, 1 to turn cursor gating on, 0 to turn it off. -->
+		<!-- AAsbury edited 4/13/23 to set the delyDuration to 200 ms. -->
+		<keyword name="GATing" leaf="1" argument="1" command="1" query="1">
+			<translation header=":MEASU:GATing CURSor" addedArgument='1' reuseArgument='1' countOfArguments='1' sensitiveArgument="1" delyDuration="200" />
+		</keyword>
+		
+	</keyword>
+
+
+  <!--CURSOR COMMAND GROUP-->
+	<keyword name='CURsor'>
+		<!-- AAsbury added 3/28/23 -->
+		<keyword name="FUNC" leaf="1" command="1" query="1" argument="1">
+			<!-- Need to make sure CUrsors are enabled before setting the function -->
+			<translation header=":DISplay:WAVEView1:CURSor:CURSOR1:STATE 1" addedArgument="1" reuseArgument='1' countOfArguments='1'/>
+			<translation header=":DISplay:WAVEView1:CURSor:CURSOR1:FUNCtion" />
+		</keyword>
+		<keyword name="MODE" leaf="1" command="1" query="1">
+			<!-- Need to make sure CUrsors are enabled before setting the mode -->
+			<translation header=":DISplay:WAVEView1:CURSor:CURSOR1:STATE 1" addedArgument="1" reuseArgument='1' countOfArguments='1'/>
+			<translation header=":DISplay:WAVEView1:CURSor:CURSOR:MODe" />
+		</keyword>
+		
+		<keyword name='VBArs'>
+			<keyword name='POSITION1' specialSuffix="1" leaf="1" query="1" command="1">
+				<translation header=":DISplay:WAVEView1:CURSor:CURSOR1:VBArs:APOSition" />
+			</keyword>
+			<keyword name='POSITION2' specialSuffix="1" leaf="1" query="1" command="1">
+				<translation header=":DISplay:WAVEView1:CURSor:CURSOR1:VBArs:BPOSition" />
+			</keyword>
+			<!-- removed translation that looks incorrect
+			<keyword name='POSITION1' specialSuffix="1" leaf="1" query="1" command="1">
+			<translation header=':cursor:vbars:positiona'>
+				<query from="positiona" change="1" to="position1"/>
+				</translation>
+			</keyword>
+			<keyword name='POSITION2' specialSuffix="1" leaf="1" query="1" command="1">
+				<translation header=':cursor:vbars:positionb' />
+			</keyword>
+			-->
+		</keyword>
+	</keyword>
+
+
+	<keyword name='EXPORT' leaf="1" command="1" argument="1">
+	<!-- work needed in palette and view needed, both elemental commands have only one enum option -->
+		<translation header=':save:waveform' sensitiveArgument='START'/>
+		<keyword name='FORMAT' leaf="1" command="1" query="1">
+			<translation header=':SAVe:IMAGe:FORMAT'/>
+		</keyword>
+		<keyword name='PALETTE' leaf="1" command="1" query="1" argument="1">
+			<translation header=':save:image:composition NORMAL' addedArgument="1" sensitiveArgument='COLOR'>
+				<query from="save" change="1" to="EXPORT"/>
+				<query from="image" change="1" to="PALETTE"/>
+				<query from="composition" delete="1"/>
+			</translation>
+			<translation header=':save:image:composition INVERTED' sendInQuery="0" addedArgument="1" sensitiveArgument='BLACKANDWHITE/INKSAVER'>
+				<query from="save" change="1" to="EXPORT"/>
+				<query from="image" change="1" to="PALETTE"/>
+				<query from="composition" delete="1"/>
+			</translation>
+		</keyword>
+		<keyword name='VIEW' leaf="1" command="1" query="1">
+			<translation header=':save:image:viewtype fullscreen' addedArgument="1"/>
+		</keyword>
+	</keyword>
+
+
+	<keyword name="HARDCOPY" leaf="1" command="1" argument="1">
+		<translation header=":SAVE:IMAGE" sensitiveArgument='START' delyDuration="3000"/>
+		<keyword name="VIEW" leaf="1" command="1" query="1">
+			<translation header=':save:image:viewtype fullscreen' addedArgument="1"/>
+		</keyword>
+		<keyword name='FILENAME' leaf="1" command="1" query="1">
+			<translation header=':SAVe:IMAGe:FULLPath'/>
+		</keyword>
+		<keyword name='PALETTE' leaf="1" command="1" query="1" argument="1">
+			<translation header=':save:image:composition NORMAL' addedArgument="1" sensitiveArgument='COLOR'>
+				<query from="save" change="1" to="HARDCOPY"/>
+				<query from="image" change="1" to="PALETTE" deleteNextColon="1"/>
+				<query from="composition" delete="1"/>
+				<argument from="NORMAL" change="1" to="COLOR"/>
+				<argument from="INVERTED" change="1" to="INKSAVER"/>
+			</translation>
+			<translation header=':save:image:composition INVERTED' sendInQuery="0" addedArgument="1" sensitiveArgument='BLACKANDWHITE/INKSAVER'>
+				<query from="save" change="1" to="HARDCOPY"/>
+				<query from="image" change="1" to="PALETTE" deleteNextColon="1"/>
+				<query from="composition" delete="1"/>
+				<argument from="NORMAL" change="1" to="COLOR"/>
+				<argument from="INVERTED" change="1" to="INKSAVER"/>
+			</translation>
+		</keyword>
+		<keyword name='IMAGe' leaf="1" command="1" query="1">
+			<translation header=':save:image:composition' />
+		</keyword>
+	</keyword>
+
+	<keyword name="WFMPRe?" leaf="1" command="0" query="1">
+		<translation header=':WFMOutpre?' />
+	</keyword>
+
+
+	<!--TRIGGER COMMAND GROUP-->
+	<keyword name="TRIGger">
+		<keyword name="MAIn" leaf="1" command="1" query="0">
+			<translation header=":TRIGger:A SETLEVEL" addedArgument="1" sendInQuery="0">
+				<query from="A" change="1" to="MAIN" />
+			</translation>
+	  
+			<!-- Andre added 10/17/22 --> <!-- VERIFIED to work 10/17/22 -->
+			<keyword name="MODe" leaf="1" command="1" query="1">
+				<translation header=":TRIGger:A:MODE" >
+					<query from="A" change="1" to="MAIN" />
+				</translation>
+			</keyword>
+	  
+			<!-- Andre added 10/17/22 --> <!-- VERIFIED to work 10/17/22 -->
+			<keyword name="LEVel" leaf="1" command="1">
+				<translation header=":TRIGger:A:LEVel:CH1" reuseArgument='1' countOfArguments='1'>
+					<query from="A" change="1" to="MAIN" />
+				</translation>
+				<translation header=":TRIGger:A:LEVel:CH2" reuseArgument='1' countOfArguments='1'>
+					<query from="A" change="1" to="MAIN" />
+				</translation>
+				<translation header=":TRIGger:A:LEVel:CH3" reuseArgument='1' countOfArguments='1'>
+					<query from="A" change="1" to="MAIN" />
+				</translation>
+				<translation header=":TRIGger:A:LEVel:CH4" reuseArgument='1' countOfArguments='1'>
+					<query from="A" change="1" to="MAIN" />
+				</translation>
+			</keyword>
+
+			<!-- Andre added 10/17/22 --> <!-- VERIFIED to work 10/17/22 -->
+			<keyword name="EDGE">
+				<keyword name="SOUrce" leaf="1" command="1" query="1">
+					<translation header=":TRIGger:A:EDGE:SOUrce" sendInQuery='1'>
+						<query from="A" change="1" to="MAIN" />
+					</translation>
+				</keyword>
+				<keyword name="SLOpe" leaf="1" command="1" query="1">
+					<translation header=":TRIGger:A:EDGE:SLOpe"  >
+						<query from="A" change="1" to="MAIN" />
+					</translation>
+				</keyword>
+				<keyword name="COUP" leaf="1" command="1" query="1">
+					<translation header=":TRIGger:A:EDGE:COUP" >
+						<query from="A" change="1" to="MAIN" />
+					</translation>
+				</keyword>
+			</keyword>
+			
+			
+			<!-- AAsbury added 4/9/23 -->
+			<keyword name="PUL">
+				<keyword name="SOUrce" leaf="1" command="1" query="1">
+					<translation header=":TRIGger:A:EDGE:SOUrce" delyDuration="100" >
+						<query from="A" change="1" to="MAIN" />
+					</translation>
+				</keyword>
+				<keyword name="SLOpe" leaf="1" command="1" query="1">
+					<translation header=":TRIGger:A:EDGE:SLOpe" >
+						<query from="A" change="1" to="MAIN" />
+					</translation>
+				</keyword>
+				<keyword name="COUP" leaf="1" command="1" query="1">
+					<translation header=":TRIGger:A:EDGE:COUP" >
+						<query from="A" change="1" to="MAIN" />
+					</translation>
+				</keyword>
+			</keyword>
+	  
+			<!-- AAsbury added 3/7/23, edited 4/9/23 to add long form of TYPe, removed query change line. --> 
+			<keyword name="TYPe" leaf="1" command="1" query="1">
+				<translation header=":TRIGger:A:TYPe" >
+					<query from="A" change="1" to="MAIN" /> 
+				</translation>
+			</keyword>
+			
+			<!-- AAsbury added 3/7/23, edited 4/9/23 to make the k in CLOCk optional. --> 
+			<keyword name="LOGIc">
+				<keyword name="SETHold">
+					<keyword name="CLOCk">
+						<delay duration="200" />
+						<keyword name="EDGE" leaf="1" command="1" query="1">
+							<translation header="TRIGger:A:SETHold:CLOCk:EDGE" />
+						</keyword>
+						<delay duration="200" />
+						<keyword name="SOUrce" leaf="1" command="1" query="1">
+							<translation header="TRIGger:A:SETHold:CLOCk:SOUrce" />
+						</keyword>
+					</keyword>
+					<keyword name="DATa">
+						<delay duration="200" />
+						<keyword name="SOUrce" leaf="1" command="1" query="1">
+							<translation header="TRIGger:A:SETHold:CLOCk:SOUrce"/>
+						</keyword>
+					</keyword>
+				</keyword>
+			</keyword>
+			
+			<!-- AAsbury added 3/7/23 --> 
+			<keyword name="HOLDOff" leaf="1" command="1" query="1">
+				<keyword name="BY" leaf="1" command="1" query="1">
+					<translation header=":TRIGger:A:HOLDOff:BY"/>
+				</keyword>
+				<keyword name="TIM" leaf="1" command="1" query="1">
+					<translation header=":TRIGger:A:HOLDOff:TIMe"/>
+					<translation header=":TRIGger:A:HOLDOff:BY TIME" addedArgument="1"/>
+				</keyword>
+			</keyword>
+			
+		</keyword> <!-- end TRIG:MAIn -->
+		
+		<!-- AAsbury added 3/7/23 -->
+		<keyword name="DELay" command="1" query="1">
+			<keyword name="BY" leaf="1" command="1" query="1" argument="1">
+				<translation header="TRIGger:B:BY TIME" addedArgument="1"/>
+			</keyword>
+			<keyword name="EDGE">
+				<keyword name="SOUrce" leaf="1" command="1" query="1">
+					<translation header=":TRIGger:B:EDGE:SOUrce" >
+						<query from="B" change="1" to="MAIN" />
+					</translation>
+				</keyword>
+			</keyword>
+		</keyword>
+	
+		<keyword name="?">
+			<keyword name="LOGic">
+				<keyword name="PATtern">
+					<keyword name="WHEn">
+						<keyword name="MORELimit"  leaf="1" command="1" query="1" argument="1">
+							<translation header=":trigger:?:logic:when morethan" addedArgument="1" reuseSuffix="1" sendInQuery="0"/>
+							<translation header=":trigger:?:logic:deltatime" reuseSuffix="1" reuseArgument="1" countOfArguments="1">
+								<query from="deltatime" change="1" to="PATTERN:WHEn:MORELIMIT"/>
+							</translation>
+						</keyword>
+						<keyword name="LESSLimit"  leaf="1" command="1" query="1" argument="1">
+							<translation header=":trigger:?:logic:when lessthan" addedArgument="1" reuseSuffix="1" sendInQuery="0"/>
+							<translation header=":trigger:?:logic:deltatime" reuseSuffix="1" reuseArgument="1" countOfArguments="1">
+								<query from="deltatime" change="1" to="PATTERN:WHEn:LESSLimit"/>
+							</translation>
+						</keyword>
+					</keyword>
+				</keyword>
+			</keyword>
+			
+			<keyword name="PULSe">
+				<keyword name="WINDow">
+					<keyword name="POLarity" leaf="1" command="1" query="1" argument="1">
+						<translation header=":trigger:?:window:crossing UPPER" addedArgument="1" reuseSuffix="1" sensitiveArgument="POSitive" sendInQuery="1">
+							<query from="WINdow" change="1" to="PULse:WINdow"/>
+							<query from="CROSSIng" change="1" to="POLarity"/>
+							<argument from="UPPer" change="1" to="POSitive"/>
+							<argument from="LOWer" change="1" to="NEGative"/>
+						</translation>
+						<translation header=":trigger:?:window:crossing LOWER" addedArgument="1" reuseSuffix="1" sensitiveArgument="NEGative" sendInQuery="0">
+							<query from="WINdow" change="1" to="PULse:WINdow"/>
+							<query from="CROSSIng" change="1" to="POLarity"/>
+							<argument from="UPPer" change="1" to="POSitive"/>
+							<argument from="LOWer" change="1" to="NEGative"/>
+						</translation>
+					</keyword>
+				</keyword>
+				<keyword name="GLITch">
+					<keyword name="POLarity" leaf="1" command="1" query="1" argument="1">
+						<translation header=":trigger:?:pulsewidth:polarity" reuseSuffix="1">
+							<query from="pulsewidth" change="1" to="PULSe:GLITch"/>
+						</translation>
+					</keyword>
+					<keyword name="TRIGIF" leaf="1" command="1" query="1" argument="1">
+						<translation header=":trigger:?:pulsewidth:when lessthan" addedArgument="1" reuseSuffix="1" sensitiveArgument="ACCept" sendInQuery="1">
+							<query from="pulsewidth" change="1" to="PULSe:GLITch"/>
+							<query from="when" change="1" to="TRIGIF"/>
+							<argument from="lessthan" change="1" to="ACCept"/>
+							<argument from="morethan" change="1" to="REJect"/>
+						</translation>
+						<translation header=":trigger:?:pulsewidth:when morethan" addedArgument="1" reuseSuffix="1" sensitiveArgument="REJect" sendInQuery="0">
+							<query from="pulsewidth" change="1" to="PULSe:GLITch"/>
+							<query from="when" change="1" to="TRIGIF"/>
+							<argument from="morethan" change="1" to="REJect"/>
+						</translation>
+					</keyword>
+					<keyword name="WIDTh" leaf="1" command="1" query="1">
+						<translation header=":trigger:?:pulsewidth:lowlimit" reuseSuffix="1">
+							<query from="pulsewidth" change="1" to="PULSE:GLITCH"/>
+							<query from="lowlimit" change="1" to="WIDTh"/>
+						</translation>
+					</keyword>
+          
+				</keyword>
+			</keyword>
+		</keyword>
+		<keyword name="?">
+			<keyword name="LOGic">
+				<keyword name="PATtern">
+					<keyword name="WHEn">
+						<keyword name="MORELimit"  leaf="1" command="1" query="1" argument="1">
+							<translation header=":trigger:?:logic:when morethan" addedArgument="1" reuseSuffix="1" sendInQuery="0"/>
+							<translation header=":trigger:?:logic:deltatime" reuseSuffix="1" reuseArgument="1" countOfArguments="1">
+								<query from="deltatime" change="1" to="PATTERN:WHEn:MORELIMIT"/>
+							</translation>
+						</keyword>
+						<keyword name="LESSLimit"  leaf="1" command="1" query="1" argument="1">
+							<translation header=":trigger:?:logic:when lessthan" addedArgument="1" reuseSuffix="1" sendInQuery="0"/>
+							<translation header=":trigger:?:logic:deltatime" reuseSuffix="1" reuseArgument="1" countOfArguments="1">
+								<query from="deltatime" change="1" to="PATTERN:WHEn:LESSLimit"/>
+							</translation>
+						</keyword>
+					</keyword>
+				</keyword>
+			</keyword>
+			<keyword name="PULSe">
+				<keyword name="WINDow">
+					<keyword name="POLarity" leaf="1" command="1" query="1" argument="1">
+						<translation header=":trigger:?:window:crossing UPPER" addedArgument="1" reuseSuffix="1" sensitiveArgument="POSitive" sendInQuery="0">
+							<query from="WINdow" change="1" to="PULse:WINdow"/>
+							<query from="CROSSIng" change="1" to="POLarity"/>
+							<argument from="UPPer" change="1" to="POSitive"/>
+						</translation>
+						<translation header=":trigger:?:window:crossing LOWER" addedArgument="1" reuseSuffix="1" sensitiveArgument="NEGative" sendInQuery="0">
+							<query from="WINdow" change="1" to="PULse:WINdow"/>
+							<query from="CROSSIng" change="1" to="POLarity"/>
+							<argument from="LOWer" change="1" to="NEGative"/>
+						</translation>
+					</keyword>
+				</keyword>
+				<keyword name="GLITch">
+					<keyword name="POLarity" leaf="1" command="1" query="1" argument="1">
+						<translation header=":trigger:?:pulsewidth:polarity" reuseSuffix="1">
+							<query from="pulsewidth" change="1" to="PULSe:GLITch"/>
+						</translation>
+					</keyword>
+					<keyword name="TRIGIF" leaf="1" command="1" query="1" argument="1">
+						<translation header=":trigger:?:pulsewidth:when lessthan" addedArgument="1" reuseSuffix="1" sensitiveArgument="ACCept" sendInQuery="1">
+							<query from="pulsewidth" change="1" to="PULSe:GLITch"/>
+							<query from="when" change="1" to="TRIGIF"/>
+							<argument from="lessthan" change="1" to="ACCept"/>
+						</translation>
+						<translation header=":trigger:?:pulsewidth:when morethan" addedArgument="1" reuseSuffix="1" sensitiveArgument="REJect" sendInQuery="1">
+							<query from="pulsewidth" change="1" to="PULSe:GLITch"/>
+							<query from="when" change="1" to="TRIGIF"/>
+							<argument from="morethan" change="1" to="REJect"/>
+						</translation>
+					</keyword>
+					<keyword name="WIDTh" leaf="1" command="1" query="1">
+						<translation header=":trigger:?:pulsewidth:lowlimit" reuseSuffix="1">
+							<query from="pulsewidth" change="1" to="PULSE:GLITCH"/>
+							<query from="lowlimit" change="1" to="WIDTh"/>
+						</translation>
+					</keyword>
+          
+				</keyword>
+			</keyword>
+		</keyword>
+	</keyword> <!--trigger-->
+  
+	<!-- 4/9/23: AAsbury added a small delyDuration for these common ACQ commands. -->
+	<keyword name="ACQ">
+		<keyword name="STOPA" leaf="1" command="1" query="1">
+			<translation header= ":ACQ:STOPA" delyDuration="100" />
+		</keyword>
+		<keyword name="STATE" leaf="1" command="1" query="1">
+			<translation header= ":ACQ:STATE" delyDuration="500" />
+		</keyword>
+		<keyword name="MODE" leaf="1" command="1" query="1">
+			<translation header= ":ACQ:MODE" delyDuration="100" />
+		</keyword>
+		<!-- AAsbury added 3/7/23 -->
+		<keyword name="REPE" leaf="1" command="1" query="1">
+			<translation header= ":ACQ:STATE" delyDuration="100" />
+		</keyword>
+	</keyword>
+	
+
+<!-- DEBUG !!!! This shows how to properly use sensitiveArgument and many one-to-many translations -->
+	<keyword name="TURNChannels" leaf="1" command="1" argument="1" >
+		<translation header=':SEL:CH3' reuseArgument="1" countOfArguments="1"/>
+		<translation header=':SEL:CH4' reuseArgument="1" countOfArguments="1"/>
+		<translation header=':SEL:CH1' reuseArgument="1" countOfArguments="1"/>
+		<translation header=':SEL:CH2' reuseArgument="1" countOfArguments="1"/>
+		<translation header=':callouts:callout1:text "Channels 1-4 are ON"' addedArgument="1" sensitiveArgument="ON"/>
+	</keyword>
+	
+<!-- Original BATMAN from Greg Richtenburg for debugging. If this function works, it indicates no syntax errors in the file." -->
+	<keyword name="BATman" leaf="1" command="1" query="1" >
+		<translation header='callouts:callout1:text' />
+	</keyword>
+
+<!-- Andre made a ROBIN to include a sensitive argument and a default to prove that it works and show the syntax. -->
+	<keyword name="ROBIN" leaf="1" command="1" query="1" argument="1">
+		<translation header='callouts:callout2:text "ThisIsRobin"'  addedArgument='1' sensitiveArgument='Andre' />
+		<translation header='callouts:callout2:text "ThisIsDefaultArg"' addedArgument='1' />
+	</keyword>
+
+
+	
+</translations>

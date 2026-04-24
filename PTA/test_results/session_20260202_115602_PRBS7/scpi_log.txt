@@ -1,0 +1,217 @@
+Tek PTA SCPI Log
+================
+Test Suite: PRBS7 DUT Test
+Date: 2026-02-02 11:56:57
+================
+
+[11:56:02.088] Starting test sequence...
+[11:56:04.202] ============================================================
+[11:56:04.202] LIVE MODE - Using AWG
+[11:56:04.212] ============================================================
+[11:56:04.212] Using connected AWG: AWG70002B
+[11:56:04.212] Configuring AWG with HSS plug-in for PRBS7...
+[11:56:04.222] AWG << OUTPut1:STATe OFF
+[11:56:04.222] AWG << *OPC?
+[11:56:04.332] AWG >> 1
+[11:56:04.332] AWG << AWGControl:STOP
+[11:56:04.332] AWG << *OPC?
+[11:56:04.332] AWG >> 1
+[11:56:04.332] Selecting High Speed Serial plug-in...
+[11:56:04.332] AWG << WPLUGin:ACTive "High Speed Serial"
+[11:56:04.332] AWG << *OPC?
+[11:56:04.332] AWG >> 1
+[11:56:04.332] AWG << WPLUGin:ACTive?
+[11:56:04.332] AWG >> "High Speed Serial"
+[11:56:04.332]   Active plug-in: "High Speed Serial"
+[11:56:04.332] AWG << HSSerial:BDATa PRBS
+[11:56:04.332] AWG << *OPC?
+[11:56:04.332] AWG >> 1
+[11:56:04.332] AWG << HSSerial:BDATa:PRBS PRBS7
+[11:56:04.332] AWG << *OPC?
+[11:56:04.332] AWG >> 1
+[11:56:04.332]   Pattern: PRBS7 (127 bits)
+[11:56:04.332] AWG << HSSerial:DRATe 250000000.0
+[11:56:04.342] AWG << *OPC?
+[11:56:04.342] AWG >> 1
+[11:56:04.350]   Data rate: 250 Mbps
+[11:56:04.350] AWG << HSSerial:AMPLitude:MAXimum 0.5
+[11:56:04.352] AWG << HSSerial:AMPLitude:MINimum -0.5
+[11:56:04.352] AWG << *OPC?
+[11:56:04.352] AWG >> 1
+[11:56:04.352]   Amplitude: 1.0 Vpp diff (-0.5V to 0.5V each leg)
+[11:56:04.352] AWG << HSSerial:COMPile:NAME "PRBS7_DUT"
+[11:56:04.352] AWG << *OPC?
+[11:56:04.362] AWG >> 1
+[11:56:04.362] AWG << HSSerial:COMPile:OPTions ON
+[11:56:04.362] AWG << *OPC?
+[11:56:04.362] AWG >> 1
+[11:56:04.362]   Compile and assign: ON
+[11:56:04.362] AWG << HSSerial:COMPile:OVERwrite ON
+[11:56:04.362] AWG << *OPC?
+[11:56:04.362] AWG >> 1
+[11:56:04.362]   Compiling PRBS7 waveform...
+[11:56:04.372] AWG << HSSerial:COMPile
+[11:56:04.372] AWG << *OPC?
+[11:56:04.583] AWG >> 1
+[11:56:04.583]   Compiled and assigned waveform 'PRBS7_DUT' to CH1
+[11:56:04.583] AWG << SOURce1:WAVeform?
+[11:56:04.583] AWG >> "PRBS7_DUT"
+[11:56:04.583]   CH1 waveform: "PRBS7_DUT"
+[11:56:04.583] AWG << AWGControl:RMODe CONTinuous
+[11:56:04.593] AWG << *OPC?
+[11:56:04.593] AWG >> 1
+[11:56:04.593]   Run mode: Continuous
+[11:56:04.593] Configuring oscilloscope...
+[11:56:04.593] SCOPE << *RST
+[11:56:04.593] SCOPE << *OPC? (timeout=10s)
+[11:56:05.019] SCOPE >> 1
+[11:56:05.019] SCOPE << HEADer OFF
+[11:56:05.021] SCOPE << DISplay:WAVEView1:CH1:STATE ON
+[11:56:05.022] SCOPE << DISplay:WAVEView1:CH2:STATE ON
+[11:56:05.029] SCOPE << DISplay:WAVEView1:CH3:STATE OFF
+[11:56:05.031] SCOPE << DISplay:WAVEView1:CH4:STATE OFF
+[11:56:05.033] SCOPE << CH1:TERmination 50
+[11:56:05.036] SCOPE << CH2:TERmination 50
+[11:56:05.038] SCOPE << CH1:SCAle 0.1
+[11:56:05.040] SCOPE << CH2:SCAle 0.1
+[11:56:05.049] SCOPE << CH1:OFFSet 0
+[11:56:05.055] SCOPE << CH2:OFFSet 0
+[11:56:05.061]   CH1, CH2: 100.0 mV/div, 50Ω, offset 0V
+[11:56:05.064] SCOPE << HORizontal:SCAle 2e-07
+[11:56:05.070] SCOPE << HORizontal:POSition 10
+[11:56:05.072]   Horizontal: 0.200 µs/div (captures ~4 patterns)
+[11:56:05.074]   Setting up MATH1 = CH1 - CH2 (differential)...
+[11:56:05.082] SCOPE << MATH:ADDNew "MATH1"
+[11:56:05.086] SCOPE << MATH:MATH1:TYPe BASic
+[11:56:05.092] SCOPE << MATH:MATH1:FUNCtion SUBtract
+[11:56:05.097] SCOPE << MATH:MATH1:SOUrce1 CH1
+[11:56:05.103] SCOPE << MATH:MATH1:SOUrce2 CH2
+[11:56:05.108] SCOPE << DISplay:WAVEView1:MATH:MATH1:STATE ON
+[11:56:05.113] SCOPE << DISplay:WAVEView1:MATH:MATH1:VERTical:SCAle 0.2
+[11:56:05.120]   MATH1: 200.0 mV/div
+[11:56:05.129] SCOPE << TRIGger:A:TYPE EDGE
+[11:56:05.136] SCOPE << TRIGger:A:EDGE:SOURce CH1
+[11:56:05.141] SCOPE << TRIGger:A:EDGE:SLOpe RISE
+[11:56:05.150] SCOPE << TRIGger:A:LEVel:CH1 0
+[11:56:05.165] SCOPE << TRIGger:A:MODE NORMAL
+[11:56:05.172]   Trigger: CH1 rising edge at 0V
+[11:56:05.178] Setting up measurements...
+[11:56:05.185] SCOPE << MEASUrement:MEAS1:TYPE DATARATE
+[11:56:05.190] SCOPE << MEASUrement:MEAS1:SOUrce CH1
+[11:56:05.193] SCOPE << MEASUrement:MEAS1:STATE ON
+[11:56:05.193]   MEAS1: DATARATE on CH1
+[11:56:05.203] SCOPE << MEASUrement:MEAS2:TYPE AMPLITUDE
+[11:56:05.213] SCOPE << MEASUrement:MEAS2:SOUrce CH1
+[11:56:05.223] SCOPE << MEASUrement:MEAS2:STATE ON
+[11:56:05.223]   MEAS2: AMPLITUDE on CH1
+[11:56:05.233] SCOPE << MEASUrement:MEAS3:TYPE PATTERNLENGTH
+[11:56:05.240] SCOPE << MEASUrement:MEAS3:SOUrce CH1
+[11:56:05.244] SCOPE << MEASUrement:MEAS3:PATTERNDETECTION AUTO
+[11:56:05.251] SCOPE << MEASUrement:MEAS3:STATE ON
+[11:56:05.254]   MEAS3: PATTERNLENGTH on CH1
+[11:56:05.254] SCOPE << MEASUrement:MEAS4:TYPE DATARATE
+[11:56:05.264] SCOPE << MEASUrement:MEAS4:SOUrce CH2
+[11:56:05.264] SCOPE << MEASUrement:MEAS4:STATE ON
+[11:56:05.284]   MEAS4: DATARATE on CH2
+[11:56:05.284] SCOPE << MEASUrement:MEAS5:TYPE AMPLITUDE
+[11:56:05.304] SCOPE << MEASUrement:MEAS5:SOUrce CH2
+[11:56:05.314] SCOPE << MEASUrement:MEAS5:STATE ON
+[11:56:05.324]   MEAS5: AMPLITUDE on CH2
+[11:56:05.324] SCOPE << MEASUrement:MEAS6:TYPE PATTERNLENGTH
+[11:56:05.334] SCOPE << MEASUrement:MEAS6:SOUrce CH2
+[11:56:05.334] SCOPE << MEASUrement:MEAS6:PATTERNDETECTION AUTO
+[11:56:05.344] SCOPE << MEASUrement:MEAS6:STATE ON
+[11:56:05.354]   MEAS6: PATTERNLENGTH on CH2
+[11:56:05.365] SCOPE << MEASUrement:MEAS7:TYPE DATARATE
+[11:56:05.365] SCOPE << MEASUrement:MEAS7:SOUrce MATH1
+[11:56:05.375] SCOPE << MEASUrement:MEAS7:STATE ON
+[11:56:05.385]   MEAS7: DATARATE on MATH1
+[11:56:05.385] SCOPE << MEASUrement:MEAS8:TYPE AMPLITUDE
+[11:56:05.395] SCOPE << MEASUrement:MEAS8:SOUrce MATH1
+[11:56:05.395] SCOPE << MEASUrement:MEAS8:STATE ON
+[11:56:05.405]   MEAS8: AMPLITUDE on MATH1
+[11:56:05.405] SCOPE << MEASUrement:MEAS9:TYPE PATTERNLENGTH
+[11:56:05.415] SCOPE << MEASUrement:MEAS9:SOUrce MATH1
+[11:56:05.415] SCOPE << MEASUrement:MEAS9:PATTERNDETECTION AUTO
+[11:56:05.425] SCOPE << MEASUrement:MEAS9:STATE ON
+[11:56:05.425]   MEAS9: PATTERNLENGTH on MATH1
+[11:56:05.435] SCOPE << *OPC? (timeout=5s)
+[11:56:06.477] SCOPE >> 1
+[11:56:06.477] Enabling AWG output...
+[11:56:06.487] AWG << OUTPut1:STATe ON
+[11:56:06.487] AWG << AWGControl:RUN
+[11:56:06.497] AWG << *OPC?
+[11:56:06.507] AWG >> 1
+[11:56:07.018] Starting single acquisition...
+[11:56:07.018] SCOPE << ACQuire:MODe SAMple
+[11:56:07.018] SCOPE << ACQuire:STOPAfter SEQuence
+[11:56:07.038] SCOPE << ACQuire:STATE RUN
+[11:56:07.053]   Waiting for trigger and acquisition...
+[11:56:07.058] SCOPE << ACQuire:STATE?
+[11:56:07.062] SCOPE >> 1
+[11:56:07.178] SCOPE << ACQuire:STATE?
+[11:56:07.188] SCOPE >> 1
+[11:56:07.409] SCOPE << ACQuire:STATE?
+[11:56:07.409] SCOPE >> 1
+[11:56:07.629] SCOPE << ACQuire:STATE?
+[11:56:07.639] SCOPE >> 1
+[11:56:07.800] SCOPE << ACQuire:STATE?
+[11:56:07.830] SCOPE >> 1
+[11:56:08.070] SCOPE << ACQuire:STATE?
+[11:56:08.070] SCOPE >> 1
+[11:56:08.191] SCOPE << ACQuire:STATE?
+[11:56:08.191] SCOPE >> 0
+[11:56:08.201]   Acquisition complete
+[11:56:08.221] SCOPE << SAVe:IMAGe "C:/Temp/prbs7_prbs7_capture.png"
+[11:56:08.231] SCOPE << *OPC?
+[11:56:08.253] SCOPE >> 1
+[11:56:08.271] SCOPE << FILESystem:READFile "C:/Temp/prbs7_prbs7_capture.png"
+[11:56:38.715] SCOPE << SAVe:IMAGe "C:/prbs7_prbs7_capture.png"
+[11:56:38.719] SCOPE << *OPC?
+[11:56:38.935] SCOPE >> 1
+[11:56:38.939] SCOPE << FILESystem:READFile "C:/prbs7_prbs7_capture.png"
+[11:56:39.052] SCOPE << FILESystem:DELEte "C:/prbs7_prbs7_capture.png"
+[11:56:39.052] Screenshot saved: prbs7_capture.png
+[11:56:39.092] 
+[11:56:39.102] ============================================================
+[11:56:39.102] RUNNING MEASUREMENTS
+[11:56:39.102] ============================================================
+[11:56:39.112] SCOPE << MEASUrement:MEAS1:RESUlts:CURRentacq:MEAN?
+[11:56:39.112] SCOPE >> 249.9993948241055E+6
+[11:56:39.112] SCOPE << MEASUrement:MEAS2:RESUlts:CURRentacq:MEAN?
+[11:56:39.122] SCOPE >> 478.3908908908909E-3
+[11:56:39.122] SCOPE << MEASUrement:MEAS3:RESUlts:CURRentacq:MEAN?
+[11:56:39.122] SCOPE >> 127.000
+[11:56:39.132] SCOPE << MEASUrement:MEAS4:RESUlts:CURRentacq:MEAN?
+[11:56:39.132] SCOPE >> 249.9994756728364E+6
+[11:56:39.132] SCOPE << MEASUrement:MEAS5:RESUlts:CURRentacq:MEAN?
+[11:56:39.142] SCOPE >> 485.6372935435436E-3
+[11:56:39.142] SCOPE << MEASUrement:MEAS6:RESUlts:CURRentacq:MEAN?
+[11:56:39.142] SCOPE >> 127.000
+[11:56:39.152] SCOPE << MEASUrement:MEAS7:RESUlts:CURRentacq:MEAN?
+[11:56:39.152] SCOPE >> 250.0309845422598E+6
+[11:56:39.152] SCOPE << MEASUrement:MEAS8:RESUlts:CURRentacq:MEAN?
+[11:56:39.162] SCOPE >> 966.6844889208361E-3
+[11:56:39.162] SCOPE << MEASUrement:MEAS9:RESUlts:CURRentacq:MEAN?
+[11:56:39.172] SCOPE >> 127.000
+[11:56:39.172] 
+[11:56:39.178] ==============================================================================================================
+[11:56:39.179] #    Test Name                   Nominal    Lower Limit    Upper Limit       Measured   Status
+[11:56:39.183] --------------------------------------------------------------------------------------------------------------
+[11:56:39.183] 1    CH1 Data Rate          250.000 Mbps   247.500 Mbps   252.500 Mbps   249.999 Mbps     PASS
+[11:56:39.183] 2    CH1 Amplitude             500.00 mV      475.00 mV      525.00 mV      478.39 mV     PASS
+[11:56:39.192] 3    CH1 Pattern Length         127 bits       127 bits       127 bits       127 bits     PASS
+[11:56:39.192] 4    CH2 Data Rate          250.000 Mbps   247.500 Mbps   252.500 Mbps   249.999 Mbps     PASS
+[11:56:39.192] 5    CH2 Amplitude             500.00 mV      475.00 mV      525.00 mV      485.64 mV     PASS
+[11:56:39.202] 6    CH2 Pattern Length         127 bits       127 bits       127 bits       127 bits     PASS
+[11:56:39.202] 7    Diff Data Rate         250.000 Mbps   247.500 Mbps   252.500 Mbps   250.031 Mbps     PASS
+[11:56:39.202] 8    Diff Amplitude             1.0000 V      950.00 mV       1.0500 V      966.68 mV     PASS
+[11:56:39.212] 9    Diff Pattern Length        127 bits       127 bits       127 bits       127 bits     PASS
+[11:56:39.212] ==============================================================================================================
+[11:56:39.212] 
+[11:56:39.222] Test Summary: 9 PASSED, 0 FAILED
+[11:56:39.222] Disabling AWG output...
+[11:56:39.222] AWG << AWGControl:STOP
+[11:56:39.232] AWG << OUTPut1:STATe OFF
+[11:56:57.419] PDF report saved: test_report.pdf
+[11:56:57.429] Results saved to: test_results\session_20260202_115602

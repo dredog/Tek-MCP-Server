@@ -1,0 +1,126 @@
+Tek PTA SCPI Log
+================
+Test Suite: Eye Diagram Analysis
+Date: 2026-02-03 20:48:31
+================
+
+[20:48:26.763] Starting test sequence...
+[20:48:26.763] Reference mode ENABLED (tests: all)
+[20:48:26.763] Auto-loading 1 reference waveform(s)...
+[20:48:26.773] Loading REF1 from: E:/AGC2026/2.5 Gbps fom TB4_ch3.wfm
+[20:48:27.484] ERROR loading REF1: 100,"Command error; Specified entity already exists; REF:ADDNew ""REF1""\n"
+[20:48:27.484] WARNING: No reference waveforms loaded - test may fail
+[20:48:27.484] Reference mode: Using pre-captured waveform on REF1
+[20:48:27.484] Skipping all acquisition steps (static waveform)
+[20:48:27.484] SCOPE << *CLS
+[20:48:27.484] SCOPE << HEADer OFF
+[20:48:27.484] SCOPE << VERBose OFF
+[20:48:27.494] SCOPE << DISplay:GLObal:REF1:STATE ON
+[20:48:27.494] Configuring global clock recovery...
+[20:48:27.494] Selected PLL: PCIE_GEN1 (nominal rate: 2.500 Gbps)
+[20:48:27.499] SCOPE << MEASUrement:CLOCKRecovery:METHod PLL
+[20:48:27.502] SCOPE << MEASUrement:CLOCKRecovery:DATARate 2500000000.0
+[20:48:27.503] SCOPE << MEASUrement:CLOCKRecovery:LOOPBandwidth 1500000.0
+[20:48:27.503] SCOPE << MEASUrement:CLOCKRecovery:MODel TYPE2
+[20:48:27.510] Global clock recovery: PLL, Rate=2.500 Gbps, BW=1.5 MHz
+[20:48:27.515] Setting up TIE measurement on REF1...
+[20:48:27.515] SCOPE << MEASUrement:DELETEALL
+[20:48:27.516] SCOPE << MEASUrement:ADDNew "MEAS1"
+[20:48:27.517] SCOPE << MEASUrement:MEAS1:TYPe TIE
+[20:48:27.518] SCOPE << MEASUrement:MEAS1:SOUrce REF1
+[20:48:27.518] SCOPE << MEASUrement:MEAS1:CLOCKRecovery:GLOBal 1
+[20:48:27.519] SCOPE << MEASUrement:MEAS1:STATE ON
+[20:48:27.520] TIE measurement configured (MEAS1)
+[20:48:27.521] Setting up eye diagram plot...
+[20:48:27.522] SCOPE << PLOT:ADDNew "PLOT1"
+[20:48:27.522] SCOPE << PLOT:PLOT1:TYPe EYEDIAGRAM
+[20:48:27.523] SCOPE << PLOT:PLOT1:SOUrce1 MEAS1
+[20:48:27.523] SCOPE << PLOT:PLOT1:BITType ALLBits
+[20:48:27.525] Eye diagram plot configured (PLOT1)
+[20:48:27.526] Setting up eye measurements on REF1...
+[20:48:27.527] SCOPE << MEASUrement:ADDNew "MEAS2"
+[20:48:27.527] SCOPE << MEASUrement:MEAS2:TYPe HEIGHT
+[20:48:27.529] SCOPE << MEASUrement:MEAS2:SOUrce REF1
+[20:48:27.530] SCOPE << MEASUrement:MEAS2:CLOCKRecovery:GLOBal 1
+[20:48:27.532] SCOPE << MEASUrement:MEAS2:DISPlaystat:ENABle ON
+[20:48:27.535] SCOPE << MEASUrement:MEAS2:STATE ON
+[20:48:27.537] Eye Height measurement added (MEAS2)
+[20:48:27.539] SCOPE << MEASUrement:ADDNew "MEAS3"
+[20:48:27.543] SCOPE << MEASUrement:MEAS3:TYPe WIDTH
+[20:48:27.545] SCOPE << MEASUrement:MEAS3:SOUrce REF1
+[20:48:27.548] SCOPE << MEASUrement:MEAS3:CLOCKRecovery:GLOBal 1
+[20:48:27.552] SCOPE << MEASUrement:MEAS3:DISPlaystat:ENABle ON
+[20:48:27.554] SCOPE << MEASUrement:MEAS3:STATE ON
+[20:48:27.559] Eye Width measurement added (MEAS3)
+[20:48:27.564] SCOPE << MEASUrement:ADDNew "MEAS4"
+[20:48:27.567] SCOPE << MEASUrement:MEAS4:TYPe PATTERNLENGTH
+[20:48:27.570] SCOPE << MEASUrement:MEAS4:SOUrce REF1
+[20:48:27.573] SCOPE << MEASUrement:MEAS4:CLOCKRecovery:GLOBal 1
+[20:48:27.576] SCOPE << MEASUrement:MEAS4:DISPlaystat:ENABle ON
+[20:48:27.579] SCOPE << MEASUrement:MEAS4:STATE ON
+[20:48:27.582] Pattern Length measurement added (MEAS4)
+[20:48:27.585] SCOPE << MEASUrement:ADDNew "MEAS5"
+[20:48:27.587] SCOPE << MEASUrement:MEAS5:TYPe DATARATE
+[20:48:27.593] SCOPE << MEASUrement:MEAS5:SOUrce REF1
+[20:48:27.596] SCOPE << MEASUrement:MEAS5:CLOCKRecovery:GLOBal 1
+[20:48:27.600] SCOPE << MEASUrement:MEAS5:DISPlaystat:ENABle ON
+[20:48:27.602] SCOPE << MEASUrement:MEAS5:STATE ON
+[20:48:27.605] Data Rate measurement added (MEAS5)
+[20:48:27.614] SCOPE << MEASUrement:ADDNew "MEAS6"
+[20:48:27.618] SCOPE << MEASUrement:MEAS6:TYPe DJ
+[20:48:27.623] SCOPE << MEASUrement:MEAS6:SOUrce REF1
+[20:48:27.627] SCOPE << MEASUrement:MEAS6:CLOCKRecovery:GLOBal 1
+[20:48:27.629] SCOPE << MEASUrement:MEAS6:DISPlaystat:ENABle ON
+[20:48:27.633] SCOPE << MEASUrement:MEAS6:STATE ON
+[20:48:27.637] Deterministic Jitter (DJ) measurement added (MEAS6)
+[20:48:27.640] SCOPE << MEASUrement:STATistics:STATE ON
+[20:48:27.643] Measurement statistics enabled
+[20:48:27.646] Processing reference waveform (no acquisition)...
+[20:48:28.527] Collecting measurement statistics...
+[20:48:28.530] SCOPE << MEASUrement:MEAS2:RESUlts:ALLAcqs:MEAN?
+[20:48:29.248] SCOPE >> 327.1979725794874E-3
+[20:48:29.248] SCOPE << MEASUrement:MEAS2:RESUlts:ALLAcqs:MINimum?
+[20:48:29.248] SCOPE >> 327.1979725794874E-3
+[20:48:29.248] SCOPE << MEASUrement:MEAS2:RESUlts:ALLAcqs:MAXimum?
+[20:48:29.258] SCOPE >> 327.1979725794874E-3
+[20:48:29.268] SCOPE << MEASUrement:MEAS2:RESUlts:ALLAcqs:STDDev?
+[20:48:29.268] SCOPE >> 0.0E+0
+[20:48:29.268] Eye Height - Mean: 327.20 mV, Min: 327.20 mV, Max: 327.20 mV
+[20:48:29.278] SCOPE << MEASUrement:MEAS3:RESUlts:ALLAcqs:MEAN?
+[20:48:29.278] SCOPE >> 297.1348812341428E-12
+[20:48:29.278] SCOPE << MEASUrement:MEAS3:RESUlts:ALLAcqs:MINimum?
+[20:48:29.278] SCOPE >> 297.1348812341428E-12
+[20:48:29.288] SCOPE << MEASUrement:MEAS3:RESUlts:ALLAcqs:MAXimum?
+[20:48:29.288] SCOPE >> 297.1348812341428E-12
+[20:48:29.298] SCOPE << MEASUrement:MEAS3:RESUlts:ALLAcqs:STDDev?
+[20:48:29.298] SCOPE >> 0.0E+0
+[20:48:29.298] Eye Width - Mean: 297.13 ps (74.3% UI), Min: 297.13 ps, Max: 297.13 ps
+[20:48:29.308] SCOPE << MEASUrement:MEAS4:RESUlts:ALLAcqs:MEAN?
+[20:48:29.308] SCOPE >> 40.0
+[20:48:29.328] Pattern Length: 40 bits
+[20:48:29.332] SCOPE << MEASUrement:MEAS5:RESUlts:ALLAcqs:MEAN?
+[20:48:29.332] SCOPE >> 2.5002063277854E+9
+[20:48:29.332] SCOPE << MEASUrement:MEAS5:RESUlts:ALLAcqs:MINimum?
+[20:48:29.342] SCOPE >> 2.4309030427811E+9
+[20:48:29.342] SCOPE << MEASUrement:MEAS5:RESUlts:ALLAcqs:MAXimum?
+[20:48:29.352] SCOPE >> 2.5854552213375E+9
+[20:48:29.352] SCOPE << MEASUrement:MEAS5:RESUlts:ALLAcqs:STDDev?
+[20:48:29.352] SCOPE >> 22.9775704635683E+6
+[20:48:29.362] Data Rate - Mean: 2.500206 Gbps
+[20:48:29.362] SCOPE << MEASUrement:MEAS6:RESUlts:ALLAcqs:MEAN?
+[20:48:29.362] SCOPE >> 9.91E+37
+[20:48:29.372] SCOPE << MEASUrement:MEAS6:RESUlts:ALLAcqs:MINimum?
+[20:48:29.372] SCOPE >> 9.91E+37
+[20:48:29.372] SCOPE << MEASUrement:MEAS6:RESUlts:ALLAcqs:MAXimum?
+[20:48:29.382] SCOPE >> 9.91E+37
+[20:48:29.382] SCOPE << MEASUrement:MEAS6:RESUlts:ALLAcqs:STDDev?
+[20:48:29.382] SCOPE >> 9.91E+37
+[20:48:29.382] PASS: Pattern Length 40 matches expected
+[20:48:29.392] SCOPE << SAVe:IMAGe "C:/Temp/eye_1.png"
+[20:48:29.392] SCOPE << *OPC?
+[20:48:29.819] SCOPE >> 1
+[20:48:29.819] SCOPE << FILESystem:READFile "C:/Temp/eye_1.png"
+[20:48:29.825] SCOPE << FILESystem:DELEte "C:/Temp/eye_1.png"
+[20:48:29.825] Screenshot saved: eye_diagram_001.png
+[20:48:31.806] PDF report saved: test_report.pdf
+[20:48:31.806] Results saved to: test_results\session_20260203_204826

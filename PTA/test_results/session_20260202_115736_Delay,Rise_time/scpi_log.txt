@@ -1,0 +1,374 @@
+Tek PTA SCPI Log
+================
+Test Suite: AWG70002B Pulse Timing Test
+Date: 2026-02-02 12:01:37
+================
+
+[11:57:36.170] Starting test sequence...
+[11:57:36.200] ==================================================
+[11:57:36.200] LIVE MODE - Using AWG
+[11:57:36.200] ==================================================
+[11:57:36.200] Using connected AWG: AWG70002B
+[11:57:36.200] AWG config: 1.0µs pulse, 10.0µs period, 2.0µs offset
+[11:57:36.200]   Samples/period: 2400, ON: 250, Phase offset: 500
+[11:57:36.200] AWG << AWGControl:STOP
+[11:57:36.200] AWG << OUTPut1:STATe OFF
+[11:57:36.200] AWG << OUTPut2:STATe OFF
+[11:57:36.411] AWG << CLOCk:SRATe 250000000
+[11:57:36.411]   Sample rate: 250.0 MS/s
+[11:57:36.411] AWG << WLISt:WAVeform:DELete "PulseCH1"
+[11:57:36.411] AWG << WLISt:WAVeform:NEW "PulseCH1",2400,REAL
+[11:57:36.411] AWG << WLISt:WAVeform:DATA "PulseCH1" (9600 bytes)
+[11:57:36.411] AWG << *OPC?
+[11:57:38.142] AWG >> 1
+[11:57:38.142]   Uploaded waveform 'PulseCH1' (2400 samples)
+[11:57:38.142] AWG << WLISt:WAVeform:DELete "PulseCH2"
+[11:57:38.142] AWG << WLISt:WAVeform:NEW "PulseCH2",2400,REAL
+[11:57:38.142] AWG << WLISt:WAVeform:DATA "PulseCH2" (9600 bytes)
+[11:57:38.142] AWG << *OPC?
+[11:57:38.142] AWG >> 1
+[11:57:38.152]   Uploaded waveform 'PulseCH2' (2400 samples)
+[11:57:38.152] AWG << SOURce1:CASSet:WAVeform "PulseCH1"
+[11:57:38.152] AWG << SOURce2:CASSet:WAVeform "PulseCH2"
+[11:57:38.152] AWG << SOURce1:VOLTage:LEVel:IMMediate:AMPLitude 0.25
+[11:57:38.152] AWG << SOURce2:VOLTage:LEVel:IMMediate:AMPLitude 0.25
+[11:57:38.152] AWG << SOURce1:VOLTage:LEVel:IMMediate:OFFSet 0.125
+[11:57:38.152] AWG << SOURce2:VOLTage:LEVel:IMMediate:OFFSet 0.125
+[11:57:38.152]   Amplitude: 250 mV
+[11:57:38.152] AWG << *OPC?
+[11:57:38.152] AWG >> 1
+[11:57:38.152] Configuring oscilloscope (delay view)...
+[11:57:38.162]   AWG differential: 250mV → Single-ended: 125mV
+[11:57:38.162]   Signal range: 0.0mV to 125.0mV
+[11:57:38.162] SCOPE << *RST
+[11:57:38.162] SCOPE << *OPC? (timeout=10s)
+[11:57:38.683] SCOPE >> 1
+[11:57:38.683] SCOPE << HEADer OFF
+[11:57:38.683] SCOPE << DISplay:WAVEView1:CH1:STATE OFF
+[11:57:38.683] SCOPE << DISplay:WAVEView1:CH2:STATE OFF
+[11:57:38.683] SCOPE << DISplay:WAVEView1:CH3:STATE OFF
+[11:57:38.683] SCOPE << DISplay:WAVEView1:CH4:STATE OFF
+[11:57:38.683] SCOPE << DISplay:WAVEView1:CH1:STATE ON
+[11:57:38.683] SCOPE << DISplay:WAVEView1:CH3:STATE ON
+[11:57:38.683] SCOPE << CH1:TERmination 50
+[11:57:38.693] SCOPE << CH1:COUPling DC
+[11:57:38.693] SCOPE << CH1:BANdwidth FULL
+[11:57:38.693] SCOPE << CH1:SCAle 0.05
+[11:57:38.693] SCOPE << CH1:OFFSet 0.0625
+[11:57:38.693] SCOPE << CH3:TERmination 50
+[11:57:38.703] SCOPE << CH3:COUPling DC
+[11:57:38.713] SCOPE << CH3:BANdwidth FULL
+[11:57:38.713] SCOPE << CH3:SCAle 0.05
+[11:57:38.723] SCOPE << CH3:OFFSet 0.0625
+[11:57:38.733]   CH1, CH3: 50Ω, 50mV/div, offset=62.5mV
+[11:57:38.737] SCOPE << HORizontal:SCAle 2.5e-06
+[11:57:38.743] SCOPE << HORizontal:POSition 10
+[11:57:38.743]   Horizontal: 2.5 µs/div (delay view)
+[11:57:38.753] SCOPE << TRIGger:A:TYPe EDGE
+[11:57:38.753] SCOPE << TRIGger:A:EDGE:SOUrce CH1
+[11:57:38.763] SCOPE << TRIGger:A:EDGE:SLOpe RISE
+[11:57:38.763] SCOPE << TRIGger:A:LEVel:CH1 0.0625
+[11:57:38.763] SCOPE << TRIGger:A:MODe NORMal
+[11:57:38.763]   Trigger: CH1 rising @ 62.5mV
+[11:57:38.763] SCOPE << ACQuire:MODe SAMple
+[11:57:38.773]   Acquisition: Sample mode (using measurement statistics)
+[11:57:38.773] Setting up delay measurements (live mode)...
+[11:57:38.773]   Statistics: 100 samples per measurement
+[11:57:38.773] SCOPE << MEASUrement:DELETEALL
+[11:57:38.783] SCOPE << MEASUrement:ADDNew "MEAS1"
+[11:57:38.783] SCOPE << MEASUrement:MEAS1:TYPe DELAY
+[11:57:38.783] SCOPE << MEASUrement:MEAS1:SOUrce1 CH1
+[11:57:38.793] SCOPE << MEASUrement:MEAS1:SOUrce2 CH3
+[11:57:38.793] SCOPE << MEASUrement:MEAS1:DELay:EDGE1 RISE
+[11:57:38.803] SCOPE << MEASUrement:MEAS1:DELay:EDGE2 RISE
+[11:57:38.803] SCOPE << MEASUrement:MEAS1:STATE ON
+[11:57:38.813] SCOPE << MEASUrement:MEAS1:DISPlaystat:ENABle ON
+[11:57:38.813] SCOPE << MEASUrement:MEAS1:POPUlation:LIMIT:STATE ON
+[11:57:38.823] SCOPE << MEASUrement:MEAS1:POPUlation:LIMIT:VALue 100
+[11:57:38.843]   MEAS1: Delay CH1↑→CH2↑ → CH1 (stats: 100 samples)
+[11:57:38.853] SCOPE << MEASUrement:ADDNew "MEAS2"
+[11:57:38.853] SCOPE << MEASUrement:MEAS2:TYPe DELAY
+[11:57:38.863] SCOPE << MEASUrement:MEAS2:SOUrce1 CH1
+[11:57:38.867] SCOPE << MEASUrement:MEAS2:SOUrce2 CH3
+[11:57:38.876] SCOPE << MEASUrement:MEAS2:DELay:EDGE1 FALL
+[11:57:38.876] SCOPE << MEASUrement:MEAS2:DELay:EDGE2 RISE
+[11:57:38.883] SCOPE << MEASUrement:MEAS2:STATE ON
+[11:57:38.883] SCOPE << MEASUrement:MEAS2:DISPlaystat:ENABle ON
+[11:57:38.893] SCOPE << MEASUrement:MEAS2:POPUlation:LIMIT:STATE ON
+[11:57:38.897] SCOPE << MEASUrement:MEAS2:POPUlation:LIMIT:VALue 100
+[11:57:38.903]   MEAS2: Delay CH1↓→CH2↑ → CH1 (stats: 100 samples)
+[11:57:38.903] ==================================================
+[11:57:38.913] PASS 1: Delay View (wide timebase)
+[11:57:38.913] ==================================================
+[11:57:38.923] Enabling AWG outputs...
+[11:57:38.923] AWG << OUTPut1:STATe ON
+[11:57:38.923] AWG << OUTPut2:STATe ON
+[11:57:38.935] AWG << AWGControl:RUN
+[11:57:38.935] AWG << *OPC?
+[11:57:40.055] AWG >> 1
+[11:57:40.566] Starting acquisition for 100 samples (delay view)...
+[11:57:40.566] SCOPE << CLEAR
+[11:57:40.576] SCOPE << ACQuire:STOPAfter RUNStop
+[11:57:40.576] SCOPE << ACQuire:STATE RUN
+[11:57:40.586] SCOPE << MEASUrement:MEAS1:RESUlts:ALLAcqs:POPUlation?
+[11:57:40.586] SCOPE >> 17
+[11:57:41.107] SCOPE << MEASUrement:MEAS1:RESUlts:ALLAcqs:POPUlation?
+[11:57:41.107] SCOPE >> 16
+[11:57:41.627] SCOPE << MEASUrement:MEAS1:RESUlts:ALLAcqs:POPUlation?
+[11:57:41.627] SCOPE >> 37
+[11:57:42.148] SCOPE << MEASUrement:MEAS1:RESUlts:ALLAcqs:POPUlation?
+[11:57:42.158] SCOPE >> 59
+[11:57:42.568] SCOPE << MEASUrement:MEAS1:RESUlts:ALLAcqs:POPUlation?
+[11:57:42.568] SCOPE >> 80
+[11:57:43.099] SCOPE << MEASUrement:MEAS1:RESUlts:ALLAcqs:POPUlation?
+[11:57:43.099] SCOPE >> 100
+[11:57:43.109]   Statistics complete: 100/100 samples
+[11:57:43.109] SCOPE << ACQuire:STATE STOP
+[11:57:43.119] SCOPE << SAVe:IMAGe "C:/Temp/awg_delay_view.png"
+[11:57:43.119] SCOPE << *OPC?
+[11:57:43.119] SCOPE >> 1
+[11:57:43.129] SCOPE << FILESystem:READFile "C:/Temp/awg_delay_view.png"
+[11:58:13.173] SCOPE << SAVe:IMAGe "C:/awg_delay_view.png"
+[11:58:13.176] SCOPE << *OPC?
+[11:58:13.296] SCOPE >> 1
+[11:58:13.296] SCOPE << FILESystem:READFile "C:/awg_delay_view.png"
+[11:58:13.506] SCOPE << FILESystem:DELEte "C:/awg_delay_view.png"
+[11:58:13.506] Screenshot saved: delay_view.png
+[11:58:13.556] SCOPE << MEASUrement:MEAS1:RESUlts:ALLAcqs:MEAN?
+[11:58:13.556] SCOPE >> 1.9999968265118E-6
+[11:58:13.556] SCOPE << MEASUrement:MEAS1:RESUlts:ALLAcqs:STDDev?
+[11:58:13.566] SCOPE >> 1.7946227365025E-12
+[11:58:13.566] SCOPE << MEASUrement:MEAS1:RESUlts:ALLAcqs:POPUlation?
+[11:58:13.566] SCOPE >> 100
+[11:58:13.576]   Delay CH1↑→CH2↑: 2.000 µs σ=0.000 µs n=100 (nom: 2.000 µs) [PASS]
+[11:58:13.576] SCOPE << MEASUrement:MEAS2:RESUlts:ALLAcqs:MEAN?
+[11:58:13.586] SCOPE >> 999.9948384355730E-9
+[11:58:13.586] SCOPE << MEASUrement:MEAS2:RESUlts:ALLAcqs:STDDev?
+[11:58:13.586] SCOPE >> 1.8419043420561E-12
+[11:58:13.596] SCOPE << MEASUrement:MEAS2:RESUlts:ALLAcqs:POPUlation?
+[11:58:13.596] SCOPE >> 100
+[11:58:13.596]   Delay CH1↓→CH2↑: 1.000 µs σ=0.000 µs n=100 (nom: 1.000 µs) [PASS]
+[11:58:13.606] 
+[11:58:13.606] ==================================================
+[11:58:13.606] PASS 2: Edge View (zoomed timebase)
+[11:58:13.616] ==================================================
+[11:58:13.616] 
+--- Rise Time CH1 ---
+[11:58:13.616] SCOPE << TRIGger:A:EDGE:SOUrce CH1
+[11:58:13.626] SCOPE << TRIGger:A:EDGE:SLOpe RISE
+[11:58:13.626] SCOPE << TRIGger:A:LEVel:CH1 0.0625
+[11:58:13.626]   Trigger: CH1 rise @ 62.5mV
+[11:58:13.636] SCOPE << HORizontal:SCAle 5e-10
+[11:58:13.636] SCOPE << HORizontal:POSition 50
+[11:58:13.636]   Horizontal: 500ps/div (edge view, ~2×165ps)
+[11:58:13.646] SCOPE << MEASUrement:DELETEALL
+[11:58:13.646] SCOPE << MEASUrement:ADDNew "MEAS3"
+[11:58:13.646] SCOPE << MEASUrement:MEAS3:TYPe RISETIME
+[11:58:13.656] SCOPE << MEASUrement:MEAS3:SOUrce CH1
+[11:58:13.656] SCOPE << MEASUrement:MEAS3:STATE ON
+[11:58:13.656] SCOPE << MEASUrement:MEAS3:DISPlaystat:ENABle ON
+[11:58:13.666] SCOPE << MEASUrement:MEAS3:POPUlation:LIMIT:STATE ON
+[11:58:13.675] SCOPE << MEASUrement:MEAS3:POPUlation:LIMIT:VALue 100
+[11:58:13.678]   Measurement: RISETIME on CH1 (stats: 100 samples)
+[11:58:13.681]   Acquiring 100 samples...
+[11:58:13.684] SCOPE << CLEAR
+[11:58:13.687] SCOPE << ACQuire:STOPAfter RUNStop
+[11:58:13.690] SCOPE << ACQuire:STATE RUN
+[11:58:13.693] SCOPE << MEASUrement:MEAS3:RESUlts:ALLAcqs:POPUlation?
+[11:58:13.803] SCOPE >> 0
+[11:58:14.226] SCOPE << MEASUrement:MEAS3:RESUlts:ALLAcqs:POPUlation?
+[11:58:14.231] SCOPE >> 22
+[11:58:14.233]     22/100 samples...
+[11:58:14.776] SCOPE << MEASUrement:MEAS3:RESUlts:ALLAcqs:POPUlation?
+[11:58:14.795] SCOPE >> 54
+[11:58:14.805]     54/100 samples...
+[11:58:15.242] SCOPE << MEASUrement:MEAS3:RESUlts:ALLAcqs:POPUlation?
+[11:58:15.248] SCOPE >> 84
+[11:58:15.264]     84/100 samples...
+[11:58:15.778] SCOPE << MEASUrement:MEAS3:RESUlts:ALLAcqs:POPUlation?
+[11:58:15.788] SCOPE >> 100
+[11:58:15.788] SCOPE << ACQuire:STATE STOP
+[11:58:15.799] SCOPE << MEASUrement:MEAS3:RESUlts:ALLAcqs:MEAN?
+[11:58:15.799] SCOPE >> 160.3782577065501E-12
+[11:58:15.799] SCOPE << MEASUrement:MEAS3:RESUlts:ALLAcqs:STDDev?
+[11:58:15.812] SCOPE >> 32.3224750224547E-12
+[11:58:15.816] SCOPE << MEASUrement:MEAS3:RESUlts:ALLAcqs:POPUlation?
+[11:58:15.819] SCOPE >> 100
+[11:58:15.825]   Rise Time CH1: 1.60378e-10 s σ=3.23225e-11 s n=100 (nom: 1.65e-10 s) [PASS]
+[11:58:15.833] SCOPE << SAVe:IMAGe "C:/Temp/awg_rise_time_ch1.png"
+[11:58:15.838] SCOPE << *OPC?
+[11:58:15.843] SCOPE >> 1
+[11:58:15.843] SCOPE << FILESystem:READFile "C:/Temp/awg_rise_time_ch1.png"
+[11:58:45.778] SCOPE << SAVe:IMAGe "C:/awg_rise_time_ch1.png"
+[11:58:45.798] SCOPE << *OPC?
+[11:58:46.025] SCOPE >> 1
+[11:58:46.029] SCOPE << FILESystem:READFile "C:/awg_rise_time_ch1.png"
+[11:58:46.140] SCOPE << FILESystem:DELEte "C:/awg_rise_time_ch1.png"
+[11:58:46.140] Screenshot saved: rise_time_ch1.png
+[11:58:46.180] 
+--- Rise Time CH2 ---
+[11:58:46.185] SCOPE << TRIGger:A:EDGE:SOUrce CH3
+[11:58:46.192] SCOPE << TRIGger:A:EDGE:SLOpe RISE
+[11:58:46.192] SCOPE << TRIGger:A:LEVel:CH3 0.0625
+[11:58:46.192]   Trigger: CH3 rise @ 62.5mV
+[11:58:46.201] SCOPE << HORizontal:SCAle 5e-10
+[11:58:46.201] SCOPE << HORizontal:POSition 50
+[11:58:46.210]   Horizontal: 500ps/div (edge view, ~2×165ps)
+[11:58:46.211] SCOPE << MEASUrement:DELETEALL
+[11:58:46.211] SCOPE << MEASUrement:ADDNew "MEAS4"
+[11:58:46.222] SCOPE << MEASUrement:MEAS4:TYPe RISETIME
+[11:58:46.222] SCOPE << MEASUrement:MEAS4:SOUrce CH3
+[11:58:46.222] SCOPE << MEASUrement:MEAS4:STATE ON
+[11:58:46.231] SCOPE << MEASUrement:MEAS4:DISPlaystat:ENABle ON
+[11:58:46.231] SCOPE << MEASUrement:MEAS4:POPUlation:LIMIT:STATE ON
+[11:58:46.241] SCOPE << MEASUrement:MEAS4:POPUlation:LIMIT:VALue 100
+[11:58:46.241]   Measurement: RISETIME on CH3 (stats: 100 samples)
+[11:58:46.241]   Acquiring 100 samples...
+[11:58:46.251] SCOPE << CLEAR
+[11:58:46.251] SCOPE << ACQuire:STOPAfter RUNStop
+[11:58:46.251] SCOPE << ACQuire:STATE RUN
+[11:58:46.261] SCOPE << MEASUrement:MEAS4:RESUlts:ALLAcqs:POPUlation?
+[11:58:46.373] SCOPE >> 0
+[11:58:46.914] SCOPE << MEASUrement:MEAS4:RESUlts:ALLAcqs:POPUlation?
+[11:58:46.918] SCOPE >> 22
+[11:58:46.922]     22/100 samples...
+[11:58:47.357] SCOPE << MEASUrement:MEAS4:RESUlts:ALLAcqs:POPUlation?
+[11:58:47.357] SCOPE >> 53
+[11:58:47.357]     53/100 samples...
+[11:58:47.907] SCOPE << MEASUrement:MEAS4:RESUlts:ALLAcqs:POPUlation?
+[11:58:47.910] SCOPE >> 82
+[11:58:47.910]     82/100 samples...
+[11:58:48.440] SCOPE << MEASUrement:MEAS4:RESUlts:ALLAcqs:POPUlation?
+[11:58:48.440] SCOPE >> 100
+[11:58:48.452] SCOPE << ACQuire:STATE STOP
+[11:58:48.455] SCOPE << MEASUrement:MEAS4:RESUlts:ALLAcqs:MEAN?
+[11:58:48.455] SCOPE >> 155.0540970662819E-12
+[11:58:48.461] SCOPE << MEASUrement:MEAS4:RESUlts:ALLAcqs:STDDev?
+[11:58:48.461] SCOPE >> 33.726880275203E-12
+[11:58:48.461] SCOPE << MEASUrement:MEAS4:RESUlts:ALLAcqs:POPUlation?
+[11:58:48.471] SCOPE >> 100
+[11:58:48.471]   Rise Time CH2: 1.55054e-10 s σ=3.37269e-11 s n=100 (nom: 1.65e-10 s) [PASS]
+[11:58:48.471] SCOPE << SAVe:IMAGe "C:/Temp/awg_rise_time_ch2.png"
+[11:58:48.481] SCOPE << *OPC?
+[11:58:48.481] SCOPE >> 1
+[11:58:48.481] SCOPE << FILESystem:READFile "C:/Temp/awg_rise_time_ch2.png"
+[11:59:18.419] SCOPE << SAVe:IMAGe "C:/awg_rise_time_ch2.png"
+[11:59:18.419] SCOPE << *OPC?
+[11:59:18.636] SCOPE >> 1
+[11:59:18.636] SCOPE << FILESystem:READFile "C:/awg_rise_time_ch2.png"
+[11:59:18.747] SCOPE << FILESystem:DELEte "C:/awg_rise_time_ch2.png"
+[11:59:18.747] Screenshot saved: rise_time_ch2.png
+[11:59:18.798] 
+--- Fall Time CH1 ---
+[11:59:18.818] SCOPE << TRIGger:A:EDGE:SOUrce CH1
+[11:59:18.829] SCOPE << TRIGger:A:EDGE:SLOpe FALL
+[11:59:18.838] SCOPE << TRIGger:A:LEVel:CH1 0.0625
+[11:59:18.844]   Trigger: CH1 fall @ 62.5mV
+[11:59:18.844] SCOPE << HORizontal:SCAle 5e-10
+[11:59:18.848] SCOPE << HORizontal:POSition 50
+[11:59:18.848]   Horizontal: 500ps/div (edge view, ~2×165ps)
+[11:59:18.858] SCOPE << MEASUrement:DELETEALL
+[11:59:18.858] SCOPE << MEASUrement:ADDNew "MEAS5"
+[11:59:18.868] SCOPE << MEASUrement:MEAS5:TYPe FALLTIME
+[11:59:18.878] SCOPE << MEASUrement:MEAS5:SOUrce CH1
+[11:59:18.888] SCOPE << MEASUrement:MEAS5:STATE ON
+[11:59:18.888] SCOPE << MEASUrement:MEAS5:DISPlaystat:ENABle ON
+[11:59:18.888] SCOPE << MEASUrement:MEAS5:POPUlation:LIMIT:STATE ON
+[11:59:18.898] SCOPE << MEASUrement:MEAS5:POPUlation:LIMIT:VALue 100
+[11:59:18.918]   Measurement: FALLTIME on CH1 (stats: 100 samples)
+[11:59:18.928]   Acquiring 100 samples...
+[11:59:18.928] SCOPE << CLEAR
+[11:59:18.938] SCOPE << ACQuire:STOPAfter RUNStop
+[11:59:18.938] SCOPE << ACQuire:STATE RUN
+[11:59:18.944] SCOPE << MEASUrement:MEAS5:RESUlts:ALLAcqs:POPUlation?
+[11:59:18.948] SCOPE >> 0
+[11:59:19.466] SCOPE << MEASUrement:MEAS5:RESUlts:ALLAcqs:POPUlation?
+[11:59:19.471] SCOPE >> 23
+[11:59:19.475]     23/100 samples...
+[11:59:20.012] SCOPE << MEASUrement:MEAS5:RESUlts:ALLAcqs:POPUlation?
+[11:59:20.023] SCOPE >> 54
+[11:59:20.027]     54/100 samples...
+[11:59:20.458] SCOPE << MEASUrement:MEAS5:RESUlts:ALLAcqs:POPUlation?
+[11:59:20.468] SCOPE >> 84
+[11:59:20.468]     84/100 samples...
+[11:59:21.014] SCOPE << MEASUrement:MEAS5:RESUlts:ALLAcqs:POPUlation?
+[11:59:21.017] SCOPE >> 100
+[11:59:21.017] SCOPE << ACQuire:STATE STOP
+[11:59:21.037] SCOPE << MEASUrement:MEAS5:RESUlts:ALLAcqs:MEAN?
+[11:59:21.040] SCOPE >> 172.2017385509446E-12
+[11:59:21.044] SCOPE << MEASUrement:MEAS5:RESUlts:ALLAcqs:STDDev?
+[11:59:21.049] SCOPE >> 27.2498010448599E-12
+[11:59:21.052] SCOPE << MEASUrement:MEAS5:RESUlts:ALLAcqs:POPUlation?
+[11:59:21.055] SCOPE >> 100
+[11:59:21.058]   Fall Time CH1: 1.72202e-10 s σ=2.72498e-11 s n=100 (nom: 1.65e-10 s) [PASS]
+[11:59:21.063] SCOPE << SAVe:IMAGe "C:/Temp/awg_fall_time_ch1.png"
+[11:59:21.067] SCOPE << *OPC?
+[11:59:21.067] SCOPE >> 1
+[11:59:21.067] SCOPE << FILESystem:READFile "C:/Temp/awg_fall_time_ch1.png"
+[11:59:51.103] SCOPE << SAVe:IMAGe "C:/awg_fall_time_ch1.png"
+[11:59:51.107] SCOPE << *OPC?
+[11:59:51.218] SCOPE >> 1
+[11:59:51.218] SCOPE << FILESystem:READFile "C:/awg_fall_time_ch1.png"
+[11:59:51.339] SCOPE << FILESystem:DELEte "C:/awg_fall_time_ch1.png"
+[11:59:51.339] Screenshot saved: fall_time_ch1.png
+[11:59:51.389] 
+--- Fall Time CH2 ---
+[11:59:51.396] SCOPE << TRIGger:A:EDGE:SOUrce CH3
+[11:59:51.399] SCOPE << TRIGger:A:EDGE:SLOpe FALL
+[11:59:51.399] SCOPE << TRIGger:A:LEVel:CH3 0.0625
+[11:59:51.399]   Trigger: CH3 fall @ 62.5mV
+[11:59:51.410] SCOPE << HORizontal:SCAle 5e-10
+[11:59:51.410] SCOPE << HORizontal:POSition 50
+[11:59:51.410]   Horizontal: 500ps/div (edge view, ~2×165ps)
+[11:59:51.419] SCOPE << MEASUrement:DELETEALL
+[11:59:51.419] SCOPE << MEASUrement:ADDNew "MEAS6"
+[11:59:51.426] SCOPE << MEASUrement:MEAS6:TYPe FALLTIME
+[11:59:51.430] SCOPE << MEASUrement:MEAS6:SOUrce CH3
+[11:59:51.430] SCOPE << MEASUrement:MEAS6:STATE ON
+[11:59:51.439] SCOPE << MEASUrement:MEAS6:DISPlaystat:ENABle ON
+[11:59:51.439] SCOPE << MEASUrement:MEAS6:POPUlation:LIMIT:STATE ON
+[11:59:51.439] SCOPE << MEASUrement:MEAS6:POPUlation:LIMIT:VALue 100
+[11:59:51.449]   Measurement: FALLTIME on CH3 (stats: 100 samples)
+[11:59:51.449]   Acquiring 100 samples...
+[11:59:51.449] SCOPE << CLEAR
+[11:59:51.459] SCOPE << ACQuire:STOPAfter RUNStop
+[11:59:51.459] SCOPE << ACQuire:STATE RUN
+[11:59:51.468] SCOPE << MEASUrement:MEAS6:RESUlts:ALLAcqs:POPUlation?
+[11:59:51.581] SCOPE >> 0
+[11:59:52.104] SCOPE << MEASUrement:MEAS6:RESUlts:ALLAcqs:POPUlation?
+[11:59:52.114] SCOPE >> 19
+[11:59:52.118]     19/100 samples...
+[11:59:52.647] SCOPE << MEASUrement:MEAS6:RESUlts:ALLAcqs:POPUlation?
+[11:59:52.647] SCOPE >> 49
+[11:59:52.657]     49/100 samples...
+[11:59:53.076] SCOPE << MEASUrement:MEAS6:RESUlts:ALLAcqs:POPUlation?
+[11:59:53.076] SCOPE >> 79
+[11:59:53.086]     79/100 samples...
+[11:59:53.619] SCOPE << MEASUrement:MEAS6:RESUlts:ALLAcqs:POPUlation?
+[11:59:53.619] SCOPE >> 100
+[11:59:53.629] SCOPE << ACQuire:STATE STOP
+[11:59:53.629] SCOPE << MEASUrement:MEAS6:RESUlts:ALLAcqs:MEAN?
+[11:59:53.629] SCOPE >> 168.0764654347463E-12
+[11:59:53.639] SCOPE << MEASUrement:MEAS6:RESUlts:ALLAcqs:STDDev?
+[11:59:53.639] SCOPE >> 30.9164246780171E-12
+[11:59:53.639] SCOPE << MEASUrement:MEAS6:RESUlts:ALLAcqs:POPUlation?
+[11:59:53.649] SCOPE >> 100
+[11:59:53.649]   Fall Time CH2: 1.68076e-10 s σ=3.09164e-11 s n=100 (nom: 1.65e-10 s) [PASS]
+[11:59:53.659] SCOPE << SAVe:IMAGe "C:/Temp/awg_fall_time_ch2.png"
+[11:59:53.659] SCOPE << *OPC?
+[11:59:53.659] SCOPE >> 1
+[11:59:53.669] SCOPE << FILESystem:READFile "C:/Temp/awg_fall_time_ch2.png"
+[12:00:23.720] SCOPE << SAVe:IMAGe "C:/awg_fall_time_ch2.png"
+[12:00:23.723] SCOPE << *OPC?
+[12:00:23.834] SCOPE >> 1
+[12:00:23.844] SCOPE << FILESystem:READFile "C:/awg_fall_time_ch2.png"
+[12:00:23.946] SCOPE << FILESystem:DELEte "C:/awg_fall_time_ch2.png"
+[12:00:23.952] Screenshot saved: fall_time_ch2.png
+[12:00:24.014] 
+Test complete: 6 passed, 0 failed
+[12:00:24.030] Disabling AWG outputs...
+[12:00:24.046] AWG << AWGControl:STOP
+[12:00:24.052] AWG << OUTPut1:STATe OFF
+[12:00:24.057] AWG << OUTPut2:STATe OFF
+[12:01:37.262] PDF report saved: test_report.pdf
+[12:01:37.272] Results saved to: test_results\session_20260202_115736

@@ -1,0 +1,867 @@
+Tek PTA SCPI Log
+================
+Test Suite: Current Shunt Test with SMU as source
+Date: 2026-02-02 12:24:59
+================
+
+[12:10:12.837] Starting test sequence...
+[12:10:12.874] Resetting oscilloscope...
+[12:10:12.884] SCOPE << FACtory
+[12:10:13.297] SCOPE << *OPC? (timeout=30s)
+[12:10:13.709] SCOPE >> 1
+[12:10:13.709] SCOPE << *CLS
+[12:10:13.709] SCOPE << HEADer OFF
+[12:10:13.709] SCOPE << VERBose OFF
+[12:10:13.709] Configuring CH5 for current measurement...
+[12:10:13.709] SCOPE << DISplay:WAVEView1:CH1:STATE OFF
+[12:10:13.709] SCOPE << DISplay:WAVEView1:CH2:STATE OFF
+[12:10:13.709] SCOPE << DISplay:WAVEView1:CH3:STATE OFF
+[12:10:13.709] SCOPE << DISplay:WAVEView1:CH4:STATE OFF
+[12:10:13.709] SCOPE << DISplay:WAVEView1:CH6:STATE OFF
+[12:10:13.709] SCOPE << DISplay:WAVEView1:CH7:STATE OFF
+[12:10:13.709] SCOPE << DISplay:WAVEView1:CH8:STATE OFF
+[12:10:13.709] SCOPE << DISplay:WAVEView1:CH5:STATE ON
+[12:10:13.709] SCOPE << CH5:COUPling DC
+[12:10:13.709] SCOPE << CH5:TERmination 1E6
+[12:10:13.709] SCOPE << CH5:BANdwidth 20E6
+[12:10:13.709] CH5 bandwidth limited to 20 MHz (noise reduction)
+[12:10:13.709] Setting ext attenuation to 0.1 (1/10.0Ω)
+[12:10:13.709] SCOPE << CH5:PROBEFunc:EXTAtten 0.1
+[12:10:13.709] SCOPE << CH5:PROBEFunc:EXTUnits:STATE ON
+[12:10:13.709] CH5 alternate units enabled (displays as Amps)
+[12:10:13.709] SCOPE << CH5:SCAle 0.001
+[12:10:13.719] SCOPE << CH5:OFFSet 0
+[12:10:13.719] SCOPE << TRIGger:A:TYPE EDGE
+[12:10:13.719] SCOPE << TRIGger:A:EDGE:SOUrce CH5
+[12:10:13.719] SCOPE << TRIGger:A:EDGE:SLOpe RISe
+[12:10:13.719] SCOPE << TRIGger:A:MODe AUTO
+[12:10:13.719] SCOPE << HORizontal:SCAle 20e-3
+[12:10:13.719] Horizontal scale: 20 ms/div
+[12:10:13.719] Setting up DC current measurement on CH5...
+[12:10:13.719] SCOPE << MEASUrement:DELETEALL
+[12:10:13.719] SCOPE << MEASUrement:ADDNew "MEAS1"
+[12:10:13.719] SCOPE << MEASUrement:MEAS1:TYPe MEAN
+[12:10:13.729] SCOPE << MEASUrement:MEAS1:SOUrce CH5
+[12:10:13.730] SCOPE << MEASUrement:MEAS1:STATE ON
+[12:10:13.730] Configuring SMU for 0.0V (source V, measure I)...
+[12:10:13.730] SMU << reset()
+[12:10:14.262] SMU << smu.source.func = smu.FUNC_DC_VOLTAGE
+[12:10:14.262] SMU << smu.source.level = 0.0
+[12:10:14.262] SMU << smu.source.ilimit.level = 0.1
+[12:10:14.262] SMU << smu.source.readback = smu.ON
+[12:10:14.262] SMU << smu.measure.func = smu.FUNC_DC_CURRENT
+[12:10:14.262] SMU << smu.measure.autorange = smu.ON
+[12:10:14.272] SMU << smu.measure.nplc = 1
+[12:10:14.272] SMU << smu.source.output = smu.ON
+[12:10:14.483] SMU output enabled
+[12:10:14.483] SMU << smu.measure.read()
+[12:10:14.483] SMU << printbuffer(1, 1, defbuffer1.readings)
+[12:10:14.594] SMU >> -1.7839245359e-10
+[12:10:14.594] SMU reports: -0.000 mA
+[12:10:14.594] Trying vertical: 500 µA/div, offset: -0.000 mA
+[12:10:14.604] SCOPE << CH5:SCAle 0.0005
+[12:10:14.604] SCOPE << CH5:OFFSet -1.7839245359e-10
+[12:10:14.604] SCOPE << ACQuire:STOPAfter SEQuence
+[12:10:14.604] SCOPE << ACQuire:STATE RUN
+[12:10:14.915] SCOPE << ACQuire:STATE STOP
+[12:10:14.915] SCOPE << CH5:CLIPping?
+[12:10:14.915] SCOPE >> 0
+[12:10:14.915] Vertical setup complete: 500 µA/div, no clipping
+[12:10:14.915] SCOPE << TRIGger:A:EDGE:SOUrce CH5
+[12:10:14.925] SCOPE << TRIGger:A:TYPE EDGE
+[12:10:14.925] SCOPE << TRIGger:A:LEVel:CH5 -1.7839245359e-10
+[12:10:14.935] SCOPE << TRIGger:A:MODe AUTO
+[12:10:14.939] Trigger: CH5 edge at -0.000 mA
+[12:10:14.939] SCOPE << TRIGger:A:LEVel:CH5 -1.7839245359e-10
+[12:10:14.939] Trigger level: -0.000 mA
+[12:10:14.945] SCOPE << ACQuire:STOPAfter RUNSTop
+[12:10:14.945] SCOPE << ACQuire:STATE RUN
+[12:10:15.862] SCOPE << ACQuire:STATE STOP
+[12:10:16.072] SCOPE << CH5:CLIPping?
+[12:10:16.082] SCOPE >> 0
+[12:10:16.082] SCOPE << MEASUrement:MEAS1:RESUlts:CURRentacq:MEAN?
+[12:10:16.092] SCOPE >> 6.5274112219289E-6
+[12:10:16.096] Scope measured: 0.007 mA
+[12:10:16.103] SCOPE << ACQuire:STATE STOP
+[12:10:16.315] PASS: Error +6.5 µA (within ±300.0 µA)
+[12:10:16.315] SCOPE << SAVe:IMAGe "C:/Temp/led_1.png"
+[12:10:16.325] SCOPE << *OPC?
+[12:10:16.325] SCOPE >> 1
+[12:10:16.325] SCOPE << FILESystem:READFile "C:/Temp/led_1.png"
+[12:10:46.726] SCOPE << SAVe:IMAGe "C:/led_1.png"
+[12:10:46.726] SCOPE << *OPC?
+[12:10:46.946] SCOPE >> 1
+[12:10:46.956] SCOPE << FILESystem:READFile "C:/led_1.png"
+[12:10:47.066] SCOPE << FILESystem:DELEte "C:/led_1.png"
+[12:10:47.066] Screenshot saved: led_current_001.png
+[12:10:47.106] Configuring SMU for 0.3333333333333333V (source V, measure I)...
+[12:10:47.116] SMU << reset()
+[12:10:47.526] SMU << smu.source.func = smu.FUNC_DC_VOLTAGE
+[12:10:47.526] SMU << smu.source.level = 0.3333333333333333
+[12:10:47.536] SMU << smu.source.ilimit.level = 0.1
+[12:10:47.536] SMU << smu.source.readback = smu.ON
+[12:10:47.536] SMU << smu.measure.func = smu.FUNC_DC_CURRENT
+[12:10:47.546] SMU << smu.measure.autorange = smu.ON
+[12:10:47.546] SMU << smu.measure.nplc = 1
+[12:10:47.546] SMU << smu.source.output = smu.ON
+[12:10:47.867] SMU output enabled
+[12:10:47.887] SMU << smu.measure.read()
+[12:10:47.897] SMU << printbuffer(1, 1, defbuffer1.readings)
+[12:10:48.619] SMU >> -1.8164669768e-09
+[12:10:48.629] SMU reports: -0.000 mA
+[12:10:48.639] Trying vertical: 500 µA/div, offset: -0.000 mA
+[12:10:48.639] SCOPE << CH5:SCAle 0.0005
+[12:10:48.639] SCOPE << CH5:OFFSet -1.8164669768e-09
+[12:10:48.653] SCOPE << ACQuire:STOPAfter SEQuence
+[12:10:48.657] SCOPE << ACQuire:STATE RUN
+[12:10:48.970] SCOPE << ACQuire:STATE STOP
+[12:10:48.980] SCOPE << CH5:CLIPping?
+[12:10:48.980] SCOPE >> 0
+[12:10:48.980] Vertical setup complete: 500 µA/div, no clipping
+[12:10:48.990] SCOPE << TRIGger:A:EDGE:SOUrce CH5
+[12:10:48.990] SCOPE << TRIGger:A:TYPE EDGE
+[12:10:48.990] SCOPE << TRIGger:A:LEVel:CH5 -1.8164669768e-09
+[12:10:49.000] SCOPE << TRIGger:A:MODe AUTO
+[12:10:49.000] Trigger: CH5 edge at -0.000 mA
+[12:10:49.000] SCOPE << TRIGger:A:LEVel:CH5 -1.8164669768e-09
+[12:10:49.010] Trigger level: -0.000 mA
+[12:10:49.010] SCOPE << ACQuire:STOPAfter RUNSTop
+[12:10:49.020] SCOPE << ACQuire:STATE RUN
+[12:10:49.933] SCOPE << ACQuire:STATE STOP
+[12:10:50.153] SCOPE << CH5:CLIPping?
+[12:10:50.153] SCOPE >> 0
+[12:10:50.153] SCOPE << MEASUrement:MEAS1:RESUlts:CURRentacq:MEAN?
+[12:10:50.163] SCOPE >> -12.4406164837434E-6
+[12:10:50.163] Scope measured: -0.012 mA
+[12:10:50.163] SCOPE << ACQuire:STATE STOP
+[12:10:50.383] PASS: Error -12.4 µA (within ±300.0 µA)
+[12:10:50.383] SCOPE << SAVe:IMAGe "C:/Temp/led_2.png"
+[12:10:50.393] SCOPE << *OPC?
+[12:10:50.393] SCOPE >> 1
+[12:10:50.393] SCOPE << FILESystem:READFile "C:/Temp/led_2.png"
+[12:11:20.365] SCOPE << SAVe:IMAGe "C:/led_2.png"
+[12:11:20.365] SCOPE << *OPC?
+[12:11:20.576] SCOPE >> 1
+[12:11:20.586] SCOPE << FILESystem:READFile "C:/led_2.png"
+[12:11:20.696] SCOPE << FILESystem:DELEte "C:/led_2.png"
+[12:11:20.706] Screenshot saved: led_current_002.png
+[12:11:20.756] Configuring SMU for 0.6666666666666666V (source V, measure I)...
+[12:11:20.756] SMU << reset()
+[12:11:21.167] SMU << smu.source.func = smu.FUNC_DC_VOLTAGE
+[12:11:21.167] SMU << smu.source.level = 0.6666666666666666
+[12:11:21.177] SMU << smu.source.ilimit.level = 0.1
+[12:11:21.177] SMU << smu.source.readback = smu.ON
+[12:11:21.177] SMU << smu.measure.func = smu.FUNC_DC_CURRENT
+[12:11:21.187] SMU << smu.measure.autorange = smu.ON
+[12:11:21.187] SMU << smu.measure.nplc = 1
+[12:11:21.197] SMU << smu.source.output = smu.ON
+[12:11:21.508] SMU output enabled
+[12:11:21.518] SMU << smu.measure.read()
+[12:11:21.528] SMU << printbuffer(1, 1, defbuffer1.readings)
+[12:11:22.249] SMU >> -1.9287356157e-09
+[12:11:22.249] SMU reports: -0.000 mA
+[12:11:22.259] Trying vertical: 500 µA/div, offset: -0.000 mA
+[12:11:22.259] SCOPE << CH5:SCAle 0.0005
+[12:11:22.259] SCOPE << CH5:OFFSet -1.9287356157e-09
+[12:11:22.269] SCOPE << ACQuire:STOPAfter SEQuence
+[12:11:22.269] SCOPE << ACQuire:STATE RUN
+[12:11:22.580] SCOPE << ACQuire:STATE STOP
+[12:11:22.580] SCOPE << CH5:CLIPping?
+[12:11:22.580] SCOPE >> 0
+[12:11:22.590] Vertical setup complete: 500 µA/div, no clipping
+[12:11:22.590] SCOPE << TRIGger:A:EDGE:SOUrce CH5
+[12:11:22.600] SCOPE << TRIGger:A:TYPE EDGE
+[12:11:22.600] SCOPE << TRIGger:A:LEVel:CH5 -1.9287356157e-09
+[12:11:22.600] SCOPE << TRIGger:A:MODe AUTO
+[12:11:22.613] Trigger: CH5 edge at -0.000 mA
+[12:11:22.613] SCOPE << TRIGger:A:LEVel:CH5 -1.9287356157e-09
+[12:11:22.620] Trigger level: -0.000 mA
+[12:11:22.620] SCOPE << ACQuire:STOPAfter RUNSTop
+[12:11:22.620] SCOPE << ACQuire:STATE RUN
+[12:11:23.643] SCOPE << ACQuire:STATE STOP
+[12:11:23.853] SCOPE << CH5:CLIPping?
+[12:11:23.863] SCOPE >> 0
+[12:11:23.863] SCOPE << MEASUrement:MEAS1:RESUlts:CURRentacq:MEAN?
+[12:11:23.863] SCOPE >> -16.941436084403E-6
+[12:11:23.873] Scope measured: -0.017 mA
+[12:11:23.873] SCOPE << ACQuire:STATE STOP
+[12:11:23.994] PASS: Error -16.9 µA (within ±300.0 µA)
+[12:11:24.004] SCOPE << SAVe:IMAGe "C:/Temp/led_3.png"
+[12:11:24.015] SCOPE << *OPC?
+[12:11:24.024] SCOPE >> 1
+[12:11:24.034] SCOPE << FILESystem:READFile "C:/Temp/led_3.png"
+[12:11:54.528] SCOPE << SAVe:IMAGe "C:/led_3.png"
+[12:11:54.538] SCOPE << *OPC?
+[12:11:54.648] SCOPE >> 1
+[12:11:54.648] SCOPE << FILESystem:READFile "C:/led_3.png"
+[12:11:54.868] SCOPE << FILESystem:DELEte "C:/led_3.png"
+[12:11:54.868] Screenshot saved: led_current_003.png
+[12:11:54.908] Configuring SMU for 1.0V (source V, measure I)...
+[12:11:54.918] SMU << reset()
+[12:11:55.430] SMU << smu.source.func = smu.FUNC_DC_VOLTAGE
+[12:11:55.430] SMU << smu.source.level = 1.0
+[12:11:55.440] SMU << smu.source.ilimit.level = 0.1
+[12:11:55.440] SMU << smu.source.readback = smu.ON
+[12:11:55.450] SMU << smu.measure.func = smu.FUNC_DC_CURRENT
+[12:11:55.450] SMU << smu.measure.autorange = smu.ON
+[12:11:55.450] SMU << smu.measure.nplc = 1
+[12:11:55.460] SMU << smu.source.output = smu.ON
+[12:11:55.670] SMU output enabled
+[12:11:55.670] SMU << smu.measure.read()
+[12:11:55.670] SMU << printbuffer(1, 1, defbuffer1.readings)
+[12:11:56.501] SMU >> -1.8599879414e-09
+[12:11:56.501] SMU reports: -0.000 mA
+[12:11:56.501] Trying vertical: 500 µA/div, offset: -0.000 mA
+[12:11:56.511] SCOPE << CH5:SCAle 0.0005
+[12:11:56.511] SCOPE << CH5:OFFSet -1.8599879414e-09
+[12:11:56.521] SCOPE << ACQuire:STOPAfter SEQuence
+[12:11:56.521] SCOPE << ACQuire:STATE RUN
+[12:11:56.832] SCOPE << ACQuire:STATE STOP
+[12:11:56.832] SCOPE << CH5:CLIPping?
+[12:11:56.842] SCOPE >> 0
+[12:11:56.842] Vertical setup complete: 500 µA/div, no clipping
+[12:11:56.851] SCOPE << TRIGger:A:EDGE:SOUrce CH5
+[12:11:56.851] SCOPE << TRIGger:A:TYPE EDGE
+[12:11:56.851] SCOPE << TRIGger:A:LEVel:CH5 -1.8599879414e-09
+[12:11:56.861] SCOPE << TRIGger:A:MODe AUTO
+[12:11:56.861] Trigger: CH5 edge at -0.000 mA
+[12:11:56.861] SCOPE << TRIGger:A:LEVel:CH5 -1.8599879414e-09
+[12:11:56.871] Trigger level: -0.000 mA
+[12:11:56.871] SCOPE << ACQuire:STOPAfter RUNSTop
+[12:11:56.871] SCOPE << ACQuire:STATE RUN
+[12:11:57.802] SCOPE << ACQuire:STATE STOP
+[12:11:58.013] SCOPE << CH5:CLIPping?
+[12:11:58.016] SCOPE >> 0
+[12:11:58.023] SCOPE << MEASUrement:MEAS1:RESUlts:CURRentacq:MEAN?
+[12:11:58.034] SCOPE >> -11.9353883608110E-6
+[12:11:58.063] Scope measured: -0.012 mA
+[12:11:58.073] SCOPE << ACQuire:STATE STOP
+[12:11:58.283] PASS: Error -11.9 µA (within ±300.0 µA)
+[12:11:58.283] SCOPE << SAVe:IMAGe "C:/Temp/led_4.png"
+[12:11:58.293] SCOPE << *OPC?
+[12:11:58.293] SCOPE >> 1
+[12:11:58.293] SCOPE << FILESystem:READFile "C:/Temp/led_4.png"
+[12:12:28.317] SCOPE << SAVe:IMAGe "C:/led_4.png"
+[12:12:28.317] SCOPE << *OPC?
+[12:12:28.429] SCOPE >> 1
+[12:12:28.429] SCOPE << FILESystem:READFile "C:/led_4.png"
+[12:12:28.429] SCOPE << FILESystem:DELEte "C:/led_4.png"
+[12:12:28.439] Screenshot saved: led_current_004.png
+[12:12:28.469] Configuring SMU for 1.3333333333333333V (source V, measure I)...
+[12:12:28.479] SMU << reset()
+[12:12:28.999] SMU << smu.source.func = smu.FUNC_DC_VOLTAGE
+[12:12:29.003] SMU << smu.source.level = 1.3333333333333333
+[12:12:29.009] SMU << smu.source.ilimit.level = 0.1
+[12:12:29.009] SMU << smu.source.readback = smu.ON
+[12:12:29.009] SMU << smu.measure.func = smu.FUNC_DC_CURRENT
+[12:12:29.019] SMU << smu.measure.autorange = smu.ON
+[12:12:29.019] SMU << smu.measure.nplc = 1
+[12:12:29.019] SMU << smu.source.output = smu.ON
+[12:12:29.240] SMU output enabled
+[12:12:29.240] SMU << smu.measure.read()
+[12:12:29.250] SMU << printbuffer(1, 1, defbuffer1.readings)
+[12:12:30.672] SMU >> 2.5702671991e-08
+[12:12:30.674] SMU reports: 0.000 mA
+[12:12:30.674] Trying vertical: 500 µA/div, offset: 0.000 mA
+[12:12:30.682] SCOPE << CH5:SCAle 0.0005
+[12:12:30.690] SCOPE << CH5:OFFSet 2.5702671991e-08
+[12:12:30.692] SCOPE << ACQuire:STOPAfter SEQuence
+[12:12:30.692] SCOPE << ACQuire:STATE RUN
+[12:12:31.003] SCOPE << ACQuire:STATE STOP
+[12:12:31.003] SCOPE << CH5:CLIPping?
+[12:12:31.003] SCOPE >> 0
+[12:12:31.013] Vertical setup complete: 500 µA/div, no clipping
+[12:12:31.013] SCOPE << TRIGger:A:EDGE:SOUrce CH5
+[12:12:31.013] SCOPE << TRIGger:A:TYPE EDGE
+[12:12:31.023] SCOPE << TRIGger:A:LEVel:CH5 2.5702671991e-08
+[12:12:31.023] SCOPE << TRIGger:A:MODe AUTO
+[12:12:31.023] Trigger: CH5 edge at 0.000 mA
+[12:12:31.033] SCOPE << TRIGger:A:LEVel:CH5 2.5702671991e-08
+[12:12:31.033] Trigger level: 0.000 mA
+[12:12:31.043] SCOPE << ACQuire:STOPAfter RUNSTop
+[12:12:31.043] SCOPE << ACQuire:STATE RUN
+[12:12:31.956] SCOPE << ACQuire:STATE STOP
+[12:12:32.166] SCOPE << CH5:CLIPping?
+[12:12:32.176] SCOPE >> 0
+[12:12:32.176] SCOPE << MEASUrement:MEAS1:RESUlts:CURRentacq:MEAN?
+[12:12:32.176] SCOPE >> 6.7382725468681E-6
+[12:12:32.186] Scope measured: 0.007 mA
+[12:12:32.190] SCOPE << ACQuire:STATE STOP
+[12:12:32.406] PASS: Error +6.7 µA (within ±300.0 µA)
+[12:12:32.406] SCOPE << SAVe:IMAGe "C:/Temp/led_5.png"
+[12:12:32.406] SCOPE << *OPC?
+[12:12:32.416] SCOPE >> 1
+[12:12:32.416] SCOPE << FILESystem:READFile "C:/Temp/led_5.png"
+[12:13:02.386] SCOPE << SAVe:IMAGe "C:/led_5.png"
+[12:13:02.386] SCOPE << *OPC?
+[12:13:02.597] SCOPE >> 1
+[12:13:02.597] SCOPE << FILESystem:READFile "C:/led_5.png"
+[12:13:02.707] SCOPE << FILESystem:DELEte "C:/led_5.png"
+[12:13:02.707] Screenshot saved: led_current_005.png
+[12:13:02.817] Configuring SMU for 1.6666666666666665V (source V, measure I)...
+[12:13:02.827] SMU << reset()
+[12:13:03.138] SMU << smu.source.func = smu.FUNC_DC_VOLTAGE
+[12:13:03.148] SMU << smu.source.level = 1.6666666666666665
+[12:13:03.168] SMU << smu.source.ilimit.level = 0.1
+[12:13:03.178] SMU << smu.source.readback = smu.ON
+[12:13:03.188] SMU << smu.measure.func = smu.FUNC_DC_CURRENT
+[12:13:03.188] SMU << smu.measure.autorange = smu.ON
+[12:13:03.208] SMU << smu.measure.nplc = 1
+[12:13:03.238] SMU << smu.source.output = smu.ON
+[12:13:03.459] SMU output enabled
+[12:13:03.459] SMU << smu.measure.read()
+[12:13:03.459] SMU << printbuffer(1, 1, defbuffer1.readings)
+[12:13:04.591] SMU >> 3.6793782783e-05
+[12:13:04.591] SMU reports: 0.037 mA
+[12:13:04.601] Trying vertical: 500 µA/div, offset: 0.037 mA
+[12:13:04.601] SCOPE << CH5:SCAle 0.0005
+[12:13:04.601] SCOPE << CH5:OFFSet 3.6793782783e-05
+[12:13:04.611] SCOPE << ACQuire:STOPAfter SEQuence
+[12:13:04.611] SCOPE << ACQuire:STATE RUN
+[12:13:04.921] SCOPE << ACQuire:STATE STOP
+[12:13:04.928] SCOPE << CH5:CLIPping?
+[12:13:04.931] SCOPE >> 0
+[12:13:04.931] Vertical setup complete: 500 µA/div, no clipping
+[12:13:04.931] SCOPE << TRIGger:A:EDGE:SOUrce CH5
+[12:13:04.941] SCOPE << TRIGger:A:TYPE EDGE
+[12:13:04.941] SCOPE << TRIGger:A:LEVel:CH5 3.6793782783e-05
+[12:13:04.951] SCOPE << TRIGger:A:MODe AUTO
+[12:13:04.951] Trigger: CH5 edge at 0.037 mA
+[12:13:04.951] SCOPE << TRIGger:A:LEVel:CH5 3.6793782783e-05
+[12:13:04.965] Trigger level: 0.037 mA
+[12:13:04.968] SCOPE << ACQuire:STOPAfter RUNSTop
+[12:13:04.971] SCOPE << ACQuire:STATE RUN
+[12:13:05.893] SCOPE << ACQuire:STATE STOP
+[12:13:06.103] SCOPE << CH5:CLIPping?
+[12:13:06.103] SCOPE >> 0
+[12:13:06.113] SCOPE << MEASUrement:MEAS1:RESUlts:CURRentacq:MEAN?
+[12:13:06.113] SCOPE >> 18.0401515258764E-6
+[12:13:06.113] Scope measured: 0.018 mA
+[12:13:06.123] SCOPE << ACQuire:STATE STOP
+[12:13:06.334] PASS: Error -18.8 µA (within ±300.0 µA)
+[12:13:06.334] SCOPE << SAVe:IMAGe "C:/Temp/led_6.png"
+[12:13:06.334] SCOPE << *OPC?
+[12:13:06.344] SCOPE >> 1
+[12:13:06.344] SCOPE << FILESystem:READFile "C:/Temp/led_6.png"
+[12:13:36.321] SCOPE << SAVe:IMAGe "C:/led_6.png"
+[12:13:36.321] SCOPE << *OPC?
+[12:13:36.441] SCOPE >> 1
+[12:13:36.451] SCOPE << FILESystem:READFile "C:/led_6.png"
+[12:13:36.561] SCOPE << FILESystem:DELEte "C:/led_6.png"
+[12:13:36.561] Screenshot saved: led_current_006.png
+[12:13:36.602] Configuring SMU for 2.0V (source V, measure I)...
+[12:13:36.612] SMU << reset()
+[12:13:37.022] SMU << smu.source.func = smu.FUNC_DC_VOLTAGE
+[12:13:37.022] SMU << smu.source.level = 2.0
+[12:13:37.032] SMU << smu.source.ilimit.level = 0.1
+[12:13:37.032] SMU << smu.source.readback = smu.ON
+[12:13:37.032] SMU << smu.measure.func = smu.FUNC_DC_CURRENT
+[12:13:37.042] SMU << smu.measure.autorange = smu.ON
+[12:13:37.042] SMU << smu.measure.nplc = 1
+[12:13:37.042] SMU << smu.source.output = smu.ON
+[12:13:37.363] SMU output enabled
+[12:13:37.363] SMU << smu.measure.read()
+[12:13:37.363] SMU << printbuffer(1, 1, defbuffer1.readings)
+[12:13:38.494] SMU >> 0.00051443459233
+[12:13:38.494] SMU reports: 0.514 mA
+[12:13:38.494] Trying vertical: 500 µA/div, offset: 0.514 mA
+[12:13:38.504] SCOPE << CH5:SCAle 0.0005
+[12:13:38.504] SCOPE << CH5:OFFSet 0.00051443459233
+[12:13:38.514] SCOPE << ACQuire:STOPAfter SEQuence
+[12:13:38.514] SCOPE << ACQuire:STATE RUN
+[12:13:38.734] SCOPE << ACQuire:STATE STOP
+[12:13:38.734] SCOPE << CH5:CLIPping?
+[12:13:38.744] SCOPE >> 0
+[12:13:38.744] Vertical setup complete: 500 µA/div, no clipping
+[12:13:38.754] SCOPE << TRIGger:A:EDGE:SOUrce CH5
+[12:13:38.754] SCOPE << TRIGger:A:TYPE EDGE
+[12:13:38.754] SCOPE << TRIGger:A:LEVel:CH5 0.00051443459233
+[12:13:38.754] SCOPE << TRIGger:A:MODe AUTO
+[12:13:38.764] Trigger: CH5 edge at 0.514 mA
+[12:13:38.764] SCOPE << TRIGger:A:LEVel:CH5 0.00051443459233
+[12:13:38.774] Trigger level: 0.514 mA
+[12:13:38.776] SCOPE << ACQuire:STOPAfter RUNSTop
+[12:13:38.776] SCOPE << ACQuire:STATE RUN
+[12:13:39.797] SCOPE << ACQuire:STATE STOP
+[12:13:40.007] SCOPE << CH5:CLIPping?
+[12:13:40.007] SCOPE >> 0
+[12:13:40.017] SCOPE << MEASUrement:MEAS1:RESUlts:CURRentacq:MEAN?
+[12:13:40.027] SCOPE >> 532.3443326566702E-6
+[12:13:40.027] Scope measured: 0.532 mA
+[12:13:40.027] SCOPE << ACQuire:STATE STOP
+[12:13:40.147] PASS: Error +17.9 µA (within ±300.0 µA)
+[12:13:40.147] SCOPE << SAVe:IMAGe "C:/Temp/led_7.png"
+[12:13:40.147] SCOPE << *OPC?
+[12:13:40.157] SCOPE >> 1
+[12:13:40.167] SCOPE << FILESystem:READFile "C:/Temp/led_7.png"
+[12:14:10.196] SCOPE << SAVe:IMAGe "C:/led_7.png"
+[12:14:10.196] SCOPE << *OPC?
+[12:14:10.307] SCOPE >> 1
+[12:14:10.307] SCOPE << FILESystem:READFile "C:/led_7.png"
+[12:14:10.417] SCOPE << FILESystem:DELEte "C:/led_7.png"
+[12:14:10.417] Screenshot saved: led_current_007.png
+[12:14:10.470] Configuring SMU for 2.333333333333333V (source V, measure I)...
+[12:14:10.470] SMU << reset()
+[12:14:10.991] SMU << smu.source.func = smu.FUNC_DC_VOLTAGE
+[12:14:10.991] SMU << smu.source.level = 2.333333333333333
+[12:14:11.001] SMU << smu.source.ilimit.level = 0.1
+[12:14:11.001] SMU << smu.source.readback = smu.ON
+[12:14:11.011] SMU << smu.measure.func = smu.FUNC_DC_CURRENT
+[12:14:11.011] SMU << smu.measure.autorange = smu.ON
+[12:14:11.016] SMU << smu.measure.nplc = 1
+[12:14:11.021] SMU << smu.source.output = smu.ON
+[12:14:11.232] SMU output enabled
+[12:14:11.232] SMU << smu.measure.read()
+[12:14:11.242] SMU << printbuffer(1, 1, defbuffer1.readings)
+[12:14:12.074] SMU >> 0.0011275068391
+[12:14:12.074] SMU reports: 1.128 mA
+[12:14:12.084] Trying vertical: 500 µA/div, offset: 1.128 mA
+[12:14:12.084] SCOPE << CH5:SCAle 0.0005
+[12:14:12.084] SCOPE << CH5:OFFSet 0.0011275068391
+[12:14:12.094] SCOPE << ACQuire:STOPAfter SEQuence
+[12:14:12.094] SCOPE << ACQuire:STATE RUN
+[12:14:12.407] SCOPE << ACQuire:STATE STOP
+[12:14:12.407] SCOPE << CH5:CLIPping?
+[12:14:12.418] SCOPE >> 0
+[12:14:12.427] Vertical setup complete: 500 µA/div, no clipping
+[12:14:12.427] SCOPE << TRIGger:A:EDGE:SOUrce CH5
+[12:14:12.427] SCOPE << TRIGger:A:TYPE EDGE
+[12:14:12.443] SCOPE << TRIGger:A:LEVel:CH5 0.0011275068391
+[12:14:12.447] SCOPE << TRIGger:A:MODe AUTO
+[12:14:12.467] Trigger: CH5 edge at 1.128 mA
+[12:14:12.467] SCOPE << TRIGger:A:LEVel:CH5 0.0011275068391
+[12:14:12.467] Trigger level: 1.128 mA
+[12:14:12.477] SCOPE << ACQuire:STOPAfter RUNSTop
+[12:14:12.477] SCOPE << ACQuire:STATE RUN
+[12:14:13.389] SCOPE << ACQuire:STATE STOP
+[12:14:13.610] SCOPE << CH5:CLIPping?
+[12:14:13.619] SCOPE >> 0
+[12:14:13.619] SCOPE << MEASUrement:MEAS1:RESUlts:CURRentacq:MEAN?
+[12:14:13.629] SCOPE >> 1.1278071198082E-3
+[12:14:13.629] Scope measured: 1.128 mA
+[12:14:13.629] SCOPE << ACQuire:STATE STOP
+[12:14:13.841] PASS: Error +0.3 µA (within ±300.0 µA)
+[12:14:13.841] SCOPE << SAVe:IMAGe "C:/Temp/led_8.png"
+[12:14:13.851] SCOPE << *OPC?
+[12:14:13.851] SCOPE >> 1
+[12:14:13.861] SCOPE << FILESystem:READFile "C:/Temp/led_8.png"
+[12:14:43.862] SCOPE << SAVe:IMAGe "C:/led_8.png"
+[12:14:43.862] SCOPE << *OPC?
+[12:14:43.972] SCOPE >> 1
+[12:14:43.976] SCOPE << FILESystem:READFile "C:/led_8.png"
+[12:14:44.093] SCOPE << FILESystem:DELEte "C:/led_8.png"
+[12:14:44.093] Screenshot saved: led_current_008.png
+[12:14:44.133] Configuring SMU for 2.6666666666666665V (source V, measure I)...
+[12:14:44.143] SMU << reset()
+[12:14:44.654] SMU << smu.source.func = smu.FUNC_DC_VOLTAGE
+[12:14:44.658] SMU << smu.source.level = 2.6666666666666665
+[12:14:44.664] SMU << smu.source.ilimit.level = 0.1
+[12:14:44.664] SMU << smu.source.readback = smu.ON
+[12:14:44.664] SMU << smu.measure.func = smu.FUNC_DC_CURRENT
+[12:14:44.674] SMU << smu.measure.autorange = smu.ON
+[12:14:44.674] SMU << smu.measure.nplc = 1
+[12:14:44.674] SMU << smu.source.output = smu.ON
+[12:14:44.885] SMU output enabled
+[12:14:44.885] SMU << smu.measure.read()
+[12:14:44.895] SMU << printbuffer(1, 1, defbuffer1.readings)
+[12:14:45.707] SMU >> 0.0017671139212
+[12:14:45.717] SMU reports: 1.767 mA
+[12:14:45.727] Trying vertical: 500 µA/div, offset: 1.767 mA
+[12:14:45.737] SCOPE << CH5:SCAle 0.0005
+[12:14:45.737] SCOPE << CH5:OFFSet 0.0017671139212
+[12:14:45.747] SCOPE << ACQuire:STOPAfter SEQuence
+[12:14:45.747] SCOPE << ACQuire:STATE RUN
+[12:14:46.067] SCOPE << ACQuire:STATE STOP
+[12:14:46.067] SCOPE << CH5:CLIPping?
+[12:14:46.077] SCOPE >> 0
+[12:14:46.097] Vertical setup complete: 500 µA/div, no clipping
+[12:14:46.107] SCOPE << TRIGger:A:EDGE:SOUrce CH5
+[12:14:46.117] SCOPE << TRIGger:A:TYPE EDGE
+[12:14:46.127] SCOPE << TRIGger:A:LEVel:CH5 0.0017671139212
+[12:14:46.127] SCOPE << TRIGger:A:MODe AUTO
+[12:14:46.137] Trigger: CH5 edge at 1.767 mA
+[12:14:46.147] SCOPE << TRIGger:A:LEVel:CH5 0.0017671139212
+[12:14:46.147] Trigger level: 1.767 mA
+[12:14:46.159] SCOPE << ACQuire:STOPAfter RUNSTop
+[12:14:46.159] SCOPE << ACQuire:STATE RUN
+[12:14:47.100] SCOPE << ACQuire:STATE STOP
+[12:14:47.211] SCOPE << CH5:CLIPping?
+[12:14:47.221] SCOPE >> 0
+[12:14:47.221] SCOPE << MEASUrement:MEAS1:RESUlts:CURRentacq:MEAN?
+[12:14:47.230] SCOPE >> 1.7808126723064E-3
+[12:14:47.231] Scope measured: 1.781 mA
+[12:14:47.236] SCOPE << ACQuire:STATE STOP
+[12:14:47.451] PASS: Error +13.7 µA (within ±300.0 µA)
+[12:14:47.461] SCOPE << SAVe:IMAGe "C:/Temp/led_9.png"
+[12:14:47.461] SCOPE << *OPC?
+[12:14:47.471] SCOPE >> 1
+[12:14:47.481] SCOPE << FILESystem:READFile "C:/Temp/led_9.png"
+[12:15:17.487] SCOPE << SAVe:IMAGe "C:/led_9.png"
+[12:15:17.507] SCOPE << *OPC?
+[12:15:17.638] SCOPE >> 1
+[12:15:17.638] SCOPE << FILESystem:READFile "C:/led_9.png"
+[12:15:17.758] SCOPE << FILESystem:DELEte "C:/led_9.png"
+[12:15:17.758] Screenshot saved: led_current_009.png
+[12:15:17.818] Configuring SMU for 3.0V (source V, measure I)...
+[12:15:17.818] SMU << reset()
+[12:15:18.340] SMU << smu.source.func = smu.FUNC_DC_VOLTAGE
+[12:15:18.340] SMU << smu.source.level = 3.0
+[12:15:18.350] SMU << smu.source.ilimit.level = 0.1
+[12:15:18.350] SMU << smu.source.readback = smu.ON
+[12:15:18.350] SMU << smu.measure.func = smu.FUNC_DC_CURRENT
+[12:15:18.360] SMU << smu.measure.autorange = smu.ON
+[12:15:18.360] SMU << smu.measure.nplc = 1
+[12:15:18.360] SMU << smu.source.output = smu.ON
+[12:15:18.581] SMU output enabled
+[12:15:18.584] SMU << smu.measure.read()
+[12:15:18.588] SMU << printbuffer(1, 1, defbuffer1.readings)
+[12:15:19.404] SMU >> 0.0024181746412
+[12:15:19.414] SMU reports: 2.418 mA
+[12:15:19.424] Trying vertical: 500 µA/div, offset: 2.418 mA
+[12:15:19.424] SCOPE << CH5:SCAle 0.0005
+[12:15:19.424] SCOPE << CH5:OFFSet 0.0024181746412
+[12:15:19.434] SCOPE << ACQuire:STOPAfter SEQuence
+[12:15:19.434] SCOPE << ACQuire:STATE RUN
+[12:15:19.744] SCOPE << ACQuire:STATE STOP
+[12:15:19.744] SCOPE << CH5:CLIPping?
+[12:15:19.754] SCOPE >> 0
+[12:15:19.754] Vertical setup complete: 500 µA/div, no clipping
+[12:15:19.754] SCOPE << TRIGger:A:EDGE:SOUrce CH5
+[12:15:19.764] SCOPE << TRIGger:A:TYPE EDGE
+[12:15:19.764] SCOPE << TRIGger:A:LEVel:CH5 0.0024181746412
+[12:15:19.764] SCOPE << TRIGger:A:MODe AUTO
+[12:15:19.774] Trigger: CH5 edge at 2.418 mA
+[12:15:19.774] SCOPE << TRIGger:A:LEVel:CH5 0.0024181746412
+[12:15:19.774] Trigger level: 2.418 mA
+[12:15:19.784] SCOPE << ACQuire:STOPAfter RUNSTop
+[12:15:19.784] SCOPE << ACQuire:STATE RUN
+[12:15:20.705] SCOPE << ACQuire:STATE STOP
+[12:15:20.915] SCOPE << CH5:CLIPping?
+[12:15:20.925] SCOPE >> 0
+[12:15:20.925] SCOPE << MEASUrement:MEAS1:RESUlts:CURRentacq:MEAN?
+[12:15:20.925] SCOPE >> 2.4248413933731E-3
+[12:15:20.935] Scope measured: 2.425 mA
+[12:15:20.935] SCOPE << ACQuire:STATE STOP
+[12:15:21.146] PASS: Error +6.7 µA (within ±300.0 µA)
+[12:15:21.146] SCOPE << SAVe:IMAGe "C:/Temp/led_10.png"
+[12:15:21.156] SCOPE << *OPC?
+[12:15:21.156] SCOPE >> 1
+[12:15:21.156] SCOPE << FILESystem:READFile "C:/Temp/led_10.png"
+[12:15:51.209] SCOPE << SAVe:IMAGe "C:/led_10.png"
+[12:15:51.219] SCOPE << *OPC?
+[12:15:51.329] SCOPE >> 1
+[12:15:51.329] SCOPE << FILESystem:READFile "C:/led_10.png"
+[12:15:51.449] SCOPE << FILESystem:DELEte "C:/led_10.png"
+[12:15:51.449] Screenshot saved: led_current_010.png
+[12:15:51.489] Configuring SMU for 3.333333333333333V (source V, measure I)...
+[12:15:51.499] SMU << reset()
+[12:15:52.011] SMU << smu.source.func = smu.FUNC_DC_VOLTAGE
+[12:15:52.011] SMU << smu.source.level = 3.333333333333333
+[12:15:52.020] SMU << smu.source.ilimit.level = 0.1
+[12:15:52.022] SMU << smu.source.readback = smu.ON
+[12:15:52.031] SMU << smu.measure.func = smu.FUNC_DC_CURRENT
+[12:15:52.031] SMU << smu.measure.autorange = smu.ON
+[12:15:52.031] SMU << smu.measure.nplc = 1
+[12:15:52.041] SMU << smu.source.output = smu.ON
+[12:15:52.252] SMU output enabled
+[12:15:52.252] SMU << smu.measure.read()
+[12:15:52.262] SMU << printbuffer(1, 1, defbuffer1.readings)
+[12:15:53.074] SMU >> 0.003076445777
+[12:15:53.074] SMU reports: 3.076 mA
+[12:15:53.082] Trying vertical: 500 µA/div, offset: 3.076 mA
+[12:15:53.085] SCOPE << CH5:SCAle 0.0005
+[12:15:53.085] SCOPE << CH5:OFFSet 0.003076445777
+[12:15:53.085] SCOPE << ACQuire:STOPAfter SEQuence
+[12:15:53.095] SCOPE << ACQuire:STATE RUN
+[12:15:53.405] SCOPE << ACQuire:STATE STOP
+[12:15:53.405] SCOPE << CH5:CLIPping?
+[12:15:53.415] SCOPE >> 0
+[12:15:53.415] Vertical setup complete: 500 µA/div, no clipping
+[12:15:53.415] SCOPE << TRIGger:A:EDGE:SOUrce CH5
+[12:15:53.425] SCOPE << TRIGger:A:TYPE EDGE
+[12:15:53.425] SCOPE << TRIGger:A:LEVel:CH5 0.003076445777
+[12:15:53.425] SCOPE << TRIGger:A:MODe AUTO
+[12:15:53.435] Trigger: CH5 edge at 3.076 mA
+[12:15:53.441] SCOPE << TRIGger:A:LEVel:CH5 0.003076445777
+[12:15:53.445] Trigger level: 3.076 mA
+[12:15:53.445] SCOPE << ACQuire:STOPAfter RUNSTop
+[12:15:53.445] SCOPE << ACQuire:STATE RUN
+[12:15:54.457] SCOPE << ACQuire:STATE STOP
+[12:15:54.567] SCOPE << CH5:CLIPping?
+[12:15:54.577] SCOPE >> 0
+[12:15:54.597] SCOPE << MEASUrement:MEAS1:RESUlts:CURRentacq:MEAN?
+[12:15:54.603] SCOPE >> 3.079378395940E-3
+[12:15:54.606] Scope measured: 3.079 mA
+[12:15:54.607] SCOPE << ACQuire:STATE STOP
+[12:15:54.819] PASS: Error +2.9 µA (within ±300.0 µA)
+[12:15:54.828] SCOPE << SAVe:IMAGe "C:/Temp/led_11.png"
+[12:15:54.828] SCOPE << *OPC?
+[12:15:54.838] SCOPE >> 1
+[12:15:54.838] SCOPE << FILESystem:READFile "C:/Temp/led_11.png"
+[12:16:24.845] SCOPE << SAVe:IMAGe "C:/led_11.png"
+[12:16:24.845] SCOPE << *OPC?
+[12:16:25.056] SCOPE >> 1
+[12:16:25.056] SCOPE << FILESystem:READFile "C:/led_11.png"
+[12:16:25.176] SCOPE << FILESystem:DELEte "C:/led_11.png"
+[12:16:25.178] Screenshot saved: led_current_011.png
+[12:16:25.216] Configuring SMU for 3.6666666666666665V (source V, measure I)...
+[12:16:25.226] SMU << reset()
+[12:16:25.636] SMU << smu.source.func = smu.FUNC_DC_VOLTAGE
+[12:16:25.646] SMU << smu.source.level = 3.6666666666666665
+[12:16:25.656] SMU << smu.source.ilimit.level = 0.1
+[12:16:25.666] SMU << smu.source.readback = smu.ON
+[12:16:25.678] SMU << smu.measure.func = smu.FUNC_DC_CURRENT
+[12:16:25.686] SMU << smu.measure.autorange = smu.ON
+[12:16:25.686] SMU << smu.measure.nplc = 1
+[12:16:25.686] SMU << smu.source.output = smu.ON
+[12:16:26.007] SMU output enabled
+[12:16:26.007] SMU << smu.measure.read()
+[12:16:26.007] SMU << printbuffer(1, 1, defbuffer1.readings)
+[12:16:26.830] SMU >> 0.0037378850393
+[12:16:26.830] SMU reports: 3.738 mA
+[12:16:26.840] Trying vertical: 500 µA/div, offset: 3.738 mA
+[12:16:26.840] SCOPE << CH5:SCAle 0.0005
+[12:16:26.850] SCOPE << CH5:OFFSet 0.0037378850393
+[12:16:26.850] SCOPE << ACQuire:STOPAfter SEQuence
+[12:16:26.860] SCOPE << ACQuire:STATE RUN
+[12:16:27.071] SCOPE << ACQuire:STATE STOP
+[12:16:27.071] SCOPE << CH5:CLIPping?
+[12:16:27.071] SCOPE >> 0
+[12:16:27.080] Vertical setup complete: 500 µA/div, no clipping
+[12:16:27.080] SCOPE << TRIGger:A:EDGE:SOUrce CH5
+[12:16:27.080] SCOPE << TRIGger:A:TYPE EDGE
+[12:16:27.090] SCOPE << TRIGger:A:LEVel:CH5 0.0037378850393
+[12:16:27.090] SCOPE << TRIGger:A:MODe AUTO
+[12:16:27.090] Trigger: CH5 edge at 3.738 mA
+[12:16:27.100] SCOPE << TRIGger:A:LEVel:CH5 0.0037378850393
+[12:16:27.100] Trigger level: 3.738 mA
+[12:16:27.100] SCOPE << ACQuire:STOPAfter RUNSTop
+[12:16:27.110] SCOPE << ACQuire:STATE RUN
+[12:16:28.133] SCOPE << ACQuire:STATE STOP
+[12:16:28.343] SCOPE << CH5:CLIPping?
+[12:16:28.343] SCOPE >> 0
+[12:16:28.353] SCOPE << MEASUrement:MEAS1:RESUlts:CURRentacq:MEAN?
+[12:16:28.353] SCOPE >> 3.7669083981830E-3
+[12:16:28.363] Scope measured: 3.767 mA
+[12:16:28.363] SCOPE << ACQuire:STATE STOP
+[12:16:28.473] PASS: Error +29.0 µA (within ±300.0 µA)
+[12:16:28.473] SCOPE << SAVe:IMAGe "C:/Temp/led_12.png"
+[12:16:28.482] SCOPE << *OPC?
+[12:16:28.593] SCOPE >> 1
+[12:16:28.593] SCOPE << FILESystem:READFile "C:/Temp/led_12.png"
+[12:16:58.917] SCOPE << SAVe:IMAGe "C:/led_12.png"
+[12:16:59.027] SCOPE << *OPC?
+[12:16:59.147] SCOPE >> 1
+[12:16:59.147] SCOPE << FILESystem:READFile "C:/led_12.png"
+[12:16:59.368] SCOPE << FILESystem:DELEte "C:/led_12.png"
+[12:16:59.368] Screenshot saved: led_current_012.png
+[12:16:59.408] Configuring SMU for 4.0V (source V, measure I)...
+[12:16:59.408] SMU << reset()
+[12:16:59.828] SMU << smu.source.func = smu.FUNC_DC_VOLTAGE
+[12:16:59.828] SMU << smu.source.level = 4.0
+[12:16:59.838] SMU << smu.source.ilimit.level = 0.1
+[12:16:59.838] SMU << smu.source.readback = smu.ON
+[12:16:59.848] SMU << smu.measure.func = smu.FUNC_DC_CURRENT
+[12:16:59.848] SMU << smu.measure.autorange = smu.ON
+[12:16:59.848] SMU << smu.measure.nplc = 1
+[12:16:59.858] SMU << smu.source.output = smu.ON
+[12:17:00.173] SMU output enabled
+[12:17:00.175] SMU << smu.measure.read()
+[12:17:00.185] SMU << printbuffer(1, 1, defbuffer1.readings)
+[12:17:00.997] SMU >> 0.0044037424959
+[12:17:00.997] SMU reports: 4.404 mA
+[12:17:01.007] Trying vertical: 500 µA/div, offset: 4.404 mA
+[12:17:01.007] SCOPE << CH5:SCAle 0.0005
+[12:17:01.017] SCOPE << CH5:OFFSet 0.0044037424959
+[12:17:01.020] SCOPE << ACQuire:STOPAfter SEQuence
+[12:17:01.020] SCOPE << ACQuire:STATE RUN
+[12:17:01.228] SCOPE << ACQuire:STATE STOP
+[12:17:01.228] SCOPE << CH5:CLIPping?
+[12:17:01.238] SCOPE >> 0
+[12:17:01.238] Vertical setup complete: 500 µA/div, no clipping
+[12:17:01.238] SCOPE << TRIGger:A:EDGE:SOUrce CH5
+[12:17:01.248] SCOPE << TRIGger:A:TYPE EDGE
+[12:17:01.248] SCOPE << TRIGger:A:LEVel:CH5 0.0044037424959
+[12:17:01.248] SCOPE << TRIGger:A:MODe AUTO
+[12:17:01.258] Trigger: CH5 edge at 4.404 mA
+[12:17:01.258] SCOPE << TRIGger:A:LEVel:CH5 0.0044037424959
+[12:17:01.258] Trigger level: 4.404 mA
+[12:17:01.268] SCOPE << ACQuire:STOPAfter RUNSTop
+[12:17:01.268] SCOPE << ACQuire:STATE RUN
+[12:17:02.291] SCOPE << ACQuire:STATE STOP
+[12:17:02.502] SCOPE << CH5:CLIPping?
+[12:17:02.502] SCOPE >> 0
+[12:17:02.512] SCOPE << MEASUrement:MEAS1:RESUlts:CURRentacq:MEAN?
+[12:17:02.522] SCOPE >> 4.4485132487790E-3
+[12:17:02.522] Scope measured: 4.449 mA
+[12:17:02.522] SCOPE << ACQuire:STATE STOP
+[12:17:02.742] PASS: Error +44.8 µA (within ±300.0 µA)
+[12:17:02.752] SCOPE << SAVe:IMAGe "C:/Temp/led_13.png"
+[12:17:02.752] SCOPE << *OPC?
+[12:17:02.762] SCOPE >> 1
+[12:17:02.762] SCOPE << FILESystem:READFile "C:/Temp/led_13.png"
+[12:17:32.720] SCOPE << SAVe:IMAGe "C:/led_13.png"
+[12:17:32.720] SCOPE << *OPC?
+[12:17:32.840] SCOPE >> 1
+[12:17:32.850] SCOPE << FILESystem:READFile "C:/led_13.png"
+[12:17:32.970] SCOPE << FILESystem:DELEte "C:/led_13.png"
+[12:17:32.980] Screenshot saved: led_current_013.png
+[12:17:33.020] Configuring SMU for 4.333333333333333V (source V, measure I)...
+[12:17:33.020] SMU << reset()
+[12:17:33.442] SMU << smu.source.func = smu.FUNC_DC_VOLTAGE
+[12:17:33.442] SMU << smu.source.level = 4.333333333333333
+[12:17:33.442] SMU << smu.source.ilimit.level = 0.1
+[12:17:33.452] SMU << smu.source.readback = smu.ON
+[12:17:33.452] SMU << smu.measure.func = smu.FUNC_DC_CURRENT
+[12:17:33.462] SMU << smu.measure.autorange = smu.ON
+[12:17:33.462] SMU << smu.measure.nplc = 1
+[12:17:33.462] SMU << smu.source.output = smu.ON
+[12:17:33.773] SMU output enabled
+[12:17:33.783] SMU << smu.measure.read()
+[12:17:33.793] SMU << printbuffer(1, 1, defbuffer1.readings)
+[12:17:34.613] SMU >> 0.0050721322186
+[12:17:34.613] SMU reports: 5.072 mA
+[12:17:34.623] Trying vertical: 500 µA/div, offset: 5.072 mA
+[12:17:34.623] SCOPE << CH5:SCAle 0.0005
+[12:17:34.633] SCOPE << CH5:OFFSet 0.0050721322186
+[12:17:34.633] SCOPE << ACQuire:STOPAfter SEQuence
+[12:17:34.633] SCOPE << ACQuire:STATE RUN
+[12:17:34.844] SCOPE << ACQuire:STATE STOP
+[12:17:34.844] SCOPE << CH5:CLIPping?
+[12:17:34.854] SCOPE >> 0
+[12:17:34.864] Vertical setup complete: 500 µA/div, no clipping
+[12:17:34.864] SCOPE << TRIGger:A:EDGE:SOUrce CH5
+[12:17:34.874] SCOPE << TRIGger:A:TYPE EDGE
+[12:17:34.874] SCOPE << TRIGger:A:LEVel:CH5 0.0050721322186
+[12:17:34.884] SCOPE << TRIGger:A:MODe AUTO
+[12:17:34.884] Trigger: CH5 edge at 5.072 mA
+[12:17:34.894] SCOPE << TRIGger:A:LEVel:CH5 0.0050721322186
+[12:17:34.894] Trigger level: 5.072 mA
+[12:17:34.904] SCOPE << ACQuire:STOPAfter RUNSTop
+[12:17:34.904] SCOPE << ACQuire:STATE RUN
+[12:17:35.915] SCOPE << ACQuire:STATE STOP
+[12:17:36.125] SCOPE << CH5:CLIPping?
+[12:17:36.125] SCOPE >> 0
+[12:17:36.125] SCOPE << MEASUrement:MEAS1:RESUlts:CURRentacq:MEAN?
+[12:17:36.135] SCOPE >> 5.1037984059141E-3
+[12:17:36.135] Scope measured: 5.104 mA
+[12:17:36.145] SCOPE << ACQuire:STATE STOP
+[12:17:36.255] PASS: Error +31.7 µA (within ±300.0 µA)
+[12:17:36.255] SCOPE << SAVe:IMAGe "C:/Temp/led_14.png"
+[12:17:36.255] SCOPE << *OPC?
+[12:17:36.265] SCOPE >> 1
+[12:17:36.265] SCOPE << FILESystem:READFile "C:/Temp/led_14.png"
+[12:18:06.361] SCOPE << SAVe:IMAGe "C:/led_14.png"
+[12:18:06.361] SCOPE << *OPC?
+[12:18:06.471] SCOPE >> 1
+[12:18:06.481] SCOPE << FILESystem:READFile "C:/led_14.png"
+[12:18:06.692] SCOPE << FILESystem:DELEte "C:/led_14.png"
+[12:18:06.695] Screenshot saved: led_current_014.png
+[12:18:06.732] Configuring SMU for 4.666666666666666V (source V, measure I)...
+[12:18:06.742] SMU << reset()
+[12:18:07.153] SMU << smu.source.func = smu.FUNC_DC_VOLTAGE
+[12:18:07.165] SMU << smu.source.level = 4.666666666666666
+[12:18:07.165] SMU << smu.source.ilimit.level = 0.1
+[12:18:07.173] SMU << smu.source.readback = smu.ON
+[12:18:07.173] SMU << smu.measure.func = smu.FUNC_DC_CURRENT
+[12:18:07.173] SMU << smu.measure.autorange = smu.ON
+[12:18:07.173] SMU << smu.measure.nplc = 1
+[12:18:07.183] SMU << smu.source.output = smu.ON
+[12:18:07.494] SMU output enabled
+[12:18:07.495] SMU << smu.measure.read()
+[12:18:07.504] SMU << printbuffer(1, 1, defbuffer1.readings)
+[12:18:08.315] SMU >> 0.0057413931936
+[12:18:08.315] SMU reports: 5.741 mA
+[12:18:08.315] Trying vertical: 500 µA/div, offset: 5.741 mA
+[12:18:08.325] SCOPE << CH5:SCAle 0.0005
+[12:18:08.325] SCOPE << CH5:OFFSet 0.0057413931936
+[12:18:08.335] SCOPE << ACQuire:STOPAfter SEQuence
+[12:18:08.335] SCOPE << ACQuire:STATE RUN
+[12:18:08.545] SCOPE << ACQuire:STATE STOP
+[12:18:08.545] SCOPE << CH5:CLIPping?
+[12:18:08.545] SCOPE >> 0
+[12:18:08.555] Vertical setup complete: 500 µA/div, no clipping
+[12:18:08.555] SCOPE << TRIGger:A:EDGE:SOUrce CH5
+[12:18:08.555] SCOPE << TRIGger:A:TYPE EDGE
+[12:18:08.565] SCOPE << TRIGger:A:LEVel:CH5 0.0057413931936
+[12:18:08.565] SCOPE << TRIGger:A:MODe AUTO
+[12:18:08.565] Trigger: CH5 edge at 5.741 mA
+[12:18:08.575] SCOPE << TRIGger:A:LEVel:CH5 0.0057413931936
+[12:18:08.575] Trigger level: 5.741 mA
+[12:18:08.585] SCOPE << ACQuire:STOPAfter RUNSTop
+[12:18:08.585] SCOPE << ACQuire:STATE RUN
+[12:18:09.608] SCOPE << ACQuire:STATE STOP
+[12:18:09.818] SCOPE << CH5:CLIPping?
+[12:18:09.828] SCOPE >> 0
+[12:18:09.839] SCOPE << MEASUrement:MEAS1:RESUlts:CURRentacq:MEAN?
+[12:18:09.858] SCOPE >> 5.7829595038677E-3
+[12:18:09.868] Scope measured: 5.783 mA
+[12:18:09.888] SCOPE << ACQuire:STATE STOP
+[12:18:09.999] PASS: Error +41.6 µA (within ±300.0 µA)
+[12:18:10.009] SCOPE << SAVe:IMAGe "C:/Temp/led_15.png"
+[12:18:10.009] SCOPE << *OPC?
+[12:18:10.019] SCOPE >> 1
+[12:18:10.019] SCOPE << FILESystem:READFile "C:/Temp/led_15.png"
+[12:18:40.083] SCOPE << SAVe:IMAGe "C:/led_15.png"
+[12:18:40.083] SCOPE << *OPC?
+[12:18:40.194] SCOPE >> 1
+[12:18:40.194] SCOPE << FILESystem:READFile "C:/led_15.png"
+[12:18:40.305] SCOPE << FILESystem:DELEte "C:/led_15.png"
+[12:18:40.305] Screenshot saved: led_current_015.png
+[12:18:40.395] Configuring SMU for 5.0V (source V, measure I)...
+[12:18:40.395] SMU << reset()
+[12:18:40.816] SMU << smu.source.func = smu.FUNC_DC_VOLTAGE
+[12:18:40.816] SMU << smu.source.level = 5.0
+[12:18:40.816] SMU << smu.source.ilimit.level = 0.1
+[12:18:40.826] SMU << smu.source.readback = smu.ON
+[12:18:40.836] SMU << smu.measure.func = smu.FUNC_DC_CURRENT
+[12:18:40.836] SMU << smu.measure.autorange = smu.ON
+[12:18:40.836] SMU << smu.measure.nplc = 1
+[12:18:40.846] SMU << smu.source.output = smu.ON
+[12:18:41.156] SMU output enabled
+[12:18:41.156] SMU << smu.measure.read()
+[12:18:41.156] SMU << printbuffer(1, 1, defbuffer1.readings)
+[12:18:41.988] SMU >> 0.0064135664143
+[12:18:41.988] SMU reports: 6.414 mA
+[12:18:41.998] Trying vertical: 500 µA/div, offset: 6.414 mA
+[12:18:42.008] SCOPE << CH5:SCAle 0.0005
+[12:18:42.008] SCOPE << CH5:OFFSet 0.0064135664143
+[12:18:42.018] SCOPE << ACQuire:STOPAfter SEQuence
+[12:18:42.018] SCOPE << ACQuire:STATE RUN
+[12:18:42.228] SCOPE << ACQuire:STATE STOP
+[12:18:42.239] SCOPE << CH5:CLIPping?
+[12:18:42.242] SCOPE >> 0
+[12:18:42.242] Vertical setup complete: 500 µA/div, no clipping
+[12:18:42.249] SCOPE << TRIGger:A:EDGE:SOUrce CH5
+[12:18:42.249] SCOPE << TRIGger:A:TYPE EDGE
+[12:18:42.249] SCOPE << TRIGger:A:LEVel:CH5 0.0064135664143
+[12:18:42.259] SCOPE << TRIGger:A:MODe AUTO
+[12:18:42.259] Trigger: CH5 edge at 6.414 mA
+[12:18:42.259] SCOPE << TRIGger:A:LEVel:CH5 0.0064135664143
+[12:18:42.269] Trigger level: 6.414 mA
+[12:18:42.269] SCOPE << ACQuire:STOPAfter RUNSTop
+[12:18:42.269] SCOPE << ACQuire:STATE RUN
+[12:18:43.292] SCOPE << ACQuire:STATE STOP
+[12:18:43.502] SCOPE << CH5:CLIPping?
+[12:18:43.502] SCOPE >> 0
+[12:18:43.512] SCOPE << MEASUrement:MEAS1:RESUlts:CURRentacq:MEAN?
+[12:18:43.512] SCOPE >> 6.4617767985153E-3
+[12:18:43.522] Scope measured: 6.462 mA
+[12:18:43.522] SCOPE << ACQuire:STATE STOP
+[12:18:43.632] PASS: Error +48.2 µA (within ±300.0 µA)
+[12:18:43.635] SCOPE << SAVe:IMAGe "C:/Temp/led_16.png"
+[12:18:43.643] SCOPE << *OPC?
+[12:18:43.643] SCOPE >> 1
+[12:18:43.653] SCOPE << FILESystem:READFile "C:/Temp/led_16.png"
+[12:19:14.120] SCOPE << SAVe:IMAGe "C:/led_16.png"
+[12:19:14.120] SCOPE << *OPC?
+[12:19:14.230] SCOPE >> 1
+[12:19:14.230] SCOPE << FILESystem:READFile "C:/led_16.png"
+[12:19:14.340] SCOPE << FILESystem:DELEte "C:/led_16.png"
+[12:19:14.350] Screenshot saved: led_current_016.png
+[12:19:14.390] SMU << smu.source.output = smu.OFF
+[12:19:14.390] SMU output disabled
+[12:24:57.326] Generating I-V plot with 16 points...
+[12:24:57.488] I-V plot saved: iv_characteristic.png
+[12:24:59.508] PDF report saved: test_report.pdf
+[12:24:59.518] Results saved to: test_results\session_20260202_121012

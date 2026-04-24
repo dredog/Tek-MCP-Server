@@ -1,0 +1,9 @@
+# Tek PTA - Production Test Assistant
+# Additional dependencies (beyond MCP server requirements)
+# 
+# Install with: pip install -r requirements_pta.txt
+# Or run INSTALL_TekPTA.bat
+
+Pillow>=9.0.0
+reportlab>=4.0.0
+matplotlib>=3.5.0

@@ -1,0 +1,32 @@
+================================================================================
+TEK PTA - PRODUCTION TEST REPORT
+================================================================================
+
+Date: 2026-02-02 12:24:57.326810
+Test Suite: Current Shunt Test with SMU as source
+Operator: 
+DUT Serial: 
+
+Oscilloscope: MSO68B (S/N: C031797)
+SMU: MODEL 2450 (S/N: 04577331)
+
+RESULTS
+--------------------------------------------------------------------------------
+  1. V=0.00V  SMU:   -0.000 mA  Scope:    0.007 mA  Err:    +6.5 µA  [PASS]
+  2. V=0.33V  SMU:   -0.000 mA  Scope:   -0.012 mA  Err:   -12.4 µA  [PASS]
+  3. V=0.67V  SMU:   -0.000 mA  Scope:   -0.017 mA  Err:   -16.9 µA  [PASS]
+  4. V=1.00V  SMU:   -0.000 mA  Scope:   -0.012 mA  Err:   -11.9 µA  [PASS]
+  5. V=1.33V  SMU:    0.000 mA  Scope:    0.007 mA  Err:    +6.7 µA  [PASS]
+  6. V=1.67V  SMU:    0.037 mA  Scope:    0.018 mA  Err:   -18.8 µA  [PASS]
+  7. V=2.00V  SMU:    0.514 mA  Scope:    0.532 mA  Err:   +17.9 µA  [PASS]
+  8. V=2.33V  SMU:    1.128 mA  Scope:    1.128 mA  Err:    +0.3 µA  [PASS]
+  9. V=2.67V  SMU:    1.767 mA  Scope:    1.781 mA  Err:   +13.7 µA  [PASS]
+ 10. V=3.00V  SMU:    2.418 mA  Scope:    2.425 mA  Err:    +6.7 µA  [PASS]
+ 11. V=3.33V  SMU:    3.076 mA  Scope:    3.079 mA  Err:    +2.9 µA  [PASS]
+ 12. V=3.67V  SMU:    3.738 mA  Scope:    3.767 mA  Err:   +29.0 µA  [PASS]
+ 13. V=4.00V  SMU:    4.404 mA  Scope:    4.449 mA  Err:   +44.8 µA  [PASS]
+ 14. V=4.33V  SMU:    5.072 mA  Scope:    5.104 mA  Err:   +31.7 µA  [PASS]
+ 15. V=4.67V  SMU:    5.741 mA  Scope:    5.783 mA  Err:   +41.6 µA  [PASS]
+ 16. V=5.00V  SMU:    6.414 mA  Scope:    6.462 mA  Err:   +48.2 µA  [PASS]
+--------------------------------------------------------------------------------
+SUMMARY: 16 PASS, 0 FAIL

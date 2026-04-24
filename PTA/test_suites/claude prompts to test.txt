@@ -1,0 +1,24 @@
+I want to create an automated test. It will dcode a SPI bus, search for specific values and print out how often those values occur. My initial testing suggests that the value "1F" should appear with either 6.51 ms or 24.05ms. It seems to alternate between the two values and then occasionally go 1 ms longer for some reason. I want this documented over a long period of time.
+For now I am using a TLP058 on CH7, SPI Clock is on CH7_D0, DATA (MOSI) is on CH7_D1, and SS is on CH7_D2, but these channels should be configurable in the UI. The U I also needs to know whether a TLP058 is plugged in so I can select digital channels correctly.
+I want you to imlement it how you see it best.
+
+I would like you to create a jitter measurement test for me. CH1 and CH3 will have serial signals going into the scope. I want to see the eye diagram and jitter decomposition plot, then I want to see date rate, Pattern length, eye width, eye height, RJ, DJ, TJ measurements on each channel. Then since CH1 and CH3 make a differential pair, do the same for the diff of those two channels on MATH1. Please pick an appropriate PLL clock recovery that suits the data rate. Also arrange the plots on screen neatly. THe eye diagrams are the most important visual. I don't know what the pass/fail criteria is yet so do some research and take a guess for now. My initial data rate will be 2.5 Gbps but this needs to be configurable in the UI. When capturing data, as usual with high speed serial patterns, capture a long record - for 1 GHz data rates, 1 us/div should be okay - but make sure the sample rate stays high.
+
+I want to see an eye diagram and measure eye width and eye height and data rate.
+Data input: channels 1 and 2 but for initial testing I want to use reference waveforms on ref1 and ref2.
+Default data rate: 5 Gbps. Make sure to set to an appropriate PLL for clock recovery.
+Measurments on each channel:
+TIE.
+PJ.
+RJ.
+DJ.
+Eye width > 100ps.
+Eye height > 250mV.
+Data rate between 4.995 and 500.005 Gbps.
+Pattern Length exactly 511.
+Plots:
+Eye Diagram.
+Composite Jitter Histogram.
+
+Do the same measurments on the diff between the two inputs except that eye height expected value is doubled.
+

@@ -1,0 +1,122 @@
+Tek PTA SCPI Log
+================
+Test Suite: Spectrum Scanner (FM Radio default)
+Date: 2026-02-02 12:03:03
+================
+
+[12:02:24.211] Starting test sequence...
+[12:02:24.211] SCOPE << *IDN?
+[12:02:24.322] SCOPE >> TEKTRONIX,MSO68B,C031797,CF:91.1CT FV:2.16.15-release.3490
+[12:02:24.322] Scope: MSO68B, minimum bandwidth: 1000 MHz
+[12:02:24.322] Scan range (113 MHz) within model minimum (1000 MHz) - no bandwidth check needed
+[12:02:24.322] Configuring SpectrumView on CH6...
+[12:02:24.322] Resetting to factory defaults...
+[12:02:24.322] SCOPE << FACtory
+[12:02:24.322] SCOPE << *OPC? (timeout=30s)
+[12:02:24.632] SCOPE >> 1
+[12:02:24.632] SCOPE << *CLS
+[12:02:24.632] SCOPE << HEADer OFF
+[12:02:24.632] SCOPE << VERBose OFF
+[12:02:24.632] Header OFF, Verbose OFF
+[12:02:24.632] SCOPE << DISplay:WAVEView1:CH1:STATE OFF
+[12:02:24.632] SCOPE << DISplay:WAVEView1:CH2:STATE OFF
+[12:02:24.632] SCOPE << DISplay:WAVEView1:CH3:STATE OFF
+[12:02:24.632] SCOPE << DISplay:WAVEView1:CH4:STATE OFF
+[12:02:24.632] SCOPE << DISplay:WAVEView1:CH5:STATE OFF
+[12:02:24.632] SCOPE << DISplay:WAVEView1:CH7:STATE OFF
+[12:02:24.632] SCOPE << DISplay:WAVEView1:CH8:STATE OFF
+[12:02:24.632] SCOPE << DISplay:WAVEView1:CH6:STATE ON
+[12:02:24.632] SCOPE << CH6:TERmination 50
+[12:02:24.632] SCOPE << CH6:BANdwidth FULL
+[12:02:24.632] CH6: 50Ω termination, FULL bandwidth for SpectrumView
+[12:02:24.632] SCOPE << CH6:SCAle 0.1
+[12:02:24.632] SCOPE << TRIGger:A:EDGE:SOUrce CH6
+[12:02:24.642] SCOPE << TRIGger:A:TYPE EDGE
+[12:02:24.642] SCOPE << TRIGger:A:EDGE:SLOpe RISe
+[12:02:24.642] SCOPE << TRIGger:A:LEVel:CH6 0
+[12:02:24.642] SCOPE << TRIGger:A:MODe AUTO
+[12:02:24.642] Trigger: CH6 edge at 0V, AUTO mode
+[12:02:24.642] SCOPE << HORizontal:SCAle 1e-3
+[12:02:24.642] Horizontal: 1 ms/div
+[12:02:24.642] SCOPE << ACQuire:MODe SAMple
+[12:02:24.642] Acquisition: Sample mode
+[12:02:24.652] SCOPE << ACQuire:STOPAfter SEQuence
+[12:02:24.652] SCOPE << ACQuire:STATE RUN
+[12:02:24.963] SCOPE << CH6:CLIPping?
+[12:02:25.274] SCOPE >> 0
+[12:02:25.274] No clipping at current scale
+[12:02:25.274] SCOPE << ACQuire:STATE STOP
+[12:02:25.274] SCOPE << CH6:SV:STATE ON
+[12:02:25.274] SCOPE << SV:CH6:SELect:RF_NORMal ON
+[12:02:25.274] SCOPE << SV:CH6:RF_AVErage:NUMAVg 256
+[12:02:25.274] SCOPE << SV:CH6:SELect:RF_AVErage ON
+[12:02:25.274] SpectrumView Average: 256 acquisitions
+[12:02:25.274] SCOPE << SV:RBWMode AUTO
+[12:02:25.274] SCOPE << SV:SPANRBWRatio 10000
+[12:02:25.284] Span:RBW ratio: 10000:1 (better resolution)
+[12:02:25.284] SCOPE << SV:MARKER:PEAK:STATE ON
+[12:02:25.284] SCOPE << SV:MARKER:PEAK:MAXimum 11
+[12:02:25.284] SCOPE << SV:MARKER:PEAK:THReshold -80
+[12:02:25.284] SCOPE << SV:MARKER:PEAK:EXCURsion 6
+[12:02:25.284] SCOPE << SV:MARKER:TYPe ABSolute
+[12:02:25.284] SCOPE << SV:CH6:UNIts DBM
+[12:02:25.284] SpectrumView configured
+[12:02:25.284] Scan: 1 steps, 500 MHz span each
+[12:02:25.284] Step 1/1: 83-583 MHz
+[12:02:25.294] SCOPE << CH6:SV:CENTERFrequency 333000000.0
+[12:02:25.294] SCOPE << SV:SPAN 500000000.0
+[12:02:25.805] SCOPE << ACQuire:STOPAfter SEQuence
+[12:02:25.805] SCOPE << ACQuire:STATE RUN
+[12:02:25.805] SCOPE << ACQuire:STATE?
+[12:02:25.805] SCOPE >> 1
+[12:02:25.916] SCOPE << ACQuire:STATE?
+[12:02:25.916] SCOPE >> 1
+[12:02:26.026] SCOPE << ACQuire:STATE?
+[12:02:26.026] SCOPE >> 1
+[12:02:26.036] SCOPE << ACQuire:STATE?
+[12:02:26.036] SCOPE >> 0
+[12:02:26.046] SCOPE << SV:MARKER:PEAKS:FREQuency?
+[12:02:26.046] SCOPE >> "92.8947368421052E+6,93.0526315789474E+6,94.1052631578947E+6,94.9210526315789E+6,96.0789473684210E+6,98.500E+6,99.500E+6,99.7105263157895E+6,101.5526315789474E+6,103.2894736842105E+6,107.4473684210526E+6"
+[12:02:26.046] SCOPE << SV:MARKER:PEAKS:AMPLITUDE?
+[12:02:26.056] SCOPE >> "-33.1800270080566,-46.1528854370117,-42.7162170410156,-34.3600006103516,-30.3933601379395,-39.7640266418457,-51.3884582519531,-33.3405685424805,-30.0514698028564,-41.3132781982422,-50.9836006164551"
+[12:02:26.056]   Peak: 92.895 MHz @ -33.2 dBm (FM Radio)
+[12:02:26.056]   Peak: 93.053 MHz @ -46.2 dBm (FM Radio)
+[12:02:26.066]   Peak: 94.105 MHz @ -42.7 dBm (FM Radio)
+[12:02:26.066]   Peak: 94.921 MHz @ -34.4 dBm (FM Radio)
+[12:02:26.076]   Peak: 96.079 MHz @ -30.4 dBm (FM Radio)
+[12:02:26.076]   Peak: 98.500 MHz @ -39.8 dBm (FM Radio)
+[12:02:26.086]   Peak: 99.500 MHz @ -51.4 dBm (FM Radio)
+[12:02:26.096]   Peak: 99.711 MHz @ -33.3 dBm (FM Radio)
+[12:02:26.096]   Peak: 101.553 MHz @ -30.1 dBm (FM Radio)
+[12:02:26.106]   Peak: 103.289 MHz @ -41.3 dBm (FM Radio)
+[12:02:26.106]   Peak: 107.447 MHz @ -51.0 dBm (FM Radio)
+[12:02:26.106] 
+=== Scan Complete: 11 peaks found ===
+[12:02:26.116] Top 10 Signals:
+[12:02:26.116]   1.     101.553 MHz @   -30.1 dBm [FM Radio]
+[12:02:26.126]   2.      96.079 MHz @   -30.4 dBm [FM Radio]
+[12:02:26.136]   3.      92.895 MHz @   -33.2 dBm [FM Radio]
+[12:02:26.146]   4.      99.711 MHz @   -33.3 dBm [FM Radio]
+[12:02:26.146]   5.      94.921 MHz @   -34.4 dBm [FM Radio]
+[12:02:26.146]   6.      98.500 MHz @   -39.8 dBm [FM Radio]
+[12:02:26.156]   7.     103.289 MHz @   -41.3 dBm [FM Radio]
+[12:02:26.156]   8.      94.105 MHz @   -42.7 dBm [FM Radio]
+[12:02:26.156]   9.      93.053 MHz @   -46.2 dBm [FM Radio]
+[12:02:26.156]   10.     107.447 MHz @   -51.0 dBm [FM Radio]
+[12:02:26.166] Capturing spectrum screenshot with markers...
+[12:02:26.166] SCOPE << SV:MARKER:PEAK:STATE ON
+[12:02:26.166] SCOPE << SV:MARKER:PEAK:MAXimum 11
+[12:02:26.166] SCOPE << PEAKSTABle:ADDNew "TABLE1"
+[12:02:26.176] Added peaks table to display
+[12:02:26.398] SCOPE << SAVe:IMAGe "C:/Temp/spectrum_scan_results.png"
+[12:02:26.398] SCOPE << *OPC?
+[12:02:26.408] SCOPE >> 1
+[12:02:26.418] SCOPE << FILESystem:READFile "C:/Temp/spectrum_scan_results.png"
+[12:02:56.799] SCOPE << SAVe:IMAGe "C:/spectrum_scan_results.png"
+[12:02:56.909] SCOPE << *OPC?
+[12:02:57.017] SCOPE >> 1
+[12:02:57.017] SCOPE << FILESystem:READFile "C:/spectrum_scan_results.png"
+[12:02:57.146] SCOPE << FILESystem:DELEte "C:/spectrum_scan_results.png"
+[12:02:57.146] Screenshot saved: spectrum_scan_results.png
+[12:03:03.657] PDF report saved: test_report.pdf
+[12:03:03.662] Results saved to: test_results\session_20260202_120224

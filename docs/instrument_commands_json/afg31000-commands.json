@@ -1,0 +1,5120 @@
+{
+  "version": "2.0",
+  "manual": "AFG31000 Series Programmer Manual",
+  "documentNumber": "077-148-803",
+  "groups": {
+    "Calibration": {
+      "name": "Calibration",
+      "description": "Calibration and diagnostic commands",
+      "commands": [
+        {
+          "scpi": "*CAL?",
+          "description": "Performs internal calibration and returns 0 (pass) or error code.",
+          "syntax": [
+            "*CAL?"
+          ],
+          "commandType": "query",
+          "returns": "<NR1>",
+          "example": "*CAL?",
+          "group": "Calibration",
+          "examples": [
+            {
+              "scpi": "*CAL?",
+              "description": "Performs internal calibration and returns 0 (pass) or error code."
+            }
+          ]
+        },
+        {
+          "scpi": "CALibration[:ALL]",
+          "description": "Performs internal calibration.",
+          "syntax": [
+            "CALibration[:ALL]",
+            "CALibration[:ALL]?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "CALibration",
+          "group": "Calibration",
+          "examples": [
+            {
+              "scpi": "CALibration",
+              "description": "Performs internal calibration."
+            }
+          ]
+        },
+        {
+          "scpi": "DIAGnostic[:ALL]",
+          "description": "Performs self-test.",
+          "syntax": [
+            "DIAGnostic[:ALL]",
+            "DIAGnostic[:ALL]?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "DIAGnostic",
+          "group": "Calibration",
+          "examples": [
+            {
+              "scpi": "DIAGnostic",
+              "description": "Performs self-test."
+            }
+          ]
+        },
+        {
+          "scpi": "*TST?",
+          "description": "Performs self-test and returns result.",
+          "syntax": [
+            "*TST?"
+          ],
+          "commandType": "query",
+          "returns": "<NR1>",
+          "example": "*TST?",
+          "group": "Calibration",
+          "examples": [
+            {
+              "scpi": "*TST?",
+              "description": "Performs self-test and returns result."
+            }
+          ]
+        }
+      ]
+    },
+    "Display": {
+      "name": "Display",
+      "description": "Display control commands",
+      "commands": [
+        {
+          "scpi": "DISPlay:BRIGhtness",
+          "description": "Sets/queries LCD brightness (0.00-1.00).",
+          "syntax": [
+            "DISPlay:BRIGhtness {<brightness>|MINimum|MAXimum}",
+            "DISPlay:BRIGhtness?"
+          ],
+          "commandType": "both",
+          "returns": "<NR2>",
+          "example": "DISPlay:BRIGhtness 0.8",
+          "group": "Display",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "DISPlay:BRIGhtness 0.8",
+              "description": "Sets/queries LCD brightness (0.00-1.00)."
+            }
+          ]
+        },
+        {
+          "scpi": "DISPlay:SAVer:IMMediate",
+          "description": "Activates screen saver immediately.",
+          "syntax": [
+            "DISPlay:SAVer:IMMediate"
+          ],
+          "commandType": "set",
+          "example": "DISPlay:SAVer:IMMediate",
+          "group": "Display",
+          "examples": [
+            {
+              "scpi": "DISPlay:SAVer:IMMediate",
+              "description": "Activates screen saver immediately."
+            }
+          ]
+        },
+        {
+          "scpi": "DISPlay:SAVer[:STATe]",
+          "description": "Sets/queries screen saver state.",
+          "syntax": [
+            "DISPlay:SAVer[:STATe] {ON|OFF|<NR1>}",
+            "DISPlay:SAVer[:STATe]?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "DISPlay:SAVer:STATe ON",
+          "group": "Display",
+          "arguments": "ON enables the feature.\nOFF disables the feature.\n<NR1> specifies a numeric value.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "ON",
+                "OFF",
+                "<NR1>"
+              ],
+              "default": "ON",
+              "description": "One of: ON, OFF, <NR1>"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "DISPlay:SAVer:STATe ON",
+              "description": "Sets/queries screen saver state."
+            }
+          ]
+        },
+        {
+          "scpi": "DISPlay[:WINDow]:TEXT[:DATA]",
+          "description": "Sets/queries text message on display.",
+          "syntax": [
+            "DISPlay[:WINDow]:TEXT[:DATA] <string>",
+            "DISPlay[:WINDow]:TEXT[:DATA]?"
+          ],
+          "commandType": "both",
+          "returns": "<string>",
+          "example": "DISPlay:TEXT \"Test\"",
+          "group": "Display",
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "required": true,
+              "description": "String value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "DISPlay:TEXT \"Test\"",
+              "description": "Sets/queries text message on display."
+            }
+          ]
+        },
+        {
+          "scpi": "DISPlay[:WINDow]:TEXT:CLEar",
+          "description": "Clears text message from display.",
+          "syntax": [
+            "DISPlay[:WINDow]:TEXT:CLEar"
+          ],
+          "commandType": "set",
+          "example": "DISPlay:TEXT:CLEar",
+          "group": "Display",
+          "examples": [
+            {
+              "scpi": "DISPlay:TEXT:CLEar",
+              "description": "Clears text message from display."
+            }
+          ]
+        }
+      ]
+    },
+    "Status": {
+      "name": "Status",
+      "description": "Status and event reporting commands",
+      "commands": [
+        {
+          "scpi": "*CLS",
+          "description": "Clears all event registers and queues.",
+          "syntax": [
+            "*CLS"
+          ],
+          "commandType": "set",
+          "example": "*CLS",
+          "group": "Status",
+          "examples": [
+            {
+              "scpi": "*CLS",
+              "description": "Clears all event registers and queues."
+            }
+          ]
+        },
+        {
+          "scpi": "*ESE",
+          "description": "Sets/queries Event Status Enable Register (0-255).",
+          "syntax": [
+            "*ESE <bit_value>",
+            "*ESE?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "*ESE 177",
+          "group": "Status",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "*ESE 177",
+              "description": "Sets/queries Event Status Enable Register (0-255)."
+            }
+          ]
+        },
+        {
+          "scpi": "*ESR?",
+          "description": "Returns and clears Standard Event Status Register.",
+          "syntax": [
+            "*ESR?"
+          ],
+          "commandType": "query",
+          "returns": "<NR1>",
+          "example": "*ESR?",
+          "group": "Status",
+          "examples": [
+            {
+              "scpi": "*ESR?",
+              "description": "Returns and clears Standard Event Status Register."
+            }
+          ]
+        },
+        {
+          "scpi": "*PSC",
+          "description": "Sets/queries power-on status clear (0|1).",
+          "syntax": [
+            "*PSC {0|1}",
+            "*PSC?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "*PSC 1",
+          "group": "Status",
+          "arguments": "0 selects 0 mode/option.\n1 selects 1 mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "0",
+                "1"
+              ],
+              "default": "0",
+              "description": "One of: 0, 1"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "*PSC 1",
+              "description": "Sets/queries power-on status clear (0|1)."
+            }
+          ]
+        },
+        {
+          "scpi": "*SRE",
+          "description": "Sets/queries Service Request Enable Register.",
+          "syntax": [
+            "*SRE <bit_value>",
+            "*SRE?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "*SRE 48",
+          "group": "Status",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "*SRE 48",
+              "description": "Sets/queries Service Request Enable Register."
+            }
+          ]
+        },
+        {
+          "scpi": "*STB?",
+          "description": "Reads status byte.",
+          "syntax": [
+            "*STB?"
+          ],
+          "commandType": "query",
+          "returns": "<NR1>",
+          "example": "*STB?",
+          "group": "Status",
+          "examples": [
+            {
+              "scpi": "*STB?",
+              "description": "Reads status byte."
+            }
+          ]
+        },
+        {
+          "scpi": "STATus:OPERation:CONDition?",
+          "description": "Returns operation condition register.",
+          "syntax": [
+            "STATus:OPERation:CONDition?"
+          ],
+          "commandType": "query",
+          "returns": "<NR1>",
+          "example": "STATus:OPERation:CONDition?",
+          "group": "Status",
+          "examples": [
+            {
+              "scpi": "STATus:OPERation:CONDition?",
+              "description": "Returns operation condition register."
+            }
+          ]
+        },
+        {
+          "scpi": "STATus:OPERation:ENABle",
+          "description": "Sets/queries operation enable register.",
+          "syntax": [
+            "STATus:OPERation:ENABle <bit_value>",
+            "STATus:OPERation:ENABle?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "STATus:OPERation:ENABle 1",
+          "group": "Status",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "STATus:OPERation:ENABle 1",
+              "description": "Sets/queries operation enable register."
+            }
+          ]
+        },
+        {
+          "scpi": "STATus:OPERation[:EVENt]?",
+          "description": "Returns operation event register.",
+          "syntax": [
+            "STATus:OPERation[:EVENt]?"
+          ],
+          "commandType": "query",
+          "returns": "<NR1>",
+          "example": "STATus:OPERation:EVENt?",
+          "group": "Status",
+          "examples": [
+            {
+              "scpi": "STATus:OPERation:EVENt?",
+              "description": "Returns operation event register."
+            }
+          ]
+        },
+        {
+          "scpi": "STATus:PRESet",
+          "description": "Presets SCPI enable registers.",
+          "syntax": [
+            "STATus:PRESet"
+          ],
+          "commandType": "set",
+          "example": "STATus:PRESet",
+          "group": "Status",
+          "examples": [
+            {
+              "scpi": "STATus:PRESet",
+              "description": "Presets SCPI enable registers."
+            }
+          ]
+        },
+        {
+          "scpi": "STATus:QUEStionable:CONDition?",
+          "description": "Returns questionable condition register.",
+          "syntax": [
+            "STATus:QUEStionable:CONDition?"
+          ],
+          "commandType": "query",
+          "returns": "<NR1>",
+          "example": "STATus:QUEStionable:CONDition?",
+          "group": "Status",
+          "examples": [
+            {
+              "scpi": "STATus:QUEStionable:CONDition?",
+              "description": "Returns questionable condition register."
+            }
+          ]
+        },
+        {
+          "scpi": "STATus:QUEStionable:ENABle",
+          "description": "Sets/queries questionable enable register.",
+          "syntax": [
+            "STATus:QUEStionable:ENABle <bit_value>",
+            "STATus:QUEStionable:ENABle?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "STATus:QUEStionable:ENABle 1",
+          "group": "Status",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "STATus:QUEStionable:ENABle 1",
+              "description": "Sets/queries questionable enable register."
+            }
+          ]
+        },
+        {
+          "scpi": "STATus:QUEStionable[:EVENt]?",
+          "description": "Returns questionable event register.",
+          "syntax": [
+            "STATus:QUEStionable[:EVENt]?"
+          ],
+          "commandType": "query",
+          "returns": "<NR1>",
+          "example": "STATus:QUEStionable:EVENt?",
+          "group": "Status",
+          "examples": [
+            {
+              "scpi": "STATus:QUEStionable:EVENt?",
+              "description": "Returns questionable event register."
+            }
+          ]
+        }
+      ]
+    },
+    "System": {
+      "name": "System",
+      "description": "System control commands",
+      "commands": [
+        {
+          "scpi": "*IDN?",
+          "description": "Returns identification: Manufacturer,Model,Serial,Firmware.",
+          "syntax": [
+            "*IDN?"
+          ],
+          "commandType": "query",
+          "returns": "<string>",
+          "example": "*IDN?",
+          "group": "System",
+          "examples": [
+            {
+              "scpi": "*IDN?",
+              "description": "Returns identification: Manufacturer,Model,Serial,Firmware."
+            }
+          ]
+        },
+        {
+          "scpi": "*OPT?",
+          "description": "Returns installed options.",
+          "syntax": [
+            "*OPT?"
+          ],
+          "commandType": "query",
+          "returns": "<string>",
+          "example": "*OPT?",
+          "group": "System",
+          "examples": [
+            {
+              "scpi": "*OPT?",
+              "description": "Returns installed options."
+            }
+          ]
+        },
+        {
+          "scpi": "*RST",
+          "description": "Resets instrument to default settings.",
+          "syntax": [
+            "*RST"
+          ],
+          "commandType": "set",
+          "example": "*RST",
+          "group": "System",
+          "examples": [
+            {
+              "scpi": "*RST",
+              "description": "Resets instrument to default settings."
+            }
+          ]
+        },
+        {
+          "scpi": "SYSTem:BEEPer[:IMMediate]",
+          "description": "Generates an audible tone.",
+          "syntax": [
+            "SYSTem:BEEPer[:IMMediate]"
+          ],
+          "commandType": "set",
+          "example": "SYSTem:BEEPer:IMMediate",
+          "group": "System",
+          "examples": [
+            {
+              "scpi": "SYSTem:BEEPer:IMMediate",
+              "description": "Generates an audible tone."
+            }
+          ]
+        },
+        {
+          "scpi": "SYSTem:BEEPer:STATe",
+          "description": "Sets/queries beeper state.",
+          "syntax": [
+            "SYSTem:BEEPer:STATe {ON|OFF|<NR1>}",
+            "SYSTem:BEEPer:STATe?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "SYSTem:BEEPer:STATe ON",
+          "group": "System",
+          "arguments": "ON enables the feature.\nOFF disables the feature.\n<NR1> specifies a numeric value.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "ON",
+                "OFF",
+                "<NR1>"
+              ],
+              "default": "ON",
+              "description": "One of: ON, OFF, <NR1>"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SYSTem:BEEPer:STATe ON",
+              "description": "Sets/queries beeper state."
+            }
+          ]
+        },
+        {
+          "scpi": "SYSTem:ERRor[:NEXT]?",
+          "description": "Returns next error from queue.",
+          "syntax": [
+            "SYSTem:ERRor[:NEXT]?"
+          ],
+          "commandType": "query",
+          "returns": "<error_code>,<message>",
+          "example": "SYSTem:ERRor?",
+          "group": "System",
+          "examples": [
+            {
+              "scpi": "SYSTem:ERRor?",
+              "description": "Returns next error from queue."
+            }
+          ]
+        },
+        {
+          "scpi": "SYSTem:KCLick[:STATe]",
+          "description": "Sets/queries key click sound.",
+          "syntax": [
+            "SYSTem:KCLick[:STATe] {ON|OFF|<NR1>}",
+            "SYSTem:KCLick[:STATe]?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "SYSTem:KCLick:STATe OFF",
+          "group": "System",
+          "arguments": "ON enables the feature.\nOFF disables the feature.\n<NR1> specifies a numeric value.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "ON",
+                "OFF",
+                "<NR1>"
+              ],
+              "default": "ON",
+              "description": "One of: ON, OFF, <NR1>"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SYSTem:KCLick:STATe OFF",
+              "description": "Sets/queries key click sound."
+            }
+          ]
+        },
+        {
+          "scpi": "SYSTem:KLOCk[:STATe]",
+          "description": "Sets/queries front panel lock.",
+          "syntax": [
+            "SYSTem:KLOCk[:STATe] {ON|OFF|<NR1>}",
+            "SYSTem:KLOCk[:STATe]?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "SYSTem:KLOCk:STATe ON",
+          "group": "System",
+          "arguments": "ON enables the feature.\nOFF disables the feature.\n<NR1> specifies a numeric value.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "ON",
+                "OFF",
+                "<NR1>"
+              ],
+              "default": "ON",
+              "description": "One of: ON, OFF, <NR1>"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SYSTem:KLOCk:STATe ON",
+              "description": "Sets/queries front panel lock."
+            }
+          ]
+        },
+        {
+          "scpi": "SYSTem:MACADDress?",
+          "description": "Returns MAC address.",
+          "syntax": [
+            "SYSTem:MACADDress?"
+          ],
+          "commandType": "query",
+          "returns": "<string>",
+          "example": "SYSTem:MACADDress?",
+          "group": "System",
+          "examples": [
+            {
+              "scpi": "SYSTem:MACADDress?",
+              "description": "Returns MAC address."
+            }
+          ]
+        },
+        {
+          "scpi": "SYSTem:PASSword:CDISable",
+          "description": "Disables protected commands.",
+          "syntax": [
+            "SYSTem:PASSword:CDISable"
+          ],
+          "commandType": "set",
+          "example": "SYSTem:PASSword:CDISable",
+          "group": "System",
+          "examples": [
+            {
+              "scpi": "SYSTem:PASSword:CDISable",
+              "description": "Disables protected commands."
+            }
+          ]
+        },
+        {
+          "scpi": "SYSTem:PASSword[:CENable]",
+          "description": "Enables protected commands.",
+          "syntax": [
+            "SYSTem:PASSword[:CENable] <password>"
+          ],
+          "commandType": "set",
+          "example": "SYSTem:PASSword:CENable \"password\"",
+          "group": "System",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SYSTem:PASSword:CENable \"password\"",
+              "description": "Enables protected commands."
+            }
+          ]
+        },
+        {
+          "scpi": "SYSTem:PASSword[:CENable]:STATe?",
+          "description": "Returns security protection state.",
+          "syntax": [
+            "SYSTem:PASSword[:CENable]:STATe?"
+          ],
+          "commandType": "query",
+          "returns": "<NR1>",
+          "example": "SYSTem:PASSword:CENable:STATe?",
+          "group": "System",
+          "examples": [
+            {
+              "scpi": "SYSTem:PASSword:CENable:STATe?",
+              "description": "Returns security protection state."
+            }
+          ]
+        },
+        {
+          "scpi": "SYSTem:PASSword:NEW",
+          "description": "Changes current password.",
+          "syntax": [
+            "SYSTem:PASSword:NEW <old>,<new>"
+          ],
+          "commandType": "set",
+          "example": "SYSTem:PASSword:NEW \"old\",\"new\"",
+          "group": "System",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SYSTem:PASSword:NEW \"old\",\"new\"",
+              "description": "Changes current password."
+            }
+          ]
+        },
+        {
+          "scpi": "SYSTem:RESTart",
+          "description": "Restarts the unit.",
+          "syntax": [
+            "SYSTem:RESTart"
+          ],
+          "commandType": "set",
+          "example": "SYSTem:RESTart",
+          "group": "System",
+          "examples": [
+            {
+              "scpi": "SYSTem:RESTart",
+              "description": "Restarts the unit."
+            }
+          ]
+        },
+        {
+          "scpi": "SYSTem:SECurity:IMMediate",
+          "description": "Resets to factory default.",
+          "syntax": [
+            "SYSTem:SECurity:IMMediate"
+          ],
+          "commandType": "set",
+          "example": "SYSTem:SECurity:IMMediate",
+          "group": "System",
+          "examples": [
+            {
+              "scpi": "SYSTem:SECurity:IMMediate",
+              "description": "Resets to factory default."
+            }
+          ]
+        },
+        {
+          "scpi": "SYSTem:ULANguage",
+          "description": "Sets/queries display language.",
+          "syntax": [
+            "SYSTem:ULANguage {ENGLish|SIMPlifiedchinese|...}",
+            "SYSTem:ULANguage?"
+          ],
+          "commandType": "both",
+          "returns": "<string>",
+          "example": "SYSTem:ULANguage ENGLish",
+          "group": "System",
+          "arguments": "ENGLish selects ENGLish mode/option.\nSIMPlifiedchinese selects SIMPlifiedchinese mode/option.\n... selects ... mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "ENGLish",
+                "SIMPlifiedchinese",
+                "..."
+              ],
+              "default": "ENGLish",
+              "description": "One of: ENGLish, SIMPlifiedchinese, ..."
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SYSTem:ULANguage ENGLish",
+              "description": "Sets/queries display language."
+            }
+          ]
+        },
+        {
+          "scpi": "SYSTem:VERSion?",
+          "description": "Returns SCPI version.",
+          "syntax": [
+            "SYSTem:VERSion?"
+          ],
+          "commandType": "query",
+          "returns": "<string>",
+          "example": "SYSTem:VERSion?",
+          "group": "System",
+          "examples": [
+            {
+              "scpi": "SYSTem:VERSion?",
+              "description": "Returns SCPI version."
+            }
+          ]
+        }
+      ]
+    },
+    "Synchronization": {
+      "name": "Synchronization",
+      "description": "Operation synchronization commands",
+      "commands": [
+        {
+          "scpi": "*OPC",
+          "description": "Sets OPC bit when operations complete. Query returns 1 when done.",
+          "syntax": [
+            "*OPC",
+            "*OPC?"
+          ],
+          "commandType": "both",
+          "returns": "1",
+          "example": "*OPC?",
+          "group": "Synchronization",
+          "examples": [
+            {
+              "scpi": "*OPC?",
+              "description": "Sets OPC bit when operations complete. Query returns 1 when done."
+            }
+          ]
+        },
+        {
+          "scpi": "*WAI",
+          "description": "Waits for pending operations to complete.",
+          "syntax": [
+            "*WAI"
+          ],
+          "commandType": "set",
+          "example": "*WAI",
+          "group": "Synchronization",
+          "examples": [
+            {
+              "scpi": "*WAI",
+              "description": "Waits for pending operations to complete."
+            }
+          ]
+        }
+      ]
+    },
+    "Output": {
+      "name": "Output",
+      "description": "Output configuration commands",
+      "commands": [
+        {
+          "scpi": "OUTPut[1|2]:IMPedance",
+          "description": "Sets/queries output impedance (1-10000 ohms or INFinity).",
+          "syntax": [
+            "OUTPut[1|2]:IMPedance {<impedance>|INFinity|MINimum|MAXimum}",
+            "OUTPut[1|2]:IMPedance?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "OUTPut1:IMPedance 50",
+          "group": "Output",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or INFinity, MINimum, MAXimum)",
+              "special_values": [
+                "INFinity",
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "OUTPut1:IMPedance 50",
+              "description": "Sets/queries output impedance (1-10000 ohms or INFinity)."
+            }
+          ]
+        },
+        {
+          "scpi": "OUTPut[1|2]:POLarity",
+          "description": "Sets/queries output polarity.",
+          "syntax": [
+            "OUTPut[1|2]:POLarity {NORMal|INVerted}",
+            "OUTPut[1|2]:POLarity?"
+          ],
+          "commandType": "both",
+          "returns": "NORMal|INVerted",
+          "example": "OUTPut1:POLarity NORMal",
+          "group": "Output",
+          "arguments": "NORMal selects NORMal mode/option.\nINVerted selects INVerted mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "NORMal",
+                "INVerted"
+              ],
+              "default": "NORMal",
+              "description": "One of: NORMal, INVerted"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "OUTPut1:POLarity NORMal",
+              "description": "Sets/queries output polarity."
+            }
+          ]
+        },
+        {
+          "scpi": "OUTPut[1|2][:STATe]",
+          "description": "Sets/queries output on/off.",
+          "syntax": [
+            "OUTPut[1|2][:STATe] {ON|OFF|<NR1>}",
+            "OUTPut[1|2][:STATe]?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "OUTPut1:STATe ON",
+          "group": "Output",
+          "arguments": "ON enables the feature.\nOFF disables the feature.\n<NR1> specifies a numeric value.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "ON",
+                "OFF",
+                "<NR1>"
+              ],
+              "default": "ON",
+              "description": "One of: ON, OFF, <NR1>"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "OUTPut1:STATe ON",
+              "description": "Sets/queries output on/off."
+            }
+          ]
+        },
+        {
+          "scpi": "OUTPut:TRIGger:MODE",
+          "description": "Sets/queries trigger output mode.",
+          "syntax": [
+            "OUTPut:TRIGger:MODE {TRIGger|SYNC}",
+            "OUTPut:TRIGger:MODE?"
+          ],
+          "commandType": "both",
+          "returns": "TRIGger|SYNC",
+          "example": "OUTPut:TRIGger:MODE TRIGger",
+          "group": "Output",
+          "arguments": "TRIGger selects TRIGger mode/option.\nSYNC selects SYNC mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "TRIGger",
+                "SYNC"
+              ],
+              "default": "TRIGger",
+              "description": "One of: TRIGger, SYNC"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "OUTPut:TRIGger:MODE TRIGger",
+              "description": "Sets/queries trigger output mode."
+            }
+          ]
+        }
+      ]
+    },
+    "Trigger": {
+      "name": "Trigger",
+      "description": "Trigger control commands",
+      "commands": [
+        {
+          "scpi": "ABORt",
+          "description": "Initializes trigger system, stops waveform output.",
+          "syntax": [
+            "ABORt"
+          ],
+          "commandType": "set",
+          "example": "ABORt",
+          "group": "Trigger",
+          "examples": [
+            {
+              "scpi": "ABORt",
+              "description": "Initializes trigger system, stops waveform output."
+            }
+          ]
+        },
+        {
+          "scpi": "*TRG",
+          "description": "Forces a trigger event.",
+          "syntax": [
+            "*TRG"
+          ],
+          "commandType": "set",
+          "example": "*TRG",
+          "group": "Trigger",
+          "examples": [
+            {
+              "scpi": "*TRG",
+              "description": "Forces a trigger event."
+            }
+          ]
+        },
+        {
+          "scpi": "TRIGger[:SEQuence]:SLOPe",
+          "description": "Sets/queries trigger slope.",
+          "syntax": [
+            "TRIGger[:SEQuence]:SLOPe {POSitive|NEGative}",
+            "TRIGger[:SEQuence]:SLOPe?"
+          ],
+          "commandType": "both",
+          "returns": "POSitive|NEGative",
+          "example": "TRIGger:SLOPe POSitive",
+          "group": "Trigger",
+          "arguments": "POSitive selects POSitive mode/option.\nNEGative selects NEGative mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "POSitive",
+                "NEGative"
+              ],
+              "default": "POSitive",
+              "description": "One of: POSitive, NEGative"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "TRIGger:SLOPe POSitive",
+              "description": "Sets/queries trigger slope."
+            }
+          ]
+        },
+        {
+          "scpi": "TRIGger[:SEQuence]:SOURce",
+          "description": "Sets/queries trigger source.",
+          "syntax": [
+            "TRIGger[:SEQuence]:SOURce {TIMer|EXTernal}",
+            "TRIGger[:SEQuence]:SOURce?"
+          ],
+          "commandType": "both",
+          "returns": "TIMer|EXTernal",
+          "example": "TRIGger:SOURce EXTernal",
+          "group": "Trigger",
+          "arguments": "TIMer selects TIMer mode/option.\nEXTernal selects EXTernal mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "TIMer",
+                "EXTernal"
+              ],
+              "default": "TIMer",
+              "description": "One of: TIMer, EXTernal"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "TRIGger:SOURce EXTernal",
+              "description": "Sets/queries trigger source."
+            }
+          ]
+        },
+        {
+          "scpi": "TRIGger[:SEQuence]:TIMer",
+          "description": "Sets/queries internal trigger period.",
+          "syntax": [
+            "TRIGger[:SEQuence]:TIMer {<period>|MINimum|MAXimum}",
+            "TRIGger[:SEQuence]:TIMer?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "TRIGger:TIMer 1ms",
+          "group": "Trigger",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "TRIGger:TIMer 1ms",
+              "description": "Sets/queries internal trigger period."
+            }
+          ]
+        },
+        {
+          "scpi": "TRIGger[:SEQuence][:IMMediate]",
+          "description": "Generates a trigger event.",
+          "syntax": [
+            "TRIGger[:SEQuence][:IMMediate]"
+          ],
+          "commandType": "set",
+          "example": "TRIGger:IMMediate",
+          "group": "Trigger",
+          "examples": [
+            {
+              "scpi": "TRIGger:IMMediate",
+              "description": "Generates a trigger event."
+            }
+          ]
+        }
+      ]
+    },
+    "Source": {
+      "name": "Source",
+      "description": "Waveform source configuration commands",
+      "commands": [
+        {
+          "scpi": "[SOURce[1|2]]:FUNCtion[:SHAPe]",
+          "description": "Sets/queries output waveform shape.",
+          "syntax": [
+            "[SOURce[1|2]]:FUNCtion[:SHAPe] {SINusoid|SQUare|PULSe|RAMP|PRNoise|DC|SINC|GAUSsian|LORentz|ERISe|EDECay|HAVersine|USER[1-4]|EMEMory|EFILe}",
+            "[SOURce[1|2]]:FUNCtion[:SHAPe]?"
+          ],
+          "commandType": "both",
+          "returns": "<waveform>",
+          "example": "SOURce1:FUNCtion SINusoid",
+          "group": "Source",
+          "arguments": "SINusoid selects SINusoid mode/option.\nSQUare selects SQUare mode/option.\nPULSe selects PULSe mode/option.\nRAMP selects RAMP mode/option.\nPRNoise selects PRNoise mode/option.\nDC selects DC mode/option.\nSINC selects SINC mode/option.\nGAUSsian selects GAUSsian mode/option.\nLORentz selects LORentz mode/option.\nERISe selects ERISe mode/option.\nEDECay selects EDECay mode/option.\nHAVersine selects HAVersine mode/option.\nUSER[1-4] selects USER[1-4] mode/option.\nEMEMory selects EMEMory mode/option.\nEFILe selects EFILe mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "SINusoid",
+                "SQUare",
+                "PULSe",
+                "RAMP",
+                "PRNoise",
+                "DC",
+                "SINC",
+                "GAUSsian",
+                "LORentz",
+                "ERISe",
+                "EDECay",
+                "HAVersine",
+                "USER[1-4]",
+                "EMEMory",
+                "EFILe"
+              ],
+              "default": "SINusoid",
+              "description": "One of: SINusoid, SQUare, PULSe, RAMP, PRNoise, DC, SINC, GAUSsian, LORentz, ERISe, EDECay, HAVersine, USER[1-4], EMEMory, EFILe"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:FUNCtion SINusoid",
+              "description": "Sets/queries output waveform shape."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:FUNCtion:EFILe",
+          "description": "Sets/queries EFILe name for arbitrary waveform.",
+          "syntax": [
+            "[SOURce[1|2]]:FUNCtion:EFILe <filename>",
+            "[SOURce[1|2]]:FUNCtion:EFILe?"
+          ],
+          "commandType": "both",
+          "returns": "<string>",
+          "example": "SOURce1:FUNCtion:EFILe \"M:/waveform.tfwx\"",
+          "group": "Source",
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "required": true,
+              "description": "String value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:FUNCtion:EFILe \"M:/waveform.tfwx\"",
+              "description": "Sets/queries EFILe name for arbitrary waveform."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:FUNCtion:RAMP:SYMMetry",
+          "description": "Sets/queries ramp waveform symmetry (0-100%).",
+          "syntax": [
+            "[SOURce[1|2]]:FUNCtion:RAMP:SYMMetry {<symmetry>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:FUNCtion:RAMP:SYMMetry?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:FUNCtion:RAMP:SYMMetry 50",
+          "group": "Source",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:FUNCtion:RAMP:SYMMetry 50",
+              "description": "Sets/queries ramp waveform symmetry (0-100%)."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:FREQuency[:CW|:FIXed]",
+          "description": "Sets/queries output frequency.",
+          "syntax": [
+            "[SOURce[1|2]]:FREQuency[:CW|:FIXed] {<frequency>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:FREQuency[:CW|:FIXed]?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:FREQuency 1MHz",
+          "group": "Source",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:FREQuency 1MHz",
+              "description": "Sets/queries output frequency."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:FREQuency:MODE",
+          "description": "Sets/queries frequency mode (CW|SWEep|MODulate).",
+          "syntax": [
+            "[SOURce[1|2]]:FREQuency:MODE {CW|FIXed|SWEep}",
+            "[SOURce[1|2]]:FREQuency:MODE?"
+          ],
+          "commandType": "both",
+          "returns": "CW|FIXed|SWEep",
+          "example": "SOURce1:FREQuency:MODE CW",
+          "group": "Source",
+          "arguments": "CW selects CW mode/option.\nFIXed selects FIXed mode/option.\nSWEep selects SWEep mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "CW",
+                "FIXed",
+                "SWEep"
+              ],
+              "default": "CW",
+              "description": "One of: CW, FIXed, SWEep"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:FREQuency:MODE CW",
+              "description": "Sets/queries frequency mode (CW|SWEep|MODulate)."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:FREQuency:CONCurrent[:STATe]",
+          "description": "Sets/queries concurrent frequency change for both channels.",
+          "syntax": [
+            "[SOURce[1|2]]:FREQuency:CONCurrent[:STATe] {ON|OFF|<NR1>}",
+            "[SOURce[1|2]]:FREQuency:CONCurrent[:STATe]?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "SOURce1:FREQuency:CONCurrent ON",
+          "group": "Source",
+          "arguments": "ON enables the feature.\nOFF disables the feature.\n<NR1> specifies a numeric value.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "ON",
+                "OFF",
+                "<NR1>"
+              ],
+              "default": "ON",
+              "description": "One of: ON, OFF, <NR1>"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:FREQuency:CONCurrent ON",
+              "description": "Sets/queries concurrent frequency change for both channels."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:FREQuency:CENTer",
+          "description": "Sets/queries sweep center frequency.",
+          "syntax": [
+            "[SOURce[1|2]]:FREQuency:CENTer {<frequency>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:FREQuency:CENTer?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:FREQuency:CENTer 10MHz",
+          "group": "Source",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:FREQuency:CENTer 10MHz",
+              "description": "Sets/queries sweep center frequency."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:FREQuency:SPAN",
+          "description": "Sets/queries sweep frequency span.",
+          "syntax": [
+            "[SOURce[1|2]]:FREQuency:SPAN {<frequency>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:FREQuency:SPAN?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:FREQuency:SPAN 1MHz",
+          "group": "Source",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:FREQuency:SPAN 1MHz",
+              "description": "Sets/queries sweep frequency span."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:FREQuency:STARt",
+          "description": "Sets/queries sweep start frequency.",
+          "syntax": [
+            "[SOURce[1|2]]:FREQuency:STARt {<frequency>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:FREQuency:STARt?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:FREQuency:STARt 1kHz",
+          "group": "Source",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:FREQuency:STARt 1kHz",
+              "description": "Sets/queries sweep start frequency."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:FREQuency:STOP",
+          "description": "Sets/queries sweep stop frequency.",
+          "syntax": [
+            "[SOURce[1|2]]:FREQuency:STOP {<frequency>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:FREQuency:STOP?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:FREQuency:STOP 100kHz",
+          "group": "Source",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:FREQuency:STOP 100kHz",
+              "description": "Sets/queries sweep stop frequency."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate][:AMPLitude]",
+          "description": "Sets/queries output amplitude.",
+          "syntax": [
+            "[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate][:AMPLitude] {<amplitude>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate][:AMPLitude]?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:VOLTage 1Vpp",
+          "group": "Source",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:VOLTage 1Vpp",
+              "description": "Sets/queries output amplitude."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate]:OFFSet",
+          "description": "Sets/queries DC offset voltage.",
+          "syntax": [
+            "[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate]:OFFSet {<offset>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate]:OFFSet?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:VOLTage:OFFSet 0",
+          "group": "Source",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:VOLTage:OFFSet 0",
+              "description": "Sets/queries DC offset voltage."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate]:HIGH",
+          "description": "Sets/queries high voltage level.",
+          "syntax": [
+            "[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate]:HIGH {<voltage>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate]:HIGH?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:VOLTage:HIGH 2.5V",
+          "group": "Source",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:VOLTage:HIGH 2.5V",
+              "description": "Sets/queries high voltage level."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate]:LOW",
+          "description": "Sets/queries low voltage level.",
+          "syntax": [
+            "[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate]:LOW {<voltage>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate]:LOW?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:VOLTage:LOW -2.5V",
+          "group": "Source",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:VOLTage:LOW -2.5V",
+              "description": "Sets/queries low voltage level."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:VOLTage:CONCurrent[:STATe]",
+          "description": "Sets/queries concurrent amplitude change.",
+          "syntax": [
+            "[SOURce[1|2]]:VOLTage:CONCurrent[:STATe] {ON|OFF|<NR1>}",
+            "[SOURce[1|2]]:VOLTage:CONCurrent[:STATe]?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "SOURce1:VOLTage:CONCurrent ON",
+          "group": "Source",
+          "arguments": "ON enables the feature.\nOFF disables the feature.\n<NR1> specifies a numeric value.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "ON",
+                "OFF",
+                "<NR1>"
+              ],
+              "default": "ON",
+              "description": "One of: ON, OFF, <NR1>"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:VOLTage:CONCurrent ON",
+              "description": "Sets/queries concurrent amplitude change."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:VOLTage:LIMit:HIGH",
+          "description": "Sets/queries upper amplitude limit.",
+          "syntax": [
+            "[SOURce[1|2]]:VOLTage:LIMit:HIGH {<voltage>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:VOLTage:LIMit:HIGH?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:VOLTage:LIMit:HIGH 5V",
+          "group": "Source",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:VOLTage:LIMit:HIGH 5V",
+              "description": "Sets/queries upper amplitude limit."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:VOLTage:LIMit:LOW",
+          "description": "Sets/queries lower amplitude limit.",
+          "syntax": [
+            "[SOURce[1|2]]:VOLTage:LIMit:LOW {<voltage>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:VOLTage:LIMit:LOW?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:VOLTage:LIMit:LOW -5V",
+          "group": "Source",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:VOLTage:LIMit:LOW -5V",
+              "description": "Sets/queries lower amplitude limit."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:VOLTage:UNIT",
+          "description": "Sets/queries amplitude unit (VPP|VRMS|DBM).",
+          "syntax": [
+            "[SOURce[1|2]]:VOLTage:UNIT {VPP|VRMS|DBM}",
+            "[SOURce[1|2]]:VOLTage:UNIT?"
+          ],
+          "commandType": "both",
+          "returns": "VPP|VRMS|DBM",
+          "example": "SOURce1:VOLTage:UNIT VPP",
+          "group": "Source",
+          "arguments": "VPP selects VPP mode/option.\nVRMS selects VRMS mode/option.\nDBM selects DBM mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "VPP",
+                "VRMS",
+                "DBM"
+              ],
+              "default": "VPP",
+              "description": "One of: VPP, VRMS, DBM"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:VOLTage:UNIT VPP",
+              "description": "Sets/queries amplitude unit (VPP|VRMS|DBM)."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:PHASe[:ADJust]",
+          "description": "Sets/queries output phase (-180 to +180 deg).",
+          "syntax": [
+            "[SOURce[1|2]]:PHASe[:ADJust] {<phase>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:PHASe[:ADJust]?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:PHASe 90DEG",
+          "group": "Source",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:PHASe 90DEG",
+              "description": "Sets/queries output phase (-180 to +180 deg)."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:PHASe:CONCurrent[:STATe]",
+          "description": "Sets/queries concurrent phase change.",
+          "syntax": [
+            "[SOURce[1|2]]:PHASe:CONCurrent[:STATe] {ON|OFF|<NR1>}",
+            "[SOURce[1|2]]:PHASe:CONCurrent[:STATe]?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "SOURce1:PHASe:CONCurrent ON",
+          "group": "Source",
+          "arguments": "ON enables the feature.\nOFF disables the feature.\n<NR1> specifies a numeric value.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "ON",
+                "OFF",
+                "<NR1>"
+              ],
+              "default": "ON",
+              "description": "One of: ON, OFF, <NR1>"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:PHASe:CONCurrent ON",
+              "description": "Sets/queries concurrent phase change."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:PHASe:INITiate",
+          "description": "Synchronizes output phase.",
+          "syntax": [
+            "[SOURce[1|2]]:PHASe:INITiate"
+          ],
+          "commandType": "set",
+          "example": "SOURce1:PHASe:INITiate",
+          "group": "Source",
+          "examples": [
+            {
+              "scpi": "SOURce1:PHASe:INITiate",
+              "description": "Synchronizes output phase."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce]:ROSCillator:SOURce",
+          "description": "Sets/queries reference clock (INTernal|EXTernal).",
+          "syntax": [
+            "[SOURce]:ROSCillator:SOURce {INTernal|EXTernal}",
+            "[SOURce]:ROSCillator:SOURce?"
+          ],
+          "commandType": "both",
+          "returns": "INTernal|EXTernal",
+          "example": "SOURce:ROSCillator:SOURce INTernal",
+          "group": "Source",
+          "arguments": "INTernal selects INTernal mode/option.\nEXTernal selects EXTernal mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "INTernal",
+                "EXTernal"
+              ],
+              "default": "INTernal",
+              "description": "One of: INTernal, EXTernal"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce:ROSCillator:SOURce INTernal",
+              "description": "Sets/queries reference clock (INTernal|EXTernal)."
+            }
+          ]
+        },
+        {
+          "scpi": "SOURce<3|4>:POWer[:LEVel][:IMMediate][:AMPLitude]",
+          "description": "Sets/queries internal noise level.",
+          "syntax": [
+            "SOURce<3|4>:POWer[:LEVel][:IMMediate][:AMPLitude] {<level>|MINimum|MAXimum}",
+            "SOURce<3|4>:POWer[:LEVel][:IMMediate][:AMPLitude]?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce3:POWer 0dBm",
+          "group": "Source",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce3:POWer 0dBm",
+              "description": "Sets/queries internal noise level."
+            }
+          ]
+        }
+      ]
+    },
+    "Pulse": {
+      "name": "Pulse",
+      "description": "Pulse waveform configuration commands",
+      "commands": [
+        {
+          "scpi": "[SOURce[1|2]]:PULSe:DCYCle",
+          "description": "Sets/queries pulse duty cycle (%).",
+          "syntax": [
+            "[SOURce[1|2]]:PULSe:DCYCle {<percent>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:PULSe:DCYCle?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:PULSe:DCYCle 50",
+          "group": "Pulse",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:PULSe:DCYCle 50",
+              "description": "Sets/queries pulse duty cycle (%)."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:PULSe:DELay",
+          "description": "Sets/queries pulse delay.",
+          "syntax": [
+            "[SOURce[1|2]]:PULSe:DELay {<delay>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:PULSe:DELay?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:PULSe:DELay 10ns",
+          "group": "Pulse",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:PULSe:DELay 10ns",
+              "description": "Sets/queries pulse delay."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:PULSe:HOLD",
+          "description": "Sets/queries pulse hold parameter (WIDTh|DUTY).",
+          "syntax": [
+            "[SOURce[1|2]]:PULSe:HOLD {WIDTh|DUTY}",
+            "[SOURce[1|2]]:PULSe:HOLD?"
+          ],
+          "commandType": "both",
+          "returns": "WIDTh|DUTY",
+          "example": "SOURce1:PULSe:HOLD WIDTh",
+          "group": "Pulse",
+          "arguments": "WIDTh selects WIDTh mode/option.\nDUTY selects DUTY mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "WIDTh",
+                "DUTY"
+              ],
+              "default": "WIDTh",
+              "description": "One of: WIDTh, DUTY"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:PULSe:HOLD WIDTh",
+              "description": "Sets/queries pulse hold parameter (WIDTh|DUTY)."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:PULSe:PERiod",
+          "description": "Sets/queries pulse period.",
+          "syntax": [
+            "[SOURce[1|2]]:PULSe:PERiod {<period>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:PULSe:PERiod?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:PULSe:PERiod 1ms",
+          "group": "Pulse",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:PULSe:PERiod 1ms",
+              "description": "Sets/queries pulse period."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:PULSe:TRANsition[:LEADing]",
+          "description": "Sets/queries pulse leading edge time.",
+          "syntax": [
+            "[SOURce[1|2]]:PULSe:TRANsition[:LEADing] {<time>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:PULSe:TRANsition[:LEADing]?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:PULSe:TRANsition 10ns",
+          "group": "Pulse",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:PULSe:TRANsition 10ns",
+              "description": "Sets/queries pulse leading edge time."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:PULSe:TRANsition:TRAiling",
+          "description": "Sets/queries pulse trailing edge time.",
+          "syntax": [
+            "[SOURce[1|2]]:PULSe:TRANsition:TRAiling {<time>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:PULSe:TRANsition:TRAiling?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:PULSe:TRANsition:TRAiling 10ns",
+          "group": "Pulse",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:PULSe:TRANsition:TRAiling 10ns",
+              "description": "Sets/queries pulse trailing edge time."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:PULSe:WIDTh",
+          "description": "Sets/queries pulse width.",
+          "syntax": [
+            "[SOURce[1|2]]:PULSe:WIDTh {<width>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:PULSe:WIDTh?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:PULSe:WIDTh 100us",
+          "group": "Pulse",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:PULSe:WIDTh 100us",
+              "description": "Sets/queries pulse width."
+            }
+          ]
+        }
+      ]
+    },
+    "Modulation": {
+      "name": "Modulation",
+      "description": "Modulation configuration commands (AM, FM, PM, FSK, PWM)",
+      "commands": [
+        {
+          "scpi": "[SOURce[1|2]]:AM[:DEPTh]",
+          "description": "Sets/queries AM modulation depth (0-120%).",
+          "syntax": [
+            "[SOURce[1|2]]:AM[:DEPTh] {<depth>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:AM[:DEPTh]?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:AM:DEPTh 50",
+          "group": "Modulation",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:AM:DEPTh 50",
+              "description": "Sets/queries AM modulation depth (0-120%)."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:AM:INTernal:FREQuency",
+          "description": "Sets/queries AM internal modulation frequency.",
+          "syntax": [
+            "[SOURce[1|2]]:AM:INTernal:FREQuency {<frequency>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:AM:INTernal:FREQuency?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:AM:INTernal:FREQuency 1kHz",
+          "group": "Modulation",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:AM:INTernal:FREQuency 1kHz",
+              "description": "Sets/queries AM internal modulation frequency."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:AM:INTernal:FUNCtion",
+          "description": "Sets/queries AM modulation waveform.",
+          "syntax": [
+            "[SOURce[1|2]]:AM:INTernal:FUNCtion {SINusoid|SQUare|RAMP|NRAMp|TRIangle|PRNoise|USER[1-4]|EMEMory|EFILe}",
+            "[SOURce[1|2]]:AM:INTernal:FUNCtion?"
+          ],
+          "commandType": "both",
+          "returns": "<waveform>",
+          "example": "SOURce1:AM:INTernal:FUNCtion SINusoid",
+          "group": "Modulation",
+          "arguments": "SINusoid selects SINusoid mode/option.\nSQUare selects SQUare mode/option.\nRAMP selects RAMP mode/option.\nNRAMp selects NRAMp mode/option.\nTRIangle selects TRIangle mode/option.\nPRNoise selects PRNoise mode/option.\nUSER[1-4] selects USER[1-4] mode/option.\nEMEMory selects EMEMory mode/option.\nEFILe selects EFILe mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "SINusoid",
+                "SQUare",
+                "RAMP",
+                "NRAMp",
+                "TRIangle",
+                "PRNoise",
+                "USER[1-4]",
+                "EMEMory",
+                "EFILe"
+              ],
+              "default": "SINusoid",
+              "description": "One of: SINusoid, SQUare, RAMP, NRAMp, TRIangle, PRNoise, USER[1-4], EMEMory, EFILe"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:AM:INTernal:FUNCtion SINusoid",
+              "description": "Sets/queries AM modulation waveform."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:AM:INTernal:FUNCtion:EFILe",
+          "description": "Sets/queries AM EFILe name.",
+          "syntax": [
+            "[SOURce[1|2]]:AM:INTernal:FUNCtion:EFILe <filename>",
+            "[SOURce[1|2]]:AM:INTernal:FUNCtion:EFILe?"
+          ],
+          "commandType": "both",
+          "returns": "<string>",
+          "example": "SOURce1:AM:INTernal:FUNCtion:EFILe \"M:/mod.tfwx\"",
+          "group": "Modulation",
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "required": true,
+              "description": "String value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:AM:INTernal:FUNCtion:EFILe \"M:/mod.tfwx\"",
+              "description": "Sets/queries AM EFILe name."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:AM:SOURce",
+          "description": "Sets/queries AM source (INTernal|EXTernal).",
+          "syntax": [
+            "[SOURce[1|2]]:AM:SOURce {INTernal|EXTernal}",
+            "[SOURce[1|2]]:AM:SOURce?"
+          ],
+          "commandType": "both",
+          "returns": "INTernal|EXTernal",
+          "example": "SOURce1:AM:SOURce INTernal",
+          "group": "Modulation",
+          "arguments": "INTernal selects INTernal mode/option.\nEXTernal selects EXTernal mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "INTernal",
+                "EXTernal"
+              ],
+              "default": "INTernal",
+              "description": "One of: INTernal, EXTernal"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:AM:SOURce INTernal",
+              "description": "Sets/queries AM source (INTernal|EXTernal)."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:AM:STATe",
+          "description": "Sets/queries AM modulation state.",
+          "syntax": [
+            "[SOURce[1|2]]:AM:STATe {ON|OFF|<NR1>}",
+            "[SOURce[1|2]]:AM:STATe?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "SOURce1:AM:STATe ON",
+          "group": "Modulation",
+          "arguments": "ON enables the feature.\nOFF disables the feature.\n<NR1> specifies a numeric value.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "ON",
+                "OFF",
+                "<NR1>"
+              ],
+              "default": "ON",
+              "description": "One of: ON, OFF, <NR1>"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:AM:STATe ON",
+              "description": "Sets/queries AM modulation state."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:FM[:DEViation]",
+          "description": "Sets/queries FM frequency deviation.",
+          "syntax": [
+            "[SOURce[1|2]]:FM[:DEViation] {<deviation>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:FM[:DEViation]?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:FM:DEViation 10kHz",
+          "group": "Modulation",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:FM:DEViation 10kHz",
+              "description": "Sets/queries FM frequency deviation."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:FM:INTernal:FREQuency",
+          "description": "Sets/queries FM internal modulation frequency.",
+          "syntax": [
+            "[SOURce[1|2]]:FM:INTernal:FREQuency {<frequency>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:FM:INTernal:FREQuency?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:FM:INTernal:FREQuency 1kHz",
+          "group": "Modulation",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:FM:INTernal:FREQuency 1kHz",
+              "description": "Sets/queries FM internal modulation frequency."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:FM:INTernal:FUNCtion",
+          "description": "Sets/queries FM modulation waveform.",
+          "syntax": [
+            "[SOURce[1|2]]:FM:INTernal:FUNCtion {SINusoid|SQUare|RAMP|...}",
+            "[SOURce[1|2]]:FM:INTernal:FUNCtion?"
+          ],
+          "commandType": "both",
+          "returns": "<waveform>",
+          "example": "SOURce1:FM:INTernal:FUNCtion SINusoid",
+          "group": "Modulation",
+          "arguments": "SINusoid selects SINusoid mode/option.\nSQUare selects SQUare mode/option.\nRAMP selects RAMP mode/option.\n... selects ... mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "SINusoid",
+                "SQUare",
+                "RAMP",
+                "..."
+              ],
+              "default": "SINusoid",
+              "description": "One of: SINusoid, SQUare, RAMP, ..."
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:FM:INTernal:FUNCtion SINusoid",
+              "description": "Sets/queries FM modulation waveform."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:FM:INTernal:FUNCtion:EFILe",
+          "description": "Sets/queries FM EFILe name.",
+          "syntax": [
+            "[SOURce[1|2]]:FM:INTernal:FUNCtion:EFILe <filename>",
+            "[SOURce[1|2]]:FM:INTernal:FUNCtion:EFILe?"
+          ],
+          "commandType": "both",
+          "returns": "<string>",
+          "example": "SOURce1:FM:INTernal:FUNCtion:EFILe \"M:/fm.tfwx\"",
+          "group": "Modulation",
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "required": true,
+              "description": "String value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:FM:INTernal:FUNCtion:EFILe \"M:/fm.tfwx\"",
+              "description": "Sets/queries FM EFILe name."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:FM:SOURce",
+          "description": "Sets/queries FM source.",
+          "syntax": [
+            "[SOURce[1|2]]:FM:SOURce {INTernal|EXTernal}",
+            "[SOURce[1|2]]:FM:SOURce?"
+          ],
+          "commandType": "both",
+          "returns": "INTernal|EXTernal",
+          "example": "SOURce1:FM:SOURce INTernal",
+          "group": "Modulation",
+          "arguments": "INTernal selects INTernal mode/option.\nEXTernal selects EXTernal mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "INTernal",
+                "EXTernal"
+              ],
+              "default": "INTernal",
+              "description": "One of: INTernal, EXTernal"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:FM:SOURce INTernal",
+              "description": "Sets/queries FM source."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:FM:STATe",
+          "description": "Sets/queries FM modulation state.",
+          "syntax": [
+            "[SOURce[1|2]]:FM:STATe {ON|OFF|<NR1>}",
+            "[SOURce[1|2]]:FM:STATe?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "SOURce1:FM:STATe ON",
+          "group": "Modulation",
+          "arguments": "ON enables the feature.\nOFF disables the feature.\n<NR1> specifies a numeric value.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "ON",
+                "OFF",
+                "<NR1>"
+              ],
+              "default": "ON",
+              "description": "One of: ON, OFF, <NR1>"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:FM:STATe ON",
+              "description": "Sets/queries FM modulation state."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:PM[:DEViation]",
+          "description": "Sets/queries PM phase deviation.",
+          "syntax": [
+            "[SOURce[1|2]]:PM[:DEViation] {<deviation>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:PM[:DEViation]?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:PM:DEViation 90DEG",
+          "group": "Modulation",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:PM:DEViation 90DEG",
+              "description": "Sets/queries PM phase deviation."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:PM:INTernal:FREQuency",
+          "description": "Sets/queries PM internal modulation frequency.",
+          "syntax": [
+            "[SOURce[1|2]]:PM:INTernal:FREQuency {<frequency>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:PM:INTernal:FREQuency?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:PM:INTernal:FREQuency 1kHz",
+          "group": "Modulation",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:PM:INTernal:FREQuency 1kHz",
+              "description": "Sets/queries PM internal modulation frequency."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:PM:INTernal:FUNCtion",
+          "description": "Sets/queries PM modulation waveform.",
+          "syntax": [
+            "[SOURce[1|2]]:PM:INTernal:FUNCtion {SINusoid|SQUare|...}",
+            "[SOURce[1|2]]:PM:INTernal:FUNCtion?"
+          ],
+          "commandType": "both",
+          "returns": "<waveform>",
+          "example": "SOURce1:PM:INTernal:FUNCtion SINusoid",
+          "group": "Modulation",
+          "arguments": "SINusoid selects SINusoid mode/option.\nSQUare selects SQUare mode/option.\n... selects ... mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "SINusoid",
+                "SQUare",
+                "..."
+              ],
+              "default": "SINusoid",
+              "description": "One of: SINusoid, SQUare, ..."
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:PM:INTernal:FUNCtion SINusoid",
+              "description": "Sets/queries PM modulation waveform."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:PM:INTernal:FUNCtion:EFILe",
+          "description": "Sets/queries PM EFILe name.",
+          "syntax": [
+            "[SOURce[1|2]]:PM:INTernal:FUNCtion:EFILe <filename>",
+            "[SOURce[1|2]]:PM:INTernal:FUNCtion:EFILe?"
+          ],
+          "commandType": "both",
+          "returns": "<string>",
+          "example": "SOURce1:PM:INTernal:FUNCtion:EFILe \"M:/pm.tfwx\"",
+          "group": "Modulation",
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "required": true,
+              "description": "String value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:PM:INTernal:FUNCtion:EFILe \"M:/pm.tfwx\"",
+              "description": "Sets/queries PM EFILe name."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:PM:SOURce",
+          "description": "Sets/queries PM source.",
+          "syntax": [
+            "[SOURce[1|2]]:PM:SOURce {INTernal|EXTernal}",
+            "[SOURce[1|2]]:PM:SOURce?"
+          ],
+          "commandType": "both",
+          "returns": "INTernal|EXTernal",
+          "example": "SOURce1:PM:SOURce INTernal",
+          "group": "Modulation",
+          "arguments": "INTernal selects INTernal mode/option.\nEXTernal selects EXTernal mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "INTernal",
+                "EXTernal"
+              ],
+              "default": "INTernal",
+              "description": "One of: INTernal, EXTernal"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:PM:SOURce INTernal",
+              "description": "Sets/queries PM source."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:PM:STATe",
+          "description": "Sets/queries PM modulation state.",
+          "syntax": [
+            "[SOURce[1|2]]:PM:STATe {ON|OFF|<NR1>}",
+            "[SOURce[1|2]]:PM:STATe?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "SOURce1:PM:STATe ON",
+          "group": "Modulation",
+          "arguments": "ON enables the feature.\nOFF disables the feature.\n<NR1> specifies a numeric value.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "ON",
+                "OFF",
+                "<NR1>"
+              ],
+              "default": "ON",
+              "description": "One of: ON, OFF, <NR1>"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:PM:STATe ON",
+              "description": "Sets/queries PM modulation state."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:FSKey[:FREQuency]",
+          "description": "Sets/queries FSK hop frequency.",
+          "syntax": [
+            "[SOURce[1|2]]:FSKey[:FREQuency] {<frequency>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:FSKey[:FREQuency]?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:FSKey:FREQuency 10kHz",
+          "group": "Modulation",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:FSKey:FREQuency 10kHz",
+              "description": "Sets/queries FSK hop frequency."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:FSKey:INTernal:RATE",
+          "description": "Sets/queries FSK internal modulation rate.",
+          "syntax": [
+            "[SOURce[1|2]]:FSKey:INTernal:RATE {<rate>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:FSKey:INTernal:RATE?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:FSKey:INTernal:RATE 100Hz",
+          "group": "Modulation",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:FSKey:INTernal:RATE 100Hz",
+              "description": "Sets/queries FSK internal modulation rate."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:FSKey:SOURce",
+          "description": "Sets/queries FSK source.",
+          "syntax": [
+            "[SOURce[1|2]]:FSKey:SOURce {INTernal|EXTernal}",
+            "[SOURce[1|2]]:FSKey:SOURce?"
+          ],
+          "commandType": "both",
+          "returns": "INTernal|EXTernal",
+          "example": "SOURce1:FSKey:SOURce INTernal",
+          "group": "Modulation",
+          "arguments": "INTernal selects INTernal mode/option.\nEXTernal selects EXTernal mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "INTernal",
+                "EXTernal"
+              ],
+              "default": "INTernal",
+              "description": "One of: INTernal, EXTernal"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:FSKey:SOURce INTernal",
+              "description": "Sets/queries FSK source."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:FSKey:STATe",
+          "description": "Sets/queries FSK state.",
+          "syntax": [
+            "[SOURce[1|2]]:FSKey:STATe {ON|OFF|<NR1>}",
+            "[SOURce[1|2]]:FSKey:STATe?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "SOURce1:FSKey:STATe ON",
+          "group": "Modulation",
+          "arguments": "ON enables the feature.\nOFF disables the feature.\n<NR1> specifies a numeric value.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "ON",
+                "OFF",
+                "<NR1>"
+              ],
+              "default": "ON",
+              "description": "One of: ON, OFF, <NR1>"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:FSKey:STATe ON",
+              "description": "Sets/queries FSK state."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:PWM[:DEViation]:DCYCle",
+          "description": "Sets/queries PWM duty cycle deviation.",
+          "syntax": [
+            "[SOURce[1|2]]:PWM[:DEViation]:DCYCle {<deviation>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:PWM[:DEViation]:DCYCle?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:PWM:DEViation:DCYCle 10",
+          "group": "Modulation",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:PWM:DEViation:DCYCle 10",
+              "description": "Sets/queries PWM duty cycle deviation."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:PWM:INTernal:FREQuency",
+          "description": "Sets/queries PWM internal modulation frequency.",
+          "syntax": [
+            "[SOURce[1|2]]:PWM:INTernal:FREQuency {<frequency>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:PWM:INTernal:FREQuency?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:PWM:INTernal:FREQuency 1kHz",
+          "group": "Modulation",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:PWM:INTernal:FREQuency 1kHz",
+              "description": "Sets/queries PWM internal modulation frequency."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:PWM:INTernal:FUNCtion",
+          "description": "Sets/queries PWM modulation waveform.",
+          "syntax": [
+            "[SOURce[1|2]]:PWM:INTernal:FUNCtion {SINusoid|SQUare|...}",
+            "[SOURce[1|2]]:PWM:INTernal:FUNCtion?"
+          ],
+          "commandType": "both",
+          "returns": "<waveform>",
+          "example": "SOURce1:PWM:INTernal:FUNCtion SINusoid",
+          "group": "Modulation",
+          "arguments": "SINusoid selects SINusoid mode/option.\nSQUare selects SQUare mode/option.\n... selects ... mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "SINusoid",
+                "SQUare",
+                "..."
+              ],
+              "default": "SINusoid",
+              "description": "One of: SINusoid, SQUare, ..."
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:PWM:INTernal:FUNCtion SINusoid",
+              "description": "Sets/queries PWM modulation waveform."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:PWM:INTernal:FUNCtion:EFILe",
+          "description": "Sets/queries PWM EFILe name.",
+          "syntax": [
+            "[SOURce[1|2]]:PWM:INTernal:FUNCtion:EFILe <filename>",
+            "[SOURce[1|2]]:PWM:INTernal:FUNCtion:EFILe?"
+          ],
+          "commandType": "both",
+          "returns": "<string>",
+          "example": "SOURce1:PWM:INTernal:FUNCtion:EFILe \"M:/pwm.tfwx\"",
+          "group": "Modulation",
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "required": true,
+              "description": "String value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:PWM:INTernal:FUNCtion:EFILe \"M:/pwm.tfwx\"",
+              "description": "Sets/queries PWM EFILe name."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:PWM:SOURce",
+          "description": "Sets/queries PWM source.",
+          "syntax": [
+            "[SOURce[1|2]]:PWM:SOURce {INTernal|EXTernal}",
+            "[SOURce[1|2]]:PWM:SOURce?"
+          ],
+          "commandType": "both",
+          "returns": "INTernal|EXTernal",
+          "example": "SOURce1:PWM:SOURce INTernal",
+          "group": "Modulation",
+          "arguments": "INTernal selects INTernal mode/option.\nEXTernal selects EXTernal mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "INTernal",
+                "EXTernal"
+              ],
+              "default": "INTernal",
+              "description": "One of: INTernal, EXTernal"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:PWM:SOURce INTernal",
+              "description": "Sets/queries PWM source."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:PWM:STATe",
+          "description": "Sets/queries PWM state.",
+          "syntax": [
+            "[SOURce[1|2]]:PWM:STATe {ON|OFF|<NR1>}",
+            "[SOURce[1|2]]:PWM:STATe?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "SOURce1:PWM:STATe ON",
+          "group": "Modulation",
+          "arguments": "ON enables the feature.\nOFF disables the feature.\n<NR1> specifies a numeric value.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "ON",
+                "OFF",
+                "<NR1>"
+              ],
+              "default": "ON",
+              "description": "One of: ON, OFF, <NR1>"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:PWM:STATe ON",
+              "description": "Sets/queries PWM state."
+            }
+          ]
+        }
+      ]
+    },
+    "Sweep": {
+      "name": "Sweep",
+      "description": "Sweep configuration commands",
+      "commands": [
+        {
+          "scpi": "[SOURce[1|2]]:SWEep:HTIMe",
+          "description": "Sets/queries sweep hold time.",
+          "syntax": [
+            "[SOURce[1|2]]:SWEep:HTIMe {<time>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:SWEep:HTIMe?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:SWEep:HTIMe 0",
+          "group": "Sweep",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:SWEep:HTIMe 0",
+              "description": "Sets/queries sweep hold time."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:SWEep:MODE",
+          "description": "Sets/queries sweep mode (AUTO|MANual).",
+          "syntax": [
+            "[SOURce[1|2]]:SWEep:MODE {AUTO|MANual}",
+            "[SOURce[1|2]]:SWEep:MODE?"
+          ],
+          "commandType": "both",
+          "returns": "AUTO|MANual",
+          "example": "SOURce1:SWEep:MODE AUTO",
+          "group": "Sweep",
+          "arguments": "AUTO selects AUTO mode/option.\nMANual selects MANual mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "AUTO",
+                "MANual"
+              ],
+              "default": "AUTO",
+              "description": "One of: AUTO, MANual"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:SWEep:MODE AUTO",
+              "description": "Sets/queries sweep mode (AUTO|MANual)."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:SWEep:RTIMe",
+          "description": "Sets/queries sweep return time.",
+          "syntax": [
+            "[SOURce[1|2]]:SWEep:RTIMe {<time>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:SWEep:RTIMe?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:SWEep:RTIMe 0",
+          "group": "Sweep",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:SWEep:RTIMe 0",
+              "description": "Sets/queries sweep return time."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:SWEep:SPACing",
+          "description": "Sets/queries sweep spacing (LINear|LOGarithmic).",
+          "syntax": [
+            "[SOURce[1|2]]:SWEep:SPACing {LINear|LOGarithmic}",
+            "[SOURce[1|2]]:SWEep:SPACing?"
+          ],
+          "commandType": "both",
+          "returns": "LINear|LOGarithmic",
+          "example": "SOURce1:SWEep:SPACing LINear",
+          "group": "Sweep",
+          "arguments": "LINear selects LINear mode/option.\nLOGarithmic selects LOGarithmic mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "LINear",
+                "LOGarithmic"
+              ],
+              "default": "LINear",
+              "description": "One of: LINear, LOGarithmic"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:SWEep:SPACing LINear",
+              "description": "Sets/queries sweep spacing (LINear|LOGarithmic)."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:SWEep:TIME",
+          "description": "Sets/queries sweep time.",
+          "syntax": [
+            "[SOURce[1|2]]:SWEep:TIME {<time>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:SWEep:TIME?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:SWEep:TIME 1s",
+          "group": "Sweep",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:SWEep:TIME 1s",
+              "description": "Sets/queries sweep time."
+            }
+          ]
+        }
+      ]
+    },
+    "Burst": {
+      "name": "Burst",
+      "description": "Burst mode configuration commands",
+      "commands": [
+        {
+          "scpi": "[SOURce[1|2]]:BURSt:MODE",
+          "description": "Sets/queries burst mode (TRIGgered|GATed).",
+          "syntax": [
+            "[SOURce[1|2]]:BURSt:MODE {TRIGgered|GATed}",
+            "[SOURce[1|2]]:BURSt:MODE?"
+          ],
+          "commandType": "both",
+          "returns": "TRIGgered|GATed",
+          "example": "SOURce1:BURSt:MODE TRIGgered",
+          "group": "Burst",
+          "arguments": "TRIGgered selects TRIGgered mode/option.\nGATed selects GATed mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "TRIGgered",
+                "GATed"
+              ],
+              "default": "TRIGgered",
+              "description": "One of: TRIGgered, GATed"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:BURSt:MODE TRIGgered",
+              "description": "Sets/queries burst mode (TRIGgered|GATed)."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:BURSt:NCYCles",
+          "description": "Sets/queries burst cycle count (1-1000000 or INFinity).",
+          "syntax": [
+            "[SOURce[1|2]]:BURSt:NCYCles {<cycles>|INFinity|MINimum|MAXimum}",
+            "[SOURce[1|2]]:BURSt:NCYCles?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>|INFinity",
+          "example": "SOURce1:BURSt:NCYCles 10",
+          "group": "Burst",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or INFinity, MINimum, MAXimum)",
+              "special_values": [
+                "INFinity",
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:BURSt:NCYCles 10",
+              "description": "Sets/queries burst cycle count (1-1000000 or INFinity)."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:BURSt[:STATe]",
+          "description": "Sets/queries burst state.",
+          "syntax": [
+            "[SOURce[1|2]]:BURSt[:STATe] {ON|OFF|<NR1>}",
+            "[SOURce[1|2]]:BURSt[:STATe]?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "SOURce1:BURSt:STATe ON",
+          "group": "Burst",
+          "arguments": "ON enables the feature.\nOFF disables the feature.\n<NR1> specifies a numeric value.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "ON",
+                "OFF",
+                "<NR1>"
+              ],
+              "default": "ON",
+              "description": "One of: ON, OFF, <NR1>"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:BURSt:STATe ON",
+              "description": "Sets/queries burst state."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:BURSt:TDELay",
+          "description": "Sets/queries burst trigger delay.",
+          "syntax": [
+            "[SOURce[1|2]]:BURSt:TDELay {<delay>|MINimum|MAXimum}",
+            "[SOURce[1|2]]:BURSt:TDELay?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SOURce1:BURSt:TDELay 0",
+          "group": "Burst",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:BURSt:TDELay 0",
+              "description": "Sets/queries burst trigger delay."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:BURSt:INFInite:REARm",
+          "description": "Rearms infinite burst.",
+          "syntax": [
+            "[SOURce[1|2]]:BURSt:INFInite:REARm"
+          ],
+          "commandType": "set",
+          "example": "SOURce1:BURSt:INFInite:REARm",
+          "group": "Burst",
+          "examples": [
+            {
+              "scpi": "SOURce1:BURSt:INFInite:REARm",
+              "description": "Rearms infinite burst."
+            }
+          ]
+        },
+        {
+          "scpi": "[SOURce[1|2]]:BURSt:IDLE",
+          "description": "Sets/queries burst idle state (STARt|END|CENTer|ZERO).",
+          "syntax": [
+            "[SOURce[1|2]]:BURSt:IDLE {STARt|END|CENTer|ZERO}",
+            "[SOURce[1|2]]:BURSt:IDLE?"
+          ],
+          "commandType": "both",
+          "returns": "STARt|END|CENTer|ZERO",
+          "example": "SOURce1:BURSt:IDLE ZERO",
+          "group": "Burst",
+          "arguments": "STARt selects STARt mode/option.\nEND selects END mode/option.\nCENTer selects CENTer mode/option.\nZERO selects ZERO mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "STARt",
+                "END",
+                "CENTer",
+                "ZERO"
+              ],
+              "default": "STARt",
+              "description": "One of: STARt, END, CENTer, ZERO"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:BURSt:IDLE ZERO",
+              "description": "Sets/queries burst idle state (STARt|END|CENTer|ZERO)."
+            }
+          ]
+        }
+      ]
+    },
+    "Combine": {
+      "name": "Combine",
+      "description": "Signal combine commands",
+      "commands": [
+        {
+          "scpi": "[SOURce[1|2]]:COMBine:FEED",
+          "description": "Sets/queries signal combine source (NOISe|EXTernal|\"\").",
+          "syntax": [
+            "[SOURce[1|2]]:COMBine:FEED {NOISe|EXTernal|\"\"}",
+            "[SOURce[1|2]]:COMBine:FEED?"
+          ],
+          "commandType": "both",
+          "returns": "NOISe|EXTernal|\"\"",
+          "example": "SOURce1:COMBine:FEED NOISe",
+          "group": "Combine",
+          "arguments": "NOISe selects NOISe mode/option.\nEXTernal selects EXTernal mode/option.\n\"\" selects \"\" mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "NOISe",
+                "EXTernal",
+                "\"\""
+              ],
+              "default": "NOISe",
+              "description": "One of: NOISe, EXTernal, \"\""
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SOURce1:COMBine:FEED NOISe",
+              "description": "Sets/queries signal combine source (NOISe|EXTernal|\"\")."
+            }
+          ]
+        }
+      ]
+    },
+    "Memory": {
+      "name": "Memory",
+      "description": "Setup memory commands",
+      "commands": [
+        {
+          "scpi": "MEMory:STATe:DELete",
+          "description": "Deletes setup memory location.",
+          "syntax": [
+            "MEMory:STATe:DELete <slot>"
+          ],
+          "commandType": "set",
+          "example": "MEMory:STATe:DELete 1",
+          "group": "Memory",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "MEMory:STATe:DELete 1",
+              "description": "Deletes setup memory location."
+            }
+          ]
+        },
+        {
+          "scpi": "MEMory:STATe:LOCK",
+          "description": "Sets/queries setup memory lock.",
+          "syntax": [
+            "MEMory:STATe:LOCK <slot>,{ON|OFF|<NR1>}",
+            "MEMory:STATe:LOCK? <slot>"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "MEMory:STATe:LOCK 1,ON",
+          "group": "Memory",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "MEMory:STATe:LOCK 1,ON",
+              "description": "Sets/queries setup memory lock."
+            }
+          ]
+        },
+        {
+          "scpi": "MEMory:STATe:RECall:AUTo",
+          "description": "Sets/queries auto-recall of last setup.",
+          "syntax": [
+            "MEMory:STATe:RECall:AUTo {ON|OFF|<NR1>}",
+            "MEMory:STATe:RECall:AUTo?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "MEMory:STATe:RECall:AUTo ON",
+          "group": "Memory",
+          "arguments": "ON enables the feature.\nOFF disables the feature.\n<NR1> specifies a numeric value.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "ON",
+                "OFF",
+                "<NR1>"
+              ],
+              "default": "ON",
+              "description": "One of: ON, OFF, <NR1>"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "MEMory:STATe:RECall:AUTo ON",
+              "description": "Sets/queries auto-recall of last setup."
+            }
+          ]
+        },
+        {
+          "scpi": "MEMory:STATe:VALid?",
+          "description": "Queries if setup memory slot is valid.",
+          "syntax": [
+            "MEMory:STATe:VALid? <slot>"
+          ],
+          "commandType": "query",
+          "returns": "<NR1>",
+          "example": "MEMory:STATe:VALid? 1",
+          "group": "Memory",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "MEMory:STATe:VALid? 1",
+              "description": "Queries if setup memory slot is valid."
+            }
+          ]
+        },
+        {
+          "scpi": "*RCL",
+          "description": "Recalls instrument settings from memory slot.",
+          "syntax": [
+            "*RCL <slot>"
+          ],
+          "commandType": "set",
+          "example": "*RCL 1",
+          "group": "Memory",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "*RCL 1",
+              "description": "Recalls instrument settings from memory slot."
+            }
+          ]
+        },
+        {
+          "scpi": "*SAV",
+          "description": "Saves instrument settings to memory slot.",
+          "syntax": [
+            "*SAV <slot>"
+          ],
+          "commandType": "set",
+          "example": "*SAV 1",
+          "group": "Memory",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "*SAV 1",
+              "description": "Saves instrument settings to memory slot."
+            }
+          ]
+        }
+      ]
+    },
+    "MassMemory": {
+      "name": "MassMemory",
+      "description": "Mass storage (USB/Internal) commands",
+      "commands": [
+        {
+          "scpi": "MMEMory:CATalog?",
+          "description": "Lists files in directory.",
+          "syntax": [
+            "MMEMory:CATalog? [<path>]"
+          ],
+          "commandType": "query",
+          "returns": "<used>,<free>,<file_list>",
+          "example": "MMEMory:CATalog? \"U:/\"",
+          "group": "MassMemory",
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "required": true,
+              "description": "String value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "MMEMory:CATalog? \"U:/\"",
+              "description": "Lists files in directory."
+            }
+          ]
+        },
+        {
+          "scpi": "MMEMory:CDIRectory",
+          "description": "Sets/queries current directory.",
+          "syntax": [
+            "MMEMory:CDIRectory <path>",
+            "MMEMory:CDIRectory?"
+          ],
+          "commandType": "both",
+          "returns": "<string>",
+          "example": "MMEMory:CDIRectory \"U:/\"",
+          "group": "MassMemory",
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "required": true,
+              "description": "String value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "MMEMory:CDIRectory \"U:/\"",
+              "description": "Sets/queries current directory."
+            }
+          ]
+        },
+        {
+          "scpi": "MMEMory:DELete",
+          "description": "Deletes file or directory.",
+          "syntax": [
+            "MMEMory:DELete <path>"
+          ],
+          "commandType": "set",
+          "example": "MMEMory:DELete \"U:/test.tfwx\"",
+          "group": "MassMemory",
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "required": true,
+              "description": "String value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "MMEMory:DELete \"U:/test.tfwx\"",
+              "description": "Deletes file or directory."
+            }
+          ]
+        },
+        {
+          "scpi": "MMEMory:LOAD:STATe",
+          "description": "Loads setup from file.",
+          "syntax": [
+            "MMEMory:LOAD:STATe <slot>,<path>"
+          ],
+          "commandType": "set",
+          "example": "MMEMory:LOAD:STATe 1,\"U:/setup.stp\"",
+          "group": "MassMemory",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "MMEMory:LOAD:STATe 1,\"U:/setup.stp\"",
+              "description": "Loads setup from file."
+            }
+          ]
+        },
+        {
+          "scpi": "MMEMory:LOAD:TRACe",
+          "description": "Loads waveform from file to edit memory.",
+          "syntax": [
+            "MMEMory:LOAD:TRACe <memory>,<path>"
+          ],
+          "commandType": "set",
+          "example": "MMEMory:LOAD:TRACe EMEMory,\"U:/wave.tfwx\"",
+          "group": "MassMemory",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "MMEMory:LOAD:TRACe EMEMory,\"U:/wave.tfwx\"",
+              "description": "Loads waveform from file to edit memory."
+            }
+          ]
+        },
+        {
+          "scpi": "MMEMory:LOCK[:STATe]",
+          "description": "Sets/queries mass memory lock.",
+          "syntax": [
+            "MMEMory:LOCK[:STATe] {ON|OFF|<NR1>}",
+            "MMEMory:LOCK[:STATe]?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "MMEMory:LOCK ON",
+          "group": "MassMemory",
+          "arguments": "ON enables the feature.\nOFF disables the feature.\n<NR1> specifies a numeric value.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "ON",
+                "OFF",
+                "<NR1>"
+              ],
+              "default": "ON",
+              "description": "One of: ON, OFF, <NR1>"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "MMEMory:LOCK ON",
+              "description": "Sets/queries mass memory lock."
+            }
+          ]
+        },
+        {
+          "scpi": "MMEMory:MDIRectory",
+          "description": "Creates a directory.",
+          "syntax": [
+            "MMEMory:MDIRectory <path>"
+          ],
+          "commandType": "set",
+          "example": "MMEMory:MDIRectory \"U:/newdir\"",
+          "group": "MassMemory",
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "required": true,
+              "description": "String value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "MMEMory:MDIRectory \"U:/newdir\"",
+              "description": "Creates a directory."
+            }
+          ]
+        },
+        {
+          "scpi": "MMEMory:STORe:STATe",
+          "description": "Saves setup to file.",
+          "syntax": [
+            "MMEMory:STORe:STATe <slot>,<path>"
+          ],
+          "commandType": "set",
+          "example": "MMEMory:STORe:STATe 0,\"U:/setup.stp\"",
+          "group": "MassMemory",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "MMEMory:STORe:STATe 0,\"U:/setup.stp\"",
+              "description": "Saves setup to file."
+            }
+          ]
+        },
+        {
+          "scpi": "MMEMory:STORe:TRACe",
+          "description": "Saves waveform from edit memory to file.",
+          "syntax": [
+            "MMEMory:STORe:TRACe <memory>,<path>"
+          ],
+          "commandType": "set",
+          "example": "MMEMory:STORe:TRACe EMEMory,\"U:/wave.tfwx\"",
+          "group": "MassMemory",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "MMEMory:STORe:TRACe EMEMory,\"U:/wave.tfwx\"",
+              "description": "Saves waveform from edit memory to file."
+            }
+          ]
+        },
+        {
+          "scpi": "MMEMory:OPEN:SEQuence",
+          "description": "Loads sequence from file.",
+          "syntax": [
+            "MMEMory:OPEN:SEQuence <path>"
+          ],
+          "commandType": "set",
+          "example": "MMEMory:OPEN:SEQuence \"U:/seq.seq\"",
+          "group": "MassMemory",
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "required": true,
+              "description": "String value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "MMEMory:OPEN:SEQuence \"U:/seq.seq\"",
+              "description": "Loads sequence from file."
+            }
+          ]
+        },
+        {
+          "scpi": "MMEMory:SAVE:SEQuence",
+          "description": "Saves sequence to file.",
+          "syntax": [
+            "MMEMory:SAVE:SEQuence <path>"
+          ],
+          "commandType": "set",
+          "example": "MMEMory:SAVE:SEQuence \"U:/seq.seq\"",
+          "group": "MassMemory",
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "required": true,
+              "description": "String value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "MMEMory:SAVE:SEQuence \"U:/seq.seq\"",
+              "description": "Saves sequence to file."
+            }
+          ]
+        },
+        {
+          "scpi": "RECALL:SETUp",
+          "description": "Loads settings file from mass memory.",
+          "syntax": [
+            "RECALL:SETUp <path>"
+          ],
+          "commandType": "set",
+          "example": "RECALL:SETUp \"U:/setup.stp\"",
+          "group": "MassMemory",
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "required": true,
+              "description": "String value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "RECALL:SETUp \"U:/setup.stp\"",
+              "description": "Loads settings file from mass memory."
+            }
+          ]
+        },
+        {
+          "scpi": "SAVe:SETUp",
+          "description": "Saves settings file to mass memory.",
+          "syntax": [
+            "SAVe:SETUp <path>"
+          ],
+          "commandType": "set",
+          "example": "SAVe:SETUp \"U:/setup.stp\"",
+          "group": "MassMemory",
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "required": true,
+              "description": "String value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SAVe:SETUp \"U:/setup.stp\"",
+              "description": "Saves settings file to mass memory."
+            }
+          ]
+        }
+      ]
+    },
+    "Trace": {
+      "name": "Trace",
+      "description": "Waveform data commands",
+      "commands": [
+        {
+          "scpi": "TRACe|DATA[:DATA]",
+          "description": "Sets/queries waveform data in edit memory.",
+          "syntax": [
+            "TRACe|DATA[:DATA] <memory>,<block_data>",
+            "TRACe|DATA[:DATA]? <memory>"
+          ],
+          "commandType": "both",
+          "returns": "<block_data>",
+          "example": "TRACe:DATA EMEMory,#232...",
+          "group": "Trace",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "TRACe:DATA EMEMory,#232...",
+              "description": "Sets/queries waveform data in edit memory."
+            }
+          ]
+        }
+      ]
+    },
+    "AFGControl": {
+      "name": "AFGControl",
+      "description": "AFG channel control commands",
+      "commands": [
+        {
+          "scpi": "AFGControl:CSCopy",
+          "description": "Copies channel setup from one channel to another.",
+          "syntax": [
+            "AFGControl:CSCopy {CH1|CH2},{CH1|CH2}"
+          ],
+          "commandType": "set",
+          "example": "AFGControl:CSCopy CH1,CH2",
+          "group": "AFGControl",
+          "arguments": "CH1 selects CH1 mode/option.\nCH2 selects CH2 mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "CH1",
+                "CH2"
+              ],
+              "default": "CH1",
+              "description": "One of: CH1, CH2"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "AFGControl:CSCopy CH1,CH2",
+              "description": "Copies channel setup from one channel to another."
+            }
+          ]
+        }
+      ]
+    },
+    "ScreenCopy": {
+      "name": "ScreenCopy",
+      "description": "Screen capture commands",
+      "commands": [
+        {
+          "scpi": "HCOPy:SDUMp[:IMMediate]",
+          "description": "Saves screen image to USB.",
+          "syntax": [
+            "HCOPy:SDUMp[:IMMediate]"
+          ],
+          "commandType": "set",
+          "example": "HCOPy:SDUMp:IMMediate",
+          "group": "ScreenCopy",
+          "examples": [
+            {
+              "scpi": "HCOPy:SDUMp:IMMediate",
+              "description": "Saves screen image to USB."
+            }
+          ]
+        }
+      ]
+    },
+    "License": {
+      "name": "License",
+      "description": "License management commands",
+      "commands": [
+        {
+          "scpi": "LICense:HID?",
+          "description": "Returns instrument Host ID.",
+          "syntax": [
+            "LICense:HID?"
+          ],
+          "commandType": "query",
+          "returns": "<string>",
+          "example": "LICense:HID?",
+          "group": "License",
+          "examples": [
+            {
+              "scpi": "LICense:HID?",
+              "description": "Returns instrument Host ID."
+            }
+          ]
+        },
+        {
+          "scpi": "LICense:INSTall",
+          "description": "Installs license from block data.",
+          "syntax": [
+            "LICense:INSTall <block_data>"
+          ],
+          "commandType": "set",
+          "example": "LICense:INSTall #...",
+          "group": "License",
+          "params": [
+            {
+              "name": "value",
+              "type": "block_data",
+              "required": true,
+              "description": "IEEE 488.2 block data"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "LICense:INSTall #...",
+              "description": "Installs license from block data."
+            }
+          ]
+        },
+        {
+          "scpi": "LICense:UNINstall?",
+          "description": "Uninstalls license and returns exit keyfile.",
+          "syntax": [
+            "LICense:UNINstall? <nomenclature>"
+          ],
+          "commandType": "query",
+          "returns": "<block_data>",
+          "example": "LICense:UNINstall? AFG3MEM",
+          "group": "License",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "LICense:UNINstall? AFG3MEM",
+              "description": "Uninstalls license and returns exit keyfile."
+            }
+          ]
+        },
+        {
+          "scpi": "LICense:LIST?",
+          "description": "Returns active license names.",
+          "syntax": [
+            "LICense:LIST?"
+          ],
+          "commandType": "query",
+          "returns": "<string>",
+          "example": "LICense:LIST?",
+          "group": "License",
+          "examples": [
+            {
+              "scpi": "LICense:LIST?",
+              "description": "Returns active license names."
+            }
+          ]
+        },
+        {
+          "scpi": "LICense:ERRor?",
+          "description": "Returns license errors.",
+          "syntax": [
+            "LICense:ERRor?"
+          ],
+          "commandType": "query",
+          "returns": "<string>",
+          "example": "LICense:ERRor?",
+          "group": "License",
+          "examples": [
+            {
+              "scpi": "LICense:ERRor?",
+              "description": "Returns license errors."
+            }
+          ]
+        },
+        {
+          "scpi": "LICense:GMT?",
+          "description": "Returns system date/time (ISO 8601).",
+          "syntax": [
+            "LICense:GMT?"
+          ],
+          "commandType": "query",
+          "returns": "<string>",
+          "example": "LICense:GMT?",
+          "group": "License",
+          "examples": [
+            {
+              "scpi": "LICense:GMT?",
+              "description": "Returns system date/time (ISO 8601)."
+            }
+          ]
+        },
+        {
+          "scpi": "LICense:IDN?",
+          "description": "Returns active host identification.",
+          "syntax": [
+            "LICense:IDN?"
+          ],
+          "commandType": "query",
+          "returns": "<string>",
+          "example": "LICense:IDN?",
+          "group": "License",
+          "examples": [
+            {
+              "scpi": "LICense:IDN?",
+              "description": "Returns active host identification."
+            }
+          ]
+        },
+        {
+          "scpi": "LICense:COUNt?",
+          "description": "Returns number of active licenses.",
+          "syntax": [
+            "LICense:COUNt?"
+          ],
+          "commandType": "query",
+          "returns": "<NR1>",
+          "example": "LICense:COUNt?",
+          "group": "License",
+          "examples": [
+            {
+              "scpi": "LICense:COUNt?",
+              "description": "Returns number of active licenses."
+            }
+          ]
+        },
+        {
+          "scpi": "LICense:ITEM?",
+          "description": "Returns license details for an item.",
+          "syntax": [
+            "LICense:ITEM? <index>"
+          ],
+          "commandType": "query",
+          "returns": "<string>",
+          "example": "LICense:ITEM? 1",
+          "group": "License",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "LICense:ITEM? 1",
+              "description": "Returns license details for an item."
+            }
+          ]
+        },
+        {
+          "scpi": "LICense:VALidate?",
+          "description": "Validates if license feature is active.",
+          "syntax": [
+            "LICense:VALidate? <nomenclature>"
+          ],
+          "commandType": "query",
+          "returns": "<NR1>",
+          "example": "LICense:VALidate? AFG3MEM",
+          "group": "License",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "LICense:VALidate? AFG3MEM",
+              "description": "Validates if license feature is active."
+            }
+          ]
+        }
+      ]
+    },
+    "Sequence": {
+      "name": "Sequence",
+      "description": "Sequence mode commands",
+      "commands": [
+        {
+          "scpi": "SEQuence:ELEM[n]:GOTO:INDex",
+          "description": "Sets/queries GOTO target index.",
+          "syntax": [
+            "SEQuence:ELEM[n]:GOTO:INDex <index>",
+            "SEQuence:ELEM[n]:GOTO:INDex?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "SEQuence:ELEM1:GOTO:INDex 5",
+          "group": "Sequence",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SEQuence:ELEM1:GOTO:INDex 5",
+              "description": "Sets/queries GOTO target index."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQuence:ELEM[n]:GOTO:STATe",
+          "description": "Sets/queries GOTO state.",
+          "syntax": [
+            "SEQuence:ELEM[n]:GOTO:STATe {ON|OFF|<NR1>}",
+            "SEQuence:ELEM[n]:GOTO:STATe?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "SEQuence:ELEM1:GOTO:STATe ON",
+          "group": "Sequence",
+          "arguments": "ON enables the feature.\nOFF disables the feature.\n<NR1> specifies a numeric value.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "ON",
+                "OFF",
+                "<NR1>"
+              ],
+              "default": "ON",
+              "description": "One of: ON, OFF, <NR1>"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SEQuence:ELEM1:GOTO:STATe ON",
+              "description": "Sets/queries GOTO state."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQuence:ELEM[n]:MARKer:STATe",
+          "description": "Sets/queries marker state.",
+          "syntax": [
+            "SEQuence:ELEM[n]:MARKer:STATe {ON|OFF|<NR1>}",
+            "SEQuence:ELEM[n]:MARKer:STATe?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "SEQuence:ELEM1:MARKer:STATe ON",
+          "group": "Sequence",
+          "arguments": "ON enables the feature.\nOFF disables the feature.\n<NR1> specifies a numeric value.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "ON",
+                "OFF",
+                "<NR1>"
+              ],
+              "default": "ON",
+              "description": "One of: ON, OFF, <NR1>"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SEQuence:ELEM1:MARKer:STATe ON",
+              "description": "Sets/queries marker state."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQuence:ELEM[n]:JTARget:INDex",
+          "description": "Sets/queries jump target index.",
+          "syntax": [
+            "SEQuence:ELEM[n]:JTARget:INDex <index>",
+            "SEQuence:ELEM[n]:JTARget:INDex?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "SEQuence:ELEM1:JTARget:INDex 3",
+          "group": "Sequence",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SEQuence:ELEM1:JTARget:INDex 3",
+              "description": "Sets/queries jump target index."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQuence:ELEM[n]:JTARget:TYPE",
+          "description": "Sets/queries jump target type (INDex|NEXT|FIRSt|LAST|END).",
+          "syntax": [
+            "SEQuence:ELEM[n]:JTARget:TYPE {INDex|NEXT|FIRSt|LAST|END}",
+            "SEQuence:ELEM[n]:JTARget:TYPE?"
+          ],
+          "commandType": "both",
+          "returns": "INDex|NEXT|FIRSt|LAST|END",
+          "example": "SEQuence:ELEM1:JTARget:TYPE INDex",
+          "group": "Sequence",
+          "arguments": "INDex selects INDex mode/option.\nNEXT selects NEXT mode/option.\nFIRSt selects FIRSt mode/option.\nLAST selects LAST mode/option.\nEND selects END mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "INDex",
+                "NEXT",
+                "FIRSt",
+                "LAST",
+                "END"
+              ],
+              "default": "INDex",
+              "description": "One of: INDex, NEXT, FIRSt, LAST, END"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SEQuence:ELEM1:JTARget:TYPE INDex",
+              "description": "Sets/queries jump target type (INDex|NEXT|FIRSt|LAST|END)."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQuence:ELEM[n]:JUMP:EVENt",
+          "description": "Sets/queries jump trigger event.",
+          "syntax": [
+            "SEQuence:ELEM[n]:JUMP:EVENt {EXTernal|TIMer|NONE}",
+            "SEQuence:ELEM[n]:JUMP:EVENt?"
+          ],
+          "commandType": "both",
+          "returns": "EXTernal|TIMer|NONE",
+          "example": "SEQuence:ELEM1:JUMP:EVENt EXTernal",
+          "group": "Sequence",
+          "arguments": "EXTernal selects EXTernal mode/option.\nTIMer selects TIMer mode/option.\nNONE selects NONE mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "EXTernal",
+                "TIMer",
+                "NONE"
+              ],
+              "default": "EXTernal",
+              "description": "One of: EXTernal, TIMer, NONE"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SEQuence:ELEM1:JUMP:EVENt EXTernal",
+              "description": "Sets/queries jump trigger event."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQuence:ELEM[n]:JUMP:SLOPe",
+          "description": "Sets/queries jump trigger slope.",
+          "syntax": [
+            "SEQuence:ELEM[n]:JUMP:SLOPe {POSitive|NEGative}",
+            "SEQuence:ELEM[n]:JUMP:SLOPe?"
+          ],
+          "commandType": "both",
+          "returns": "POSitive|NEGative",
+          "example": "SEQuence:ELEM1:JUMP:SLOPe POSitive",
+          "group": "Sequence",
+          "arguments": "POSitive selects POSitive mode/option.\nNEGative selects NEGative mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "POSitive",
+                "NEGative"
+              ],
+              "default": "POSitive",
+              "description": "One of: POSitive, NEGative"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SEQuence:ELEM1:JUMP:SLOPe POSitive",
+              "description": "Sets/queries jump trigger slope."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQuence:ELEM[n]:LOOP:COUNt",
+          "description": "Sets/queries loop count (1-1048575).",
+          "syntax": [
+            "SEQuence:ELEM[n]:LOOP:COUNt <count>",
+            "SEQuence:ELEM[n]:LOOP:COUNt?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "SEQuence:ELEM1:LOOP:COUNt 100",
+          "group": "Sequence",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SEQuence:ELEM1:LOOP:COUNt 100",
+              "description": "Sets/queries loop count (1-1048575)."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQuence:ELEM[n]:LOOP:INFinite",
+          "description": "Sets/queries infinite loop state.",
+          "syntax": [
+            "SEQuence:ELEM[n]:LOOP:INFinite {ON|OFF|<NR1>}",
+            "SEQuence:ELEM[n]:LOOP:INFinite?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "SEQuence:ELEM1:LOOP:INFinite ON",
+          "group": "Sequence",
+          "arguments": "ON enables the feature.\nOFF disables the feature.\n<NR1> specifies a numeric value.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "ON",
+                "OFF",
+                "<NR1>"
+              ],
+              "default": "ON",
+              "description": "One of: ON, OFF, <NR1>"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SEQuence:ELEM1:LOOP:INFinite ON",
+              "description": "Sets/queries infinite loop state."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQuence:ELEM[n]:TWAit[:STATe]",
+          "description": "Sets/queries trigger wait state.",
+          "syntax": [
+            "SEQuence:ELEM[n]:TWAit[:STATe] {ON|OFF|<NR1>}",
+            "SEQuence:ELEM[n]:TWAit[:STATe]?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "SEQuence:ELEM1:TWAit ON",
+          "group": "Sequence",
+          "arguments": "ON enables the feature.\nOFF disables the feature.\n<NR1> specifies a numeric value.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "ON",
+                "OFF",
+                "<NR1>"
+              ],
+              "default": "ON",
+              "description": "One of: ON, OFF, <NR1>"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SEQuence:ELEM1:TWAit ON",
+              "description": "Sets/queries trigger wait state."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQuence:ELEM[n]:TWAit:EVENt",
+          "description": "Sets/queries wait trigger event.",
+          "syntax": [
+            "SEQuence:ELEM[n]:TWAit:EVENt {EXTernal|TIMer|NONE}",
+            "SEQuence:ELEM[n]:TWAit:EVENt?"
+          ],
+          "commandType": "both",
+          "returns": "EXTernal|TIMer|NONE",
+          "example": "SEQuence:ELEM1:TWAit:EVENt EXTernal",
+          "group": "Sequence",
+          "arguments": "EXTernal selects EXTernal mode/option.\nTIMer selects TIMer mode/option.\nNONE selects NONE mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "EXTernal",
+                "TIMer",
+                "NONE"
+              ],
+              "default": "EXTernal",
+              "description": "One of: EXTernal, TIMer, NONE"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SEQuence:ELEM1:TWAit:EVENt EXTernal",
+              "description": "Sets/queries wait trigger event."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQuence:ELEM[n]:TWAit:SLOPe",
+          "description": "Sets/queries wait trigger slope.",
+          "syntax": [
+            "SEQuence:ELEM[n]:TWAit:SLOPe {POSitive|NEGative}",
+            "SEQuence:ELEM[n]:TWAit:SLOPe?"
+          ],
+          "commandType": "both",
+          "returns": "POSitive|NEGative",
+          "example": "SEQuence:ELEM1:TWAit:SLOPe POSitive",
+          "group": "Sequence",
+          "arguments": "POSitive selects POSitive mode/option.\nNEGative selects NEGative mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "POSitive",
+                "NEGative"
+              ],
+              "default": "POSitive",
+              "description": "One of: POSitive, NEGative"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SEQuence:ELEM1:TWAit:SLOPe POSitive",
+              "description": "Sets/queries wait trigger slope."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQuence:ELEM[n]:WAVeform[m]",
+          "description": "Sets/queries waveform for sequence element.",
+          "syntax": [
+            "SEQuence:ELEM[n]:WAVeform[m] <name>",
+            "SEQuence:ELEM[n]:WAVeform[m]?"
+          ],
+          "commandType": "both",
+          "returns": "<string>",
+          "example": "SEQuence:ELEM1:WAVeform1 \"MySine\"",
+          "group": "Sequence",
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "required": true,
+              "description": "String value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SEQuence:ELEM1:WAVeform1 \"MySine\"",
+              "description": "Sets/queries waveform for sequence element."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQuence:LENGth",
+          "description": "Sets/queries sequence length.",
+          "syntax": [
+            "SEQuence:LENGth <length>",
+            "SEQuence:LENGth?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "SEQuence:LENGth 10",
+          "group": "Sequence",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SEQuence:LENGth 10",
+              "description": "Sets/queries sequence length."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQuence:NEW",
+          "description": "Creates a new sequence.",
+          "syntax": [
+            "SEQuence:NEW"
+          ],
+          "commandType": "set",
+          "example": "SEQuence:NEW",
+          "group": "Sequence",
+          "examples": [
+            {
+              "scpi": "SEQuence:NEW",
+              "description": "Creates a new sequence."
+            }
+          ]
+        }
+      ]
+    },
+    "SequenceControl": {
+      "name": "SequenceControl",
+      "description": "Sequence run control commands",
+      "commands": [
+        {
+          "scpi": "SEQControl:RMODe",
+          "description": "Sets/queries run mode (CONTinuous|TRIGgered|GATed|SEQuence).",
+          "syntax": [
+            "SEQControl:RMODe {CONTinuous|TRIGgered|GATed|SEQuence}",
+            "SEQControl:RMODe?"
+          ],
+          "commandType": "both",
+          "returns": "CONTinuous|TRIGgered|GATed|SEQuence",
+          "example": "SEQControl:RMODe SEQuence",
+          "group": "SequenceControl",
+          "arguments": "CONTinuous selects CONTinuous mode/option.\nTRIGgered selects TRIGgered mode/option.\nGATed selects GATed mode/option.\nSEQuence selects SEQuence mode/option.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "CONTinuous",
+                "TRIGgered",
+                "GATed",
+                "SEQuence"
+              ],
+              "default": "CONTinuous",
+              "description": "One of: CONTinuous, TRIGgered, GATed, SEQuence"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SEQControl:RMODe SEQuence",
+              "description": "Sets/queries run mode (CONTinuous|TRIGgered|GATed|SEQuence)."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQControl:RUN[:IMMediate]",
+          "description": "Starts sequence output.",
+          "syntax": [
+            "SEQControl:RUN[:IMMediate]"
+          ],
+          "commandType": "set",
+          "example": "SEQControl:RUN",
+          "group": "SequenceControl",
+          "examples": [
+            {
+              "scpi": "SEQControl:RUN",
+              "description": "Starts sequence output."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQControl:STOP[:IMMediate]",
+          "description": "Stops sequence output.",
+          "syntax": [
+            "SEQControl:STOP[:IMMediate]"
+          ],
+          "commandType": "set",
+          "example": "SEQControl:STOP",
+          "group": "SequenceControl",
+          "examples": [
+            {
+              "scpi": "SEQControl:STOP",
+              "description": "Stops sequence output."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQControl:RESET[:IMMediate]",
+          "description": "Resets sequence to default state.",
+          "syntax": [
+            "SEQControl:RESET[:IMMediate]"
+          ],
+          "commandType": "set",
+          "example": "SEQControl:RESET",
+          "group": "SequenceControl",
+          "examples": [
+            {
+              "scpi": "SEQControl:RESET",
+              "description": "Resets sequence to default state."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQControl:STATe",
+          "description": "Sets/queries sequence mode on/off.",
+          "syntax": [
+            "SEQControl:STATe {ON|OFF|<NR1>}",
+            "SEQControl:STATe?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "SEQControl:STATe ON",
+          "group": "SequenceControl",
+          "arguments": "ON enables the feature.\nOFF disables the feature.\n<NR1> specifies a numeric value.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "ON",
+                "OFF",
+                "<NR1>"
+              ],
+              "default": "ON",
+              "description": "One of: ON, OFF, <NR1>"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SEQControl:STATe ON",
+              "description": "Sets/queries sequence mode on/off."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQControl:RSTATe?",
+          "description": "Queries sequence run state.",
+          "syntax": [
+            "SEQControl:RSTATe?"
+          ],
+          "commandType": "query",
+          "returns": "<NR1>",
+          "example": "SEQControl:RSTATe?",
+          "group": "SequenceControl",
+          "examples": [
+            {
+              "scpi": "SEQControl:RSTATe?",
+              "description": "Queries sequence run state."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQControl:SRATe",
+          "description": "Sets/queries sampling rate.",
+          "syntax": [
+            "SEQControl:SRATe {<rate>|MINimum|MAXimum}",
+            "SEQControl:SRATe?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SEQControl:SRATe 1e9",
+          "group": "SequenceControl",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SEQControl:SRATe 1e9",
+              "description": "Sets/queries sampling rate."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQControl:DELay",
+          "description": "Sets/queries skew time.",
+          "syntax": [
+            "SEQControl:DELay {<time>|MINimum|MAXimum}",
+            "SEQControl:DELay?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SEQControl:DELay 0",
+          "group": "SequenceControl",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SEQControl:DELay 0",
+              "description": "Sets/queries skew time."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQControl:SOURce[n]:SCALe",
+          "description": "Sets/queries sequence output scale.",
+          "syntax": [
+            "SEQControl:SOURce[n]:SCALe <scale>",
+            "SEQControl:SOURce[n]:SCALe?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SEQControl:SOURce1:SCALe 1.0",
+          "group": "SequenceControl",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SEQControl:SOURce1:SCALe 1.0",
+              "description": "Sets/queries sequence output scale."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQControl:SOURce[n]:OFFSet",
+          "description": "Sets/queries sequence output offset.",
+          "syntax": [
+            "SEQControl:SOURce[n]:OFFSet <offset>",
+            "SEQControl:SOURce[n]:OFFSet?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SEQControl:SOURce1:OFFSet 0",
+          "group": "SequenceControl",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SEQControl:SOURce1:OFFSet 0",
+              "description": "Sets/queries sequence output offset."
+            }
+          ]
+        },
+        {
+          "scpi": "SEQControl:TIMer",
+          "description": "Sets/queries jump/wait timer.",
+          "syntax": [
+            "SEQControl:TIMer {<time>|MINimum|MAXimum}",
+            "SEQControl:TIMer?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "SEQControl:TIMer 1ms",
+          "group": "SequenceControl",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value (or MINimum, MAXimum)",
+              "special_values": [
+                "MINimum",
+                "MAXimum"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "SEQControl:TIMer 1ms",
+              "description": "Sets/queries jump/wait timer."
+            }
+          ]
+        }
+      ]
+    },
+    "WaveformList": {
+      "name": "WaveformList",
+      "description": "Waveform list management commands",
+      "commands": [
+        {
+          "scpi": "WLISt:NAME?",
+          "description": "Returns waveform name at index.",
+          "syntax": [
+            "WLISt:NAME? <index>"
+          ],
+          "commandType": "query",
+          "returns": "<string>",
+          "example": "WLISt:NAME? 1",
+          "group": "WaveformList",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "WLISt:NAME? 1",
+              "description": "Returns waveform name at index."
+            }
+          ]
+        },
+        {
+          "scpi": "WLISt:SIZE?",
+          "description": "Returns waveform list size.",
+          "syntax": [
+            "WLISt:SIZE?"
+          ],
+          "commandType": "query",
+          "returns": "<NR1>",
+          "example": "WLISt:SIZE?",
+          "group": "WaveformList",
+          "examples": [
+            {
+              "scpi": "WLISt:SIZE?",
+              "description": "Returns waveform list size."
+            }
+          ]
+        },
+        {
+          "scpi": "WLISt:WAVeform:DELete",
+          "description": "Deletes waveform from list.",
+          "syntax": [
+            "WLISt:WAVeform:DELete <name>"
+          ],
+          "commandType": "set",
+          "example": "WLISt:WAVeform:DELete \"MySine\"",
+          "group": "WaveformList",
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "required": true,
+              "description": "String value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "WLISt:WAVeform:DELete \"MySine\"",
+              "description": "Deletes waveform from list."
+            }
+          ]
+        },
+        {
+          "scpi": "WLISt:WAVeform:IMPort",
+          "description": "Imports waveform to list.",
+          "syntax": [
+            "WLISt:WAVeform:IMPort <name>,<path>"
+          ],
+          "commandType": "set",
+          "example": "WLISt:WAVeform:IMPort \"NewWave\",\"U:/wave.tfwx\"",
+          "group": "WaveformList",
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "required": true,
+              "description": "String value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "WLISt:WAVeform:IMPort \"NewWave\",\"U:/wave.tfwx\"",
+              "description": "Imports waveform to list."
+            }
+          ]
+        },
+        {
+          "scpi": "WLISt:WAVeform:LENGth?",
+          "description": "Returns waveform length.",
+          "syntax": [
+            "WLISt:WAVeform:LENGth? <name>"
+          ],
+          "commandType": "query",
+          "returns": "<NR1>",
+          "example": "WLISt:WAVeform:LENGth? \"MySine\"",
+          "group": "WaveformList",
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "required": true,
+              "description": "String value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "WLISt:WAVeform:LENGth? \"MySine\"",
+              "description": "Returns waveform length."
+            }
+          ]
+        }
+      ]
+    },
+    "InstaView": {
+      "name": "InstaView",
+      "description": "InstaView real-time monitoring commands",
+      "commands": [
+        {
+          "scpi": "INSTaview[1|2]:STATe",
+          "description": "Sets/queries InstaView state.",
+          "syntax": [
+            "INSTaview[1|2]:STATe {ON|OFF|<NR1>}",
+            "INSTaview[1|2]:STATe?"
+          ],
+          "commandType": "both",
+          "returns": "<NR1>",
+          "example": "INSTaview1:STATe ON",
+          "group": "InstaView",
+          "arguments": "ON enables the feature.\nOFF disables the feature.\n<NR1> specifies a numeric value.",
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "required": true,
+              "options": [
+                "ON",
+                "OFF",
+                "<NR1>"
+              ],
+              "default": "ON",
+              "description": "One of: ON, OFF, <NR1>"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "INSTaview1:STATe ON",
+              "description": "Sets/queries InstaView state."
+            }
+          ]
+        },
+        {
+          "scpi": "INSTaview[1|2]:MEASUrement:DELay",
+          "description": "Sets/queries cable delay compensation.",
+          "syntax": [
+            "INSTaview[1|2]:MEASUrement:DELay <delay>",
+            "INSTaview[1|2]:MEASUrement:DELay?"
+          ],
+          "commandType": "both",
+          "returns": "<NRf>",
+          "example": "INSTaview1:MEASUrement:DELay 2e-9",
+          "group": "InstaView",
+          "params": [
+            {
+              "name": "value",
+              "type": "numeric",
+              "required": true,
+              "description": "Numeric value"
+            }
+          ],
+          "examples": [
+            {
+              "scpi": "INSTaview1:MEASUrement:DELay 2e-9",
+              "description": "Sets/queries cable delay compensation."
+            }
+          ]
+        },
+        {
+          "scpi": "INSTaview[1|2]:MEASUrement:MINimum?",
+          "description": "Returns InstaView minimum level.",
+          "syntax": [
+            "INSTaview[1|2]:MEASUrement:MINimum?"
+          ],
+          "commandType": "query",
+          "returns": "<NRf>",
+          "example": "INSTaview1:MEASUrement:MINimum?",
+          "group": "InstaView",
+          "examples": [
+            {
+              "scpi": "INSTaview1:MEASUrement:MINimum?",
+              "description": "Returns InstaView minimum level."
+            }
+          ]
+        },
+        {
+          "scpi": "INSTaview[1|2]:MEASUrement:MAXimum?",
+          "description": "Returns InstaView maximum level.",
+          "syntax": [
+            "INSTaview[1|2]:MEASUrement:MAXimum?"
+          ],
+          "commandType": "query",
+          "returns": "<NRf>",
+          "example": "INSTaview1:MEASUrement:MAXimum?",
+          "group": "InstaView",
+          "examples": [
+            {
+              "scpi": "INSTaview1:MEASUrement:MAXimum?",
+              "description": "Returns InstaView maximum level."
+            }
+          ]
+        }
+      ]
+    },
+    "RunMode": {
+      "name": "RunMode",
+      "description": "Run mode query commands",
+      "commands": [
+        {
+          "scpi": "[SOURce[1|2]]:RMODe?",
+          "description": "Queries the current run mode.",
+          "syntax": [
+            "[SOURce[1|2]]:RMODe?"
+          ],
+          "commandType": "query",
+          "returns": "CONTinuous|SWEep|BURSt|...",
+          "example": "SOURce1:RMODe?",
+          "group": "RunMode",
+          "examples": [
+            {
+              "scpi": "SOURce1:RMODe?",
+              "description": "Queries the current run mode."
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,4396 @@
+{
+  "version": "2.0",
+  "manual": "DPOJET Jitter and Eye Diagram Analysis Tools Online Help (077-0048-13)",
+  "groups": {
+    "Application Control": {
+      "name": "Application Control",
+      "description": "",
+      "commands": [
+        {
+          "scpi": "DPOJET:ACTIVate",
+          "description": "Activates DPOJET application",
+          "group": "Application Control",
+          "set": true,
+          "query": false,
+          "migration": {
+            "status": "integrated",
+            "notes": "Not needed on MSO 4/5/6. Jitter and eye measurements are built into the measurement system."
+          }
+        },
+        {
+          "scpi": "DPOJET:ADDMeas",
+          "description": "Adds a measurement of the specified type",
+          "group": "Application Control",
+          "set": true,
+          "query": false,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "PERIOD",
+                "FREQUENCY",
+                "PDUTY",
+                "NDUTY",
+                "PWIDTH",
+                "NWIDTH",
+                "CCPERIOD",
+                "PCCDUTY",
+                "NCCDUTY",
+                "NPERIOD",
+                "TIE",
+                "TJBER",
+                "RJ",
+                "DJ",
+                "DDJ",
+                "PJ",
+                "NPJ",
+                "DCD",
+                "PHASENOISE",
+                "RJDIRAC",
+                "DJDIRAC",
+                "EYEHEIGHT",
+                "EYEWIDTH",
+                "HEIGHTBER",
+                "WIDTHBER",
+                "EYEHIGH",
+                "EYELOW",
+                "QFACTOR",
+                "MASKHITS",
+                "RISETIME",
+                "FALLTIME",
+                "HIGHTIME",
+                "LOWTIME",
+                "SKEW",
+                "SETUPTIME",
+                "HOLDTIME",
+                "RISESLEWRATE",
+                "FALLSLEWRATE",
+                "HIGH",
+                "LOW",
+                "HIGHLOWDIFF",
+                "DCCOMMONMODE",
+                "ACCOMMONMODE",
+                "VDIFFXOVR",
+                "TNTRATIO",
+                "OVERSHOOT",
+                "UNDERSHOOT",
+                "CYCLEMAX",
+                "CYCLEMIN",
+                "CYCLEPKPK",
+                "SSCPROFILE",
+                "SSCFREQDEV",
+                "SSCFREQDEVMIN",
+                "SSCFREQDEVMAX",
+                "SSCMODRATE",
+                "TCMDCMD",
+                "TIMEOUTSIDELEVEL",
+                "JITTERSUMMARY"
+              ],
+              "description": "One of: PERIOD, FREQUENCY, PDUTY, NDUTY, PWIDTH, NWIDTH, CCPERIOD, PCCDUTY"
+            }
+          ],
+          "migration": {
+            "status": "values_changed",
+            "notes": "Most types map directly. EYEHEIGHT\u2192HEIGHT, EYEWIDTH\u2192WIDTH, SETUPTIME\u2192SETUP, HOLDTIME\u2192HOLD, DCCOMMONMODE\u2192COMMONMODE. MASKHITS moved to EYEMASK commands. OVERSHOOT split into POVERSHOOT/NOVERSHOOT.",
+            "modern_command": "MEASUrement:ADDMEAS",
+            "value_map": {
+              "PERIOD": "PERIOD",
+              "FREQUENCY": "FREQUENCY",
+              "PDUTY": "PDUTY",
+              "NDUTY": "NDUty",
+              "PWIDTH": "PWIDTH",
+              "NWIDTH": "NWIDTH",
+              "NPERIOD": "NPERIOD",
+              "TIE": "TIE",
+              "TJBER": "TJBER",
+              "RJ": "RJ",
+              "DJ": "DJ",
+              "DDJ": "DDJ",
+              "PJ": "PJ",
+              "NPJ": "NPJ",
+              "DCD": "DCD",
+              "PHASENOISE": "PHASENOISE",
+              "RJDIRAC": "RJDIRAC",
+              "DJDIRAC": "DJDIRAC",
+              "EYEHEIGHT": "HEIGHT",
+              "EYEWIDTH": "WIDTH",
+              "HEIGHTBER": "HEIGHTBER",
+              "WIDTHBER": "WIDTHBER",
+              "EYEHIGH": "EYEHIGH",
+              "EYELOW": "EYELOW",
+              "QFACTOR": "QFACTOR",
+              "RISETIME": "RISETIME",
+              "FALLTIME": "FALLTIME",
+              "HIGHTIME": "HIGHTIME",
+              "LOWTIME": "LOWTIME",
+              "SKEW": "SKEW",
+              "SETUPTIME": "SETUP",
+              "HOLDTIME": "HOLD",
+              "RISESLEWRATE": "RISESLEWRATE",
+              "FALLSLEWRATE": "FALLSLEWRATE",
+              "HIGH": "HIGH",
+              "LOW": "LOW",
+              "ACCOMMONMODE": "ACCOMMONMODE",
+              "DCCOMMONMODE": "COMMONMODE",
+              "VDIFFXOVR": "VDIFFXOVR",
+              "TNTRATIO": "TNTRATIO",
+              "SSCFREQDEV": "SSCFREQDEV",
+              "SSCMODRATE": "SSCMODRATE",
+              "TIMEOUTSIDELEVEL": "TIMEOUTSIDELEVEL",
+              "JITTERSUMMARY": "JITTERSUMMARY",
+              "CCPERIOD": "CCJITTER",
+              "MASKHITS": "REMOVED: Use EYEMASK:MASK<x>:COUNt:HITS? for mask hit counting",
+              "HIGHLOWDIFF": "REMOVED: Compute via MATH or use HIGH and LOW separately",
+              "OVERSHOOT": "REMOVED: Use POVERSHOOT (positive) or NOVERSHOOT (negative)",
+              "UNDERSHOOT": "REMOVED: Use NOVERSHOOT (negative) or POVERSHOOT (positive)",
+              "CYCLEMAX": "REMOVED: Use MAXIMUM with cycle mode",
+              "CYCLEMIN": "REMOVED: Use MINIMUM with cycle mode",
+              "CYCLEPKPK": "REMOVED: Use PK2Pk with cycle mode",
+              "PCCDUTY": "NEEDS_VERIFICATION: May map to CCJITTER with duty config",
+              "NCCDUTY": "NEEDS_VERIFICATION: May map to CCJITTER with duty config",
+              "SSCPROFILE": "REMOVED: SSC profile display handled via plots",
+              "SSCFREQDEVMIN": "NEEDS_VERIFICATION: May be queryable from results",
+              "SSCFREQDEVMAX": "NEEDS_VERIFICATION: May be queryable from results",
+              "TCMDCMD": "NEEDS_VERIFICATION: May not be available outside DDR-specific measurements"
+            }
+          }
+        },
+        {
+          "scpi": "DPOJET:CLEARALLMeas",
+          "description": "Clears all measurements from DPOJET",
+          "group": "Application Control",
+          "set": true,
+          "query": false,
+          "migration": {
+            "status": "renamed",
+            "notes": "Renamed from CLEARALLMeas to DELETEALL. Also see MEASUrement:DELete for removing individual measurements.",
+            "modern_command": "MEASUrement:DELETEALL"
+          }
+        },
+        {
+          "scpi": "DPOJET:DIRacmodel",
+          "description": "Sets or queries the Dirac model state",
+          "group": "Application Control",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "ON",
+                "OFF"
+              ],
+              "description": "One of: ON, OFF"
+            }
+          ],
+          "migration": {
+            "status": "values_changed",
+            "notes": "CRITICAL CHANGE: Legacy uses ON|OFF toggle. Modern uses PCIExpress|FIBREchannel to select the Dirac model variant. The concept changed from enable/disable to model selection.",
+            "modern_command": "MEASUrement:DIRacmodel",
+            "value_map": {
+              "ON": "NEEDS_VERIFICATION",
+              "OFF": "NEEDS_VERIFICATION"
+            }
+          }
+        },
+        {
+          "scpi": "DPOJET:EXPORT",
+          "description": "Exports data snapshot",
+          "group": "Application Control",
+          "set": true,
+          "query": false,
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "No direct equivalent. Data export on MSO 4/5/6 is handled through SAVe:WAVEform and file system commands."
+          }
+        },
+        {
+          "scpi": "DPOJET:GATING",
+          "description": "Sets or queries the global gating mode for measurements",
+          "group": "Application Control",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "SCREEN",
+                "CURSORS",
+                "MARKS",
+                "NONE"
+              ],
+              "description": "One of: SCREEN, CURSORS, MARKS, NONE"
+            }
+          ],
+          "migration": {
+            "status": "values_changed",
+            "notes": "CURSORS\u2192CURSor. MARKS removed; use SEARch or LOGic gating instead. New options: LOGic, SEARch, TIMe.",
+            "modern_command": "MEASUrement:GATing",
+            "value_map": {
+              "SCREEN": "SCREEN",
+              "CURSORS": "CURSor",
+              "NONE": "NONE",
+              "MARKS": "REMOVED: Use SEARch gating instead"
+            }
+          }
+        },
+        {
+          "scpi": "DPOJET:HALTFreerunonlimfail",
+          "description": "Sets or queries halt free run on limit failure state",
+          "group": "Application Control",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "ON",
+                "OFF"
+              ],
+              "description": "One of: ON, OFF"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "May map to ACTONEVent or measurement pass/fail system. Needs scope verification."
+          }
+        },
+        {
+          "scpi": "DPOJET:HIGHPerfrendering",
+          "description": "Sets or queries high performance rendering state",
+          "group": "Application Control",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "ON",
+                "OFF"
+              ],
+              "description": "One of: ON, OFF"
+            }
+          ],
+          "migration": {
+            "status": "integrated",
+            "notes": "High performance rendering is handled automatically on MSO 4/5/6 through FastAcq and the display system."
+          }
+        },
+        {
+          "scpi": "DPOJET:INTERp",
+          "description": "Sets or queries the interpolation method",
+          "group": "Application Control",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "AUTO",
+                "SINX",
+                "LINEAR"
+              ],
+              "description": "One of: AUTO, SINX, LINEAR"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "Direct mapping. Minor case difference: LINEAR\u2192LINear.",
+            "modern_command": "MEASUrement:INTERp",
+            "value_map": {
+              "AUTO": "AUTO",
+              "SINX": "SINX",
+              "LINEAR": "LINear"
+            }
+          }
+        },
+        {
+          "scpi": "DPOJET:JITTermodel",
+          "description": "Sets or queries the jitter model type",
+          "group": "Application Control",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "RJDJ",
+                "DDNDDJ"
+              ],
+              "description": "One of: RJDJ, DDNDDJ"
+            }
+          ],
+          "migration": {
+            "status": "values_changed",
+            "notes": "Value names changed: RJDJ\u2192SPECTRAL, DDNDDJ\u2192SPECTRALBUJ.",
+            "modern_command": "MEASUrement:JITTermodel",
+            "value_map": {
+              "RJDJ": "SPECTRAL",
+              "DDNDDJ": "SPECTRALBUJ"
+            }
+          }
+        },
+        {
+          "scpi": "DPOJET:LASTError?",
+          "description": "Returns the last error code",
+          "group": "Application Control",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Use *ESR?, ALLEV?, or EVENT? for error reporting on MSO 4/5/6."
+          }
+        },
+        {
+          "scpi": "DPOJET:LIMITRise",
+          "description": "Sets or queries the limit rise state",
+          "group": "Application Control",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "ON",
+                "OFF"
+              ],
+              "description": "One of: ON, OFF"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "May map to pass/fail system on modern scopes. Needs verification."
+          }
+        },
+        {
+          "scpi": "DPOJET:MINBUJUI",
+          "description": "Sets or queries the minimum BU JUI value",
+          "group": "Application Control",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "Renamed from MINBUJUI to MINUI.",
+            "modern_command": "MEASUrement:MINUI"
+          }
+        },
+        {
+          "scpi": "DPOJET:NUMMeas?",
+          "description": "Returns the number of active measurements",
+          "group": "Application Control",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "restructured",
+            "notes": "No direct count query. Use MEASUrement:LIST? to get list of active measurements and count them.",
+            "modern_command": "MEASUrement:LIST?"
+          }
+        },
+        {
+          "scpi": "DPOJET:OPTions:LAYout",
+          "description": "Sets or queries the plot layout option",
+          "group": "Application Control",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "HORIZONTAL",
+                "VERTICAL",
+                "OVERLAY"
+              ],
+              "description": "One of: HORIZONTAL, VERTICAL, OVERLAY"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Plot layout on MSO 4/5/6 is managed through the display system. Individual plots are positioned via PLOT commands."
+          }
+        },
+        {
+          "scpi": "DPOJET:POPULATION:COUNT",
+          "description": "Sets or queries the population count target",
+          "group": "Application Control",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR1>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "POPULATION:COUNT maps to POPUlation:LIMIT:VALue. Per-measurement: MEASUrement:MEAS<x>:POPUlation:LIMIT:VALue.",
+            "modern_command": "MEASUrement:POPUlation:LIMIT:VALue"
+          }
+        },
+        {
+          "scpi": "DPOJET:POPULATION:LIMit",
+          "description": "Sets or queries the population limit state",
+          "group": "Application Control",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "ON",
+                "OFF"
+              ],
+              "description": "One of: ON, OFF"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "POPULATION:LIMit maps to POPUlation:LIMIT:STATE. Per-measurement: MEASUrement:MEAS<x>:POPUlation:LIMIT:STATE.",
+            "modern_command": "MEASUrement:POPUlation:LIMIT:STATE"
+          }
+        },
+        {
+          "scpi": "DPOJET:QUALIFY:STATE",
+          "description": "Sets or queries the qualify state",
+          "group": "Application Control",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "ON",
+                "OFF"
+              ],
+              "description": "One of: ON, OFF"
+            }
+          ],
+          "migration": {
+            "status": "restructured",
+            "notes": "Qualify functionality restructured on MSO 4/5/6. Gating with LOGic source provides similar signal-qualified measurement capability. See MEASUrement:MEAS<x>:GATing LOGic and GATing:LOGICSource."
+          }
+        },
+        {
+          "scpi": "DPOJET:QUALIFY:SOURCE",
+          "description": "Sets or queries the qualify source",
+          "group": "Application Control",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "CH1",
+                "CH2",
+                "CH3",
+                "CH4",
+                "MATH1-4",
+                "REF1-4"
+              ],
+              "description": "One of: CH1, CH2, CH3, CH4, MATH1-4, REF1-4"
+            }
+          ],
+          "migration": {
+            "status": "restructured",
+            "notes": "Qualify source maps to gating logic source when using LOGic gating mode.",
+            "modern_command": "MEASUrement:MEAS<x>:GATing:LOGICSource"
+          }
+        },
+        {
+          "scpi": "DPOJET:QUALIFY:ACTIVELEVEL",
+          "description": "Sets or queries the qualify active level",
+          "group": "Application Control",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "HIGH",
+                "LOW"
+              ],
+              "description": "One of: HIGH, LOW"
+            }
+          ],
+          "migration": {
+            "status": "restructured",
+            "notes": "Qualify active level maps to gating active level.",
+            "modern_command": "MEASUrement:MEAS<x>:GATing:ACTive"
+          }
+        },
+        {
+          "scpi": "DPOJET:QUALIFY:GATE",
+          "description": "Sets or queries the qualify gate mode",
+          "group": "Application Control",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "BETWEEN",
+                "OUTSIDE"
+              ],
+              "description": "One of: BETWEEN, OUTSIDE"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Qualify gate mode concept may map to gating hysteresis or search-based gating."
+          }
+        },
+        {
+          "scpi": "DPOJET:REFLevels:AUTOSet",
+          "description": "Executes automatic reference level calculation",
+          "group": "Application Control",
+          "set": true,
+          "query": false,
+          "arguments": "EXECUTE",
+          "migration": {
+            "status": "integrated",
+            "notes": "Auto reference levels are calculated automatically on MSO 4/5/6 when BASETop method is set to AUTO."
+          }
+        },
+        {
+          "scpi": "DPOJET:REFLevels:BASETOP:METHod",
+          "description": "Sets or queries the base/top method",
+          "group": "Application Control",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "AUTO",
+                "MINMAX",
+                "MEAN",
+                "EYE",
+                "STANDARD"
+              ],
+              "description": "One of: AUTO, MINMAX, MEAN, EYE, STANDARD"
+            }
+          ],
+          "migration": {
+            "status": "values_changed",
+            "notes": "Global ref level base/top. Value names changed. Per-measurement: MEASUrement:MEAS<x>:REFLevels<x>:BASETop.",
+            "modern_command": "MEASUrement:REFLevels:BASETop",
+            "value_map": {
+              "AUTO": "AUTO",
+              "MINMAX": "MINMax",
+              "MEAN": "MEANhistogram",
+              "EYE": "EYEhistogram",
+              "STANDARD": "MODEhistogram"
+            }
+          }
+        },
+        {
+          "scpi": "DPOJET:RESULts:STATUS?",
+          "description": "Returns overall DPOJET status",
+          "group": "Application Control",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "No single status query. Check individual measurement status via MEASUrement:MEAS<x>:STATUS?"
+          }
+        },
+        {
+          "scpi": "DPOJET:SEQUencing:STATE",
+          "description": "Sets or queries the sequencing state",
+          "group": "Application Control",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "ON",
+                "OFF"
+              ],
+              "description": "One of: ON, OFF"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Sequencing may map to ACQuire:SEQuence commands on modern scopes."
+          }
+        },
+        {
+          "scpi": "DPOJET:STATE",
+          "description": "Sets or queries the DPOJET run state",
+          "group": "Application Control",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "RUN",
+                "STOP",
+                "CLEAR",
+                "RECALC"
+              ],
+              "description": "One of: RUN, STOP, CLEAR, RECALC"
+            }
+          ],
+          "migration": {
+            "status": "restructured",
+            "notes": "No direct equivalent. RUN/STOP: Use ACQuire:STATE. CLEAR: Use MEASUrement:STATIstics:RESET or MEASUrement:DELETEALL. RECALC: Measurements recalculate automatically.",
+            "alt_commands": [
+              "ACQuire:STATE",
+              "MEASUrement:DELETEALL"
+            ]
+          }
+        },
+        {
+          "scpi": "DPOJET:VERsion?",
+          "description": "Returns the DPOJET software version",
+          "group": "Application Control",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "integrated",
+            "notes": "DPOJET version not applicable. Use *IDN? for instrument firmware version."
+          }
+        }
+      ]
+    },
+    "Burst Configuration": {
+      "name": "Burst Configuration",
+      "description": "",
+      "commands": [
+        {
+          "scpi": "DPOJET:BURSTConfig:BUS",
+          "description": "Sets or queries the burst config bus",
+          "group": "Burst Configuration",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "B1",
+                "B2",
+                "B3",
+                "B4"
+              ],
+              "description": "One of: B1, B2, B3, B4"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Burst configuration is handled differently on MSO 4/5/6. DDR burst detection is integrated into DDR-specific measurement types. Some functionality may require TekExpress DDR compliance application."
+          }
+        },
+        {
+          "scpi": "DPOJET:BURSTConfig:CSACTIve",
+          "description": "Sets or queries the chip select active level",
+          "group": "Burst Configuration",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "HIGH",
+                "LOW"
+              ],
+              "description": "One of: HIGH, LOW"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Burst configuration is handled differently on MSO 4/5/6. DDR burst detection is integrated into DDR-specific measurement types. Some functionality may require TekExpress DDR compliance application."
+          }
+        },
+        {
+          "scpi": "DPOJET:BURSTConfig:CSSource",
+          "description": "Sets or queries the chip select source",
+          "group": "Burst Configuration",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "CH1",
+                "CH2",
+                "CH3",
+                "CH4"
+              ],
+              "description": "One of: CH1, CH2, CH3, CH4"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Burst configuration is handled differently on MSO 4/5/6. DDR burst detection is integrated into DDR-specific measurement types. Some functionality may require TekExpress DDR compliance application."
+          }
+        },
+        {
+          "scpi": "DPOJET:BURSTConfig:CUSTOMRate",
+          "description": "Sets or queries the custom data rate",
+          "group": "Burst Configuration",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Burst configuration is handled differently on MSO 4/5/6. DDR burst detection is integrated into DDR-specific measurement types. Some functionality may require TekExpress DDR compliance application."
+          }
+        },
+        {
+          "scpi": "DPOJET:BURSTConfig:DATA",
+          "description": "Sets or queries the burst data source",
+          "group": "Burst Configuration",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "CH1",
+                "CH2",
+                "CH3",
+                "CH4"
+              ],
+              "description": "One of: CH1, CH2, CH3, CH4"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Burst configuration is handled differently on MSO 4/5/6. DDR burst detection is integrated into DDR-specific measurement types. Some functionality may require TekExpress DDR compliance application."
+          }
+        },
+        {
+          "scpi": "DPOJET:BURSTConfig:DATARate",
+          "description": "Sets or queries the burst data rate",
+          "group": "Burst Configuration",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "DDR2_400",
+                "DDR2_533",
+                "...",
+                "DDR3_2133",
+                "CUSTOM"
+              ],
+              "description": "One of: DDR2_400, DDR2_533, ..., DDR3_2133, CUSTOM"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Burst configuration is handled differently on MSO 4/5/6. DDR burst detection is integrated into DDR-specific measurement types. Some functionality may require TekExpress DDR compliance application."
+          }
+        },
+        {
+          "scpi": "DPOJET:BURSTConfig:DETECTMethod",
+          "description": "Sets or queries the burst detection method",
+          "group": "Burst Configuration",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "CHIPSELECT",
+                "STROBERATE",
+                "CUSTOM"
+              ],
+              "description": "One of: CHIPSELECT, STROBERATE, CUSTOM"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Burst configuration is handled differently on MSO 4/5/6. DDR burst detection is integrated into DDR-specific measurement types. Some functionality may require TekExpress DDR compliance application."
+          }
+        },
+        {
+          "scpi": "DPOJET:BURSTConfig:GENERation",
+          "description": "Sets or queries the DDR generation",
+          "group": "Burst Configuration",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "DDR2",
+                "DDR3",
+                "LPDDR2",
+                "LPDDR3",
+                "GDDR5"
+              ],
+              "description": "One of: DDR2, DDR3, LPDDR2, LPDDR3, GDDR5"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Burst configuration is handled differently on MSO 4/5/6. DDR burst detection is integrated into DDR-specific measurement types. Some functionality may require TekExpress DDR compliance application."
+          }
+        },
+        {
+          "scpi": "DPOJET:BURSTConfig:LATEncy",
+          "description": "Sets or queries the burst latency",
+          "group": "Burst Configuration",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR1>"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Burst configuration is handled differently on MSO 4/5/6. DDR burst detection is integrated into DDR-specific measurement types. Some functionality may require TekExpress DDR compliance application."
+          }
+        },
+        {
+          "scpi": "DPOJET:BURSTConfig:LENGth",
+          "description": "Sets or queries the burst length",
+          "group": "Burst Configuration",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR1>"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Burst configuration is handled differently on MSO 4/5/6. DDR burst detection is integrated into DDR-specific measurement types. Some functionality may require TekExpress DDR compliance application."
+          }
+        },
+        {
+          "scpi": "DPOJET:BURSTConfig:SEARch",
+          "description": "Sets or queries the burst search mode",
+          "group": "Burst Configuration",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "READ",
+                "WRITE",
+                "READWRITE"
+              ],
+              "description": "One of: READ, WRITE, READWRITE"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Burst configuration is handled differently on MSO 4/5/6. DDR burst detection is integrated into DDR-specific measurement types. Some functionality may require TekExpress DDR compliance application."
+          }
+        },
+        {
+          "scpi": "DPOJET:BURSTConfig:STRObe",
+          "description": "Sets or queries the burst strobe source",
+          "group": "Burst Configuration",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "CH1",
+                "CH2",
+                "CH3",
+                "CH4"
+              ],
+              "description": "One of: CH1, CH2, CH3, CH4"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Burst configuration is handled differently on MSO 4/5/6. DDR burst detection is integrated into DDR-specific measurement types. Some functionality may require TekExpress DDR compliance application."
+          }
+        },
+        {
+          "scpi": "DPOJET:BURSTConfig:TOLERance",
+          "description": "Sets or queries the burst tolerance",
+          "group": "Burst Configuration",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Burst configuration is handled differently on MSO 4/5/6. DDR burst detection is integrated into DDR-specific measurement types. Some functionality may require TekExpress DDR compliance application."
+          }
+        }
+      ]
+    },
+    "Deskew": {
+      "name": "Deskew",
+      "description": "",
+      "commands": [
+        {
+          "scpi": "DPOJET:DESKEW",
+          "description": "Executes deskew operation",
+          "group": "Deskew",
+          "set": true,
+          "query": false,
+          "arguments": "EXECUTE",
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "No automated deskew wizard. Set individual channel deskew via CH<x>:DESKew."
+          }
+        },
+        {
+          "scpi": "DPOJET:DESKEW:DESKEWchannel",
+          "description": "Sets or queries the deskew channel",
+          "group": "Deskew",
+          "set": true,
+          "query": true,
+          "arguments": "CH1-4",
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Channel deskew on MSO 4/5/6 is handled per-channel via CH<x>:DESKew. The dedicated DPOJET deskew wizard functionality has no direct equivalent."
+          }
+        },
+        {
+          "scpi": "DPOJET:DESKEW:DESKEWHysteresis",
+          "description": "Sets or queries the deskew hysteresis",
+          "group": "Deskew",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Channel deskew on MSO 4/5/6 is handled per-channel via CH<x>:DESKew. The dedicated DPOJET deskew wizard functionality has no direct equivalent."
+          }
+        },
+        {
+          "scpi": "DPOJET:DESKEW:DESKEWMidlevel",
+          "description": "Sets or queries the deskew mid level",
+          "group": "Deskew",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Channel deskew on MSO 4/5/6 is handled per-channel via CH<x>:DESKew. The dedicated DPOJET deskew wizard functionality has no direct equivalent."
+          }
+        },
+        {
+          "scpi": "DPOJET:DESKEW:EDGE",
+          "description": "Sets or queries the deskew edge",
+          "group": "Deskew",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "RISE",
+                "FALL",
+                "BOTH"
+              ],
+              "description": "One of: RISE, FALL, BOTH"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Channel deskew on MSO 4/5/6 is handled per-channel via CH<x>:DESKew. The dedicated DPOJET deskew wizard functionality has no direct equivalent."
+          }
+        },
+        {
+          "scpi": "DPOJET:DESKEW:MAXimum",
+          "description": "Sets or queries the deskew maximum value",
+          "group": "Deskew",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Channel deskew on MSO 4/5/6 is handled per-channel via CH<x>:DESKew. The dedicated DPOJET deskew wizard functionality has no direct equivalent."
+          }
+        },
+        {
+          "scpi": "DPOJET:DESKEW:MINimum",
+          "description": "Sets or queries the deskew minimum value",
+          "group": "Deskew",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Channel deskew on MSO 4/5/6 is handled per-channel via CH<x>:DESKew. The dedicated DPOJET deskew wizard functionality has no direct equivalent."
+          }
+        },
+        {
+          "scpi": "DPOJET:DESKEW:REFChannel",
+          "description": "Sets or queries the deskew reference channel",
+          "group": "Deskew",
+          "set": true,
+          "query": true,
+          "arguments": "CH1-4",
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Channel deskew on MSO 4/5/6 is handled per-channel via CH<x>:DESKew. The dedicated DPOJET deskew wizard functionality has no direct equivalent."
+          }
+        },
+        {
+          "scpi": "DPOJET:DESKEW:REFHysteresis",
+          "description": "Sets or queries the deskew reference hysteresis",
+          "group": "Deskew",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Channel deskew on MSO 4/5/6 is handled per-channel via CH<x>:DESKew. The dedicated DPOJET deskew wizard functionality has no direct equivalent."
+          }
+        },
+        {
+          "scpi": "DPOJET:DESKEW:REFMidlevel",
+          "description": "Sets or queries the deskew reference mid level",
+          "group": "Deskew",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Channel deskew on MSO 4/5/6 is handled per-channel via CH<x>:DESKew. The dedicated DPOJET deskew wizard functionality has no direct equivalent."
+          }
+        }
+      ]
+    },
+    "Limits": {
+      "name": "Limits",
+      "description": "",
+      "commands": [
+        {
+          "scpi": "DPOJET:LIMits:FILEName",
+          "description": "Sets or queries the limits file name",
+          "group": "Limits",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "description": "<string>"
+            }
+          ],
+          "migration": {
+            "status": "restructured",
+            "notes": "Limits file is now per-measurement via CUSTOMLIMITSFile instead of a global setting.",
+            "modern_command": "MEASUrement:MEAS<x>:CUSTOMLIMITSFile"
+          }
+        },
+        {
+          "scpi": "DPOJET:LIMits:STATE",
+          "description": "Sets or queries the limits state",
+          "group": "Limits",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "ON",
+                "OFF"
+              ],
+              "description": "One of: ON, OFF"
+            }
+          ],
+          "migration": {
+            "status": "restructured",
+            "notes": "Global limits state replaced by per-measurement pass/fail enable. See also PASSFAILHIGHlimit, PASSFAILLOWlimit, PASSFAILWHEN.",
+            "modern_command": "MEASUrement:MEAS<x>:PASSFAILENabled"
+          }
+        },
+        {
+          "scpi": "DPOJET:LIMITRise",
+          "description": "Sets or queries the limit rise state",
+          "group": "Limits",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "ON",
+                "OFF"
+              ],
+              "description": "One of: ON, OFF"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "May map to pass/fail margin or pass/fail criteria on modern scopes."
+          }
+        }
+      ]
+    },
+    "Logging": {
+      "name": "Logging",
+      "description": "",
+      "commands": [
+        {
+          "scpi": "DPOJET:LOGging:MEASurements:FOLDer",
+          "description": "Sets or queries the measurement logging folder",
+          "group": "Logging",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "description": "<string>"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "DPOJET logging has no direct equivalent. Use SAVe:WAVEform, SAVe:EVENtable, or SAVe:REPORT commands for data export on MSO 4/5/6."
+          }
+        },
+        {
+          "scpi": "DPOJET:LOGging:MEASurements:STATE",
+          "description": "Sets or queries the measurement logging state",
+          "group": "Logging",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "ON",
+                "OFF"
+              ],
+              "description": "One of: ON, OFF"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "DPOJET logging has no direct equivalent. Use SAVe:WAVEform, SAVe:EVENtable, or SAVe:REPORT commands for data export on MSO 4/5/6."
+          }
+        },
+        {
+          "scpi": "DPOJET:LOGging:SNAPshot",
+          "description": "Sets or queries the logging snapshot",
+          "group": "Logging",
+          "set": true,
+          "query": false,
+          "arguments": "EXECUTE",
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "DPOJET logging has no direct equivalent. Use SAVe:WAVEform, SAVe:EVENtable, or SAVe:REPORT commands for data export on MSO 4/5/6."
+          }
+        },
+        {
+          "scpi": "DPOJET:LOGging:STATistics:FILEName",
+          "description": "Sets or queries the statistics logging file name",
+          "group": "Logging",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "description": "<string>"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "DPOJET logging has no direct equivalent. Use SAVe:WAVEform, SAVe:EVENtable, or SAVe:REPORT commands for data export on MSO 4/5/6."
+          }
+        },
+        {
+          "scpi": "DPOJET:LOGging:STATistics:STATE",
+          "description": "Sets or queries the statistics logging state",
+          "group": "Logging",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "ON",
+                "OFF"
+              ],
+              "description": "One of: ON, OFF"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "DPOJET logging has no direct equivalent. Use SAVe:WAVEform, SAVe:EVENtable, or SAVe:REPORT commands for data export on MSO 4/5/6."
+          }
+        },
+        {
+          "scpi": "DPOJET:LOGging:WORSTcase:FOLDer",
+          "description": "Sets or queries the worst case logging folder",
+          "group": "Logging",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "description": "<string>"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "DPOJET logging has no direct equivalent. Use SAVe:WAVEform, SAVe:EVENtable, or SAVe:REPORT commands for data export on MSO 4/5/6."
+          }
+        },
+        {
+          "scpi": "DPOJET:LOGging:WORSTcase:STATE",
+          "description": "Sets or queries the worst case logging state",
+          "group": "Logging",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "ON",
+                "OFF"
+              ],
+              "description": "One of: ON, OFF"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "DPOJET logging has no direct equivalent. Use SAVe:WAVEform, SAVe:EVENtable, or SAVe:REPORT commands for data export on MSO 4/5/6."
+          }
+        }
+      ]
+    },
+    "Measurement Setup": {
+      "name": "Measurement Setup",
+      "description": "",
+      "commands": [
+        {
+          "scpi": "DPOJET:MEAS<x>",
+          "description": "Sets or queries measurement type for slot x",
+          "group": "Measurement Setup",
+          "set": true,
+          "query": true,
+          "arguments": "<measurement_type>",
+          "migration": {
+            "status": "renamed",
+            "notes": "DPOJET:MEAS<x> maps to MEASUrement:MEAS<x>:TYPe. Measurement type names may differ (see ADDMeas value_map).",
+            "modern_command": "MEASUrement:MEAS<x>:TYPe"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:BER:TARGETBER",
+          "description": "Sets or queries the target BER value",
+          "group": "Measurement Setup",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:BER:TARGETBER"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:BITCfgmethod",
+          "description": "Sets or queries the bit config method",
+          "group": "Measurement Setup",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "AUTO",
+                "MANUAL"
+              ],
+              "description": "One of: AUTO, MANUAL"
+            }
+          ],
+          "migration": {
+            "status": "values_changed",
+            "notes": "CRITICAL: Different concept. Legacy BITCfgmethod (AUTO|MANUAL) controls automatic vs manual bit config. Modern BITCfgmode (MEAN|MODE) controls statistical method. See also BITAbsolute and PATTERNDETECTION for auto/manual control.",
+            "modern_command": "MEASUrement:MEAS<x>:BITCfgmode",
+            "value_map": {
+              "AUTO": "NEEDS_VERIFICATION",
+              "MANUAL": "NEEDS_VERIFICATION"
+            }
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:BITPcnt",
+          "description": "Sets or queries the bit percentage",
+          "group": "Measurement Setup",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:BITPcnt"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:BITConfig:STARTPercent",
+          "description": "Sets or queries the bit config start percent",
+          "group": "Measurement Setup",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "BITConfig:STARTPercent flattened to BITSTart.",
+            "modern_command": "MEASUrement:MEAS<x>:BITSTart"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:BITConfig:ENDPercent",
+          "description": "Sets or queries the bit config end percent",
+          "group": "Measurement Setup",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "BITConfig:ENDPercent flattened to BITEnd.",
+            "modern_command": "MEASUrement:MEAS<x>:BITEnd"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:BITConfig:NUMBins",
+          "description": "Sets or queries the number of bit config bins",
+          "group": "Measurement Setup",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR1>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "BITConfig:NUMBins flattened to BIN.",
+            "modern_command": "MEASUrement:MEAS<x>:BIN"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:BITType",
+          "description": "Sets or queries the bit type selection",
+          "group": "Measurement Setup",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "ALLBITS",
+                "TRANSBITS",
+                "NONTRANSBITS"
+              ],
+              "description": "One of: ALLBITS, TRANSBITS, NONTRANSBITS"
+            }
+          ],
+          "migration": {
+            "status": "values_changed",
+            "notes": "Values renamed: ALLBITS\u2192ALLBits, TRANSBITS\u2192TRANSition, NONTRANSBITS\u2192NONTRANsition.",
+            "modern_command": "MEASUrement:MEAS<x>:BITType",
+            "value_map": {
+              "ALLBITS": "ALLBits",
+              "TRANSBITS": "TRANSition",
+              "NONTRANSBITS": "NONTRANsition"
+            }
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:CUSTomname",
+          "description": "Sets or queries a custom measurement name",
+          "group": "Measurement Setup",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "description": "<string>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "CUSTomname renamed to LABel.",
+            "modern_command": "MEASUrement:MEAS<x>:LABel"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:DATA?",
+          "description": "Returns the raw measurement data array",
+          "group": "Measurement Setup",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "restructured",
+            "notes": "Raw measurement data retrieval handled differently. Use MEASUrement:MEAS<x>:RESUlts queries or data transfer commands."
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:FROMedge",
+          "description": "Sets or queries the from edge direction",
+          "group": "Measurement Setup",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "RISE",
+                "FALL",
+                "BOTH"
+              ],
+              "description": "One of: RISE, FALL, BOTH"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:FROMedge",
+            "value_map": {
+              "RISE": "RISe",
+              "FALL": "FALL",
+              "BOTH": "BOTH"
+            }
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:HIGHREFVoltage",
+          "description": "Sets or queries the high reference voltage",
+          "group": "Measurement Setup",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:HIGHREFVoltage"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:LOWREFVoltage",
+          "description": "Sets or queries the low reference voltage",
+          "group": "Measurement Setup",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:LOWREFVoltage"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:REFVoltage",
+          "description": "Sets or queries the reference voltage",
+          "group": "Measurement Setup",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:REFVoltage"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:MASKfile",
+          "description": "Sets or queries the mask file path",
+          "group": "Measurement Setup",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "description": "<string>"
+            }
+          ],
+          "migration": {
+            "status": "restructured",
+            "notes": "Mask file handling moved to EYEMASK command group.",
+            "modern_command": "EYEMASK:MASK<x>:MASKfile"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:MEASRange:MAX",
+          "description": "Sets or queries the measurement range maximum",
+          "group": "Measurement Setup",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:MEASRange:MAX"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:MEASRange:MIN",
+          "description": "Sets or queries the measurement range minimum",
+          "group": "Measurement Setup",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:MEASRange:MIN"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:MEASRange:STATE",
+          "description": "Sets or queries the measurement range state",
+          "group": "Measurement Setup",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "ON",
+                "OFF"
+              ],
+              "description": "One of: ON, OFF"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:MEASRange:STATE"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:MEASStart",
+          "description": "Sets or queries the measurement start position",
+          "group": "Measurement Setup",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "May map to gating start time (MEASUrement:MEAS<x>:GATing:STARTtime) on modern scopes."
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:N",
+          "description": "Sets or queries the N value for N-period measurement",
+          "group": "Measurement Setup",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR1>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "Moved from top-level MEAS<x>:N to EDGES:N sub-tree.",
+            "modern_command": "MEASUrement:MEAS<x>:EDGES:N"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:NAME?",
+          "description": "Returns the measurement name",
+          "group": "Measurement Setup",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "renamed",
+            "notes": "NAME query replaced by LABel query.",
+            "modern_command": "MEASUrement:MEAS<x>:LABel"
+          }
+        }
+      ]
+    },
+    "Measurement - Bus State": {
+      "name": "Measurement - Bus State",
+      "description": "",
+      "commands": [
+        {
+          "scpi": "DPOJET:MEAS<x>:BUSState:CLOCKPolarity",
+          "description": "Sets or queries the bus state clock polarity",
+          "group": "Measurement - Bus State",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "RISE",
+                "FALL",
+                "BOTH"
+              ],
+              "description": "One of: RISE, FALL, BOTH"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Bus state measurements for DDR are handled differently on MSO 4/5/6. Pattern-based measurement qualification uses FROMSymbol/TOSYmbol sub-trees."
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:BUSState:FROMPattern",
+          "description": "Sets or queries the bus state from pattern",
+          "group": "Measurement - Bus State",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "description": "<string>"
+            }
+          ],
+          "migration": {
+            "status": "restructured",
+            "notes": "Pattern matching restructured. See FROMSymbol sub-tree: LOGIC2SOUrce through LOGIC5SOUrce, and MEASUREAT.",
+            "modern_command": "MEASUrement:MEAS<x>:FROMSymbol:MEASUREAT"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:BUSState:FROMSymbol",
+          "description": "Sets or queries the bus state from symbol",
+          "group": "Measurement - Bus State",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "description": "<string>"
+            }
+          ],
+          "migration": {
+            "status": "restructured",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:FROMSymbol:MEASUREAT"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:BUSState:MEASUREType",
+          "description": "Sets or queries the bus state measure type",
+          "group": "Measurement - Bus State",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "PATTERN",
+                "SYMBOL"
+              ],
+              "description": "One of: PATTERN, SYMBOL"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Pattern/symbol distinction may not exist in same form on modern scopes."
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:BUSState:MEASUREFrom",
+          "description": "Sets or queries the bus state measure from source",
+          "group": "Measurement - Bus State",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "DATA",
+                "STROBE"
+              ],
+              "description": "One of: DATA, STROBE"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": ""
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:BUSState:MEASURETO",
+          "description": "Sets or queries the bus state measure to source",
+          "group": "Measurement - Bus State",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "DATA",
+                "STROBE"
+              ],
+              "description": "One of: DATA, STROBE"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": ""
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:BUSState:TOPattern",
+          "description": "Sets or queries the bus state to pattern",
+          "group": "Measurement - Bus State",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "description": "<string>"
+            }
+          ],
+          "migration": {
+            "status": "restructured",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:TOSYmbol:MEASUREAT"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:BUSState:TOSymbol",
+          "description": "Sets or queries the bus state to symbol",
+          "group": "Measurement - Bus State",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "description": "<string>"
+            }
+          ],
+          "migration": {
+            "status": "restructured",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:TOSYmbol:MEASUREAT"
+          }
+        }
+      ]
+    },
+    "Measurement - Clock Recovery": {
+      "name": "Measurement - Clock Recovery",
+      "description": "",
+      "commands": [
+        {
+          "scpi": "DPOJET:MEAS<x>:CLOCKRecovery:CLOCKBitrate",
+          "description": "Sets or queries the clock bit rate",
+          "group": "Measurement - Clock Recovery",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "CLOCKBitrate renamed to DATARate.",
+            "modern_command": "MEASUrement:MEAS<x>:CLOCKRecovery:DATARate"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:CLOCKRecovery:CLOCKFrequency",
+          "description": "Sets or queries the clock frequency",
+          "group": "Measurement - Clock Recovery",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:CLOCKRecovery:CLOCKFrequency"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:CLOCKRecovery:CLOCKMultiplier",
+          "description": "Sets or queries the clock multiplier",
+          "group": "Measurement - Clock Recovery",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR1>"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:CLOCKRecovery:CLOCKMultiplier"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:CLOCKRecovery:CLOCKPath",
+          "description": "Sets or queries the clock path for custom standard",
+          "group": "Measurement - Clock Recovery",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "description": "<string>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "CLOCKPath renamed to DATAPath.",
+            "modern_command": "MEASUrement:MEAS<x>:CLOCKRecovery:DATAPath"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:CLOCKRecovery:DAMPing",
+          "description": "Sets or queries the PLL damping factor",
+          "group": "Measurement - Clock Recovery",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:CLOCKRecovery:DAMPing"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:CLOCKRecovery:DATARate",
+          "description": "Sets or queries the data rate",
+          "group": "Measurement - Clock Recovery",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:CLOCKRecovery:DATARate"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:CLOCKRecovery:BWType",
+          "description": "Sets or queries the bandwidth type",
+          "group": "Measurement - Clock Recovery",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "STANDARD",
+                "CUSTOM"
+              ],
+              "description": "One of: STANDARD, CUSTOM"
+            }
+          ],
+          "migration": {
+            "status": "restructured",
+            "notes": "Bandwidth type concept split. Standard bandwidth set via CLOCKRecovery:STAndard. Custom bandwidth set directly via LOOPBandwidth and JTFBandwidth.",
+            "alt_commands": [
+              "MEASUrement:MEAS<x>:CLOCKRecovery:LOOPBandwidth",
+              "MEASUrement:MEAS<x>:CLOCKRecovery:JTFBandwidth"
+            ]
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:CLOCKRecovery:LOOPBandwidth",
+          "description": "Sets or queries the PLL loop bandwidth",
+          "group": "Measurement - Clock Recovery",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:CLOCKRecovery:LOOPBandwidth"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:CLOCKRecovery:MEANAUTOCalculate",
+          "description": "Sets or queries the mean auto calculate state",
+          "group": "Measurement - Clock Recovery",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "ON",
+                "OFF"
+              ],
+              "description": "One of: ON, OFF"
+            }
+          ],
+          "migration": {
+            "status": "values_changed",
+            "notes": "ON|OFF changed to EVERY|FIRST. ON\u2192EVERY (recalculate every acquisition), OFF\u2192FIRST (calculate once).",
+            "modern_command": "MEASUrement:MEAS<x>:CLOCKRecovery:MEANAUTOCalculate",
+            "value_map": {
+              "ON": "EVERY",
+              "OFF": "FIRST"
+            }
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:CLOCKRecovery:METHod",
+          "description": "Sets or queries the clock recovery method",
+          "group": "Measurement - Clock Recovery",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "CONSTMEAN",
+                "CONSTMEDIAN",
+                "CONSTFIXED",
+                "PLL",
+                "EXPLICITCLOCKEDGE",
+                "EXPLICITCLOCKPLL"
+              ],
+              "description": "One of: CONSTMEAN, CONSTMEDIAN, CONSTFIXED, PLL, EXPLICITCLOCKEDGE, EXPLICITCLOCKPLL"
+            }
+          ],
+          "migration": {
+            "status": "restructured",
+            "notes": "CRITICAL: Method values consolidated. CONSTMEAN/CONSTMEDIAN/CONSTFIXED \u2192 CONSTANTCLOCK with sub-mode via CONSTCLOCKMODe. EXPLICITCLOCKEDGE/EXPLICITCLOCKPLL \u2192 EXPLICITCLOCK with sub-mode via EXPLICITCLOCKMODe. Requires TWO commands to fully replicate legacy single command.",
+            "modern_command": "MEASUrement:MEAS<x>:CLOCKRecovery:METHod",
+            "value_map": {
+              "CONSTMEAN": "CONSTANTCLOCK + CONSTCLOCKMODe:MEAN",
+              "CONSTMEDIAN": "CONSTANTCLOCK + CONSTCLOCKMODe:MEDian",
+              "CONSTFIXED": "CONSTANTCLOCK + CONSTCLOCKMODe:FIXed",
+              "PLL": "PLL",
+              "EXPLICITCLOCKEDGE": "EXPLICITCLOCK + EXPLICITCLOCKMODe:EDGE",
+              "EXPLICITCLOCKPLL": "EXPLICITCLOCK + EXPLICITCLOCKMODe:PLL"
+            },
+            "alt_commands": [
+              "MEASUrement:MEAS<x>:CLOCKRecovery:CONSTCLOCKMODe",
+              "MEASUrement:MEAS<x>:CLOCKRecovery:EXPLICITCLOCKMODe"
+            ]
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:CLOCKRecovery:MODel",
+          "description": "Sets or queries the PLL model order",
+          "group": "Measurement - Clock Recovery",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "FIRST",
+                "SECOND"
+              ],
+              "description": "One of: FIRST, SECOND"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:CLOCKRecovery:MODel"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:CLOCKRecovery:NOMINALOFFset",
+          "description": "Sets or queries the nominal offset",
+          "group": "Measurement - Clock Recovery",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "values_changed",
+            "notes": "Changed from numeric value to AUTO|MANUAL enum. The numeric offset value is set indirectly. Legacy sub-commands (AUTO?, MANual, Recalctype, SELECTIONtype) collapsed into single AUTO|MANUAL selector.",
+            "modern_command": "MEASUrement:MEAS<x>:CLOCKRecovery:NOMINALOFFset",
+            "value_map": {
+              "<NR3>": "AUTO | MANUAL"
+            }
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:CLOCKRecovery:NOMINALOFFset:AUTO?",
+          "description": "Queries the auto-calculated nominal offset",
+          "group": "Measurement - Clock Recovery",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "restructured",
+            "notes": "Query the offset value after setting NOMINALOFFset to AUTO."
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:CLOCKRecovery:NOMINALOFFset:MANual",
+          "description": "Sets or queries the manual nominal offset",
+          "group": "Measurement - Clock Recovery",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "restructured",
+            "notes": "Set NOMINALOFFset to MANUAL, then the offset value is set differently on modern scopes."
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:CLOCKRecovery:NOMINALOFFset:Recalctype",
+          "description": "Sets or queries the nominal offset recalc type",
+          "group": "Measurement - Clock Recovery",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "AUTO",
+                "MANUAL"
+              ],
+              "description": "One of: AUTO, MANUAL"
+            }
+          ],
+          "migration": {
+            "status": "restructured",
+            "notes": "Collapsed into NOMINALOFFset AUTO|MANUAL.",
+            "modern_command": "MEASUrement:MEAS<x>:CLOCKRecovery:NOMINALOFFset"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:CLOCKRecovery:NOMINALOFFset:SELECTIONtype",
+          "description": "Sets or queries the nominal offset selection type",
+          "group": "Measurement - Clock Recovery",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "AUTO",
+                "MANUAL"
+              ],
+              "description": "One of: AUTO, MANUAL"
+            }
+          ],
+          "migration": {
+            "status": "restructured",
+            "notes": "Collapsed into NOMINALOFFset AUTO|MANUAL.",
+            "modern_command": "MEASUrement:MEAS<x>:CLOCKRecovery:NOMINALOFFset"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:CLOCKRecovery:PATTern",
+          "description": "Sets or queries the pattern type",
+          "group": "Measurement - Clock Recovery",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "REPEATING",
+                "ARBITRARY"
+              ],
+              "description": "One of: REPEATING, ARBITRARY"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "Moved from CLOCKRecovery sub-tree to top-level MEAS<x>:PATTERNTYPe.",
+            "modern_command": "MEASUrement:MEAS<x>:PATTERNTYPe",
+            "value_map": {
+              "REPEATING": "REPeating",
+              "ARBITRARY": "ARBitrary"
+            }
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:CLOCKRecovery:STAndard",
+          "description": "Sets or queries the clock recovery standard",
+          "group": "Measurement - Clock Recovery",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "CUSTOM",
+                "USB3_5G",
+                "USB3_10G",
+                "PCIE_2_5G",
+                "PCIE_5G",
+                "PCIE_8G",
+                "SATA_1_5G",
+                "SATA_3G",
+                "SATA_6G",
+                "..."
+              ],
+              "description": "One of: CUSTOM, USB3_5G, USB3_10G, PCIE_2_5G, PCIE_5G, PCIE_8G, SATA_1_5G, SATA_3G"
+            }
+          ],
+          "migration": {
+            "status": "values_changed",
+            "notes": "Standard names completely redesigned. Rate-based naming (e.g. PCIE_2_5G) changed to generation-based (e.g. PCIE_GEN1). FC uses base rate numbers instead of computed rates. Some legacy standards may not have direct modern equivalents.",
+            "modern_command": "MEASUrement:MEAS<x>:CLOCKRecovery:STAndard",
+            "value_map": {
+              "CUSTOM": "CUSTom",
+              "PCIE_2_5G": "PCIE_GEN1",
+              "PCIE_5G": "PCIE_GEN2",
+              "PCIE_8G": "PCIE_GEN3",
+              "SATA_1_5G": "SATA_GEN1",
+              "SATA_3G": "SATA_GEN2",
+              "SATA_6G": "SATA_GEN3",
+              "SAS_1_5G": "SAS15_NOSSC",
+              "SAS_3G": "SAS3_NOSSC",
+              "SAS_6G": "SAS6_NOSSC",
+              "USB3_5G": "USB3",
+              "XAUI": "XAUI",
+              "FIBRE_1G": "FC133",
+              "FIBRE_2G": "FC266",
+              "FIBRE_4G": "FC531",
+              "FIBRE_8G": "FC1063",
+              "FIBRE_10G": "FC2125",
+              "INFINIBAND_2_5G": "IBA2500",
+              "ETHERNET_1_25G": "ENET1000",
+              "HDMI_1_5G": "NEEDS_VERIFICATION",
+              "HDMI_3_4G": "NEEDS_VERIFICATION",
+              "DISPLAYPORT_1_62G": "NEEDS_VERIFICATION",
+              "DISPLAYPORT_2_7G": "NEEDS_VERIFICATION",
+              "USB3_10G": "NEEDS_VERIFICATION",
+              "FIBRE_14G": "FC8500",
+              "FIBRE_16G": "NEEDS_VERIFICATION",
+              "INFINIBAND_5G": "IBA_GEN2"
+            }
+          }
+        }
+      ]
+    },
+    "Measurement - Common Mode": {
+      "name": "Measurement - Common Mode",
+      "description": "",
+      "commands": [
+        {
+          "scpi": "DPOJET:MEAS<x>:COMMONMode:FILTers:STATE",
+          "description": "Sets or queries the common mode filter state",
+          "group": "Measurement - Common Mode",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "ON",
+                "OFF"
+              ],
+              "description": "One of: ON, OFF"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:COMMONMode:FILTers:STATE"
+          }
+        }
+      ]
+    },
+    "Measurement - DDR": {
+      "name": "Measurement - DDR",
+      "description": "",
+      "commands": [
+        {
+          "scpi": "DPOJET:MEAS<x>:DDR:MPERCycle",
+          "description": "Sets or queries the M per cycle value for DDR",
+          "group": "Measurement - DDR",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR1>"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "DDR measurement parameters restructured on MSO 4/5/6. May map to TCKAVG or similar DDR-specific settings."
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:DDR:NPERCycle",
+          "description": "Sets or queries the N per cycle value for DDR",
+          "group": "Measurement - DDR",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR1>"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "See DDR:MPERCycle note."
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:DDR:WINDowsize",
+          "description": "Sets or queries the DDR window size",
+          "group": "Measurement - DDR",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR1>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "DDR:WINDowsize likely maps to WINDOWLENgth. Needs verification for DDR-specific context.",
+            "modern_command": "MEASUrement:MEAS<x>:WINDOWLENgth"
+          }
+        }
+      ]
+    },
+    "Measurement - Edges": {
+      "name": "Measurement - Edges",
+      "description": "",
+      "commands": [
+        {
+          "scpi": "DPOJET:MEAS<x>:EDGE1",
+          "description": "Sets or queries edge 1 direction",
+          "group": "Measurement - Edges",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "RISE",
+                "FALL",
+                "BOTH"
+              ],
+              "description": "One of: RISE, FALL, BOTH"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "EDGE1 becomes EDGE1 under generic EDGE<x> syntax. Set x=1.",
+            "modern_command": "MEASUrement:MEAS<x>:EDGE<x>"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:EDGE2",
+          "description": "Sets or queries edge 2 direction",
+          "group": "Measurement - Edges",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "RISE",
+                "FALL",
+                "BOTH"
+              ],
+              "description": "One of: RISE, FALL, BOTH"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "EDGE2 becomes EDGE2 under generic EDGE<x> syntax. Set x=2.",
+            "modern_command": "MEASUrement:MEAS<x>:EDGE<x>"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:EDGEIncre",
+          "description": "Sets or queries the edge increment for N-period",
+          "group": "Measurement - Edges",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR1>"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:EDGEIncre"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:EDGES:FROMLevel",
+          "description": "Sets or queries the from level for slew rate",
+          "group": "Measurement - Edges",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:EDGES:FROMLevel"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:EDGES:LEVel",
+          "description": "Sets or queries the edge level",
+          "group": "Measurement - Edges",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:EDGES:LEVel"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:EDGES:SLEWRATETechnique",
+          "description": "Sets or queries slew rate technique",
+          "group": "Measurement - Edges",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "NOMINALAMPLITUDE",
+                "VOLTS"
+              ],
+              "description": "One of: NOMINALAMPLITUDE, VOLTS"
+            }
+          ],
+          "migration": {
+            "status": "values_changed",
+            "notes": "Renamed SLEWRATETechnique\u2192SLEWRATEMethod. Values changed: NOMINALAMPLITUDE\u2192NOMinal, VOLTS\u2192DDR.",
+            "modern_command": "MEASUrement:MEAS<x>:EDGES:SLEWRATEMethod",
+            "value_map": {
+              "NOMINALAMPLITUDE": "NOMinal",
+              "VOLTS": "DDR"
+            }
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:EDGES:TOLevel",
+          "description": "Sets or queries the to level for slew rate",
+          "group": "Measurement - Edges",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:EDGES:TOLevel"
+          }
+        }
+      ]
+    },
+    "Measurement - Filters": {
+      "name": "Measurement - Filters",
+      "description": "",
+      "commands": [
+        {
+          "scpi": "DPOJET:MEAS<x>:FILTers:BLANKingtime",
+          "description": "Sets or queries the blanking time",
+          "group": "Measurement - Filters",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:FILTers:BLANKingtime"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:FILTers:HIGHPass:FREQ",
+          "description": "Sets or queries the high pass filter frequency",
+          "group": "Measurement - Filters",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:FILTers:HIGHPass:FREQ"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:FILTers:HIGHPass:SPEC",
+          "description": "Sets or queries the high pass filter specification",
+          "group": "Measurement - Filters",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "BRICKWALL",
+                "GAUSSIAN"
+              ],
+              "description": "One of: BRICKWALL, GAUSSIAN"
+            }
+          ],
+          "migration": {
+            "status": "values_changed",
+            "notes": "CRITICAL: Different paradigm. Legacy uses filter shape (BRICKWALL|GAUSSIAN). Modern uses filter order (NONE|FIRST|SECOND|THIRD). No direct 1:1 mapping possible.",
+            "modern_command": "MEASUrement:MEAS<x>:FILTers:HIGHPass:SPEC",
+            "value_map": {
+              "BRICKWALL": "NEEDS_VERIFICATION: Modern uses filter order (NONE|FIRST|SECOND|THIRD)",
+              "GAUSSIAN": "NEEDS_VERIFICATION: Modern uses filter order (NONE|FIRST|SECOND|THIRD)"
+            }
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:FILTers:LOWPass:FREQ",
+          "description": "Sets or queries the low pass filter frequency",
+          "group": "Measurement - Filters",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:FILTers:LOWPass:FREQ"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:FILTers:LOWPass:SPEC",
+          "description": "Sets or queries the low pass filter specification",
+          "group": "Measurement - Filters",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "BRICKWALL",
+                "GAUSSIAN"
+              ],
+              "description": "One of: BRICKWALL, GAUSSIAN"
+            }
+          ],
+          "migration": {
+            "status": "values_changed",
+            "notes": "Same as HIGHPass:SPEC \u2014 filter shape\u2192filter order paradigm change.",
+            "modern_command": "MEASUrement:MEAS<x>:FILTers:LOWPass:SPEC",
+            "value_map": {
+              "BRICKWALL": "NEEDS_VERIFICATION: Modern uses filter order (NONE|FIRST|SECOND|THIRD)",
+              "GAUSSIAN": "NEEDS_VERIFICATION: Modern uses filter order (NONE|FIRST|SECOND|THIRD)"
+            }
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:FILTers:RAMPtime",
+          "description": "Sets or queries the filter ramp time",
+          "group": "Measurement - Filters",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:FILTers:RAMPtime"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:FILTers:STATE",
+          "description": "Sets or queries the filter state",
+          "group": "Measurement - Filters",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "ON",
+                "OFF"
+              ],
+              "description": "One of: ON, OFF"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "FILTers:STATE replaced by FILTers:GLOBal flag which controls whether per-measurement or global filter settings are used.",
+            "modern_command": "MEASUrement:MEAS<x>:FILTers:GLOBal"
+          }
+        }
+      ]
+    },
+    "Measurement - Phase Noise": {
+      "name": "Measurement - Phase Noise",
+      "description": "",
+      "commands": [
+        {
+          "scpi": "DPOJET:MEAS<x>:PHASENoise:HIGHLimit",
+          "description": "Sets or queries the phase noise high limit",
+          "group": "Measurement - Phase Noise",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "Phase noise frequency limits restructured. HIGHLimit maps to EDGES:UPPERFREQuency for phase noise measurements. Needs verification.",
+            "modern_command": "MEASUrement:MEAS<x>:EDGES:UPPERFREQuency"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:PHASENoise:LOWLimit",
+          "description": "Sets or queries the phase noise low limit",
+          "group": "Measurement - Phase Noise",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "LOWLimit maps to EDGES:LOWERFREQuency for phase noise measurements. Needs verification.",
+            "modern_command": "MEASUrement:MEAS<x>:EDGES:LOWERFREQuency"
+          }
+        }
+      ]
+    },
+    "Measurement - RJDJ": {
+      "name": "Measurement - RJDJ",
+      "description": "",
+      "commands": [
+        {
+          "scpi": "DPOJET:MEAS<x>:RJDJ:BER:TARGETBER",
+          "description": "Sets or queries the RJ/DJ target BER",
+          "group": "Measurement - RJDJ",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "Moved from RJDJ sub-tree to top-level BER:TARGETBER.",
+            "modern_command": "MEASUrement:MEAS<x>:BER:TARGETBER"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RJDJ:PATTern",
+          "description": "Sets or queries the RJ/DJ pattern type",
+          "group": "Measurement - RJDJ",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "REPEATING",
+                "ARBITRARY"
+              ],
+              "description": "One of: REPEATING, ARBITRARY"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "Moved from RJDJ sub-tree to top-level PATTERNTYPe.",
+            "modern_command": "MEASUrement:MEAS<x>:PATTERNTYPe",
+            "value_map": {
+              "REPEATING": "REPeating",
+              "ARBITRARY": "ARBitrary"
+            }
+          }
+        }
+      ]
+    },
+    "Measurement - SSC": {
+      "name": "Measurement - SSC",
+      "description": "",
+      "commands": [
+        {
+          "scpi": "DPOJET:MEAS<x>:SSC:NOMINALFREQuency",
+          "description": "Sets or queries the SSC nominal frequency",
+          "group": "Measurement - SSC",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "NOMINALFREQuency shortened to NOMinalfreq. Also see SSC:NOMinalfreq:SELECTIONtype on modern scopes.",
+            "modern_command": "MEASUrement:MEAS<x>:SSC:NOMinalfreq"
+          }
+        }
+      ]
+    },
+    "Measurement - Sources": {
+      "name": "Measurement - Sources",
+      "description": "",
+      "commands": [
+        {
+          "scpi": "DPOJET:MEAS<x>:SOUrce1",
+          "description": "Sets or queries measurement source 1",
+          "group": "Measurement - Sources",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "CH1-4",
+                "MATH1-4",
+                "REF1-4"
+              ],
+              "description": "One of: CH1-4, MATH1-4, REF1-4"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "SOUrce1 generalized to SOUrce<x> where x=1. Source naming expanded on modern scopes (CH1-8, MATH1-N, REF1-N, etc.).",
+            "modern_command": "MEASUrement:MEAS<x>:SOUrce<x>"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:SOUrce2",
+          "description": "Sets or queries measurement source 2",
+          "group": "Measurement - Sources",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "CH1-4",
+                "MATH1-4",
+                "REF1-4"
+              ],
+              "description": "One of: CH1-4, MATH1-4, REF1-4"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "SOUrce2 generalized to SOUrce<x> where x=2.",
+            "modern_command": "MEASUrement:MEAS<x>:SOUrce<x>"
+          }
+        }
+      ]
+    },
+    "Measurement - Reference Levels": {
+      "name": "Measurement - Reference Levels",
+      "description": "",
+      "commands": [
+        {
+          "scpi": "DPOJET:MEAS<x>:REFLevels:ABSolute:FALLHigh",
+          "description": "Sets or queries the absolute fall high reference level",
+          "group": "Measurement - Reference Levels",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "REFLevels indexed per-source on modern scopes: REFLevels<x> where x matches source number.",
+            "modern_command": "MEASUrement:MEAS<x>:REFLevels:ABSolute:FALLHigh"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:REFLevels:ABSolute:FALLLow",
+          "description": "Sets or queries the absolute fall low reference level",
+          "group": "Measurement - Reference Levels",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "REFLevels indexed per-source on modern scopes: REFLevels<x> where x matches source number.",
+            "modern_command": "MEASUrement:MEAS<x>:REFLevels<x>:ABSolute:FALLLow"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:REFLevels:ABSolute:FALLMid",
+          "description": "Sets or queries the absolute fall mid reference level",
+          "group": "Measurement - Reference Levels",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "REFLevels indexed per-source on modern scopes: REFLevels<x> where x matches source number.",
+            "modern_command": "MEASUrement:MEAS<x>:REFLevels<x>:ABSolute:FALLMid"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:REFLevels:ABSolute:HYSTeresis",
+          "description": "Sets or queries the absolute hysteresis value",
+          "group": "Measurement - Reference Levels",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "REFLevels indexed per-source on modern scopes: REFLevels<x> where x matches source number.",
+            "modern_command": "MEASUrement:MEAS<x>:REFLevels<x>:ABSolute:HYSTeresis"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:REFLevels:ABSolute:RISEHigh",
+          "description": "Sets or queries the absolute rise high reference level",
+          "group": "Measurement - Reference Levels",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "REFLevels indexed per-source on modern scopes: REFLevels<x> where x matches source number.",
+            "modern_command": "MEASUrement:MEAS<x>:REFLevels<x>:ABSolute:RISEHigh"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:REFLevels:ABSolute:RISELow",
+          "description": "Sets or queries the absolute rise low reference level",
+          "group": "Measurement - Reference Levels",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "REFLevels indexed per-source on modern scopes: REFLevels<x> where x matches source number.",
+            "modern_command": "MEASUrement:MEAS<x>:REFLevels<x>:ABSolute:RISELow"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:REFLevels:ABSolute:RISEMid",
+          "description": "Sets or queries the absolute rise mid reference level",
+          "group": "Measurement - Reference Levels",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "REFLevels indexed per-source on modern scopes: REFLevels<x> where x matches source number.",
+            "modern_command": "MEASUrement:MEAS<x>:REFLevels<x>:ABSolute:RISEMid"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:REFLevels:ABSolute:TYPE",
+          "description": "Sets or queries the whether rise/fall use same or unique levels",
+          "group": "Measurement - Reference Levels",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "SAME",
+                "UNIQUE"
+              ],
+              "description": "One of: SAME, UNIQUE"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "REFLevels indexed per-source on modern scopes: REFLevels<x> where x matches source number.",
+            "modern_command": "MEASUrement:MEAS<x>:REFLevels<x>:ABSolute:TYPE"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:REFLevels:PERCent:FALLHigh",
+          "description": "Sets or queries the percent fall high reference level",
+          "group": "Measurement - Reference Levels",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "REFLevels indexed per-source on modern scopes: REFLevels<x> where x matches source number.",
+            "modern_command": "MEASUrement:MEAS<x>:REFLevels<x>:PERCent:FALLHigh"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:REFLevels:PERCent:FALLLow",
+          "description": "Sets or queries the percent fall low reference level",
+          "group": "Measurement - Reference Levels",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "REFLevels indexed per-source on modern scopes: REFLevels<x> where x matches source number.",
+            "modern_command": "MEASUrement:MEAS<x>:REFLevels<x>:PERCent:FALLLow"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:REFLevels:PERCent:FALLMid",
+          "description": "Sets or queries the percent fall mid reference level",
+          "group": "Measurement - Reference Levels",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "REFLevels indexed per-source on modern scopes: REFLevels<x> where x matches source number.",
+            "modern_command": "MEASUrement:MEAS<x>:REFLevels<x>:PERCent:FALLMid"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:REFLevels:PERCent:HYSTeresis",
+          "description": "Sets or queries the percent hysteresis value",
+          "group": "Measurement - Reference Levels",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "REFLevels indexed per-source on modern scopes: REFLevels<x> where x matches source number.",
+            "modern_command": "MEASUrement:MEAS<x>:REFLevels<x>:PERCent:HYSTeresis"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:REFLevels:PERCent:RISEHigh",
+          "description": "Sets or queries the percent rise high reference level",
+          "group": "Measurement - Reference Levels",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "REFLevels indexed per-source on modern scopes: REFLevels<x> where x matches source number.",
+            "modern_command": "MEASUrement:MEAS<x>:REFLevels<x>:PERCent:RISEHigh"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:REFLevels:PERCent:RISELow",
+          "description": "Sets or queries the percent rise low reference level",
+          "group": "Measurement - Reference Levels",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "REFLevels indexed per-source on modern scopes: REFLevels<x> where x matches source number.",
+            "modern_command": "MEASUrement:MEAS<x>:REFLevels<x>:PERCent:RISELow"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:REFLevels:PERCent:RISEMid",
+          "description": "Sets or queries the percent rise mid reference level",
+          "group": "Measurement - Reference Levels",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "REFLevels indexed per-source on modern scopes: REFLevels<x> where x matches source number.",
+            "modern_command": "MEASUrement:MEAS<x>:REFLevels<x>:PERCent:RISEMid"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:REFLevels:PERCent:TYPE",
+          "description": "Sets or queries the whether percent rise/fall use same or unique levels",
+          "group": "Measurement - Reference Levels",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "SAME",
+                "UNIQUE"
+              ],
+              "description": "One of: SAME, UNIQUE"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "REFLevels indexed per-source on modern scopes: REFLevels<x> where x matches source number.",
+            "modern_command": "MEASUrement:MEAS<x>:REFLevels<x>:PERCent:TYPE"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:REFLevels:REFLevel:METHod",
+          "description": "Sets or queries the reference level method",
+          "group": "Measurement - Reference Levels",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "PERCENT",
+                "ABSOLUTE"
+              ],
+              "description": "One of: PERCENT, ABSOLUTE"
+            }
+          ],
+          "migration": {
+            "status": "renamed",
+            "notes": "Moved from REFLevel:METHod to REFLevels<x>:METHod. Also available globally: MEASUrement:REFLevels:METHod.",
+            "modern_command": "MEASUrement:MEAS<x>:REFLevels<x>:METHod",
+            "value_map": {
+              "PERCENT": "PERCent",
+              "ABSOLUTE": "ABSolute"
+            }
+          }
+        }
+      ]
+    },
+    "Measurement - Logging": {
+      "name": "Measurement - Logging",
+      "description": "",
+      "commands": [
+        {
+          "scpi": "DPOJET:MEAS<x>:LOGging:MEASurements:FILEname?",
+          "description": "Sets or queries the measurement logging filename",
+          "group": "Measurement - Logging",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Per-measurement logging not available on MSO 4/5/6. Use SAVe commands for data export."
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:LOGging:MEASurements:SELect",
+          "description": "Sets or queries the measurement logging selection",
+          "group": "Measurement - Logging",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "ON",
+                "OFF"
+              ],
+              "description": "One of: ON, OFF"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Per-measurement logging not available on MSO 4/5/6. Use SAVe commands for data export."
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:LOGging:STATistics:SELect",
+          "description": "Sets or queries the statistics logging selection",
+          "group": "Measurement - Logging",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "ON",
+                "OFF"
+              ],
+              "description": "One of: ON, OFF"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Per-measurement logging not available on MSO 4/5/6. Use SAVe commands for data export."
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:LOGging:WORSTcase:SELect",
+          "description": "Sets or queries the worst case logging selection",
+          "group": "Measurement - Logging",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "ON",
+                "OFF"
+              ],
+              "description": "One of: ON, OFF"
+            }
+          ],
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Per-measurement logging not available on MSO 4/5/6. Use SAVe commands for data export."
+          }
+        }
+      ]
+    },
+    "Results": {
+      "name": "Results",
+      "description": "",
+      "commands": [
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts?",
+          "description": "Returns the all results",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "renamed",
+            "notes": "No single query for all results. Query individual statistics.",
+            "modern_command": "MEASUrement:MEAS<x>:RESUlts:ALLAcqs:MEAN?"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts:ALLAcqs?",
+          "description": "Returns the all-acquisitions results",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "No single query. Use individual ALLAcqs queries."
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts:ALLAcqs:MAX?",
+          "description": "Returns the maximum value (all acqs)",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "renamed",
+            "notes": "MAX\u2192MAXimum",
+            "modern_command": "MEASUrement:MEAS<x>:RESUlts:ALLAcqs:MAXimum?"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts:ALLAcqs:MEAN?",
+          "description": "Returns the mean value (all acqs)",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:RESUlts:ALLAcqs:MEAN?"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts:ALLAcqs:MIN?",
+          "description": "Returns the minimum value (all acqs)",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "renamed",
+            "notes": "MIN\u2192MINimum",
+            "modern_command": "MEASUrement:MEAS<x>:RESUlts:ALLAcqs:MINimum?"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts:ALLAcqs:PK2PK?",
+          "description": "Returns the peak-to-peak (all acqs)",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:RESUlts:ALLAcqs:PK2PK?"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts:ALLAcqs:POPUlation?",
+          "description": "Returns the population (all acqs)",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:RESUlts:ALLAcqs:POPUlation?"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts:ALLAcqs:STDdev?",
+          "description": "Returns the std deviation (all acqs)",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "renamed",
+            "notes": "STDdev\u2192STDDev",
+            "modern_command": "MEASUrement:MEAS<x>:RESUlts:ALLAcqs:STDDev?"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts:CURRentacq:MAX?",
+          "description": "Returns the maximum (current acq)",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "renamed",
+            "notes": "MAX\u2192MAXimum",
+            "modern_command": "MEASUrement:MEAS<x>:RESUlts:CURRentacq:MAXimum?"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts:CURRentacq:MEAN?",
+          "description": "Returns the mean (current acq)",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:RESUlts:CURRentacq:MEAN?"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts:CURRentacq:MIN?",
+          "description": "Returns the minimum (current acq)",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "renamed",
+            "notes": "MIN\u2192MINimum",
+            "modern_command": "MEASUrement:MEAS<x>:RESUlts:CURRentacq:MINimum?"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts:CURRentacq:PK2PK?",
+          "description": "Returns the peak-to-peak (current acq)",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:RESUlts:CURRentacq:PK2PK?"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts:CURRentacq:POPUlation?",
+          "description": "Returns the population (current acq)",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "MEASUrement:MEAS<x>:RESUlts:CURRentacq:POPUlation?"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts:CURRentacq:STDdev?",
+          "description": "Returns the std deviation (current acq)",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "renamed",
+            "notes": "STDdev\u2192STDDev",
+            "modern_command": "MEASUrement:MEAS<x>:RESUlts:CURRentacq:STDDev?"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts:GetAll?",
+          "description": "Returns the all results in one query",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "No equivalent. Query individual result statistics."
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts:ALLAcqs:LIMits:STATus?",
+          "description": "Returns the limits pass/fail status",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "renamed",
+            "notes": "Limits status via measurement STATUS query.",
+            "modern_command": "MEASUrement:MEAS<x>:STATUS?"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts:ALLAcqs:LIMits:HIgh:STATus?",
+          "description": "Returns the high limit status",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Use PASSFAILHIGHlimit and check STATUS."
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts:ALLAcqs:LIMits:LOw:STATus?",
+          "description": "Returns the low limit status",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Use PASSFAILLOWlimit and check STATUS."
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts:ALLAcqs:HITS?",
+          "description": "Returns the mask hits count",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "renamed",
+            "notes": "Mask hits moved to EYEMASK group.",
+            "modern_command": "EYEMASK:MASK<x>:COUNt:HITS?"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts:ALLAcqs:HITPopulation?",
+          "description": "Returns the hit population",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Use EYEMASK:MASK<x>:COUNt:HITS?"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts:ALLAcqs:MAXHits?",
+          "description": "Returns the maximum hits",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Detailed hit stats in EYEMASK group."
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts:ALLAcqs:MINHits?",
+          "description": "Returns the minimum hits",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "no_equivalent",
+            "notes": "Detailed hit stats in EYEMASK group."
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts:ALLAcqs:MAXCC?",
+          "description": "Returns the max cycle-to-cycle",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "renamed",
+            "notes": "CC results moved to CCRESUlts sub-tree.",
+            "modern_command": "MEASUrement:MEAS<x>:CCRESUlts:ALLAcqs:MAXimum?"
+          }
+        },
+        {
+          "scpi": "DPOJET:MEAS<x>:RESULts:ALLAcqs:MINCC?",
+          "description": "Returns the min cycle-to-cycle",
+          "group": "Results",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "renamed",
+            "notes": "CC results moved to CCRESUlts sub-tree.",
+            "modern_command": "MEASUrement:MEAS<x>:CCRESUlts:ALLAcqs:MINimum?"
+          }
+        }
+      ]
+    },
+    "Plots": {
+      "name": "Plots",
+      "description": "",
+      "commands": [
+        {
+          "scpi": "DPOJET:PLOT<x>:TYPE",
+          "description": "Sets or queries the plot type",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "EYEDIAGRAM",
+                "BATHTUB",
+                "HISTOGRAM",
+                "SPECTRUM",
+                "TIMETREND",
+                "TRANSFER",
+                "PHASENOISE"
+              ],
+              "description": "One of: EYEDIAGRAM, BATHTUB, HISTOGRAM, SPECTRUM, TIMETREND, TRANSFER, PHASENOISE"
+            }
+          ],
+          "migration": {
+            "status": "values_changed",
+            "notes": "Plot type moved to PLOT namespace. Specific type value names may differ on modern scopes. Add plots via PLOT:ADDNew.",
+            "modern_command": "PLOT:PLOT<x>:TYPe"
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:SOUrce",
+          "description": "Sets or queries the measurement source for this plot",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "arguments": "MEAS1 - MEAS8",
+          "migration": {
+            "status": "renamed",
+            "notes": "SOUrce generalized to SOUrce<x>.",
+            "modern_command": "PLOT:PLOT<x>:SOUrce<x>"
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:BATHtub:BER",
+          "description": "Sets or queries the bathtub BER value for plot",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "PLOT:PLOT<x>:BATHtub:BER"
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:NUMBins",
+          "description": "Sets or queries the number of bins for the plot",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR1>"
+            }
+          ],
+          "migration": {
+            "status": "values_changed",
+            "notes": "Modern uses enumerated values: TWENtyfive|FIFTY|HUNdred|TWOFifty|FIVEHundred|TWOThousand|MAXimum instead of arbitrary integer.",
+            "modern_command": "PLOT:PLOT<x>:NUMBins"
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:SPECtrum:BASE",
+          "description": "Sets or queries the spectrum base frequency",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "direct",
+            "notes": "",
+            "modern_command": "PLOT:PLOT<x>:SPECtrum:BASE"
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:CURRentacq",
+          "description": "Sets or queries the showing current acquisition on plot",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "ON",
+                "OFF"
+              ],
+              "description": "One of: ON, OFF"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Plot functionality restructured. Modern plots use PLOT:ADDNew and PLOT:PLOT<x>: sub-tree."
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:DATA?",
+          "description": "Returns the plot data",
+          "group": "Plots",
+          "set": false,
+          "query": true,
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Plot functionality restructured. Modern plots use PLOT:ADDNew and PLOT:PLOT<x>: sub-tree."
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:EXPort",
+          "description": "Sets or queries the plot data export",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "arguments": "EXECUTE",
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Plot functionality restructured. Modern plots use PLOT:ADDNew and PLOT:PLOT<x>: sub-tree."
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:EXPortRAW",
+          "description": "Sets or queries the raw plot data export",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "arguments": "EXECUTE",
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Plot functionality restructured. Modern plots use PLOT:ADDNew and PLOT:PLOT<x>: sub-tree."
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:FILEName",
+          "description": "Sets or queries the plot export filename",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "string",
+              "description": "<string>"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Plot functionality restructured. Modern plots use PLOT:ADDNew and PLOT:PLOT<x>: sub-tree."
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:FILEFormat",
+          "description": "Sets or queries the plot file format",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "PNG",
+                "BMP",
+                "JPG"
+              ],
+              "description": "One of: PNG, BMP, JPG"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Plot functionality restructured. Modern plots use PLOT:ADDNew and PLOT:PLOT<x>: sub-tree."
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:MEASurement",
+          "description": "Sets or queries the associated measurement",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR1>"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Plot functionality restructured. Modern plots use PLOT:ADDNew and PLOT:PLOT<x>: sub-tree."
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:TRENd:TYPe",
+          "description": "Sets or queries the trend type",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "MEASUREMENT",
+                "ACQTIME"
+              ],
+              "description": "One of: MEASUREMENT, ACQTIME"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Plot functionality restructured. Modern plots use PLOT:ADDNew and PLOT:PLOT<x>: sub-tree."
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:HISTOgram:AUTOScale",
+          "description": "Sets or queries the histogram auto scale",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "ON",
+                "OFF"
+              ],
+              "description": "One of: ON, OFF"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Histogram/Spectrum/TimeTrend plot parameters restructured. Check PLOT:PLOT<x>: sub-tree on modern scopes."
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:HISTOgram:HORizontal:MAX",
+          "description": "Sets or queries the histogram horizontal max",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Histogram/Spectrum/TimeTrend plot parameters restructured. Check PLOT:PLOT<x>: sub-tree on modern scopes."
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:HISTOgram:HORizontal:MIN",
+          "description": "Sets or queries the histogram horizontal min",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Histogram/Spectrum/TimeTrend plot parameters restructured. Check PLOT:PLOT<x>: sub-tree on modern scopes."
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:HISTOgram:NUMBins",
+          "description": "Sets or queries the histogram bin count",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR1>"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Histogram/Spectrum/TimeTrend plot parameters restructured. Check PLOT:PLOT<x>: sub-tree on modern scopes."
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:HISTOgram:VERTical:SCALE",
+          "description": "Sets or queries the histogram vertical scale",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "LINEAR",
+                "LOG"
+              ],
+              "description": "One of: LINEAR, LOG"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Histogram/Spectrum/TimeTrend plot parameters restructured. Check PLOT:PLOT<x>: sub-tree on modern scopes."
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:SPECtrum:HORizontal:MAX",
+          "description": "Sets or queries the spectrum horizontal max",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Histogram/Spectrum/TimeTrend plot parameters restructured. Check PLOT:PLOT<x>: sub-tree on modern scopes."
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:SPECtrum:HORizontal:MIN",
+          "description": "Sets or queries the spectrum horizontal min",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Histogram/Spectrum/TimeTrend plot parameters restructured. Check PLOT:PLOT<x>: sub-tree on modern scopes."
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:SPECtrum:HORizontal:SCALE",
+          "description": "Sets or queries the spectrum horizontal scale",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "LINEAR",
+                "LOG"
+              ],
+              "description": "One of: LINEAR, LOG"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Histogram/Spectrum/TimeTrend plot parameters restructured. Check PLOT:PLOT<x>: sub-tree on modern scopes."
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:SPECtrum:VERTical:MAX",
+          "description": "Sets or queries the spectrum vertical max",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Histogram/Spectrum/TimeTrend plot parameters restructured. Check PLOT:PLOT<x>: sub-tree on modern scopes."
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:SPECtrum:VERTical:MIN",
+          "description": "Sets or queries the spectrum vertical min",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Histogram/Spectrum/TimeTrend plot parameters restructured. Check PLOT:PLOT<x>: sub-tree on modern scopes."
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:SPECtrum:VERTical:SCALE",
+          "description": "Sets or queries the spectrum vertical scale",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "LINEAR",
+                "LOG"
+              ],
+              "description": "One of: LINEAR, LOG"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Histogram/Spectrum/TimeTrend plot parameters restructured. Check PLOT:PLOT<x>: sub-tree on modern scopes."
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:TIMETrend:VERTical:MAX",
+          "description": "Sets or queries the time trend vertical max",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Histogram/Spectrum/TimeTrend plot parameters restructured. Check PLOT:PLOT<x>: sub-tree on modern scopes."
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:TIMETrend:VERTical:MIN",
+          "description": "Sets or queries the time trend vertical min",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "number",
+              "description": "<NR3>"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Histogram/Spectrum/TimeTrend plot parameters restructured. Check PLOT:PLOT<x>: sub-tree on modern scopes."
+          }
+        },
+        {
+          "scpi": "DPOJET:PLOT<x>:TIMETrend:VERTical:SCALE",
+          "description": "Sets or queries the time trend vertical scale mode",
+          "group": "Plots",
+          "set": true,
+          "query": true,
+          "params": [
+            {
+              "name": "value",
+              "type": "enumeration",
+              "options": [
+                "AUTO",
+                "MANUAL"
+              ],
+              "description": "One of: AUTO, MANUAL"
+            }
+          ],
+          "migration": {
+            "status": "needs_verification",
+            "notes": "Histogram/Spectrum/TimeTrend plot parameters restructured. Check PLOT:PLOT<x>: sub-tree on modern scopes."
+          }
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "instrument_family": "DPOJET",
+    "description": "DPOJET Jitter and Eye Diagram Analysis Tools - SCPI Command Database with MSO 4/5/6 Migration Mappings",
+    "source_manual": "DPOJET Online Help (077-0048-13), September 2012",
+    "target_manual": "4/5/6 Series MSO Programmer Manual (077-1305-24)",
+    "applies_to": [
+      "DPO7000",
+      "DPO7000C",
+      "MSO5000",
+      "MSO5000B",
+      "DPO5000",
+      "DPO5000B",
+      "DPO70000",
+      "DPO70000SX",
+      "DSA70000",
+      "MSO70000"
+    ],
+    "migrates_to": [
+      "MSO44",
+      "MSO44B",
+      "MSO46",
+      "MSO46B",
+      "MSO54",
+      "MSO54B",
+      "MSO56",
+      "MSO56B",
+      "MSO58",
+      "MSO58B",
+      "MSO58LP",
+      "MSO64",
+      "MSO64B",
+      "MSO66B",
+      "MSO68B",
+      "LPD64"
+    ],
+    "option_tiers": {
+      "DJE": "Essentials - basic jitter (TIE) and timing analysis",
+      "DJA": "Advanced - full jitter, timing, and eye diagram analysis",
+      "DJAN": "Advanced Plus - full jitter, noise, timing, and eye diagram analysis"
+    },
+    "command_count": 204,
+    "migration_statistics": {
+      "integrated": 4,
+      "values_changed": 15,
+      "renamed": 54,
+      "no_equivalent": 45,
+      "needs_verification": 34,
+      "direct": 33,
+      "restructured": 19
+    },
+    "version": "2.0.0"
+  },
+  "measurement_type_map": {
+    "_description": "Maps DPOJET ADDMeas measurement type names to MSO 4/5/6 ADDMEAS/TYPe names",
+    "direct": {
+      "PERIOD": "PERIOD",
+      "FREQUENCY": "FREQUENCY",
+      "PDUTY": "PDUTY",
+      "NDUTY": "NDUty",
+      "PWIDTH": "PWIDTH",
+      "NWIDTH": "NWIDTH",
+      "NPERIOD": "NPERIOD",
+      "TIE": "TIE",
+      "TJBER": "TJBER",
+      "RJ": "RJ",
+      "DJ": "DJ",
+      "DDJ": "DDJ",
+      "PJ": "PJ",
+      "NPJ": "NPJ",
+      "DCD": "DCD",
+      "PHASENOISE": "PHASENOISE",
+      "RJDIRAC": "RJDIRAC",
+      "DJDIRAC": "DJDIRAC",
+      "HEIGHTBER": "HEIGHTBER",
+      "WIDTHBER": "WIDTHBER",
+      "EYEHIGH": "EYEHIGH",
+      "EYELOW": "EYELOW",
+      "QFACTOR": "QFACTOR",
+      "RISETIME": "RISETIME",
+      "FALLTIME": "FALLTIME",
+      "HIGHTIME": "HIGHTIME",
+      "LOWTIME": "LOWTIME",
+      "SKEW": "SKEW",
+      "RISESLEWRATE": "RISESLEWRATE",
+      "FALLSLEWRATE": "FALLSLEWRATE",
+      "HIGH": "HIGH",
+      "LOW": "LOW",
+      "ACCOMMONMODE": "ACCOMMONMODE",
+      "VDIFFXOVR": "VDIFFXOVR",
+      "TNTRATIO": "TNTRATIO",
+      "SSCFREQDEV": "SSCFREQDEV",
+      "SSCMODRATE": "SSCMODRATE",
+      "TIMEOUTSIDELEVEL": "TIMEOUTSIDELEVEL",
+      "JITTERSUMMARY": "JITTERSUMMARY"
+    },
+    "renamed": {
+      "EYEHEIGHT": "HEIGHT",
+      "EYEWIDTH": "WIDTH",
+      "SETUPTIME": "SETUP",
+      "HOLDTIME": "HOLD",
+      "DCCOMMONMODE": "COMMONMODE",
+      "CCPERIOD": "CCJITTER",
+      "DDR3VIX": "DDRVIXAC",
+      "DDRSETUP": "DDRSETUPDIFF",
+      "DDRHOLD": "DDRHOLDDIFF",
+      "DDRTCK": "DDRTCKAVERAGE",
+      "OVERSHOOT": "POVERSHOOT",
+      "UNDERSHOOT": "NOVERSHOOT"
+    },
+    "split": {
+      "DDRTCH": [
+        "DDRTCHABS",
+        "DDRTCHAVERAGE"
+      ],
+      "DDRTCL": [
+        "DDRTCLABS",
+        "DDRTCLAVERAGE"
+      ],
+      "DDROVERAREA": [
+        "DDRAOS",
+        "DDRAOSPERTCK",
+        "DDRAOSPERUI"
+      ],
+      "DDRUNDERAREA": [
+        "DDRAUS",
+        "DDRAUSPERTCK",
+        "DDRAUSPERUI"
+      ]
+    },
+    "removed_or_moved": {
+      "MASKHITS": "Use EYEMASK:MASK<x>:COUNt:HITS?",
+      "HIGHLOWDIFF": "Compute via MATH or use HIGH-LOW separately",
+      "CYCLEMAX": "Use MAXIMUM with CYCLemode",
+      "CYCLEMIN": "Use MINIMUM with CYCLemode",
+      "CYCLEPKPK": "Use PK2Pk with CYCLemode",
+      "SSCPROFILE": "SSC profile handled via plots, not measurement type",
+      "SSCFREQDEVMIN": "Use SSCFREQDEV results MIN query",
+      "SSCFREQDEVMAX": "Use SSCFREQDEV results MAX query"
+    },
+    "standard_specific_no_equivalent": {
+      "PCIETXDIFFPP": "PCIe compliance measurements may require TekExpress",
+      "PCIETX": "PCIe compliance measurements may require TekExpress",
+      "PCIETXFALL": "PCIe compliance measurements may require TekExpress",
+      "PCIETXRISE": "PCIe compliance measurements may require TekExpress",
+      "PCIETMINPULSE": "PCIe compliance measurements may require TekExpress",
+      "PCIEDEEMPH": "PCIe compliance measurements may require TekExpress",
+      "PCIEUI": "PCIe compliance measurements may require TekExpress",
+      "PCIEMEDMXJITTER": "PCIe compliance measurements may require TekExpress",
+      "PCIERFMISMCH": "PCIe compliance measurements may require TekExpress",
+      "PCIEMAXMINRATIO": "PCIe compliance measurements may require TekExpress",
+      "PCIESSCPROFILE": "PCIe compliance measurements may require TekExpress",
+      "PCIESSCFREQDEV": "PCIe compliance measurements may require TekExpress",
+      "PCIEACCOMMONMODE": "PCIe compliance measurements may require TekExpress",
+      "GDDR5TBURSTCMD": "GDDR5 measurements may require TekExpress",
+      "GDDR5TCKSRE": "GDDR5 measurements may require TekExpress",
+      "GDDR5TCKSRX": "GDDR5 measurements may require TekExpress",
+      "USBVTXDIFFPP": "USB compliance measurements may require TekExpress",
+      "USBTCDRSLEW": "USB compliance measurements may require TekExpress",
+      "USBTMINPULSETJ": "USB compliance measurements may require TekExpress",
+      "USBTMINPULSEDJ": "USB compliance measurements may require TekExpress",
+      "USBSSCMODRATE": "USB compliance measurements may require TekExpress",
+      "USBSSCFREQDEVMAX": "USB compliance measurements may require TekExpress",
+      "USBSSCFREQDEVMIN": "USB compliance measurements may require TekExpress",
+      "USBSSCPROFILE": "USB compliance measurements may require TekExpress",
+      "USBUI": "USB compliance measurements may require TekExpress",
+      "USBACCOMMONMODE": "USB compliance measurements may require TekExpress",
+      "TTXDDJ": "Transmitter compliance via TekExpress",
+      "TTXUTJ": "Transmitter compliance via TekExpress",
+      "TTXUDJDD": "Transmitter compliance via TekExpress",
+      "TTXUPWTJ": "Transmitter compliance via TekExpress",
+      "TTXUPWDJDD": "Transmitter compliance via TekExpress",
+      "VTXEQNO": "Transmitter compliance via TekExpress",
+      "VTXEIEOS": "Transmitter compliance via TekExpress",
+      "PS21TX": "Transmitter compliance via TekExpress",
+      "TCMDCMD": "Timing measurement may require specific DDR option",
+      "PCCDUTY": "Cycle-cycle duty may map to CCJITTER with config",
+      "NCCDUTY": "Cycle-cycle duty may map to CCJITTER with config"
+    }
+  },
+  "clock_recovery_standard_map": {
+    "_description": "Maps DPOJET clock recovery standard names to MSO 4/5/6 names",
+    "CUSTOM": "CUSTom",
+    "PCIE_2_5G": "PCIE_GEN1",
+    "PCIE_5G": "PCIE_GEN2",
+    "PCIE_8G": "PCIE_GEN3",
+    "SATA_1_5G": "SATA_GEN1",
+    "SATA_3G": "SATA_GEN2",
+    "SATA_6G": "SATA_GEN3",
+    "SAS_1_5G": "SAS15_NOSSC",
+    "SAS_3G": "SAS3_NOSSC",
+    "SAS_6G": "SAS6_NOSSC",
+    "USB3_5G": "USB3",
+    "XAUI": "XAUI",
+    "FIBRE_1G": "FC133",
+    "FIBRE_2G": "FC266",
+    "FIBRE_4G": "FC531",
+    "FIBRE_8G": "FC1063",
+    "FIBRE_10G": "FC2125",
+    "FIBRE_14G": "FC8500",
+    "INFINIBAND_2_5G": "IBA2500",
+    "INFINIBAND_5G": "IBA_GEN2",
+    "ETHERNET_1_25G": "ENET1000",
+    "ETHERNET_10_3G": "NEEDS_VERIFICATION",
+    "RATE_CUSTOM": "CUSTom",
+    "RATE_USER": "CUSTom"
+  }
+}

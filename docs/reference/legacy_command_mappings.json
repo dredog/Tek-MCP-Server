@@ -1,0 +1,1074 @@
+{
+  "version": "1.0",
+  "description": "Maps legacy MSO/DPO 5000/7000/70000 and 4/5/6 Series MSO commands to modern DPO 7 Series / MSO 4/5/6 Series commands",
+  "source": "7 Series DPO Performance Oscilloscope Programmer Manual (077-1860-01), Pages 12-16",
+  "notes": [
+    "The DPO 7 Series has implicit backwards compatibility - legacy commands are automatically translated",
+    "For custom command processing, use the PI Translator feature on the scope",
+    "See tek.com for the Programming Interface Translator technical brief"
+  ],
+  "mappings": [
+    {
+      "legacy": ":SV:SV<n>:UNIts",
+      "modern": ":SV:CH<n>:UNIts",
+      "category": "Spectrum View",
+      "notes": "Spectrum View units moved to channel namespace"
+    },
+    {
+      "legacy": ":BUS:B<n>:AUDio:FRAMESync:SOUrce",
+      "modern": ":BUS:B<n>:AUDio:WORDSel:SOUrce",
+      "category": "Bus - Audio",
+      "notes": "FrameSync renamed to WordSel"
+    },
+    {
+      "legacy": ":BUS:B<n>:AUDio:FRAMESync:POLarity",
+      "modern": ":BUS:B<n>:AUDio:WORDSel:POLarity",
+      "category": "Bus - Audio",
+      "notes": "FrameSync renamed to WordSel"
+    },
+    {
+      "legacy": ":BUS:B<n>:AUTOETHERnet:SOUrce:DIFFerential",
+      "modern": ":BUS:B<n>:AUTOETHERnet:SOUrce",
+      "category": "Bus - Automotive Ethernet",
+      "notes": "Differential suffix removed"
+    },
+    {
+      "legacy": ":BUS:B<n>:AUTOETHERnet:LOWerthreshold",
+      "modern": ":BUS:B<n>:AUTOETHERnet:LOWTHRESHold",
+      "category": "Bus - Automotive Ethernet",
+      "notes": "Spelling standardized"
+    },
+    {
+      "legacy": ":BUS:B<n>:CAN:BITRate:VALue",
+      "modern": ":BUS:B<n>:CAN:BITRate:CUSTom",
+      "category": "Bus - CAN",
+      "notes": "VALue renamed to CUSTom"
+    },
+    {
+      "legacy": ":BUS:B<n>:CAN:FD:BITRate:VALue",
+      "modern": ":BUS:B<n>:CAN:FD:BITRate:CUSTom",
+      "category": "Bus - CAN FD",
+      "notes": "VALue renamed to CUSTom"
+    },
+    {
+      "legacy": ":MEASUrement:MEAS<n>:EDGEQUALifier",
+      "modern": ":MEASUrement:MEAS<n>:SOUrce<n>",
+      "category": "Measurement",
+      "notes": "Edge qualifier now uses source specifier"
+    },
+    {
+      "legacy": ":MEASUrement:MEAS<n>:ACQTime",
+      "modern": ":MEASUrement:MEAS<n>:WAITTime",
+      "category": "Measurement",
+      "notes": "ACQTime renamed to WAITTime"
+    },
+    {
+      "legacy": ":BUS:B<n>:ETHERnet:SOUrce:DIFFerential",
+      "modern": ":BUS:B<n>:ETHERnet:SOUrce",
+      "category": "Bus - Ethernet",
+      "notes": "Differential suffix removed"
+    },
+    {
+      "legacy": ":BUS:B<n>:ETHERnet:LOWerthreshold",
+      "modern": ":BUS:B<n>:ETHERnet:LOWTHRESHold",
+      "category": "Bus - Ethernet",
+      "notes": "Spelling standardized"
+    },
+    {
+      "legacy": ":BUS:B<n>:THReshold",
+      "modern": ":BUS:B<n>:FLEXray:THRESHold",
+      "category": "Bus - FlexRay",
+      "notes": "Generic threshold moved to FlexRay namespace"
+    },
+    {
+      "legacy": ":BUS:B<n>:LOWerthreshold",
+      "modern": ":BUS:B<n>:FLEXray:LOWTHRESHold",
+      "category": "Bus - FlexRay",
+      "notes": "Generic lower threshold moved to FlexRay namespace"
+    },
+    {
+      "legacy": ":DPOJET:GATing",
+      "modern": ":MEASUrement:MEAS<n>:GATing",
+      "category": "Measurement - DPOJET",
+      "notes": "DPOJET gating moved to per-measurement setting"
+    },
+    {
+      "legacy": ":BUS:B<n>:I2C:SCLk:SOUrce",
+      "modern": ":BUS:B<n>:I2C:CLOCk:SOUrce",
+      "category": "Bus - I2C",
+      "notes": "SCLk renamed to CLOCk"
+    },
+    {
+      "legacy": ":BUS:B<n>:I2C:ADDRess:RWINClude",
+      "modern": ":BUS:B<n>:I2C:DATa:SOUrce",
+      "category": "Bus - I2C",
+      "notes": "Address RW include replaced with data source"
+    },
+    {
+      "legacy": ":BUS:B<n>:I3C:SCLk:SOUrce",
+      "modern": ":BUS:B<n>:I3C:CLOCk:SOUrce",
+      "category": "Bus - I3C",
+      "notes": "SCLk renamed to CLOCk"
+    },
+    {
+      "legacy": ":BUS:B<n>:I3C:SDAta:SOUrce",
+      "modern": ":BUS:B<n>:I3C:DATa:SOUrce",
+      "category": "Bus - I3C",
+      "notes": "SDAta renamed to DATa"
+    },
+    {
+      "legacy": ":MEASUrement:MEAS<n>:FUNDAMENTALFreq",
+      "modern": ":MEASUrement:MEAS<n>:FREQ",
+      "category": "Measurement",
+      "notes": "FUNDAMENTALFreq simplified to FREQ"
+    },
+    {
+      "legacy": ":BUS:B<n>:LIN:VALue",
+      "modern": ":BUS:B<n>:LIN:BITRate:CUSTom",
+      "category": "Bus - LIN",
+      "notes": "VALue moved to BITRate:CUSTom"
+    },
+    {
+      "legacy": ":MATH:MATH<n>:SPECTral:UNWRap",
+      "modern": ":MATH:MATH<n>:SPECTral:WRAP:STATE",
+      "category": "Math - Spectral",
+      "notes": "UNWRap renamed to WRAP:STATE (inverted logic)"
+    },
+    {
+      "legacy": ":MATH:MATH<n>:SPECTral:UNWRap:DEGrees",
+      "modern": ":MATH:MATH<n>:SPECTral:WRAP:DEGrees",
+      "category": "Math - Spectral",
+      "notes": "UNWRap renamed to WRAP"
+    },
+    {
+      "legacy": ":BUS:B<n>:MDIO:SCLOCk:SOUrce",
+      "modern": ":BUS:B<n>:MDIO:CLOCk:SOUrce",
+      "category": "Bus - MDIO",
+      "notes": "SCLOCk renamed to CLOCk"
+    },
+    {
+      "legacy": ":BUS:B<n>:MDIO:SDATA:SOUrce",
+      "modern": ":BUS:B<n>:MDIO:DATA:SOUrce",
+      "category": "Bus - MDIO",
+      "notes": "SDATA renamed to DATA"
+    },
+    {
+      "legacy": ":DPOJET:DIRacmodel",
+      "modern": ":MEASUrement:DIRacmodel",
+      "category": "Measurement - DPOJET",
+      "notes": "Moved from DPOJET to MEASUrement namespace"
+    },
+    {
+      "legacy": ":DPOJET:JITTermodel",
+      "modern": ":MEASUrement:JITTermodel",
+      "category": "Measurement - DPOJET",
+      "notes": "Moved from DPOJET to MEASUrement namespace"
+    },
+    {
+      "legacy": ":DPOJET:MINBUJUI",
+      "modern": ":MEASUrement:MINUI",
+      "category": "Measurement - DPOJET",
+      "notes": "MINBUJUI renamed to MINUI"
+    },
+    {
+      "legacy": ":DPOJET:INTERp",
+      "modern": ":MEASUrement:INTERp",
+      "category": "Measurement - DPOJET",
+      "notes": "Moved from DPOJET to MEASUrement namespace"
+    },
+    {
+      "legacy": ":BUS:B<n>:MIL1553B:LOWerthreshold",
+      "modern": ":BUS:B<n>:MIL1553B:LOWTHRESHold",
+      "category": "Bus - MIL-STD-1553",
+      "notes": "Spelling standardized"
+    },
+    {
+      "legacy": ":DPOJET:PLOT<n>:SPECtrum:HORizontal:SCALE",
+      "modern": ":PLOT:PLOT<n>:SPECtrum:HORizontal:SCALE",
+      "category": "Plot - DPOJET",
+      "notes": "Moved from DPOJET to PLOT namespace"
+    },
+    {
+      "legacy": ":DPOJET:PLOT<n>:SPECtrum:BASE",
+      "modern": ":PLOT:PLOT<n>:SPECtrum:BASE",
+      "category": "Plot - DPOJET",
+      "notes": "Moved from DPOJET to PLOT namespace"
+    },
+    {
+      "legacy": ":DPOJET:PLOT<n>:BATHtub:BER",
+      "modern": ":PLOT:PLOT<n>:BATHtub:BER",
+      "category": "Plot - DPOJET",
+      "notes": "Moved from DPOJET to PLOT namespace"
+    },
+    {
+      "legacy": ":BUS:B<n>:RS232C:TX:SOUrce",
+      "modern": ":BUS:B<n>:RS232C:SOUrce",
+      "category": "Bus - RS232",
+      "notes": "TX removed from path"
+    },
+    {
+      "legacy": ":BUS:B<n>:RS232C:TX:SOUrce:THReshold",
+      "modern": ":BUS:B<n>:RS232C:SOUrce:THReshold",
+      "category": "Bus - RS232",
+      "notes": "TX removed from path"
+    },
+    {
+      "legacy": ":SEARCH:SEARCH<n>:TRIGger:A:WINdow:POLarity",
+      "modern": ":SEARCH:SEARCH<n>:TRIGger:A:WINdow:CROSSIng",
+      "category": "Search",
+      "notes": "POLarity renamed to CROSSIng"
+    },
+    {
+      "legacy": ":BUS:B<n>:SPACEWIRe:SDAta:SOUrce",
+      "modern": ":BUS:B<n>:SPACEWIRe:DATa:SOUrce",
+      "category": "Bus - SpaceWire",
+      "notes": "SDAta renamed to DATa"
+    },
+    {
+      "legacy": ":BUS:B<n>:SPACEWIRe:SSTRobe:SOUrce",
+      "modern": ":BUS:B<n>:SPACEWIRe:STRobe:SOUrce",
+      "category": "Bus - SpaceWire",
+      "notes": "SSTRobe renamed to STRobe"
+    },
+    {
+      "legacy": ":BUS:B<n>:SPI:SCLk:SOUrce",
+      "modern": ":BUS:B<n>:SPI:CLOCk:SOUrce",
+      "category": "Bus - SPI",
+      "notes": "SCLk renamed to CLOCk"
+    },
+    {
+      "legacy": ":BUS:B<n>:SPI:MOSi:INPut",
+      "modern": ":BUS:B<n>:SPI:DATa:SOUrce",
+      "category": "Bus - SPI",
+      "notes": "MOSi:INPut renamed to DATa:SOUrce"
+    },
+    {
+      "legacy": ":BUS:B<n>:SPI:SS:SOUrce",
+      "modern": ":BUS:B<n>:SPI:SELect:SOUrce",
+      "category": "Bus - SPI",
+      "notes": "SS renamed to SELect"
+    },
+    {
+      "legacy": ":BUS:B<n>:SPI:MOSi:THReshold",
+      "modern": ":BUS:B<n>:SPI:DATa:THReshold",
+      "category": "Bus - SPI",
+      "notes": "MOSi renamed to DATa"
+    },
+    {
+      "legacy": ":BUS:B<n>:SPI:SCLk:POLarity",
+      "modern": ":BUS:B<n>:SPI:CLOCk:POLarity",
+      "category": "Bus - SPI",
+      "notes": "SCLk renamed to CLOCk"
+    },
+    {
+      "legacy": ":BUS:B<n>:SPI:MOSi:DATa:POLarity",
+      "modern": ":BUS:B<n>:SPI:DATa:POLarity",
+      "category": "Bus - SPI",
+      "notes": "MOSi removed from path"
+    },
+    {
+      "legacy": ":BUS:B<n>:SPI:SS:POLarity",
+      "modern": ":BUS:B<n>:SPI:SELect:POLarity",
+      "category": "Bus - SPI",
+      "notes": "SS renamed to SELect"
+    },
+    {
+      "legacy": ":BUS:B<n>:SPMI:SDAta:SOUrce",
+      "modern": ":BUS:B<n>:SPMI:SDATa:SOUrce",
+      "category": "Bus - SPMI",
+      "notes": "Capitalization change only"
+    },
+    {
+      "legacy": ":MEASUrement:MEAS<n>:DELay:DIREction",
+      "modern": ":MEASUrement:MEAS<n>:TOEDGESEARCHDIRec",
+      "category": "Measurement",
+      "notes": "DELay:DIREction renamed to TOEDGESEARCHDIRec"
+    },
+    {
+      "legacy": ":BUS:B<n>:USB:SOUrce:DIFFerential",
+      "modern": ":BUS:B<n>:USB:SOUrce",
+      "category": "Bus - USB",
+      "notes": "Differential suffix removed"
+    },
+    {
+      "legacy": ":BUS:B<n>:USB:LOWerthreshold",
+      "modern": ":BUS:B<n>:USB:LOWTHRESHold",
+      "category": "Bus - USB",
+      "notes": "Spelling standardized"
+    },
+    {
+      "legacy": ":MATH:MATH<n>:POSITION",
+      "modern": ":DISplay:WAVEView<n>:MATH:MATH<n>:VERTical:POSition",
+      "category": "Math Display",
+      "notes": "Position moved to display namespace - major restructure"
+    },
+    {
+      "legacy": ":MATH:MATH<n>:SCAle",
+      "modern": ":DISplay:WAVEView<n>:MATH:MATH<n>:VERTical:SCAle",
+      "category": "Math Display",
+      "notes": "Scale moved to display namespace - major restructure"
+    },
+    {
+      "legacy": ":REF:REF<n>:POSITION",
+      "modern": ":DISplay:WAVEView<n>:REF:REF<n>:VERTical:POSition",
+      "category": "Reference Display",
+      "notes": "Position moved to display namespace - major restructure"
+    },
+    {
+      "legacy": ":REF:REF<n>:SCAle",
+      "modern": ":DISplay:WAVEView<n>:REF:REF<n>:VERTical:SCAle",
+      "category": "Reference Display",
+      "notes": "Scale moved to display namespace - major restructure"
+    },
+    {
+      "legacy": ":HORizontal:FASTframe:SELECTED:REF<n>",
+      "modern": ":DISplay:WAVEView<n>:REF:REF<n>:FRAMe",
+      "category": "FastFrame",
+      "notes": "FastFrame selection moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:VBArs:POSITIONA",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:VBArs:APOSition",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:VBArs:POSITIONB",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:VBArs:BPOSition",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:HBArs:POSITIONA",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:HBArs:APOSition",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:HBArs:POSITIONB",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:HBArs:BPOSition",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:SCREEN:XPOSITIONA",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:SCREEN:AXPOSition",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:SCREEN:XPOSITIONB",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:SCREEN:BXPOSition",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:SCREEN:YPOSITIONA",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:SCREEN:AYPOSition",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:SCREEN:YPOSITIONB",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:SCREEN:BYPOSition",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:WAVEform:POSITIONA",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:WAVEform:APOSition",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:WAVEform:POSITIONB",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:WAVEform:BPOSition",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:SOURCEA",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:ASOUrce",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:SOURCEB",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:BSOUrce",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:VBArs:UNIts",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:VBArs:UNIts",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:HBArs:UNITA",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:HBArs:AUNIts",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:HBArs:UNITB",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:HBArs:BUNIts",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:VBArs:ALTERNATEA",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:VBArs:ALTERNATEA",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:VBArs:ALTERNATEB",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:VBArs:ALTERNATEB",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:VBArs:DELTa",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:VBArs:DELTa",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:WAVEform:HDELTa",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:HBArs:DELTa",
+      "category": "Cursor",
+      "notes": "HDELTa moved to HBArs:DELTa in display namespace"
+    },
+    {
+      "legacy": ":CURSor:HBArs:DELTa",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:HBArs:DELTa",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:WAVEform:VDELTa",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:VBArs:DELTa",
+      "category": "Cursor",
+      "notes": "VDELTa moved to VBArs:DELTa in display namespace"
+    },
+    {
+      "legacy": ":CURSor:DDT",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:DDT",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:ONEOVERDELTATVALUE",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:ONEOVERDELTATVALUE",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:FUNCtion",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:FUNCtion",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:STATE",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:STATE",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":CURSor:MODe",
+      "modern": ":DISplay:WAVEView<n>:CURSor:CURSOR:MODe",
+      "category": "Cursor",
+      "notes": "Cursor commands moved to display namespace"
+    },
+    {
+      "legacy": ":BUS:B<n>:POSition",
+      "modern": ":DISplay:WAVEView<n>:BUS:B<n>:VERTical:POSition",
+      "category": "Bus Display",
+      "notes": "Bus position moved to display namespace"
+    },
+    {
+      "legacy": ":ZOOm:HORizontal:POSition",
+      "modern": ":DISplay:WAVEView<n>:ZOOM:ZOOM<n>:HORizontal:POSition",
+      "category": "Zoom",
+      "notes": "Zoom commands moved to display namespace"
+    },
+    {
+      "legacy": ":ZOOm:ZOOM<n>:HORizontal:POSition",
+      "modern": ":DISplay:WAVEView<n>:ZOOM:ZOOM<n>:HORizontal:POSition",
+      "category": "Zoom",
+      "notes": "Zoom commands moved to display namespace"
+    },
+    {
+      "legacy": ":ZOOm:HORizontal:SCALe",
+      "modern": ":DISplay:WAVEView<n>:ZOOM:ZOOM<n>:HORizontal:SCALe",
+      "category": "Zoom",
+      "notes": "Zoom commands moved to display namespace"
+    },
+    {
+      "legacy": ":ZOOm:ZOOM<n>:HORizontal:SCALe",
+      "modern": ":DISplay:WAVEView<n>:ZOOM:ZOOM<n>:HORizontal:SCALe",
+      "category": "Zoom",
+      "notes": "Zoom commands moved to display namespace"
+    },
+    {
+      "legacy": ":ZOOm:VERTical:POSition",
+      "modern": ":DISplay:WAVEView<n>:ZOOM:ZOOM<n>:VERTical:POSition",
+      "category": "Zoom",
+      "notes": "Zoom commands moved to display namespace"
+    },
+    {
+      "legacy": ":ZOOm:ZOOM<n>:VERTical:POSition",
+      "modern": ":DISplay:WAVEView<n>:ZOOM:ZOOM<n>:VERTical:POSition",
+      "category": "Zoom",
+      "notes": "Zoom commands moved to display namespace"
+    },
+    {
+      "legacy": ":ZOOm:VERTical:SCALe",
+      "modern": ":DISplay:WAVEView<n>:ZOOM:ZOOM<n>:VERTical:SCALe",
+      "category": "Zoom",
+      "notes": "Zoom commands moved to display namespace"
+    },
+    {
+      "legacy": ":ZOOm:ZOOM<n>:VERTical:SCALe",
+      "modern": ":DISplay:WAVEView<n>:ZOOM:ZOOM<n>:VERTical:SCALe",
+      "category": "Zoom",
+      "notes": "Zoom commands moved to display namespace"
+    },
+    {
+      "legacy": ":ZOOm:STATe",
+      "modern": ":DISplay:WAVEView<n>:ZOOM:ZOOM<n>:STATe",
+      "category": "Zoom",
+      "notes": "Zoom commands moved to display namespace"
+    },
+    {
+      "legacy": ":ZOOm:ZOOM<n>:STATe",
+      "modern": ":DISplay:WAVEView<n>:ZOOM:ZOOM<n>:STATe",
+      "category": "Zoom",
+      "notes": "Zoom commands moved to display namespace"
+    },
+    {
+      "legacy": ":BUS:B<n>:STATE",
+      "modern": ":DISplay:GLObal:B<n>:STATE",
+      "category": "Display State",
+      "notes": "Waveform state moved to DISplay:GLObal"
+    },
+    {
+      "legacy": ":CH<n>:STATE",
+      "modern": ":DISplay:GLObal:CH<n>:STATE",
+      "category": "Display State",
+      "notes": "Channel state moved to DISplay:GLObal"
+    },
+    {
+      "legacy": ":MATH:MATH<n>:STATE",
+      "modern": ":DISplay:GLObal:MATH<n>:STATE",
+      "category": "Display State",
+      "notes": "Math state moved to DISplay:GLObal"
+    },
+    {
+      "legacy": ":REF:REF<n>:STATE",
+      "modern": ":DISplay:GLObal:REF<n>:STATE",
+      "category": "Display State",
+      "notes": "Reference state moved to DISplay:GLObal"
+    },
+    {
+      "legacy": ":REM:REM<n>:STATE",
+      "modern": ":DISplay:GLObal:REM<n>:STATE",
+      "category": "Display State",
+      "notes": "Remote state moved to DISplay:GLObal"
+    },
+    {
+      "legacy": ":PLOT:PLOT<n>:STATE",
+      "modern": ":DISplay:GLObal:PLOT<n>:STATE",
+      "category": "Display State",
+      "notes": "Plot state moved to DISplay:GLObal"
+    },
+    {
+      "legacy": ":DISplay:INTENSITy:WAVEform",
+      "modern": ":DISplay:WAVEView<n>:INTENSITy:WAVEform",
+      "category": "Display",
+      "notes": "Intensity moved to per-WaveView setting"
+    },
+    {
+      "legacy": ":DISplay:INTENSITy:WAVEform:ANALYsis",
+      "modern": ":DISplay:WAVEView<n>:INTENSITy:WAVEform",
+      "category": "Display",
+      "notes": "Analysis intensity merged with waveform intensity"
+    },
+    {
+      "legacy": ":DISplay:INTENSITy:WAVEform:FASTAcq",
+      "modern": ":DISplay:WAVEView<n>:INTENSITy:WAVEform",
+      "category": "Display",
+      "notes": "FastAcq intensity merged with waveform intensity"
+    },
+    {
+      "legacy": ":DISplay:INTENSITy:GRATicule",
+      "modern": ":DISplay:WAVEView<n>:INTENSITy:GRATicule",
+      "category": "Display",
+      "notes": "Graticule intensity moved to per-WaveView setting"
+    },
+    {
+      "legacy": ":DISplay:STYle",
+      "modern": ":DISplay:WAVEView<n>:STYle",
+      "category": "Display",
+      "notes": "Style moved to per-WaveView setting"
+    },
+    {
+      "legacy": ":DISplay:GRAticule",
+      "modern": ":DISplay:WAVEView<n>:GRAticule",
+      "category": "Display",
+      "notes": "Graticule moved to per-WaveView setting"
+    },
+    {
+      "legacy": ":DISplay:FILTer",
+      "modern": ":DISplay:WAVEView<n>:FILTer",
+      "category": "Display",
+      "notes": "Filter moved to per-WaveView setting"
+    },
+    {
+      "legacy": ":DISplay:VIEWStyle",
+      "modern": ":DISplay:WAVEView<n>:VIEWStyle",
+      "category": "Display",
+      "notes": "ViewStyle moved to per-WaveView setting"
+    },
+    {
+      "legacy": ":HORizontal:DELay:POSition",
+      "modern": ":HORizontal:POSition",
+      "category": "Horizontal",
+      "notes": "Simplified - DELay removed from path"
+    },
+    {
+      "legacy": ":HORizontal:MAIn:POSition",
+      "modern": ":HORizontal:POSition",
+      "category": "Horizontal",
+      "notes": "Simplified - MAIn removed from path"
+    },
+    {
+      "legacy": ":HORizontal:MODe:SCAle",
+      "modern": ":HORizontal:SCAle",
+      "category": "Horizontal",
+      "notes": "Simplified - MODe removed from path"
+    },
+    {
+      "legacy": ":HORizontal:SECdiv",
+      "modern": ":HORizontal:SCAle",
+      "category": "Horizontal",
+      "notes": "SECdiv renamed to SCAle"
+    },
+    {
+      "legacy": ":HORizontal:MAIn:SCAle",
+      "modern": ":HORizontal:SCAle",
+      "category": "Horizontal",
+      "notes": "Simplified - MAIn removed from path"
+    },
+    {
+      "legacy": ":HORizontal:MAIn:SECdiv",
+      "modern": ":HORizontal:SCAle",
+      "category": "Horizontal",
+      "notes": "Simplified and renamed"
+    },
+    {
+      "legacy": ":HORizontal:DELay:SCAle",
+      "modern": ":HORizontal:SCAle",
+      "category": "Horizontal",
+      "notes": "Simplified - DELay removed from path"
+    },
+    {
+      "legacy": ":HORizontal:DELay:SECdiv",
+      "modern": ":HORizontal:SCAle",
+      "category": "Horizontal",
+      "notes": "Simplified and renamed"
+    },
+    {
+      "legacy": ":HORizontal:MAIn:UNIts:STRing",
+      "modern": ":HORizontal:MAIn:UNIts",
+      "category": "Horizontal",
+      "notes": "STRing suffix removed"
+    },
+    {
+      "legacy": ":HORizontal:DELay:STATE",
+      "modern": ":HORizontal:DELay:MODe",
+      "category": "Horizontal",
+      "notes": "STATE renamed to MODe"
+    },
+    {
+      "legacy": ":HORizontal:MAIn:DELay:MODe",
+      "modern": ":HORizontal:DELay:MODe",
+      "category": "Horizontal",
+      "notes": "Simplified - MAIn removed from path"
+    },
+    {
+      "legacy": ":HORizontal:DELay:TIMe:RUNSAfter",
+      "modern": ":HORizontal:DELay:TIMe",
+      "category": "Horizontal",
+      "notes": "RUNSAfter suffix removed"
+    },
+    {
+      "legacy": ":HORizontal:DELay:TIMe:TRIGAfter",
+      "modern": ":HORizontal:DELay:TIMe",
+      "category": "Horizontal",
+      "notes": "TRIGAfter suffix removed"
+    },
+    {
+      "legacy": ":HORizontal:MAIn:DELay:TIMe",
+      "modern": ":HORizontal:DELay:TIMe",
+      "category": "Horizontal",
+      "notes": "Simplified - MAIn removed from path"
+    },
+    {
+      "legacy": ":CH<n>:VOLTS",
+      "modern": ":CH<n>:SCAle",
+      "category": "Vertical",
+      "notes": "VOLTS renamed to SCAle"
+    },
+    {
+      "legacy": ":HORizontal:MODe:SAMPLERate",
+      "modern": ":HORizontal:SAMPLERate",
+      "category": "Horizontal",
+      "notes": "Simplified - MODe removed from path"
+    },
+    {
+      "legacy": ":HORizontal:MAIn:SAMPLERate",
+      "modern": ":HORizontal:SAMPLERate",
+      "category": "Horizontal",
+      "notes": "Simplified - MAIn removed from path"
+    },
+    {
+      "legacy": ":HORizontal:DIGital:SAMPLERate",
+      "modern": ":HORizontal:SAMPLERate",
+      "category": "Horizontal",
+      "notes": "DIGital namespace merged"
+    },
+    {
+      "legacy": ":HORizontal:DIGital:SAMPLERate:MAIn",
+      "modern": ":HORizontal:SAMPLERate",
+      "category": "Horizontal",
+      "notes": "DIGital namespace merged"
+    },
+    {
+      "legacy": ":HORizontal:MODe:RECOrdlength",
+      "modern": ":HORizontal:RECOrdlength",
+      "category": "Horizontal",
+      "notes": "Simplified - MODe removed from path"
+    },
+    {
+      "legacy": ":HORizontal:RESOlution",
+      "modern": ":HORizontal:RECOrdlength",
+      "category": "Horizontal",
+      "notes": "RESOlution renamed to RECOrdlength"
+    },
+    {
+      "legacy": ":HORizontal:DIGital:RECOrdlength",
+      "modern": ":HORizontal:RECOrdlength",
+      "category": "Horizontal",
+      "notes": "DIGital namespace merged"
+    },
+    {
+      "legacy": ":HORizontal:DIGital:RECOrdlength:MAIn",
+      "modern": ":HORizontal:RECOrdlength",
+      "category": "Horizontal",
+      "notes": "DIGital namespace merged"
+    },
+    {
+      "legacy": ":HORizontal:ACQLENGTH",
+      "modern": ":HORizontal:RECOrdlength",
+      "category": "Horizontal",
+      "notes": "ACQLENGTH renamed to RECOrdlength"
+    },
+    {
+      "legacy": ":SAVEON:WAVEform:FILEFormat",
+      "modern": ":SAVEONEVent:WAVEform:FILEFormat",
+      "category": "Save",
+      "notes": "SAVEON renamed to SAVEONEVent"
+    },
+    {
+      "legacy": ":SAVEON:WAVEform:SOURce",
+      "modern": ":SAVEONEVent:WAVEform:SOUrce",
+      "category": "Save",
+      "notes": "SAVEON renamed to SAVEONEVent"
+    },
+    {
+      "legacy": ":SAVEON:IMAGe:FILEFormat",
+      "modern": ":SAVEONEVent:IMAGe:FILEFormat",
+      "category": "Save",
+      "notes": "SAVEON renamed to SAVEONEVent"
+    },
+    {
+      "legacy": ":SAVEON:FILE:NAME",
+      "modern": ":SAVEONEVent:FILEName",
+      "category": "Save",
+      "notes": "FILE:NAME simplified to FILEName"
+    },
+    {
+      "legacy": ":TRIGger:A:PULse:WIDth:WHEn",
+      "modern": ":TRIGger:A:PULSEWidth:WHEn",
+      "category": "Trigger",
+      "notes": "PULse:WIDth merged to PULSEWidth"
+    },
+    {
+      "legacy": ":TRIGger:B:PULse:WIDth:WHEn",
+      "modern": ":TRIGger:B:PULSEWidth:WHEn",
+      "category": "Trigger",
+      "notes": "PULse:WIDth merged to PULSEWidth"
+    },
+    {
+      "legacy": ":TRIGger:A:PULse:WIDth:POLarity",
+      "modern": ":TRIGger:A:PULSEWidth:POLarity",
+      "category": "Trigger",
+      "notes": "PULse:WIDth merged to PULSEWidth"
+    },
+    {
+      "legacy": ":TRIGger:B:PULse:WIDth:POLarity",
+      "modern": ":TRIGger:B:PULSEWidth:POLarity",
+      "category": "Trigger",
+      "notes": "PULse:WIDth merged to PULSEWidth"
+    },
+    {
+      "legacy": ":TRIGger:A:PULse:WIDth:HIGHLimit",
+      "modern": ":TRIGger:A:PULSEWidth:HIGHLimit",
+      "category": "Trigger",
+      "notes": "PULse:WIDth merged to PULSEWidth"
+    },
+    {
+      "legacy": ":TRIGger:B:PULse:WIDth:HIGHLimit",
+      "modern": ":TRIGger:B:PULSEWidth:HIGHLimit",
+      "category": "Trigger",
+      "notes": "PULse:WIDth merged to PULSEWidth"
+    },
+    {
+      "legacy": ":TRIGger:A:PULse:WIDth:LOWLimit",
+      "modern": ":TRIGger:A:PULSEWidth:LOWLimit",
+      "category": "Trigger",
+      "notes": "PULse:WIDth merged to PULSEWidth"
+    },
+    {
+      "legacy": ":TRIGger:B:PULse:WIDth:LOWLimit",
+      "modern": ":TRIGger:B:PULSEWidth:LOWLimit",
+      "category": "Trigger",
+      "notes": "PULse:WIDth merged to PULSEWidth"
+    },
+    {
+      "legacy": ":TRIGger:A:PULSEWidth:WIDth",
+      "modern": ":TRIGger:A:PULSEWidth:LOWLimit",
+      "category": "Trigger",
+      "notes": "WIDth renamed to LOWLimit"
+    },
+    {
+      "legacy": ":TRIGger:B:PULSEWidth:WIDth",
+      "modern": ":TRIGger:B:PULSEWidth:LOWLimit",
+      "category": "Trigger",
+      "notes": "WIDth renamed to LOWLimit"
+    },
+    {
+      "legacy": ":TRIGger:A:VIDeo:SYNC",
+      "modern": ":TRIGger:A:VIDeo:FIELD",
+      "category": "Trigger",
+      "notes": "SYNC renamed to FIELD"
+    },
+    {
+      "legacy": ":TRIGger:B:VIDeo:SYNC",
+      "modern": ":TRIGger:B:VIDeo:FIELD",
+      "category": "Trigger",
+      "notes": "SYNC renamed to FIELD"
+    },
+    {
+      "legacy": ":TRIGger:A:PULse:RUNT:WHEn",
+      "modern": ":TRIGger:A:RUNT:WHEn",
+      "category": "Trigger",
+      "notes": "PULse removed from path"
+    },
+    {
+      "legacy": ":TRIGger:B:PULse:RUNT:WHEn",
+      "modern": ":TRIGger:B:RUNT:WHEn",
+      "category": "Trigger",
+      "notes": "PULse removed from path"
+    },
+    {
+      "legacy": ":TRIGger:A:PULse:RUNT:POLarity",
+      "modern": ":TRIGger:A:RUNT:POLarity",
+      "category": "Trigger",
+      "notes": "PULse removed from path"
+    },
+    {
+      "legacy": ":TRIGger:B:PULse:RUNT:POLarity",
+      "modern": ":TRIGger:B:RUNT:POLarity",
+      "category": "Trigger",
+      "notes": "PULse removed from path"
+    },
+    {
+      "legacy": ":TRIGger:A:PULse:RUNT:WIDth",
+      "modern": ":TRIGger:A:RUNT:WIDth",
+      "category": "Trigger",
+      "notes": "PULse removed from path"
+    },
+    {
+      "legacy": ":TRIGger:B:PULse:RUNT:WIDth",
+      "modern": ":TRIGger:B:RUNT:WIDth",
+      "category": "Trigger",
+      "notes": "PULse removed from path"
+    },
+    {
+      "legacy": ":TRIGger:A:PULse:TIMEOut:POLarity",
+      "modern": ":TRIGger:A:TIMEOut:POLarity",
+      "category": "Trigger",
+      "notes": "PULse removed from path"
+    },
+    {
+      "legacy": ":TRIGger:B:PULse:TIMEOut:POLarity",
+      "modern": ":TRIGger:B:TIMEOut:POLarity",
+      "category": "Trigger",
+      "notes": "PULse removed from path"
+    },
+    {
+      "legacy": ":TRIGger:A:PULse:TIMEOut:TIMe",
+      "modern": ":TRIGger:A:TIMEOut:TIMe",
+      "category": "Trigger",
+      "notes": "PULse removed from path"
+    },
+    {
+      "legacy": ":TRIGger:B:PULse:TIMEOut:TIMe",
+      "modern": ":TRIGger:B:TIMEOut:TIMe",
+      "category": "Trigger",
+      "notes": "PULse removed from path"
+    },
+    {
+      "legacy": ":TRIGger:A:RISEFall:SOUrce",
+      "modern": ":TRIGger:A:TRANsition:SOUrce",
+      "category": "Trigger",
+      "notes": "RISEFall renamed to TRANsition"
+    },
+    {
+      "legacy": ":TRIGger:B:RISEFall:SOUrce",
+      "modern": ":TRIGger:B:TRANsition:SOUrce",
+      "category": "Trigger",
+      "notes": "RISEFall renamed to TRANsition"
+    },
+    {
+      "legacy": ":TRIGger:A:RISEFall:WHEn",
+      "modern": ":TRIGger:A:TRANsition:WHEn",
+      "category": "Trigger",
+      "notes": "RISEFall renamed to TRANsition"
+    },
+    {
+      "legacy": ":TRIGger:B:RISEFall:WHEn",
+      "modern": ":TRIGger:B:TRANsition:WHEn",
+      "category": "Trigger",
+      "notes": "RISEFall renamed to TRANsition"
+    },
+    {
+      "legacy": ":TRIGger:A:PULse:TRANsition:WHEn",
+      "modern": ":TRIGger:A:TRANsition:WHEn",
+      "category": "Trigger",
+      "notes": "PULse removed from path"
+    },
+    {
+      "legacy": ":TRIGger:B:PULse:TRANsition:WHEn",
+      "modern": ":TRIGger:B:TRANsition:WHEn",
+      "category": "Trigger",
+      "notes": "PULse removed from path"
+    },
+    {
+      "legacy": ":TRIGger:A:RISEFall:POLarity",
+      "modern": ":TRIGger:A:TRANsition:POLarity",
+      "category": "Trigger",
+      "notes": "RISEFall renamed to TRANsition"
+    },
+    {
+      "legacy": ":TRIGger:B:RISEFall:POLarity",
+      "modern": ":TRIGger:B:TRANsition:POLarity",
+      "category": "Trigger",
+      "notes": "RISEFall renamed to TRANsition"
+    },
+    {
+      "legacy": ":TRIGger:A:PULse:TRANsition:POLarity",
+      "modern": ":TRIGger:A:TRANsition:POLarity",
+      "category": "Trigger",
+      "notes": "PULse removed from path"
+    },
+    {
+      "legacy": ":TRIGger:B:PULse:TRANsition:POLarity",
+      "modern": ":TRIGger:B:TRANsition:POLarity",
+      "category": "Trigger",
+      "notes": "PULse removed from path"
+    },
+    {
+      "legacy": ":TRIGger:A:RISEFall:DELTatime",
+      "modern": ":TRIGger:A:TRANsition:DELTatime",
+      "category": "Trigger",
+      "notes": "RISEFall renamed to TRANsition"
+    },
+    {
+      "legacy": ":TRIGger:B:RISEFall:DELTatime",
+      "modern": ":TRIGger:B:TRANsition:DELTatime",
+      "category": "Trigger",
+      "notes": "RISEFall renamed to TRANsition"
+    },
+    {
+      "legacy": ":TRIGger:A:PULse:TRANsition:DELTatime",
+      "modern": ":TRIGger:A:TRANsition:DELTatime",
+      "category": "Trigger",
+      "notes": "PULse removed from path"
+    },
+    {
+      "legacy": ":TRIGger:B:PULse:TRANsition:DELTatime",
+      "modern": ":TRIGger:B:TRANsition:DELTatime",
+      "category": "Trigger",
+      "notes": "PULse removed from path"
+    },
+    {
+      "legacy": ":TRIGger:A:WINdow:POLarity",
+      "modern": ":TRIGger:A:WINdow:CROSSIng",
+      "category": "Trigger",
+      "notes": "POLarity renamed to CROSSIng"
+    },
+    {
+      "legacy": ":TRIGger:B:WINdow:POLarity",
+      "modern": ":TRIGger:B:WINdow:CROSSIng",
+      "category": "Trigger",
+      "notes": "POLarity renamed to CROSSIng"
+    },
+    {
+      "legacy": ":TRIGger:A:PULse:WINdow:POLarity",
+      "modern": ":TRIGger:A:WINdow:CROSSIng",
+      "category": "Trigger",
+      "notes": "PULse removed, POLarity renamed to CROSSIng"
+    },
+    {
+      "legacy": ":TRIGger:B:PULse:WINdow:POLarity",
+      "modern": ":TRIGger:B:WINdow:CROSSIng",
+      "category": "Trigger",
+      "notes": "PULse removed, POLarity renamed to CROSSIng"
+    },
+    {
+      "legacy": ":TRIGger:A:PULse:WINdow:WIDth",
+      "modern": ":TRIGger:A:WINdow:WIDth",
+      "category": "Trigger",
+      "notes": "PULse removed from path"
+    },
+    {
+      "legacy": ":TRIGger:B:PULse:WINdow:WIDth",
+      "modern": ":TRIGger:B:WINdow:WIDth",
+      "category": "Trigger",
+      "notes": "PULse removed from path"
+    },
+    {
+      "legacy": ":TRIGger:B:RESET:SOUrce",
+      "modern": ":TRIGger:B:RESET:EDGE:SOUrce",
+      "category": "Trigger",
+      "notes": "EDGE added to path"
+    },
+    {
+      "legacy": ":TRIGger:B:RESET:TIMEOut:TIMe",
+      "modern": ":TRIGger:B:RESET:EDGE:LEVel",
+      "category": "Trigger",
+      "notes": "TIMEOut:TIMe renamed to EDGE:LEVel"
+    },
+    {
+      "legacy": ":TRIGger:B:RESET:TIMEOut",
+      "modern": ":TRIGger:B:RESET:TIMEOut:TIMe",
+      "category": "Trigger",
+      "notes": "TIMe suffix now required"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+# =============================================================================
+# Tektronix MCP Server + Tek PTA + Wake Listener — Full Local Requirements
+# Python 3.10+ required
+# =============================================================================
+# For Docker deployment, use requirements-docker.txt instead.
+# That file contains only what the MCP server itself imports and avoids
+# audio packages (PyAudio, faster-whisper) that fail inside containers.
+# =============================================================================
+
+# ── MCP Server (hard requirements) ───────────────────────────────────────────
+# from mcp.server.fastmcp import FastMCP
+mcp>=1.0.0
+fastmcp>=2.0.0
+# from pydantic import BaseModel, Field
+pydantic>=2.0.0
+# Required by mcp internals
+anyio>=4.0.0
+httpx>=0.27.0
+
+# ── MCP Server (optional — graceful try/except fallback if missing) ───────────
+# from openai import OpenAI  →  vector store semantic search tier
+openai>=1.0.0
+# import pyvisa  →  live instrument control
+pyvisa>=1.14.0
+pyvisa-py>=0.7.0
+# from PIL import Image  →  screenshot capture/encode
+Pillow>=9.0.0
+
+# ── Tek PTA GUI (tek_pta.py) ──────────────────────────────────────────────────
+# NOT imported by the MCP server — only needed to run the PTA desktop app
+reportlab>=4.0.0
+matplotlib>=3.5.0
+# tkinter: built into the Python standard library, no pip install needed
+
+# ── Hey Tek Wake Listener (tek_wake_listener.py) ─────────────────────────────
+# NOT imported by the MCP server — only needed for voice control
+# The server does try: import hey_tek_voice, but that's a local .py module,
+# not a pip package. If hey_tek_voice.py is present, these packages support it.
+
+# Core voice pipeline
+SpeechRecognition>=3.10.0
+anthropic>=0.30.0          # Claude API for complex voice commands
+pyttsx3>=2.90              # Text-to-speech feedback (--tts flag)
+
+# PyAudio — platform-specific install:
+#   Windows: pip install PyAudio                         (wheel bundled)
+#   macOS:   brew install portaudio && pip install PyAudio
+#   Linux:   sudo apt-get install portaudio19-dev python3-pyaudio
+PyAudio>=0.2.13
+
+# Faster STT (recommended — 4-8x faster than openai-whisper on CPU)
+faster-whisper>=1.0.0
+numpy>=1.24.0              # Required by faster-whisper and openwakeword
+
+# Far-field wake word detection (recommended)
+openwakeword>=0.6.0
+
+# ── Hey Tek Voice MCP module (hey_tek_voice.py) ───────────────────────────────
+# Only needed if using the MCP-integrated voice toggle (not tek_wake_listener.py)
+pyautogui>=0.9.54
+pygetwindow>=0.0.9
