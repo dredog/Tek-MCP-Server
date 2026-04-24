@@ -5766,7 +5766,9 @@ def main():
         print(f"🌐 Hosted mode — HTTP transport on port {port}", file=sys.stderr)
         print("\n🚀 Server ready\n" + "=" * 60, file=sys.stderr)
         flush_output()
-        mcp.run(transport="streamable-http", port=int(port))
+        import uvicorn
+        app = mcp.http_app(transport="streamable-http")
+        uvicorn.run(app, host="0.0.0.0", port=int(port))
     else:
         print("💻 Local mode — STDIO transport", file=sys.stderr)
         print("\n🚀 Server ready\n" + "=" * 60, file=sys.stderr)
