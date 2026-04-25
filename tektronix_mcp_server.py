@@ -765,7 +765,7 @@ async def landing_page(request):  # type: ignore[no-untyped-def]
   .section{{padding:32px 40px}}
   .section h2{{font-size:1.2rem;font-weight:600;margin-bottom:8px}}
   .section p{{color:#8b949e;margin-bottom:20px;font-size:.9rem}}
-  .cards{{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:900px}}
+  .cards{{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:1100px}}
   .card{{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:24px}}
   .card h3{{color:#58a6ff;font-size:.95rem;font-weight:600;margin-bottom:6px}}
   .card .sub{{color:#8b949e;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px}}
@@ -802,21 +802,36 @@ URL:  {mcp_url}
 No OAuth — leave Advanced settings blank</pre>
     </div>
     <div class="card">
-      <h3>Claude Desktop / Code / VS Code / Cursor</h3>
-      <div class="sub">Use type: "http" — config file varies by client</div>
+      <h3>Claude Desktop</h3>
+      <div class="sub">Requires mcp-remote proxy &mdash; ~/.claude/claude_desktop_config.json</div>
       <pre><span class="key">{{</span>
   <span class="key">"mcpServers"</span>: <span class="key">{{</span>
+    <span class="key">"tektronix"</span>: <span class="key">{{</span>
+      <span class="key">"command"</span>: <span class="str">"npx"</span>,
+      <span class="key">"args"</span>: [<span class="str">"mcp-remote"</span>, <span class="str">"{mcp_url}"</span>]
+    <span class="key">}}</span>
+  <span class="key">}}</span>
+<span class="key">}}</span></pre>
+    </div>
+    <div class="card">
+      <h3>Claude Code</h3>
+      <div class="sub">Native HTTP &mdash; run in terminal (not inside Claude Code)</div>
+      <pre>claude mcp add-json tektronix \
+  '{{"type":"http","url":"{mcp_url}"}}'</pre>
+      <pre style="margin-top:10px;font-size:.78rem;color:#8b949e">Or add to ~/.claude.json (user) or .mcp.json (project root):
+{{"mcpServers": {{"tektronix": {{"type":"http","url":"{mcp_url}"}}}}}}</pre>
+    </div>
+    <div class="card">
+      <h3>VS Code / Cursor</h3>
+      <div class="sub">Native HTTP &mdash; .vscode/mcp.json or .cursor/mcp.json</div>
+      <pre><span class="key">{{</span>
+  <span class="key">"servers"</span>: <span class="key">{{</span>
     <span class="key">"tektronix"</span>: <span class="key">{{</span>
       <span class="key">"type"</span>: <span class="str">"http"</span>,
       <span class="key">"url"</span>: <span class="str">"{mcp_url}"</span>
     <span class="key">}}</span>
   <span class="key">}}</span>
 <span class="key">}}</span></pre>
-      <pre style="margin-top:12px;font-size:.75rem;color:#8b949e">Config file locations:
-  Desktop:      ~/.claude/claude_desktop_config.json
-  Claude Code:  .mcp.json (project root)
-  VS Code:      .vscode/mcp.json
-  Cursor:       .cursor/mcp.json</pre>
     </div>
   </div>
 </div>
