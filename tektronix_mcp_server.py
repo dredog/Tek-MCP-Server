@@ -18,7 +18,7 @@ if hasattr(sys.stdout, 'fileno'):
         pass  # May fail in some environments, that's ok
 
 """
-Tektronix MCP Server v1.4.2
+Tektronix MCP Server v1.4.3
 ===========================
 MCP server for Tektronix instrument automation with authoritative SCPI commands.
 
@@ -77,6 +77,28 @@ Features:
 ═══════════════════════════════════════════════════════════
 CHANGELOG
 ═══════════════════════════════════════════════════════════
+
+v1.4.3
+- mso_4_5_6_7_commands.json: 21 SCPI string repairs applied to fix truncated
+  leading letters in examples (CQUIRE: -> ACQUIRE: on ACQuire:SEQuence:MODe;
+  EARCH: -> SEARCH: on six SEARCH:SEARCH<x>:TRIGger:A:DDR* commands). Each
+  command had the bug in three parallel locations (top-level example,
+  examples[0].scpi, _manualEntry.examples[0].codeExamples.scpi.code) — all
+  fixed for consistency with TekControl's build pipeline. Metadata gains
+  cleanup_applied array and cleanup_applied_count for traceability.
+  Command count unchanged at 2,958.
+- search_commands: conditions and notes fields are now searchable. Both are
+  added to the fingerprint early-exit check (so terms like "aero",
+  "undocumented", "pwr" can match commands where those words only appear
+  in conditions/notes) and contribute +5/+3 per term to the score, matching
+  the params_text weight. Gives queries direct hit paths to the 117 SR-AERO
+  commands and the ~30 commands tagged "undocumented, verified via bus
+  capture" in notes.
+- tek_get_command: surfaces conditions as "**Note:** <text>" under the Group
+  line so license/option requirements are impossible to miss when copying a
+  command. Adds "**Notes:**" bulleted block after Examples for the 5% of
+  commands carrying provenance/constraint info (e.g. "WAVEView<x> must be
+  WAVEView1"). Adds "**See also:**" list rendering relatedCommands.
 
 v1.4.2
 - mso_4_5_6_7_commands.json upgraded to v3.0-merged (TektronixMCP + TekControl):
@@ -2484,8 +2506,23 @@ def search_commands(query: str, instrument: str = None, limit: int = 10) -> List
             scpi  = (cmd.get("scpi") or cmd.get("name") or "").lower()
             desc  = (cmd.get("description") or "").lower()
 
-            # Fingerprint early-exit: skip commands with no term overlap
-            if not any(t in scpi or t in desc for t in all_search_terms):
+            # conditions: license/option gating text (e.g. "Requires option SR-AERO")
+            # notes:      supplementary guidance (e.g. "Undocumented. Verified via bus capture")
+            # Both are populated for a meaningful share of commands (48% and 5%) and
+            # contain terms like "aero", "undocumented", "pwr" that queries commonly
+            # want to hit on. Included in the fingerprint so searches for such terms
+            # aren't silently discarded when scpi/desc don't contain them.
+            conditions_text = str(cmd.get("conditions") or "").lower()
+            _notes_raw = cmd.get("notes") or []
+            if isinstance(_notes_raw, list):
+                notes_text = " ".join(str(n) for n in _notes_raw).lower()
+            else:
+                notes_text = str(_notes_raw).lower()
+
+            # Fingerprint early-exit: skip commands with no term overlap across
+            # any searchable field (scpi, desc, conditions, notes).
+            if not any(t in scpi or t in desc or t in conditions_text or t in notes_text
+                       for t in all_search_terms):
                 continue
 
             group  = (cmd.get("group") or "").lower()
@@ -2539,6 +2576,10 @@ def search_commands(query: str, instrument: str = None, limit: int = 10) -> List
                 if term in args:
                     score += 8 if is_original else 5
                 if term in params_text:
+                    score += 5 if is_original else 3
+                if term in conditions_text:
+                    score += 5 if is_original else 3
+                if term in notes_text:
                     score += 5 if is_original else 3
 
             if score > 0:
@@ -3236,7 +3277,10 @@ def tek_get_command(scpi: str, instrument: str = None) -> str:
     
     output = f"## `{cmd.get('scpi', scpi)}`\n\n"
     output += f"**Instrument:** {cmd.get('_instrument', 'unknown')}\n"
-    output += f"**Group:** {cmd.get('group', 'N/A')}\n\n"
+    output += f"**Group:** {cmd.get('group', 'N/A')}\n"
+    if cmd.get("conditions"):
+        output += f"**Note:** {cmd['conditions']}\n"
+    output += "\n"
     output += f"**Description:** {cmd.get('description', 'No description')}\n\n"
     
     if cmd.get("syntax"):
@@ -3285,7 +3329,21 @@ def tek_get_command(scpi: str, instrument: str = None) -> str:
                     output += f"- `{ex}`\n"
         else:
             output += f"\n**Example:** `{examples}`\n"
-    
+
+    # Supplementary notes (provenance, constraints, cross-refs)
+    notes = cmd.get("notes") or []
+    if isinstance(notes, list) and notes:
+        output += "\n**Notes:**\n"
+        for n in notes:
+            output += f"- {n}\n"
+    elif isinstance(notes, str) and notes.strip():
+        output += f"\n**Notes:** {notes}\n"
+
+    # Related commands (cross-references)
+    rel = cmd.get("relatedCommands") or []
+    if rel:
+        output += "\n**See also:** " + ", ".join(f"`{r}`" for r in rel) + "\n"
+
     return output
 
 
@@ -4262,7 +4320,7 @@ def tek_save_lessons_learned(
     
     content += f"""
 ---
-*Generated by Tek MCP Server v1.4.2*
+*Generated by Tek MCP Server v1.4.3*
 """
     
     try:
@@ -5411,7 +5469,7 @@ def tek_status() -> str:
     hours, remainder = divmod(int(uptime.total_seconds()), 3600)
     minutes, seconds = divmod(remainder, 60)
     
-    output = f"## 🔬 Tektronix MCP Server v1.4.2\n\n"
+    output = f"## 🔬 Tektronix MCP Server v1.4.3\n\n"
     output += f"**Status:** ✅ Running\n"
     output += f"**Uptime:** {hours}h {minutes}m {seconds}s\n"
     output += f"**Total Commands:** {_total_commands:,}\n"
@@ -5741,7 +5799,7 @@ def main():
     _server_start_time = datetime.now()
     
     print("\n" + "=" * 60, file=sys.stderr)
-    print("🔬 Tektronix MCP Server v1.4.2", file=sys.stderr)
+    print("🔬 Tektronix MCP Server v1.4.3", file=sys.stderr)
     print("   - MSO 4/5/6/7 + MSO 2 Series command databases", file=sys.stderr)
     print("   - Local docs search includes Tek PTA source", file=sys.stderr)
     print("   - Live instrument control via PyVISA", file=sys.stderr)
@@ -5766,9 +5824,7 @@ def main():
         print(f"🌐 Hosted mode — HTTP transport on port {port}", file=sys.stderr)
         print("\n🚀 Server ready\n" + "=" * 60, file=sys.stderr)
         flush_output()
-        import uvicorn
-        app = mcp.http_app(transport="streamable-http")
-        uvicorn.run(app, host="0.0.0.0", port=int(port))
+        mcp.run(transport="streamable-http", host="0.0.0.0", port=int(port))
     else:
         print("💻 Local mode — STDIO transport", file=sys.stderr)
         print("\n🚀 Server ready\n" + "=" * 60, file=sys.stderr)
