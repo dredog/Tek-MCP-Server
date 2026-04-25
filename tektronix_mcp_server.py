@@ -736,6 +736,97 @@ _total_commands: int = 0
 _server_start_time: datetime = datetime.now()
 
 # =============================================================================
+# LANDING PAGE — served at GET / for hosted deployments
+# =============================================================================
+
+@mcp.custom_route("/", methods=["GET"])
+async def landing_page(request):  # type: ignore[no-untyped-def]
+    from starlette.responses import HTMLResponse
+    railway_url = os.environ.get("RAILWAY_PUBLIC_DOMAIN", "")
+    base_url = f"https://{railway_url}" if railway_url else ""
+    mcp_url = f"{base_url}/mcp" if base_url else "/mcp"
+    html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tektronix MCP Server</title>
+<style>
+  *{{box-sizing:border-box;margin:0;padding:0}}
+  body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0d1117;color:#e6edf3;min-height:100vh}}
+  header{{background:#161b22;border-bottom:1px solid #30363d;padding:24px 40px;display:flex;align-items:center;gap:16px}}
+  header h1{{font-size:1.6rem;font-weight:700}}
+  header p{{color:#8b949e;margin-top:4px;font-size:.95rem}}
+  .badge{{background:#1f6feb;color:#fff;font-size:.75rem;font-weight:600;padding:3px 10px;border-radius:20px;white-space:nowrap}}
+  .stats{{display:flex;gap:16px;padding:32px 40px 0}}
+  .stat{{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:24px 32px;text-align:center;min-width:160px}}
+  .stat .num{{font-size:2rem;font-weight:700;color:#58a6ff}}
+  .stat .label{{color:#8b949e;font-size:.85rem;margin-top:4px;text-transform:uppercase;letter-spacing:.05em}}
+  .section{{padding:32px 40px}}
+  .section h2{{font-size:1.2rem;font-weight:600;margin-bottom:8px}}
+  .section p{{color:#8b949e;margin-bottom:20px;font-size:.9rem}}
+  .cards{{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:900px}}
+  .card{{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:24px}}
+  .card h3{{color:#58a6ff;font-size:.95rem;font-weight:600;margin-bottom:6px}}
+  .card .sub{{color:#8b949e;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px}}
+  pre{{background:#0d1117;border:1px solid #30363d;border-radius:6px;padding:14px;font-size:.8rem;overflow-x:auto;line-height:1.6;color:#e6edf3}}
+  .key{{color:#79c0ff}}.val{{color:#a5d6ff}}.str{{color:#a5d6ff}}
+  footer{{text-align:center;color:#484f58;font-size:.8rem;padding:32px;border-top:1px solid #21262d;margin-top:16px}}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>🔬 Tektronix MCP Server</h1>
+    <p>SCPI command intelligence &amp; live instrument control for AI assistants</p>
+  </div>
+  <span class="badge">v1.4.3</span>
+</header>
+
+<div class="stats">
+  <div class="stat"><div class="num">{_total_commands:,}</div><div class="label">SCPI Commands</div></div>
+  <div class="stat"><div class="num">9</div><div class="label">Instrument Families</div></div>
+  <div class="stat"><div class="num">2</div><div class="label">Transports</div></div>
+</div>
+
+<div class="section">
+  <h2>Remote — No Install Needed</h2>
+  <p>Connect via Streamable HTTP. No local files or Node.js required.</p>
+  <div class="cards">
+    <div class="card">
+      <h3>Claude Web (claude.ai)</h3>
+      <div class="sub">Settings &rsaquo; Connectors &rsaquo; Add Custom Connector</div>
+      <pre>Name: TektronixMCP
+URL:  {mcp_url}
+
+No OAuth — leave Advanced settings blank</pre>
+    </div>
+    <div class="card">
+      <h3>Claude Desktop / Code / VS Code / Cursor</h3>
+      <div class="sub">Use type: "http" — config file varies by client</div>
+      <pre><span class="key">{{</span>
+  <span class="key">"mcpServers"</span>: <span class="key">{{</span>
+    <span class="key">"tektronix"</span>: <span class="key">{{</span>
+      <span class="key">"type"</span>: <span class="str">"http"</span>,
+      <span class="key">"url"</span>: <span class="str">"{mcp_url}"</span>
+    <span class="key">}}</span>
+  <span class="key">}}</span>
+<span class="key">}}</span></pre>
+      <pre style="margin-top:12px;font-size:.75rem;color:#8b949e">Config file locations:
+  Desktop:      ~/.claude/claude_desktop_config.json
+  Claude Code:  .mcp.json (project root)
+  VS Code:      .vscode/mcp.json
+  Cursor:       .cursor/mcp.json</pre>
+    </div>
+  </div>
+</div>
+
+<footer>Tektronix MCP Server v1.4.3 &mdash; Built by the Tektronix FAE Team</footer>
+</body>
+</html>"""
+    return HTMLResponse(html)
+
+# =============================================================================
 # LIVE INSTRUMENT SESSION STATE
 # =============================================================================
 
