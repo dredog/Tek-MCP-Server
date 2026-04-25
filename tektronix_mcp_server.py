@@ -721,7 +721,13 @@ KNOWLEDGE_EXPERT_MODE = os.environ.get("TEK_EXPERT_MODE", "0") == "1"
 # INITIALIZE MCP SERVER
 # =============================================================================
 
-mcp = FastMCP("tektronix")
+# host/port must be set at construction time — FastMCP.run() does not accept them.
+# Railway sets PORT; default host 127.0.0.1 rejects external traffic.
+mcp = FastMCP(
+    "tektronix",
+    host=os.environ.get("FASTMCP_HOST", "0.0.0.0"),
+    port=int(os.environ.get("PORT", os.environ.get("FASTMCP_PORT", "8000"))),
+)
 
 _commands_db: Dict[str, Dict] = {}
 _commands_flat: Dict[str, List[Dict]] = {}
