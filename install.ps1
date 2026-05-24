@@ -5,7 +5,7 @@
 $ErrorActionPreference = "Stop"
 
 # Version - must match build.bat
-$VERSION   = "1.4.2"
+$VERSION   = "1.4.3"
 $DIST_NAME = "TektronixMCP_v$VERSION"
 
 # Paths - install to AppData\Local (no admin rights needed, consistent on all PCs)S
