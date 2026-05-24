@@ -18,7 +18,7 @@ if hasattr(sys.stdout, 'fileno'):
         pass  # May fail in some environments, that's ok
 
 """
-Tektronix MCP Server v1.4.3
+Tektronix MCP Server v1.4.4
 ===========================
 MCP server for Tektronix instrument automation with authoritative SCPI commands.
 
@@ -66,8 +66,14 @@ SPECTRUM ANALYZERS & SIGNAL ANALYSIS:
 SOURCE MEASURE UNITS:
   • Keithley SMU: 2400 series, 2450/2460/2461/2470, 2600B series, 2651A
 
+COMPLIANCE TEST PLATFORMS:
+  • Clarius: Next-generation browser-based compliance test platform
+             (replaces TekExpress) — REST API, Python SDK, LPDDR5 & more
+             Runs in Hyper-V VM; accessed via browser at https://127.0.0.1:4200
+
 Features:
 - 20,000+ SCPI commands from official documentation
+- Clarius compliance platform SDK/API reference (LPDDR5, REST API, Python SDK)
 - Tek PTA production test framework
 - Live instrument control via PyVISA
 - AI-driven undocumented command discovery (tek_probe_scpi)
@@ -77,6 +83,23 @@ Features:
 ═══════════════════════════════════════════════════════════
 CHANGELOG
 ═══════════════════════════════════════════════════════════
+
+v1.4.4
+- Clarius compliance test platform integrated: clarius_overview.md,
+  clarius_sdk_api.md, and clarius_reference.json added to docs/reference/.
+  search_local_docs boosts clarius_overview.md and clarius_sdk_api.md to
+  +5 so Clarius queries surface the right file first.
+- search_local_docs: added named entries for clarius_overview.md (+5) and
+  clarius_sdk_api.md (+5) before the **/*.md glob (dedup preserves boost).
+- Tektronix_Automation_Guidelines.md updated to v1.11: three-step
+  HORIZONTAL:MODE MANUAL workflow added (HORIZONTAL:MODE:MANUAL:CONFIGURE
+  RECORDLength). New Section 17 for searchability on horizontal/sample-rate
+  queries. CONTEXT block horizontal entry also updated.
+- Landing page expanded: ChatGPT (Developer Mode + Responses API),
+  Grok (Bring Your Own MCP, launched May 2026), GitHub Copilot
+  (VS Code Agent mode, JetBrains/Visual Studio/CLI) all added.
+  Page restructured into four platform sections with tier badges.
+- Version synced across build.bat, install.ps1, server (all → v1.4.4).
 
 v1.4.3
 - mso_4_5_6_7_commands.json: 21 SCPI string repairs applied to fix truncated
@@ -758,7 +781,7 @@ async def landing_page(request):  # type: ignore[no-untyped-def]
   header h1{{font-size:1.6rem;font-weight:700}}
   header p{{color:#8b949e;margin-top:4px;font-size:.95rem}}
   .badge{{background:#1f6feb;color:#fff;font-size:.75rem;font-weight:600;padding:3px 10px;border-radius:20px;white-space:nowrap}}
-  .stats{{display:flex;gap:16px;padding:32px 40px 0}}
+  .stats{{display:flex;gap:16px;padding:32px 40px 0;flex-wrap:wrap}}
   .stat{{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:24px 32px;text-align:center;min-width:160px}}
   .stat .num{{font-size:2rem;font-weight:700;color:#58a6ff}}
   .stat .label{{color:#8b949e;font-size:.85rem;margin-top:4px;text-transform:uppercase;letter-spacing:.05em}}
@@ -769,18 +792,24 @@ async def landing_page(request):  # type: ignore[no-untyped-def]
   .card{{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:24px}}
   .card h3{{color:#58a6ff;font-size:.95rem;font-weight:600;margin-bottom:6px}}
   .card .sub{{color:#8b949e;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px}}
+  .card .req{{display:inline-block;font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:4px;margin-bottom:12px}}
+  .req-free{{background:#0a3628;color:#3fb950;border:1px solid #238636}}
+  .req-paid{{background:#2d1b00;color:#f0883e;border:1px solid #9e6a03}}
   pre{{background:#0d1117;border:1px solid #30363d;border-radius:6px;padding:14px;font-size:.8rem;overflow-x:auto;line-height:1.6;color:#e6edf3}}
   .key{{color:#79c0ff}}.val{{color:#a5d6ff}}.str{{color:#a5d6ff}}
+  .note{{font-size:.78rem;color:#8b949e;margin-top:10px;line-height:1.5;padding:10px 12px;background:#0d1117;border:1px solid #21262d;border-radius:6px}}
+  .note a{{color:#58a6ff;text-decoration:none}}
   footer{{text-align:center;color:#484f58;font-size:.8rem;padding:32px;border-top:1px solid #21262d;margin-top:16px}}
+  @media(max-width:700px){{.cards{{grid-template-columns:1fr}}.stats{{gap:10px}}}}
 </style>
 </head>
 <body>
 <header>
   <div>
-    <h1>🔬 Tektronix MCP Server</h1>
+    <h1>&#x1F52C; Tektronix MCP Server</h1>
     <p>SCPI command intelligence &amp; live instrument control for AI assistants</p>
   </div>
-  <span class="badge">v1.4.3</span>
+  <span class="badge">v1.4.4</span>
 </header>
 
 <div class="stats">
@@ -789,21 +818,26 @@ async def landing_page(request):  # type: ignore[no-untyped-def]
   <div class="stat"><div class="num">2</div><div class="label">Transports</div></div>
 </div>
 
+<!-- ANTHROPIC CLAUDE -->
 <div class="section">
-  <h2>Remote — No Install Needed</h2>
-  <p>Connect via Streamable HTTP. No local files or Node.js required.</p>
+  <h2>Anthropic Claude</h2>
+  <p>Native MCP support across all Claude surfaces. No authentication required.</p>
   <div class="cards">
+
     <div class="card">
       <h3>Claude Web (claude.ai)</h3>
+      <span class="req req-free">Free &amp; Pro</span>
       <div class="sub">Settings &rsaquo; Connectors &rsaquo; Add Custom Connector</div>
       <pre>Name: TektronixMCP
 URL:  {mcp_url}
 
-No OAuth — leave Advanced settings blank</pre>
+Authentication: None (leave blank)</pre>
     </div>
+
     <div class="card">
       <h3>Claude Desktop</h3>
-      <div class="sub">Requires mcp-remote proxy &mdash; ~/.claude/claude_desktop_config.json</div>
+      <span class="req req-free">Free &amp; Pro</span>
+      <div class="sub">~/.claude/claude_desktop_config.json &mdash; requires Node.js for mcp-remote</div>
       <pre><span class="key">{{</span>
   <span class="key">"mcpServers"</span>: <span class="key">{{</span>
     <span class="key">"tektronix"</span>: <span class="key">{{</span>
@@ -812,18 +846,33 @@ No OAuth — leave Advanced settings blank</pre>
     <span class="key">}}</span>
   <span class="key">}}</span>
 <span class="key">}}</span></pre>
+      <div class="note">&#x1F4A1; Prefer local install? Download the standalone .exe &mdash; no Node.js, no Railway dependency, lessons-learned saved to disk.</div>
     </div>
+
     <div class="card">
       <h3>Claude Code</h3>
-      <div class="sub">Native HTTP &mdash; run in terminal (not inside Claude Code)</div>
+      <span class="req req-free">Free &amp; Pro</span>
+      <div class="sub">Native HTTP &mdash; run in terminal, not inside Claude Code</div>
       <pre>claude mcp add-json tektronix \
   '{{"type":"http","url":"{mcp_url}"}}'</pre>
-      <pre style="margin-top:10px;font-size:.78rem;color:#8b949e">Or add to ~/.claude.json (user) or .mcp.json (project root):
-{{"mcpServers": {{"tektronix": {{"type":"http","url":"{mcp_url}"}}}}}}</pre>
+      <pre style="margin-top:10px;font-size:.75rem;color:#8b949e">Or add to ~/.claude.json (user scope) or
+.mcp.json (project root):
+{{"mcpServers":{{"tektronix":{{"type":"http","url":"{mcp_url}"}}}}}}</pre>
     </div>
+
+  </div>
+</div>
+
+<!-- MICROSOFT / GITHUB COPILOT -->
+<div class="section" style="padding-top:0">
+  <h2>Microsoft &mdash; VS Code &amp; GitHub Copilot</h2>
+  <p>MCP tools are available in Copilot Agent mode only &mdash; not in regular Copilot chat.</p>
+  <div class="cards">
+
     <div class="card">
       <h3>VS Code / Cursor</h3>
-      <div class="sub">Native HTTP &mdash; .vscode/mcp.json or .cursor/mcp.json</div>
+      <span class="req req-free">Free (Copilot Free tier)</span>
+      <div class="sub">.vscode/mcp.json (project) or user mcp.json &mdash; Agent mode only</div>
       <pre><span class="key">{{</span>
   <span class="key">"servers"</span>: <span class="key">{{</span>
     <span class="key">"tektronix"</span>: <span class="key">{{</span>
@@ -832,11 +881,113 @@ No OAuth — leave Advanced settings blank</pre>
     <span class="key">}}</span>
   <span class="key">}}</span>
 <span class="key">}}</span></pre>
+      <div class="note">Open Command Palette &rarr; <b>MCP: Open User Configuration</b> for user-wide config. Note: root key is <code>"servers"</code> not <code>"mcpServers"</code>.</div>
     </div>
+
+    <div class="card">
+      <h3>GitHub Copilot (JetBrains / Visual Studio / CLI)</h3>
+      <span class="req req-free">Copilot Free / Pro / Business</span>
+      <div class="sub">.github/copilot/mcp.json in repo root &mdash; Agent mode only</div>
+      <pre><span class="key">{{</span>
+  <span class="key">"servers"</span>: <span class="key">{{</span>
+    <span class="key">"tektronix"</span>: <span class="key">{{</span>
+      <span class="key">"type"</span>: <span class="str">"http"</span>,
+      <span class="key">"url"</span>: <span class="str">"{mcp_url}"</span>
+    <span class="key">}}</span>
+  <span class="key">}}</span>
+<span class="key">}}</span></pre>
+      <div class="note">Copilot CLI: Settings &rarr; MCP Servers &rarr; Add &rarr; HTTP &rarr; paste URL. Business/Enterprise: org admin must enable <em>MCP servers in Copilot</em> policy first.</div>
+    </div>
+
   </div>
 </div>
 
-<footer>Tektronix MCP Server v1.4.3 &mdash; Built by the Tektronix FAE Team</footer>
+<!-- OPENAI CHATGPT -->
+<div class="section" style="padding-top:0">
+  <h2>OpenAI &mdash; ChatGPT</h2>
+  <p>Requires Developer Mode (ChatGPT Plus or Pro). Set Authentication to None for this server.</p>
+  <div class="cards">
+
+    <div class="card">
+      <h3>ChatGPT Web &amp; Desktop</h3>
+      <span class="req req-paid">Plus / Pro required</span>
+      <div class="sub">Settings &rsaquo; Apps &amp; Connectors &rsaquo; Developer Mode &rsaquo; Create</div>
+      <pre>1. Settings &rarr; Apps &amp; Connectors
+2. Scroll to Advanced &rarr; Enable Developer Mode
+3. Click Create (now visible)
+   Name:           TektronixMCP
+   MCP Server URL: {mcp_url}
+   Authentication: None
+4. Click Create &rarr; confirm tool permissions</pre>
+      <div class="note">&#x26A0; Developer Mode is beta &mdash; ChatGPT Plus or Pro required. Memory is automatically disabled while Developer Mode is active.</div>
+    </div>
+
+    <div class="card">
+      <h3>OpenAI Responses API / Agents SDK</h3>
+      <span class="req req-paid">API key required</span>
+      <div class="sub">Native remote MCP &mdash; Python example</div>
+      <pre><span class="key">from</span> openai <span class="key">import</span> OpenAI
+client = OpenAI()
+
+resp = client.responses.create(
+  model=<span class="str">"gpt-4o"</span>,
+  tools=[{{
+    <span class="str">"type"</span>: <span class="str">"mcp"</span>,
+    <span class="str">"server_url"</span>: <span class="str">"{mcp_url}"</span>,
+    <span class="str">"server_label"</span>: <span class="str">"tektronix"</span>
+  }}],
+  input=<span class="str">"Find SCPI commands for TDR preset"</span>
+)</pre>
+    </div>
+
+  </div>
+</div>
+
+<!-- XAI GROK -->
+<div class="section" style="padding-top:0">
+  <h2>xAI &mdash; Grok</h2>
+  <p>Bring Your Own MCP launched May 2026. Requires a paid Grok account.</p>
+  <div class="cards">
+
+    <div class="card">
+      <h3>Grok Web / iOS / Android</h3>
+      <span class="req req-paid">Paid Grok account required</span>
+      <div class="sub">grok.com/connectors &rsaquo; New Connector &rsaquo; Custom</div>
+      <pre>1. Go to grok.com/connectors
+   (or Grok menu &rarr; Connectors)
+2. Click New Connector &rarr; Custom
+3. MCP Server URL: {mcp_url}
+4. Complete any authentication prompt
+5. Grok discovers tools automatically</pre>
+      <div class="note">Grok custom MCP launched May 6, 2026. Live on web, iOS, and Android. See <a href="https://docs.x.ai/grok/connectors" target="_blank">docs.x.ai/grok/connectors</a>.</div>
+    </div>
+
+    <div class="card">
+      <h3>xAI API / SDK</h3>
+      <span class="req req-paid">xAI API key required</span>
+      <div class="sub">Remote MCP via xAI Responses API &mdash; Python example</div>
+      <pre><span class="key">from</span> openai <span class="key">import</span> OpenAI
+client = OpenAI(
+  base_url=<span class="str">"https://api.x.ai/v1"</span>,
+  api_key=<span class="str">"xai-..."</span>
+)
+
+resp = client.responses.create(
+  model=<span class="str">"grok-3"</span>,
+  tools=[{{
+    <span class="str">"type"</span>: <span class="str">"mcp"</span>,
+    <span class="str">"server_url"</span>: <span class="str">"{mcp_url}"</span>,
+    <span class="str">"server_label"</span>: <span class="str">"tektronix"</span>
+  }}],
+  input=<span class="str">"Find SCPI commands for TDR preset"</span>
+)</pre>
+      <div class="note">xAI supports remote MCP natively in the Responses API and Voice Agent API. See <a href="https://docs.x.ai/developers/tools/remote-mcp" target="_blank">docs.x.ai/developers/tools/remote-mcp</a>.</div>
+    </div>
+
+  </div>
+</div>
+
+<footer>Tektronix MCP Server v1.4.4 &mdash; Built by the Tektronix FAE Team</footer>
 </body>
 </html>"""
     return HTMLResponse(html)
@@ -3686,6 +3837,10 @@ def search_local_docs(query: str, max_results: int = 5) -> List[Dict[str, Any]]:
         (DOCS_PATH, "measurement_workflow_Andre.md", "markdown", 3),
         # Tier 3: Golden Python examples (default context: MSO 4/5/6)
         (PYTHON_EXAMPLES_PATH, "*.py", "python", 5),
+        # Clarius Compliance Platform — boost above standard reference tier
+        # Must precede **/*.md glob so deduplication preserves these higher boosts
+        (DOCS_REFERENCE_PATH, "clarius_overview.md", "markdown", 5),
+        (DOCS_REFERENCE_PATH, "clarius_sdk_api.md", "markdown", 5),
         # Tier 4: Reference documentation (recursive — includes pi_translator/)
         (DOCS_REFERENCE_PATH, "**/*.md", "markdown", 3),
         # Tier 5/6: Remaining docs (tiers 1-2 already in seen_files, skipped)
@@ -4432,7 +4587,7 @@ def tek_save_lessons_learned(
     
     content += f"""
 ---
-*Generated by Tek MCP Server v1.4.3*
+*Generated by Tek MCP Server v1.4.4*
 """
     
     try:
@@ -5581,7 +5736,7 @@ def tek_status() -> str:
     hours, remainder = divmod(int(uptime.total_seconds()), 3600)
     minutes, seconds = divmod(remainder, 60)
     
-    output = f"## 🔬 Tektronix MCP Server v1.4.3\n\n"
+    output = f"## 🔬 Tektronix MCP Server v1.4.4\n\n"
     output += f"**Status:** ✅ Running\n"
     output += f"**Uptime:** {hours}h {minutes}m {seconds}s\n"
     output += f"**Total Commands:** {_total_commands:,}\n"
@@ -5911,7 +6066,7 @@ def main():
     _server_start_time = datetime.now()
     
     print("\n" + "=" * 60, file=sys.stderr)
-    print("🔬 Tektronix MCP Server v1.4.3", file=sys.stderr)
+    print("🔬 Tektronix MCP Server v1.4.4", file=sys.stderr)
     print("   - MSO 4/5/6/7 + MSO 2 Series command databases", file=sys.stderr)
     print("   - Local docs search includes Tek PTA source", file=sys.stderr)
     print("   - Live instrument control via PyVISA", file=sys.stderr)

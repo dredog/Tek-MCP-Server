@@ -1,0 +1,246 @@
+{
+  "clarius_automation_framework": {
+    "version": "4.0.0",
+    "doc_date": "March 2026",
+    "part_numbers": {
+      "getting_started_guide": "077-1852-02",
+      "programming_guide": "077-1854-02"
+    },
+    "description": "Tektronix next-generation browser-based compliance test platform. Replaces TekExpress. Runs inside Hyper-V VM on host PC, accessed via web browser.",
+    "predecessor": "TekExpress"
+  },
+
+  "system_requirements": {
+    "os": ["Windows 10 Enterprise/Pro 21H1+", "Windows 11 Enterprise/Pro 21H2+"],
+    "language": "English (United States) only",
+    "browser": ["Microsoft Edge (default)", "Google Chrome"],
+    "python_sdk": "3.13.x",
+    "network": "1 Gbps",
+    "virtualization": "Hyper-V must be enabled; BIOS virtualization required",
+    "ram_minimum_system": "16 GB",
+    "ram_vm_minimum": "8 GB",
+    "ram_vm_default_logic": "max(min(50% of system RAM, 16 GB), 8 GB)",
+    "disk_minimum": "20 GB",
+    "disk_maximum": "90% of available disk space",
+    "cpu_minimum_logical_cores": 2,
+    "cpu_maximum_percent": "75% of total logical cores"
+  },
+
+  "ports": {
+    "clarius_ui": {"default": 4200, "range": "4200-4209"},
+    "event_communication": {"default": 5672, "range": "5672-5679"},
+    "api_gateway": {"default": 8080, "range": "8080-8089"},
+    "ssl_certificates": {"default": 8443, "range": "8443-8449"},
+    "file_store": {"default": 9001, "range": "9001-9009"},
+    "instrument_service_hub": {"default": 18000, "range": "fixed"},
+    "all_required": ["9001", "5672", "8080", "4200", "8443", "18000", "18002", "5060"]
+  },
+
+  "deployment_models": [
+    {
+      "model": 1,
+      "name": "Single System",
+      "description": "Laptop/PC runs both Measurement Service and Instrument Service. Pre-recorded waveforms only.",
+      "use_case": "Offline analysis, no live scope needed"
+    },
+    {
+      "model": 2,
+      "name": "Peer to Peer",
+      "description": "PC runs Measurement Service; Oscilloscope runs Instrument Service. Direct 1G Ethernet.",
+      "use_case": "Live acquisition compliance testing at bench"
+    },
+    {
+      "model": 3,
+      "name": "Private Network",
+      "description": "PC runs Measurement Service; Multiple oscilloscopes run Instrument Service via switch/router.",
+      "use_case": "Lab with multiple scopes/test benches"
+    }
+  ],
+
+  "services": {
+    "measurement_service": {
+      "runs_on": "Host PC (inside Hyper-V VM)",
+      "purpose": "Compliance algorithms and measurement engine",
+      "managed_via": "Admin Console UI",
+      "log_path": "C:\\ProgramData\\Tektronix\\Clarius\\logs\\"
+    },
+    "instrument_service": {
+      "runs_on": "Host PC or oscilloscope",
+      "purpose": "Waveform acquisition and transfer to measurement service",
+      "default_port": 18000,
+      "start": "InstrumentServiceStart.bat (desktop shortcut)",
+      "stop": "InstrumentServiceStop.bat (desktop shortcut)",
+      "alt_path": "C:\\Program Files\\Tektronix\\Clarius\\lib\\instrument\\service\\"
+    }
+  },
+
+  "file_paths": {
+    "install_dir": "C:\\Program Files\\Tektronix\\Clarius\\",
+    "logs": "C:\\ProgramData\\Tektronix\\Clarius\\logs\\",
+    "instrument_installer": "C:\\Program Files\\Tektronix\\Clarius\\installers\\instrument\\",
+    "sdk_installer": "C:\\Program Files\\Tektronix\\Clarius\\installers\\sdk\\",
+    "port_config": "C:\\Program Files\\Tektronix\\Clarius\\conf\\portconfiguration.json",
+    "vm_details": "C:\\Program Files\\Tektronix\\Clarius\\.meta\\vmdetails.json",
+    "scripts": "C:\\Program Files\\Tektronix\\Clarius\\bin\\scripts"
+  },
+
+  "access": {
+    "local_url": "https://127.0.0.1:4200",
+    "remote_url": "https://<host_ip_or_name>:4200",
+    "default_username": "admin",
+    "password": "set during installation"
+  },
+
+  "upgrade": {
+    "v4_0_0_upgrades_from": ["3.1.0", "3.0.0"],
+    "free_vm_disk_required_gb": 30,
+    "no_rollback_on_interrupt": true,
+    "app_upgrade_has_rollback": true,
+    "expand_storage_command": "clarius --systemInfo manage --storage <GB>"
+  },
+
+  "license_flow": [
+    "Install Clarius Automation Framework",
+    "Install compliance application (e.g., LPDDR4 app) from tek.com",
+    "Log in -> License tab -> copy Host ID",
+    "Email Host ID to Tektronix AE/sales to get license file",
+    "License tab -> Add License -> browse to .lic file -> Activate"
+  ],
+
+  "cli_commands": {
+    "view_system_info": "clarius --systemInfo view  OR  clarius -y view",
+    "expand_storage": "clarius --systemInfo manage --storage <GB>  OR  clarius -y manage -s <GB>",
+    "expand_memory": "clarius --systemInfo manage --memory <GB>  OR  clarius -y manage -m <GB>",
+    "expand_cpu": "clarius --systemInfo manage --core <count>  OR  clarius -y manage -c <count>",
+    "reset_password": "clarius --resetPwd -p \"newpassword\"  OR  clarius --resetPwd --password \"newpassword\"",
+    "view_tls_cert": "clarius --sslCert -d  OR  clarius -x -d",
+    "renew_tls_cert": "clarius --sslCert -r  OR  clarius -x -r",
+    "restart_all_services": "clarius restart",
+    "restart_one_service": "clarius restart \"service name\"",
+    "reset_hyper_v_switch": "clarius --resetNetSwitch"
+  },
+
+  "admin_console": {
+    "launch": "Double-click 'Clarius Admin Console' on desktop",
+    "warning_threshold_pct": 70,
+    "critical_threshold_pct": 90,
+    "metrics_shown": ["CPU Load", "Memory", "Storage"],
+    "test_bench_statuses": {
+      "Available": "IS and IS Agent running, no test active",
+      "Occupied": "Test currently running",
+      "Unavailable": "IS down, IS Agent running - use Start",
+      "Not Reachable": "Both IS and IS Agent unreachable"
+    }
+  },
+
+  "sdk": {
+    "package_name": "clariussdk",
+    "python_version_required": "3.13.x",
+    "main_import": "from clariussdk import clarius",
+    "acquisition_mode_import": "from clariussdk.tests import AcquisitionMode",
+    "notifications_import": "from clariussdk.notifications import InterruptActions",
+
+    "initialization": {
+      "signature": "clarius.Api(ip, client_id, client_secret, api_port=8443, cert_port=8080)",
+      "api_port_default": 8443,
+      "cert_port_default": 8080,
+      "ip": "IP address of Clarius host (where framework is installed)"
+    },
+
+    "workflow_steps": [
+      "api.applications.get_list()  - get licensed apps",
+      "api.test_benches.create_testbench(bench_json)  - create bench",
+      "sdk.tests.new_test(name, bench_id, description)  - create test object",
+      "new_test.acquisition_mode = AcquisitionMode.LIVE or RECORDED",
+      "new_test.add_sequence(technology, app_name)  - select app",
+      "technology.applications[0].set_selection(True)  - enable",
+      "api.tests.start_test(new_test)  - returns execution_id",
+      "api.tests.wait_for_completion(execution_id)",
+      "api.tests.get_status(execution_id)  - check result",
+      "api.reports.generate_report(...)  - generate report"
+    ],
+
+    "key_methods": {
+      "get_apps": "api.applications.get_list()",
+      "create_bench": "api.test_benches.create_testbench(bench_json, options?)",
+      "get_benches": "api.test_benches.get_all_testbenches()",
+      "validate_bench": "api.test_benches.validate_testbench(bench_json)",
+      "new_test": "api.tests.new_test(name, bench_id, description)",
+      "start_test": "api.tests.start_test(new_test)",
+      "get_status": "api.tests.get_status(execution_id, raw=False)",
+      "wait": "api.tests.wait_for_completion(execution_id)",
+      "abort": "api.tests.abort_test(execution_id)",
+      "delete_test": "api.tests.delete_test(execution_id)",
+      "get_templates": "api.templates.get_report_templates()",
+      "generate_report": "api.reports.generate_report(test_id, template_id, name, path)",
+      "download_waveforms": "api.results.download_waveforms(execution_id, wfm_path)",
+      "get_sequences": "api.sequences.get_all_sequences()",
+      "save_sequence": "api.sequences.save_sequence(sequence)",
+      "import_sequence": "api.sequences.import_sequence(sequence_id)",
+      "get_limits": "technology.applications[index].get_limits()",
+      "update_limit": "limit.update_ideal_value() / update_low_limit() / update_high_limit()",
+      "pull_notifications": "api.notifications.pull_interrupt_notifications()",
+      "perform_interrupt": "api.notifications.perform_interrupt_action(notification_id, action)"
+    },
+
+    "interrupt_actions": ["InterruptActions.RESUME", "InterruptActions.SKIP", "InterruptActions.STOP", "InterruptActions.CLEAR"],
+
+    "test_bench_live_required_fields": ["name", "acquisitionMode", "technologies", "hubAddress", "instruments"],
+    "test_bench_recorded_required_fields": ["name", "hubAddress", "acquisitionMode"],
+
+    "instrument_fields": {
+      "name": "friendly name",
+      "type": "SIGNAL_ANALYZER",
+      "category": "RT_SCOPE",
+      "address": "VISA address e.g. TCPIP::192.168.1.50::INSTR or GPIB8::1::INSTR",
+      "properties": {"manufacturer": "TEKTRONIX", "model": "default"}
+    }
+  },
+
+  "rest_api": {
+    "base_url": "https://<host_ip>:<port>/clarius/",
+    "auth_endpoint": "POST /clarius/oauth2/token",
+    "auth_header": "Authorization: Bearer <token>",
+    "key_endpoints": {
+      "get_apps": "GET /clarius/application",
+      "run_test": "POST /clarius/application/$execute",
+      "get_test_status": "GET /clarius/application/$execute/{id}",
+      "create_bench": "POST /clarius/testbench",
+      "validate_bench": "POST /clarius/execution/testbench/validation/$start",
+      "get_limits": "GET /clarius/limits",
+      "update_limit": "PUT /clarius/limits/{id}",
+      "generate_report": "POST /clarius/reports"
+    }
+  },
+
+  "ui_tabs": {
+    "Dashboard": "Status overview - running tests, sequences, test benches, notifications",
+    "Tests": "Create, configure, run, and review tests",
+    "Manage": "Manage applications, test benches, sequences",
+    "License": "Add/view licenses, copy Host ID",
+    "Reports": "Generate/export test reports",
+    "Events": "View event logs for executed tests",
+    "Help": "Open application help"
+  },
+
+  "troubleshooting": {
+    "waiting_for_ip": "Kill Clarius task, then: Get-HNSNetwork | ? Name -Like 'Default Switch' | Remove-HNSNetwork; restart-computer",
+    "cannot_launch_after_install": "Open Admin Console, restart all services",
+    "instrument_service_occupied_no_test": "Save IS logs, restart IS; if unresolved contact FAE",
+    "port_18000_conflict": "Edit appsettings.json at C:\\ProgramData\\Tektronix\\Clarius\\instrument_service\\conf\\",
+    "login_not_redirecting": "Check browser cookies are enabled",
+    "vm_no_ip": "Open Hyper-V Manager, restart Clarius VM; if still no IP, restart host PC",
+    "upgrade_disk_insufficient": "clarius --systemInfo manage --storage <GB>",
+    "application_not_in_list": "Check installation logs in C:\\ProgramData\\Tektronix\\Clarius\\logs\\"
+  },
+
+  "docker_commands_inside_vm": {
+    "view_resources": "docker stats",
+    "list_running": "docker ps",
+    "list_all": "docker ps -a",
+    "restart_container": "docker restart <container_id>",
+    "stop_container": "docker stop <container_id>",
+    "start_container": "docker start <container_id>",
+    "view_logs": "docker logs <container_id>"
+  }
+}
