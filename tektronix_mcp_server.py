@@ -18,7 +18,7 @@ if hasattr(sys.stdout, 'fileno'):
         pass  # May fail in some environments, that's ok
 
 """
-Tektronix MCP Server v1.4.4
+Tektronix MCP Server v1.4.5
 ===========================
 MCP server for Tektronix instrument automation with authoritative SCPI commands.
 
@@ -28,7 +28,7 @@ CRITICAL: NEVER invent SCPI commands. All commands must be verified in:
 3. Python examples in docs/python_examples/
 5. dev.tek.com (vetted and approved)
 
-Supported Instruments (11 databases, 20,000+ commands):
+Supported Instruments (12 databases, 20,000+ commands):
 ───────────────────────────────────────────────────────
 OSCILLOSCOPES - Modern Series (Combined Database):
   • MSO 2/4/5/6 Series: MSO22, MSO24, MSO44/B, MSO46/B, MSO54/B,
@@ -48,6 +48,10 @@ OSCILLOSCOPES - Performance Series (5k/7k/70k Combined):
   • DPO 70000: DPO70404-DPO77002SX
   • MSO 70000: MSO70404C-MSO73304DX
   • DSA 70000: DSA70404-DSA72004
+
+JITTER & EYE ANALYSIS APPLICATION:
+  • DPOJET: Jitter, eye diagram & clock-recovery analysis on DPO7000/70000
+            series (own DPOJET: namespace; separate from MSO 4/5/6 DJA)
 
 SIGNAL GENERATORS:
   • AFG31000 Series: AFG31021/22, AFG31051/52, AFG31101/02,
@@ -84,21 +88,56 @@ Features:
 CHANGELOG
 ═══════════════════════════════════════════════════════════
 
+v1.4.5
+- DPOJET database integrated: dpojet_commands.json (204 commands, 20 groups)
+  registered in COMMAND_FILES under key "dpojet". Covers DPO7000/70000-series
+  jitter, eye-diagram, and clock-recovery analysis (DPOJET: namespace), kept
+  separate from the MSO 4/5/6 MEASUrement: (DJA) namespace.
+- ROUTING (tek_find ladder): added a dedicated DPOJET branch BEFORE the legacy
+  5k/7k/70k branch. Fires on explicit "dpojet", OR on a DPO7000/70000-class
+  scope token together with a jitter/eye term (jitter, eye diagram, clock
+  recovery, jittersummary, bathtub, tj@ber, phase noise, ...). Bare scope
+  tokens with no jitter context still fall through to mso_dpo_5k_7k_70k.
+  Removed "dpojet" from the legacy branch token list (it was being swallowed
+  there and routed to the generic legacy DB).
+- ROUTING (_INSTRUMENT_QUERY_HINTS): legacy high-end scope hints now include
+  the dpojet DB alongside the generic legacy DB, so search_commands surfaces
+  DPOJET commands on DPO70000-class queries and scores them competitively.
+  Added dpo75002 / mso73304 model tokens.
+- BUGFIX: legacy scope hints pointed at non-existent key "mso_dpo_5k" (real
+  key is "mso_dpo_5k_7k_70k"), so the multi-DB path silently dropped the
+  legacy DB. Corrected to "mso_dpo_5k_7k_70k". Only affected bare
+  search_commands auto-detect; tek_find sets the key directly in its ladder.
+- Reference docs (docs/reference/): dpojet_dpo70000_reference.md (consolidated,
+  hardware-verified DPOJET DPO70000 incl. DX/SX) and dja_jitter_eye_sim_reference.md
+  (modern MSO5/6 + DPO7 DJA, SIM, and EYEMASK/mask). Both registered as named
+  search_local_docs entries at +5 (above the standard reference +3), placed before
+  the **/*.md glob so dedup preserves the higher boost.
+- ROUTING (tek_find dpojet branch): jitter-term set widened to include mask/msk/eye/
+  report/clockrecovery. SX/DX coverage generalized via a (sx|dx)+(dpo7|mso7|dsa7)
+  clause so every 70000-class SX/DX model routes to DPOJET (DPO75002SX, DPO77002SX,
+  MSO73304DX, MSO72304DX, ...) WITHOUT catching the modern DPO7 Series (DPO714A/718A,
+  which has no SX/DX suffix and uses DJA).
+- NOTE: dpojet_commands.json carries a per-command "migration" field plus
+  measurement_type_map / clock_recovery_standard_map top-level maps. These
+  load fine (extra fields ignored) but are not yet surfaced in render/search —
+  deferred to a follow-up.
+- Version synced across build.bat, install.ps1, server (all → v1.4.5).
+
 v1.4.4
-- Clarius compliance test platform integrated: clarius_overview.md,
   clarius_sdk_api.md, and clarius_reference.json added to docs/reference/.
   search_local_docs boosts clarius_overview.md and clarius_sdk_api.md to
-  +5 so Clarius queries surface the right file first.
+  +5 (above the standard reference +3) so Clarius queries surface the
+  right file first. clarius_reference.json provides structured machine-
+  readable data (not full-text searched but included in distribution).
 - search_local_docs: added named entries for clarius_overview.md (+5) and
-  clarius_sdk_api.md (+5) before the **/*.md glob (dedup preserves boost).
-- Tektronix_Automation_Guidelines.md updated to v1.11: three-step
-  HORIZONTAL:MODE MANUAL workflow added (HORIZONTAL:MODE:MANUAL:CONFIGURE
-  RECORDLength). New Section 17 for searchability on horizontal/sample-rate
-  queries. CONTEXT block horizontal entry also updated.
-- Landing page expanded: ChatGPT (Developer Mode + Responses API),
-  Grok (Bring Your Own MCP, launched May 2026), GitHub Copilot
-  (VS Code Agent mode, JetBrains/Visual Studio/CLI) all added.
-  Page restructured into four platform sections with tier badges.
+  clarius_sdk_api.md (+5) — these must precede the **/*.md glob so
+  deduplication preserves the higher boost for those files.
+- Tektronix_Automation_Guidelines.md updated to v1.11: added three-step
+  HORIZONTAL:MODE MANUAL workflow (HORIZONTAL:MODE:MANUAL:CONFIGURE
+  RECORDLength) with diagnostic query block. Moved to new Section 17
+  for searchability on queries like "sample rate", "horizontal mode",
+  "CONFIGURE RECORDLength". CONTEXT block horizontal entry also updated.
 - Version synced across build.bat, install.ps1, server (all → v1.4.4).
 
 v1.4.3
@@ -580,7 +619,30 @@ COMMAND_FILES = {
         "models": ["DPO5034", "DPO5204B"],
         "is_alias": True,
     },
-    
+
+    # =========================================================================
+    # JITTER & EYE ANALYSIS APPLICATION (DPO7000/70000 series)
+    # =========================================================================
+    # DPOJET is a separate application with its own DPOJET: SCPI namespace that
+    # runs on DPO7000/70000-series scopes. It is NOT the same as the MSO 4/5/6
+    # built-in DJA (MEASUrement: namespace) — keep the two databases distinct.
+    "dpojet": {
+        "path": JSON_PATH / "dpojet_commands.json",
+        "description": "DPOJET Jitter & Eye Diagram Analysis (DPO7000/70000 Series)",
+        "models": [
+            # DPO 7000 Series
+            "DPO7000", "DPO7000C",
+            # DPO/MSO/DSA 70000 Series
+            "DPO70000", "DPO70000C", "DPO70000D", "DPO70000DX", "DPO70000SX",
+            "DPO75002SX", "DPO75902SX", "DPO77002SX",
+            "MSO70000", "MSO70000C", "MSO70000DX", "MSO73304DX",
+            "DSA70000",
+            # DPO/MSO 5000(B) Series (DPOJET also runs here)
+            "DPO5000", "DPO5000B", "MSO5000", "MSO5000B",
+        ],
+        "aliases": ["jitter app", "eye analysis", "dpo jet"],
+    },
+
     # =========================================================================
     # SIGNAL GENERATORS
     # =========================================================================
@@ -781,7 +843,7 @@ async def landing_page(request):  # type: ignore[no-untyped-def]
   header h1{{font-size:1.6rem;font-weight:700}}
   header p{{color:#8b949e;margin-top:4px;font-size:.95rem}}
   .badge{{background:#1f6feb;color:#fff;font-size:.75rem;font-weight:600;padding:3px 10px;border-radius:20px;white-space:nowrap}}
-  .stats{{display:flex;gap:16px;padding:32px 40px 0;flex-wrap:wrap}}
+  .stats{{display:flex;gap:16px;padding:32px 40px 0}}
   .stat{{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:24px 32px;text-align:center;min-width:160px}}
   .stat .num{{font-size:2rem;font-weight:700;color:#58a6ff}}
   .stat .label{{color:#8b949e;font-size:.85rem;margin-top:4px;text-transform:uppercase;letter-spacing:.05em}}
@@ -792,24 +854,18 @@ async def landing_page(request):  # type: ignore[no-untyped-def]
   .card{{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:24px}}
   .card h3{{color:#58a6ff;font-size:.95rem;font-weight:600;margin-bottom:6px}}
   .card .sub{{color:#8b949e;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px}}
-  .card .req{{display:inline-block;font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:4px;margin-bottom:12px}}
-  .req-free{{background:#0a3628;color:#3fb950;border:1px solid #238636}}
-  .req-paid{{background:#2d1b00;color:#f0883e;border:1px solid #9e6a03}}
   pre{{background:#0d1117;border:1px solid #30363d;border-radius:6px;padding:14px;font-size:.8rem;overflow-x:auto;line-height:1.6;color:#e6edf3}}
   .key{{color:#79c0ff}}.val{{color:#a5d6ff}}.str{{color:#a5d6ff}}
-  .note{{font-size:.78rem;color:#8b949e;margin-top:10px;line-height:1.5;padding:10px 12px;background:#0d1117;border:1px solid #21262d;border-radius:6px}}
-  .note a{{color:#58a6ff;text-decoration:none}}
   footer{{text-align:center;color:#484f58;font-size:.8rem;padding:32px;border-top:1px solid #21262d;margin-top:16px}}
-  @media(max-width:700px){{.cards{{grid-template-columns:1fr}}.stats{{gap:10px}}}}
 </style>
 </head>
 <body>
 <header>
   <div>
-    <h1>&#x1F52C; Tektronix MCP Server</h1>
+    <h1>🔬 Tektronix MCP Server</h1>
     <p>SCPI command intelligence &amp; live instrument control for AI assistants</p>
   </div>
-  <span class="badge">v1.4.4</span>
+  <span class="badge">v1.4.5</span>
 </header>
 
 <div class="stats">
@@ -818,26 +874,21 @@ async def landing_page(request):  # type: ignore[no-untyped-def]
   <div class="stat"><div class="num">2</div><div class="label">Transports</div></div>
 </div>
 
-<!-- ANTHROPIC CLAUDE -->
 <div class="section">
-  <h2>Anthropic Claude</h2>
-  <p>Native MCP support across all Claude surfaces. No authentication required.</p>
+  <h2>Remote — No Install Needed</h2>
+  <p>Connect via Streamable HTTP. No local files or Node.js required.</p>
   <div class="cards">
-
     <div class="card">
       <h3>Claude Web (claude.ai)</h3>
-      <span class="req req-free">Free &amp; Pro</span>
       <div class="sub">Settings &rsaquo; Connectors &rsaquo; Add Custom Connector</div>
       <pre>Name: TektronixMCP
 URL:  {mcp_url}
 
-Authentication: None (leave blank)</pre>
+No OAuth — leave Advanced settings blank</pre>
     </div>
-
     <div class="card">
       <h3>Claude Desktop</h3>
-      <span class="req req-free">Free &amp; Pro</span>
-      <div class="sub">~/.claude/claude_desktop_config.json &mdash; requires Node.js for mcp-remote</div>
+      <div class="sub">Requires mcp-remote proxy &mdash; ~/.claude/claude_desktop_config.json</div>
       <pre><span class="key">{{</span>
   <span class="key">"mcpServers"</span>: <span class="key">{{</span>
     <span class="key">"tektronix"</span>: <span class="key">{{</span>
@@ -846,33 +897,18 @@ Authentication: None (leave blank)</pre>
     <span class="key">}}</span>
   <span class="key">}}</span>
 <span class="key">}}</span></pre>
-      <div class="note">&#x1F4A1; Prefer local install? Download the standalone .exe &mdash; no Node.js, no Railway dependency, lessons-learned saved to disk.</div>
     </div>
-
     <div class="card">
       <h3>Claude Code</h3>
-      <span class="req req-free">Free &amp; Pro</span>
-      <div class="sub">Native HTTP &mdash; run in terminal, not inside Claude Code</div>
+      <div class="sub">Native HTTP &mdash; run in terminal (not inside Claude Code)</div>
       <pre>claude mcp add-json tektronix \
   '{{"type":"http","url":"{mcp_url}"}}'</pre>
-      <pre style="margin-top:10px;font-size:.75rem;color:#8b949e">Or add to ~/.claude.json (user scope) or
-.mcp.json (project root):
-{{"mcpServers":{{"tektronix":{{"type":"http","url":"{mcp_url}"}}}}}}</pre>
+      <pre style="margin-top:10px;font-size:.78rem;color:#8b949e">Or add to ~/.claude.json (user) or .mcp.json (project root):
+{{"mcpServers": {{"tektronix": {{"type":"http","url":"{mcp_url}"}}}}}}</pre>
     </div>
-
-  </div>
-</div>
-
-<!-- MICROSOFT / GITHUB COPILOT -->
-<div class="section" style="padding-top:0">
-  <h2>Microsoft &mdash; VS Code &amp; GitHub Copilot</h2>
-  <p>MCP tools are available in Copilot Agent mode only &mdash; not in regular Copilot chat.</p>
-  <div class="cards">
-
     <div class="card">
       <h3>VS Code / Cursor</h3>
-      <span class="req req-free">Free (Copilot Free tier)</span>
-      <div class="sub">.vscode/mcp.json (project) or user mcp.json &mdash; Agent mode only</div>
+      <div class="sub">Native HTTP &mdash; .vscode/mcp.json or .cursor/mcp.json</div>
       <pre><span class="key">{{</span>
   <span class="key">"servers"</span>: <span class="key">{{</span>
     <span class="key">"tektronix"</span>: <span class="key">{{</span>
@@ -881,113 +917,11 @@ Authentication: None (leave blank)</pre>
     <span class="key">}}</span>
   <span class="key">}}</span>
 <span class="key">}}</span></pre>
-      <div class="note">Open Command Palette &rarr; <b>MCP: Open User Configuration</b> for user-wide config. Note: root key is <code>"servers"</code> not <code>"mcpServers"</code>.</div>
     </div>
-
-    <div class="card">
-      <h3>GitHub Copilot (JetBrains / Visual Studio / CLI)</h3>
-      <span class="req req-free">Copilot Free / Pro / Business</span>
-      <div class="sub">.github/copilot/mcp.json in repo root &mdash; Agent mode only</div>
-      <pre><span class="key">{{</span>
-  <span class="key">"servers"</span>: <span class="key">{{</span>
-    <span class="key">"tektronix"</span>: <span class="key">{{</span>
-      <span class="key">"type"</span>: <span class="str">"http"</span>,
-      <span class="key">"url"</span>: <span class="str">"{mcp_url}"</span>
-    <span class="key">}}</span>
-  <span class="key">}}</span>
-<span class="key">}}</span></pre>
-      <div class="note">Copilot CLI: Settings &rarr; MCP Servers &rarr; Add &rarr; HTTP &rarr; paste URL. Business/Enterprise: org admin must enable <em>MCP servers in Copilot</em> policy first.</div>
-    </div>
-
   </div>
 </div>
 
-<!-- OPENAI CHATGPT -->
-<div class="section" style="padding-top:0">
-  <h2>OpenAI &mdash; ChatGPT</h2>
-  <p>Requires Developer Mode (ChatGPT Plus or Pro). Set Authentication to None for this server.</p>
-  <div class="cards">
-
-    <div class="card">
-      <h3>ChatGPT Web &amp; Desktop</h3>
-      <span class="req req-paid">Plus / Pro required</span>
-      <div class="sub">Settings &rsaquo; Apps &amp; Connectors &rsaquo; Developer Mode &rsaquo; Create</div>
-      <pre>1. Settings &rarr; Apps &amp; Connectors
-2. Scroll to Advanced &rarr; Enable Developer Mode
-3. Click Create (now visible)
-   Name:           TektronixMCP
-   MCP Server URL: {mcp_url}
-   Authentication: None
-4. Click Create &rarr; confirm tool permissions</pre>
-      <div class="note">&#x26A0; Developer Mode is beta &mdash; ChatGPT Plus or Pro required. Memory is automatically disabled while Developer Mode is active.</div>
-    </div>
-
-    <div class="card">
-      <h3>OpenAI Responses API / Agents SDK</h3>
-      <span class="req req-paid">API key required</span>
-      <div class="sub">Native remote MCP &mdash; Python example</div>
-      <pre><span class="key">from</span> openai <span class="key">import</span> OpenAI
-client = OpenAI()
-
-resp = client.responses.create(
-  model=<span class="str">"gpt-4o"</span>,
-  tools=[{{
-    <span class="str">"type"</span>: <span class="str">"mcp"</span>,
-    <span class="str">"server_url"</span>: <span class="str">"{mcp_url}"</span>,
-    <span class="str">"server_label"</span>: <span class="str">"tektronix"</span>
-  }}],
-  input=<span class="str">"Find SCPI commands for TDR preset"</span>
-)</pre>
-    </div>
-
-  </div>
-</div>
-
-<!-- XAI GROK -->
-<div class="section" style="padding-top:0">
-  <h2>xAI &mdash; Grok</h2>
-  <p>Bring Your Own MCP launched May 2026. Requires a paid Grok account.</p>
-  <div class="cards">
-
-    <div class="card">
-      <h3>Grok Web / iOS / Android</h3>
-      <span class="req req-paid">Paid Grok account required</span>
-      <div class="sub">grok.com/connectors &rsaquo; New Connector &rsaquo; Custom</div>
-      <pre>1. Go to grok.com/connectors
-   (or Grok menu &rarr; Connectors)
-2. Click New Connector &rarr; Custom
-3. MCP Server URL: {mcp_url}
-4. Complete any authentication prompt
-5. Grok discovers tools automatically</pre>
-      <div class="note">Grok custom MCP launched May 6, 2026. Live on web, iOS, and Android. See <a href="https://docs.x.ai/grok/connectors" target="_blank">docs.x.ai/grok/connectors</a>.</div>
-    </div>
-
-    <div class="card">
-      <h3>xAI API / SDK</h3>
-      <span class="req req-paid">xAI API key required</span>
-      <div class="sub">Remote MCP via xAI Responses API &mdash; Python example</div>
-      <pre><span class="key">from</span> openai <span class="key">import</span> OpenAI
-client = OpenAI(
-  base_url=<span class="str">"https://api.x.ai/v1"</span>,
-  api_key=<span class="str">"xai-..."</span>
-)
-
-resp = client.responses.create(
-  model=<span class="str">"grok-3"</span>,
-  tools=[{{
-    <span class="str">"type"</span>: <span class="str">"mcp"</span>,
-    <span class="str">"server_url"</span>: <span class="str">"{mcp_url}"</span>,
-    <span class="str">"server_label"</span>: <span class="str">"tektronix"</span>
-  }}],
-  input=<span class="str">"Find SCPI commands for TDR preset"</span>
-)</pre>
-      <div class="note">xAI supports remote MCP natively in the Responses API and Voice Agent API. See <a href="https://docs.x.ai/developers/tools/remote-mcp" target="_blank">docs.x.ai/developers/tools/remote-mcp</a>.</div>
-    </div>
-
-  </div>
-</div>
-
-<footer>Tektronix MCP Server v1.4.4 &mdash; Built by the Tektronix FAE Team</footer>
+<footer>Tektronix MCP Server v1.4.5 &mdash; Built by the Tektronix FAE Team</footer>
 </body>
 </html>"""
     return HTMLResponse(html)
@@ -2515,16 +2449,22 @@ _INSTRUMENT_QUERY_HINTS: Dict[str, List[str]] = {
     'mdo4000':       ['mdo4'],
     'mso4000':       ['mdo4'],
     'dpo4000':       ['mdo4'],
-    # MSO/DPO 5k/7k/70k (high-end legacy)
-    'dpo5000':       ['mso_dpo_5k'],
-    'mso5000':       ['mso_dpo_5k'],
-    'dpo70000':      ['mso_dpo_5k'],
-    'mso70000':      ['mso_dpo_5k'],
-    'dpo7000':       ['mso_dpo_5k'],
+    # MSO/DPO 5k/7k/70k (high-end legacy) — these run DPOJET for jitter/eye,
+    # so include the dpojet DB alongside the generic legacy programmer-manual DB.
+    # (Key was previously the non-existent 'mso_dpo_5k'; real key is the full
+    # 'mso_dpo_5k_7k_70k', which was being silently dropped in the multi path.)
+    'dpo5000':       ['mso_dpo_5k_7k_70k', 'dpojet'],
+    'mso5000':       ['mso_dpo_5k_7k_70k', 'dpojet'],
+    'dpo70000':      ['mso_dpo_5k_7k_70k', 'dpojet'],
+    'mso70000':      ['mso_dpo_5k_7k_70k', 'dpojet'],
+    'dpo7000':       ['mso_dpo_5k_7k_70k', 'dpojet'],
+    'dpo75002':      ['mso_dpo_5k_7k_70k', 'dpojet'],
+    'mso73304':      ['mso_dpo_5k_7k_70k', 'dpojet'],
     # DPOJet jitter analysis
     'dpojet':        ['dpojet'],
-    # 'jitter' removed — jitter queries in scope context should find MSO MEASUrement commands
-    # dpojet commands only when 'dpojet' explicitly mentioned
+    # 'jitter' alone still routes to MSO MEASUrement (DJA). DPOJET is surfaced
+    # only when a DPO7000/70000-class scope or 'dpojet' is named (tek_find ladder
+    # gates on scope-token + jitter-term; this hint map unions the DBs by score).
     'tj':            ['dpojet'],
 }
 
@@ -3265,10 +3205,41 @@ def tek_find(query: str, instrument: str = None) -> str:
         ]):
             instrument = "hss_plugin"
 
+        # DPOJET jitter/eye analysis (DPO7000/70000 series, incl. DX/SX) — MUST come
+        # BEFORE the generic legacy 5k/7k/70k branch, which would otherwise swallow
+        # these. Fires on explicit "dpojet", OR on a DPO7000/70000-class scope token
+        # together with a jitter/eye/mask term. Bare scope tokens with no jitter
+        # context fall through to the generic legacy DB below.
+        #
+        # The (sx|dx) + (dpo7|mso7|dsa7) clause catches every 70000-class SX/DX model
+        # (DPO75002SX, DPO77002SX, MSO73304DX, MSO72304DX, ...) without matching the
+        # modern DPO7 Series (DPO714A/718A — no SX/DX suffix, uses DJA, not DPOJET).
+        elif (
+            'dpojet' in q_lower
+            or (
+                (
+                    any(t in q_lower for t in [
+                        'dpo70', 'mso70', 'dsa70', 'dpo7000', 'dpo5000', 'mso5000',
+                        'dpo75002', 'mso73304', '70000', '7000c', '5000b',
+                    ])
+                    or (
+                        ('sx' in q_lower or 'dx' in q_lower)
+                        and any(p in q_lower for p in ['dpo7', 'mso7', 'dsa7'])
+                    )
+                )
+                and any(t in q_lower for t in [
+                    'jitter', 'eye', 'mask', 'msk', 'clock recovery', 'clockrecovery',
+                    'jittersummary', 'jitter summary', 'bathtub', 'tj@ber', 'tjber',
+                    'phase noise', 'rjdj', 'tie spectrum', 'report', 'dpojet',
+                ])
+            )
+        ):
+            instrument = "dpojet"
+
         # Legacy 5k/7k/70k oscilloscopes
         elif any(t in q_lower for t in [
             'dpo70', 'mso70', 'dsa70', 'dpo7000', 'dpo5000', 'mso5000',
-            'dpojet', '70000', '5000b', '7000c',
+            '70000', '5000b', '7000c',
         ]):
             instrument = "mso_dpo_5k_7k_70k"
 
@@ -3841,6 +3812,11 @@ def search_local_docs(query: str, max_results: int = 5) -> List[Dict[str, Any]]:
         # Must precede **/*.md glob so deduplication preserves these higher boosts
         (DOCS_REFERENCE_PATH, "clarius_overview.md", "markdown", 5),
         (DOCS_REFERENCE_PATH, "clarius_sdk_api.md", "markdown", 5),
+        # Jitter/Eye reference pair — boost above standard reference tier so they
+        # outrank generic legacy-scope docs on DPOJET/DJA/jitter/eye/mask queries.
+        # Must precede the **/*.md glob so dedup preserves the higher boost.
+        (DOCS_REFERENCE_PATH, "dpojet_dpo70000_reference.md", "markdown", 5),
+        (DOCS_REFERENCE_PATH, "dja_jitter_eye_sim_reference.md", "markdown", 5),
         # Tier 4: Reference documentation (recursive — includes pi_translator/)
         (DOCS_REFERENCE_PATH, "**/*.md", "markdown", 3),
         # Tier 5/6: Remaining docs (tiers 1-2 already in seen_files, skipped)
@@ -3956,7 +3932,9 @@ def tek_search_local_docs(query: str, max_results: int = 5) -> str:
     1. Tektronix_Automation_Guidelines.md     (boost +10) — primary reference
     2. measurement_workflow_Andre.md           (boost  +3) — measurement procedures
     3. docs/python_examples/*.py               (boost  +5) — golden example scripts
-    4. docs/reference/**/*.md                  (boost  +3) — full reference folder
+    4a. docs/reference/clarius_overview.md     (boost  +5) — Clarius architecture/install
+    4b. docs/reference/clarius_sdk_api.md       (boost  +5) — Clarius Python SDK/REST API
+    4. docs/reference/**/*.md                   (boost  +3) — full reference folder
     5. docs/*.md (other root docs)             (boost  +1)
     6. [install root]/*.md                     (boost   0)
 
@@ -4587,7 +4565,7 @@ def tek_save_lessons_learned(
     
     content += f"""
 ---
-*Generated by Tek MCP Server v1.4.4*
+*Generated by Tek MCP Server v1.4.5*
 """
     
     try:
@@ -5736,7 +5714,7 @@ def tek_status() -> str:
     hours, remainder = divmod(int(uptime.total_seconds()), 3600)
     minutes, seconds = divmod(remainder, 60)
     
-    output = f"## 🔬 Tektronix MCP Server v1.4.4\n\n"
+    output = f"## 🔬 Tektronix MCP Server v1.4.5\n\n"
     output += f"**Status:** ✅ Running\n"
     output += f"**Uptime:** {hours}h {minutes}m {seconds}s\n"
     output += f"**Total Commands:** {_total_commands:,}\n"
@@ -6066,7 +6044,7 @@ def main():
     _server_start_time = datetime.now()
     
     print("\n" + "=" * 60, file=sys.stderr)
-    print("🔬 Tektronix MCP Server v1.4.4", file=sys.stderr)
+    print("🔬 Tektronix MCP Server v1.4.5", file=sys.stderr)
     print("   - MSO 4/5/6/7 + MSO 2 Series command databases", file=sys.stderr)
     print("   - Local docs search includes Tek PTA source", file=sys.stderr)
     print("   - Live instrument control via PyVISA", file=sys.stderr)
