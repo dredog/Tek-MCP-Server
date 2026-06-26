@@ -6,7 +6,7 @@ REM ============================================================================
 REM build.bat
 REM Builds the PyInstaller distributable for Tektronix MCP Server.
 REM Run this from C:\Users\u610842\TektronixMCP\ (alongside the .spec file).
-REM Output: dist\TektronixMCP_v1.4.1\  — zip this folder and share it.
+REM Output: dist\TektronixMCP_v1.4.5\  — zip this folder and share it.
 REM
 REM Files copied into the distribution (alphabetical by section):
 REM
@@ -26,7 +26,7 @@ REM   PTA\tek_pta_plugin_api.py           Same — GUI only
 REM =============================================================================
 
 REM ── Version — update this when server version changes ────────────────────────
-set VERSION=1.4.1
+set VERSION=1.4.5
 set DIST_NAME=TektronixMCP_v%VERSION%
 
 echo.
@@ -110,7 +110,7 @@ if errorlevel 1 (
 
 REM ── Rename PyInstaller output to versioned folder ─────────────────────────────
 REM PyInstaller creates: dist\tektronix_mcp_server\
-REM We rename it to:     dist\TektronixMCP_v1.4.1\
+REM We rename it to:     dist\TektronixMCP_v1.4.5\
 echo.
 echo Packaging distribution folder...
 rename "dist\tektronix_mcp_server" "%DIST_NAME%"
