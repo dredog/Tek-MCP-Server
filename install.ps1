@@ -5,10 +5,10 @@
 $ErrorActionPreference = "Stop"
 
 # Version - must match build.bat
-$VERSION   = "1.4.3"
+$VERSION   = "1.4.5"
 $DIST_NAME = "TektronixMCP_v$VERSION"
 
-# Paths - install to AppData\Local (no admin rights needed, consistent on all PCs)S
+# Paths - install to AppData\Local (no admin rights needed, consistent on all PCs)
 $ScriptDir   = Split-Path -Parent $MyInvocation.MyCommand.Path
 $InstallRoot = "$env:LOCALAPPDATA\$DIST_NAME"
 $ExePath     = "$InstallRoot\tektronix_mcp_server.exe"
